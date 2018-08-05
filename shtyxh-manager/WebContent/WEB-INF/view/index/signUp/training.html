@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title></title>
+<style type="text/css">
+.tabp {
+	border-color: #000000 #000000 #000000 #000000;
+	border-style: solid;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+}
+
+.title {
+	padding: 30px 0 50px 0;
+	width: '100%';
+	text-align: center;
+	font-family: "SimSun";
+	/* 	font-size: 16pt; */
+	font-size: 30pt;
+	font-weight: bold;
+}
+
+.tr63 {
+	height: 63pt;
+}
+
+.tr72 {
+	height: 72pt;
+}
+
+.tr53 {
+	height: 53pt;
+}
+
+.tr45 {
+	height: 45pt;
+}
+
+.tr157 {
+	height: 157pt;
+}
+
+.tr40 {
+	height: 40pt;
+}
+
+.tr43 {
+	height: 43pt;
+}
+
+table tr td {
+	padding:5px;
+	font-family: "楷体", "楷体_GB2312";
+	font-size: 16px;
+	text-align: center;
+	word-break: keep-all;
+	white-space: nowrap;
+}
+
+input {
+	text-align: center;
+/* 	outline: none; */
+	border-width: 0;
+}
+</style>
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script
+	src="https://linwalker.github.io/render-html-to-pdf/js/jsPdf.debug.js"></script>
+<script type="text/javascript">
+	function downPdf (){
+			var newstr = document.getElementById("mainId").innerHTML;
+			var oldstr = document.body.innerHTML; 
+			document.body.innerHTML = newstr; 
+			window.print(); 
+			document.body.innerHTML = oldstr; 
+	}
+// 	$(document).ready(function() {
+// 		var downPdf = document.getElementById("renderPdf");
+// 		downPdf.onclick = function() {
+// 			var newstr = document.getElementById("mainId").innerHTML;
+// 			var oldstr = document.body.innerHTML; 
+// 			document.body.innerHTML = newstr; 
+// 			window.print(); 
+// 			document.body.innerHTML = oldstr; 
+// 			return false; 
+// 			html2canvas(document.body, {
+// 				onrendered : function(canvas) {
+
+// 						                   var contentWidth = canvas.width;
+// 						                   var contentHeight = canvas.height;
+
+// 						                   //一页pdf显示html页面生成的canvas高度;
+// 						                   var pageHeight = contentWidth / 592.28 * 841.89;
+// 						                   //未生成pdf的html页面高度
+// 						                   var leftHeight = contentHeight;
+// 						                   //pdf页面偏移
+// 						                   var position = 0;
+// 						                   //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+// 						                   var imgWidth = 595.28;
+// 						                   var imgHeight = 592.28/contentWidth * contentHeight;
+
+// 						                   var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+// 						                   var pdf = new jsPDF('', 'pt', 'a4');
+
+// 						                   //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+// 						                   //当内容未超过pdf一页显示的范围，无需分页
+// 						                   if (leftHeight < pageHeight) {
+// 						                       pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight );
+// 						                   } else {
+// 						                       while(leftHeight > 0) {
+// 						                           pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+// 						                           leftHeight -= pageHeight;
+// 						                           position -= 841.89;
+// 						                           //避免添加空白页
+// 						                           if(leftHeight > 0) {
+// 						                               pdf.addPage();
+// 						                           }
+// 						                       }
+// 						                   }
+
+// 						                   pdf.save('content.pdf');
+// 				}
+// 			})
+// 		}
+// 	});
+</script>
+</head>
+<body id="index">
+	<div id="mainId" style="width: 1000px; margin: 0 auto; ">
+		<div class="title">学前教育岗位培训班报名单</div>
+
+		<table border="1" border="0" align="center" cellpadding="1"
+			cellspacing="0" class="tabp">
+			<tr class="tr63">
+				<td width="10%">姓名</td>
+				<td width="16%"><input type="text"  /></td>
+				<td width="10%">性别</td>
+				<td width="10%"><input type="text" /></td>
+				<td width="16%">出生年月</td>
+				<td width="16%"><input type="text" /></td>
+				<td width="20%" rowspan="3"></td>
+			</tr>
+			<tr class="tr72">
+				<td>工作单位</td>
+				<td colspan="3"><input type="text" /></td>
+				<td>户籍所在地</td>
+				<td><input type="text" /></td>
+			</tr>
+			<tr class="tr53">
+				<td>单位地址</td>
+				<td colspan="3"><input type="text" /></td>
+				<td>邮编</td>
+				<td><input type="text" /></td>
+			</tr>
+			<tr class="tr53">
+				<td>居住地址</td>
+				<td colspan="6"><input type="text" /></td>
+			</tr>
+			<tr class="tr53">
+				<td>最后学历</td>
+				<td><input type="text" /></td>
+				<td>所学专业</td>
+				<td colspan="2"><input type="text" /></td>
+				<td>有何特长</td>
+				<td><input type="text" /></td>
+			</tr>
+			<!-- next -->
+			<tr class="tr53">
+				<td rowspan="7" style="text-align: center, vertical-align:middle,">
+					<p>学</p>
+					<p>习</p>
+					<p>·</p>
+					<p>工</p>
+					<p>作</p>
+					<p>经</p>
+					<p>历</p>
+				</td>
+				<td colspan="3">年 月 — 年 月</td>
+				<td colspan="3">单 位（学校）</td>
+			</tr>
+			<tr class="tr45">
+				<td colspan="3"><input type="text" /></td>
+				<td colspan="3"><input type="text" /></td>
+			</tr>
+			<tr class="tr45">
+				<td colspan="3"><input type="text" /></td>
+				<td colspan="3"><input type="text" /></td>
+			</tr>
+			<tr class="tr45">
+				<td colspan="3"><input type="text" /></td>
+				<td colspan="3"><input type="text" /></td>
+			</tr>
+			<tr class="tr45">
+				<td colspan="3"><input type="text" /></td>
+				<td colspan="3"><input type="text" /></td>
+			</tr>
+			<tr class="tr45">
+				<td colspan="3"><input type="text" /></td>
+				<td colspan="3"><input type="text" /></td>
+			</tr>
+			<tr class="tr45">
+				<td colspan="3"><input type="text" /></td>
+				<td colspan="3"><input type="text" /></td>
+			</tr>
+			<!-- 其他说明 -->
+			<tr class="tr53">
+				<td colspan="2">其它需要说明的情况</td>
+				<td colspan="5">①有教师职称 ②有教师资格证书 ③其它</td>
+			</tr>
+			<tr class="tr157">
+				<td colspan="7" style="text-align: left; padding: 10px 0 10px 30px">
+					培训要求：<br /> 1、免修申请：① 综合音乐；② 综合美术 （需持有效证件在交学费时供老师审核）<br /> 2、其它需求：
+				</td>
+			</tr>
+			<tr class="tr40">
+				<td>联系地址</td>
+				<td colspan="4"><input type="text" /></td>
+				<td>邮编</td>
+				<td><input type="text" /></td>
+			</tr>
+			<tr class="tr43">
+				<td>手 机</td>
+				<td colspan="2"><input type="text" /></td>
+				<td>电话</td>
+				<td><input type="text" /></td>
+				<td>编号</td>
+				<td><input type="text" /></td>
+			</tr>
+		</table>
+		
+	</div>
+	<div style="text-align:center;margin-top:20px">
+			<button id="renderPdf" onclick="downPdf()">提交</button>
+	</div>
+</body>
+</html>

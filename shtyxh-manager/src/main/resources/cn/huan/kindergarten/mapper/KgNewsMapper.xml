@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.huan.kindergarten.mapper.KgNewsMapper">
+    <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.KgNews">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="typeId" property="typeid" jdbcType="DECIMAL" />
+        <result column="sourceId" property="sourceid" jdbcType="DECIMAL" />
+        <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
+        <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />
+        <result column="summary" property="summary" jdbcType="VARCHAR" />
+        <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="indexshow" property="indexshow" jdbcType="VARCHAR" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
+        <result column="createDate" property="createdate" jdbcType="DATE" />
+        <result column="viewsCount" property="viewscount" jdbcType="DECIMAL" />
+    </resultMap>
+
+	 <resultMap  id="OtherResultMap" type="cn.huan.kindergarten.dto.KgNews">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="typeId" property="typeid" jdbcType="DECIMAL" />
+        <result column="sourceId" property="sourceid" jdbcType="DECIMAL" />
+        <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
+        <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />
+        <result column="summary" property="summary" jdbcType="VARCHAR" />
+        <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="indexshow" property="indexshow" jdbcType="VARCHAR" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
+        <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+        <result column="viewsCount" property="viewscount" jdbcType="DECIMAL" />
+        <association property="kgNewstype" javaType="cn.huan.kindergarten.dto.KgNewstype">
+            <id column="typeid" property="id"></id>
+            <result column="typename" property="typename"/>
+        </association>
+    </resultMap>
+
+   <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="cn.huan.kindergarten.dto.KgNews">
+        select a.*,b.typename from kg_news a left join kg_newstype b
+            on a.typeid=b.id 
+           <where>
+           		<if test="newstitle != null">
+           			AND a.newsTitle  like CONCAT('%',#{newstitle},'%') 
+           		</if>
+           		<if test="typeid != null">
+           			AND a.typeId = #{typeid}
+           		</if>
+           		<if test="attributeid != null and attributeid !=''">
+           		 	AND FIND_IN_SET(#{attributeid},a.attributeId) 
+           		</if>
+           		<if test="indexshow!=null and indexshow !=''">
+           			AND a.indexshow = #{indexshow}
+           		</if>
+           		<if test="sourceid!=null and sourceid !=''">
+           			AND a.sourceId = #{sourceid}
+           		</if>
+           		<if test="startDate!=null">
+           			<![CDATA[AND createdate >= #{startDate} ]]>
+           		</if>
+           		<if test="endDate!=null">
+           		 	<![CDATA[ AND createdate <= #{endDate} ]]>
+           		</if>
+           </where>
+           
+           <choose>
+			    <when test="sortname!=null and sortname !=''">
+			         ORDER BY #{sortname} #{sortorder}
+			    </when>
+			    <otherwise>
+			        ORDER BY a.sequence, a.createDate DESC
+			    </otherwise>
+			</choose>
+           
+    </select>
+    
+   <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgNews">
+        select count(1) from kg_news 
+           <where>
+           		<if test="newstitle != null and newstitle !=''">
+           			AND newsTitle  like CONCAT('%',#{newstitle},'%') 
+           		</if>
+           		<if test="typeid != null and typeid !=''">
+           			AND typeId = #{typeid}
+           		</if>
+           		<if test="attributeid != null and attributeid !='' ">
+           		 	AND FIND_IN_SET(#{attributeid},attributeId) 
+           		</if>
+           		<if test="indexshow!=null  and indexshow !='' ">
+           			AND indexshow = #{indexshow}
+           		</if>
+           		<if test="sourceid!=null and sourceid !=''">
+           			AND sourceId = #{sourceid}
+           		</if>
+           		<if test="startDate!=null">
+           			<![CDATA[AND createdate >= #{startDate} ]]>
+           		</if>
+           		<if test="endDate!=null">
+           		 	<![CDATA[ AND createdate <= #{endDate} ]]>
+           		</if>
+           		
+           </where>
+    </select>
+</mapper>

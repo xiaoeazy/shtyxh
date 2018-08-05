@@ -1,0 +1,38 @@
+@charset "utf-8";
+.rh_info{width:760px;margin:0 auto;font-size:14px;line-height:22px;margin-top:50px;color:#2b2b2b;border-top:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1;background:#f9f9f9;}
+.rh_info table td{padding:1px;}
+
+.rh_info table td.info_title{height:32px;font-size:16px;color:#ff0000;font-weight:bold;text-align:center;font-family:"Microsoft YaHei", "微软雅黑","黑体"}
+.fengexian{height:1px; width:100%; background:#ccc; overflow:hidden;margin-top:50px;margin-bottom:30px;clear:both}
+#qrcode{display:none;margin-top:-16px;margin-left:75px}/*margin-top:-130px;margin-left:260px;*/
+.rh_printer{width:50px;height:50px;position:fixed;bottom:150px;margin-left:760px;z-index:100}
+.rh_container {width:760px;margin:auto}
+.rh_head h1{width:100%;text-align:center;font-family: "华文中宋";font-size: 40px;color: #ff0000;text-decoration: none;font-weight: bold;margin-bottom:60px;margin:0;padding:120px 0 60px 0}
+.rh_head h1!important{width:100%;text-align:center;font-family: "华文中宋";font-size: 40px;color: #ff0000;text-decoration: none;font-weight: bold;margin-bottom:60px;margin:0;padding:120px 0 60px 0}
+.rh_head h2{ line-height:50px;font-family: "仿宋","仿宋_GB2312",simsun;font-size: 17px;color: #000000;text-decoration: none; font-weight: normal;height:50px;width:100%;text-align:center;padding:0;margin:0}
+.rh_bt{border-top:#FF0000 solid 3px;padding:40px 0 30px 0;width:95%;margin:auto;font-family: "华文中宋";font-size: 20px;line-height: 28px;color: #000000; text-align:center}
+.rh_content{padding:0 30px 10px 30px;font-family: "仿宋","仿宋_GB2312",simsun;font-size: 19px;line-height: 30px;color: #000000;text-decoration: none;width:90%}
+.rh_button{text-align:right;padding:0 30px 20px 0;width:100%}
+.rh_head{width:100%}
+.rh_head h1{width:100%;text-align:center;font-family: "华文中宋";font-size: 40px;color: #ff0000;text-decoration: none;font-weight: bold;margin-bottom:60px;margin:0;padding:120px 0 60px 0}
+.rh_head h2{ line-height:50px;font-family: "仿宋","仿宋_GB2312",simsun;font-size: 17px;color: #000000;text-decoration: none;  font-weight: normal;height:50px;width:100%;text-align:center;padding:0;margin:0}
+
+.rh_container .rh_head h1.rh_hone{width:100%;text-align:center;font-family: "华文中宋";font-size: 40px;color: #ff0000;text-decoration: none;font-weight: bold;margin-bottom:60px;margin:0;padding:120px 0 60px 0}
+.rh_container .rh_head h1.rh_hone span{width:100%;text-align:center;font-family: "华文中宋";font-size: 40px;color: #ff0000;text-decoration: none;font-weight: bold;margin-bottom:60px;margin:0;padding:120px 0 60px 0}
+.rh_container .rh_head h2.rh_htwo{ line-height:50px;font-family: "仿宋","仿宋_GB2312",simsun;font-size: 17px;color: #000000;text-decoration: none;  font-weight: normal;height:50px;width:100%;text-align:center;padding:0;margin:0}
+
+.rh_content p{line-height:28pt;font-size:14pt}
+.rh_content p  a{font-family: "仿宋","仿宋_GB2312",simsun;font-size:19px;line-height:28px}
+
+@media   print{
+    div.vT_detail_nav{display:none;}
+    div.rh_info{display:none;}
+    div.position{display:none;}
+    div.vT_detail_header{display:none;}
+    #slicedLine{display:none;}
+    div.nav_xc{display:none;}
+    div.vT_nav{display:none}
+    div.nav_xc_main{display:none}
+    div.rh_button{display:none}
+    div.vT_nav_cp{display:none}
+}

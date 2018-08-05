@@ -1,0 +1,113 @@
+
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>资料下载_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+<script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
+<script language="javascript" src="${base.contextPath}/lib/jqPaginator/jqpaginator.min.js" ></script>
+</head>
+<body id="bid_lst">
+<#include "../../include/navigation.html">
+<script type="text/javascript">
+	function download(fileId,itemId){
+		var password = $("#download_"+itemId).val();
+		window.location="${base.contextPath}/index/admin/file/download?fileId="+fileId+"&password="+password; 
+		$("#download_"+itemId).val("");
+	}
+</script>
+<div class="main">
+	<div class="main_container">
+		<div class="main_left_block mt13">
+			<div class="wz_block">
+			    <div class="vF_deail_currentloc">
+			        <p>当前位置：<a href="${base.contextPath}" title="首页" class="CurrChnlCls">首页</a>&nbsp;&raquo;&nbsp;
+			                <a href="#" title="资料下载" class="CurrChnlCls">资料下载</a>&nbsp;&raquo;&nbsp;</p>
+			    </div>
+			
+			    <div class="vF_detail_relcontent mt13">
+				    <h2><p>资料下载</p></h2>
+				    <div class="vF_detail_relcontent_lst">
+				        <ul class="c_list_bid">
+				        	<#list downloadList as downloadList>
+				        		<li>   
+									<#if downloadList.password!="">
+								    	 <a href="#"  title="${downloadList.fileTitle}">${downloadList.fileTitle}</a>
+								    	  发布时间：<em>${downloadList.createdate?string('yyyy-MM-dd HH:mm:ss')}</em> 
+							    	 	   密码：<em><input type="text" id="download_${downloadList_index}" value=''/>&nbsp;&nbsp;<button onclick="download('${downloadList.id}','${downloadList_index}')">下载</button></em> 
+							    	 <#else>
+							    	 	 <a href="${base.contextPath}/index/admin/file/download?fileId=${downloadList.id}" target="_blank" title="${downloadList.fileTitle}">${downloadList.fileTitle}</a>
+								    	  发布时间：<em>${downloadList.createdate?string('yyyy-MM-dd HH:mm:ss')}</em> 
+							    	 </#if>
+						    	</li>
+				        	</#list>
+				        </ul>
+				    </div>
+				</div>
+				<div class="pagigation" style="text-align:right">
+					 <ul class="pagination" id="pagination2"></ul>
+				</div>
+			
+				<script type="text/javascript">
+					$.jqPaginator('#pagination2', {
+				        totalPages: ${allPageNum},
+				        visiblePages: 10,
+				        currentPage: ${page},
+				        first: '<li class="prev"><a href="javascript:;">首页</a></li>',  
+				        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',  
+				        next: '<li class="next"><a href="javascript:;">下一页</a></li>',  
+				        last: '<li class="prev"><a href="javascript:;">末页</a></li>',  
+				        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',  
+				        onPageChange: function (num, type) {
+				        	if(type=="change"){
+				 	            var path ="download?page="+num;
+				 	            window.location.href=path;
+				        	}
+				        }
+				    });
+				   </script>
+			</div>
+		</div>
+
+	    <div class="main_right_block" style="margin-top:43px">
+				<!--OTsidebar-->
+					<#list rightAttributeList as rightAttributeList>
+						<#if rightAttributeList_index = 0>
+							<div class="main_right_cbl " style="margin-top:4px">
+				            	<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
+				                <div class="vT-chs-section-content-con">
+				                <ul class="vT-chs-section-content-list mb10">
+				                	<#list rightAttributeList.newsList as newsList>
+				                		<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+				                	</#list>
+								 </ul>
+				                </div>
+				       		 </div>
+						<#else>
+							<div class="main_right_cbl mt13">
+				          		<h2 class="mt10 mb10"><a href="#" >${rightAttributeList.attributename}</a></h2>
+				                <div class="vT-chs-section-content-con">
+				                <ul class="vT-chs-section-content-list mb10">
+									<#list rightAttributeList.newsList as newsList>
+										<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+									</#list>
+				                </ul>
+				                </div>
+				        	</div>
+						</#if>
+					</#list>
+				        
+				<!--OTsidebar-->
+	        </div>
+    </div>
+</div>
+<#include "../../include/footer.html">
+</body>
+<script language="javascript" src="/js/detailaddon.js"></script>
+</html>

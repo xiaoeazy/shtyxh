@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.huan.kindergarten.mapper.FuncMapper">
+    <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.Func">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="func_name" property="funcName" jdbcType="VARCHAR" />
+    </resultMap>
+
+	<select id="rolequeryNotHave" resultMap="BaseResultMap" parameterType="cn.huan.kindergarten.dto.RoleFunc">
+        select c.* from sys_func  c where c.id not in (
+        	select a.FUNC_ID from sys_role_func a left join sys_role b
+            on a.ROLE_ID=b.ROLE_ID where a.ROLE_ID =#{roleId}
+            )
+    </select>
+    
+    <select id="roleQueryHave" resultMap="BaseResultMap" parameterType="cn.huan.kindergarten.dto.RoleFunc">
+         select b.* from sys_role_func a left join sys_func b
+            on a.FUNC_ID=b.id where a.ROLE_ID =#{roleId}
+    </select>
+    
+    <select id="adminUserFuncQueryHave" resultMap="BaseResultMap" parameterType="java.util.List">
+         select b.* from sys_role_func a left join sys_func b
+            on a.FUNC_ID=b.id where a.ROLE_ID in (
+            <foreach collection="list" index="index" item="item" open="(" separator="," close=")">  
+			        #{item.roleId}  
+			</foreach> 
+            )
+    </select>
+</mapper>

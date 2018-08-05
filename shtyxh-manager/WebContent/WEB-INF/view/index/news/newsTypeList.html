@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>${kgNewstype.typename!}_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
+<script language="javascript" src="${base.contextPath}/lib/jqPaginator/jqpaginator.min.js" ></script>
+</head>
+<body id="detail">
+<#include "../../include/navigation.html">
+
+<div class="main">
+<div class="main_container">
+
+
+<div class="main_left_block mt13">
+	<div class="wz_block">
+	    <div class="vF_deail_currentloc">
+	        <p>当前位置：<a href="${base.contextPath}/index/news" title="资讯中心" class="CurrChnlCls">资讯中心</a>
+	        &nbsp;&raquo;&nbsp;${kgNewstype.typename} 列表页</p>
+	    </div>
+	
+	    <div class="vF_detail_relcontent mt13">
+		    <h2><p>${kgNewstype.typename}</p></h2>
+		    <div class="vF_detail_relcontent_lst">
+		        <ul class="c_list_tat">
+		
+		
+		
+			<#list newsList as news>   
+		               <li><a href="${base.contextPath}/index/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newsSimpleTitle}</a>
+		     				 <span> ${news.createdate?string('yyyy-MM-dd HH:mm:ss')} </span>
+					    </li> 
+		    </#list>   
+		
+		        </ul>
+		    </div>
+		    <div class="pagigation" style="text-align:right">
+					 <ul class="pagination" id="pagination2"></ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+		$.jqPaginator('#pagination2', {
+	        totalPages: ${allPageNum},
+	        visiblePages: 10,
+	        currentPage: ${page},
+	        first: '<li class="prev"><a href="javascript:;">首页</a></li>',  
+	        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',  
+	        next: '<li class="next"><a href="javascript:;">下一页</a></li>',  
+	        last: '<li class="prev"><a href="javascript:;">末页</a></li>',  
+	        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',  
+	        onPageChange: function (num, type) {
+	        	if(type=="change"){
+	 	            var path ="newsTypeList?typeid=${typeid}&page="+num;
+	 	            window.location.href=path;
+	        	}
+	        }
+	    });
+	   </script>
+	</div>
+</div>
+
+    <div class="main_right_block" style="margin-top:43px">
+
+
+<!--OTsidebar-->
+	<#list rightAttributeList as rightAttributeList>
+		<#if rightAttributeList_index = 0>
+			<div class="main_right_cbl " style="margin-top:4px">
+            	<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+                	<#list rightAttributeList.newsList as newsList>
+                		<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+                	</#list>
+				 </ul>
+                </div>
+       		 </div>
+		<#else>
+			<div class="main_right_cbl mt13">
+          		<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+					<#list rightAttributeList.newsList as newsList>
+						<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+					</#list>
+                </ul>
+                </div>
+        	</div>
+		</#if>
+	</#list>
+        
+
+        
+<!--OTsidebar-->
+        </div>
+    </div>
+</div>
+</div>
+<#include "../../include/footer.html">
+</body>
+</html>

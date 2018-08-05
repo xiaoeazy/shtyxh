@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.huan.kindergarten.mapper.KgAssessmentActivityMapper">
+    <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.KgAssessmentActivity">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="finished" property="finished" jdbcType="TINYINT" />
+        <result column="assessment_type_id" property="assessmentTypeId" jdbcType="DECIMAL" />
+         <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
+        <result column="assessment_activity_name" property="assessmentActivityName" jdbcType="VARCHAR" />
+        <result column="assessment_activity_content" property="assessmentActivityContent" jdbcType="VARCHAR" />
+          <result column="createDate" property="createdate" jdbcType="DATE" />
+    </resultMap>
+
+ <resultMap  id="OtherResultMap" type="cn.huan.kindergarten.dto.KgAssessmentActivity">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="finished" property="finished" jdbcType="TINYINT" />
+        <result column="assessment_type_id" property="assessmentTypeId" jdbcType="DECIMAL" />
+        <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
+        <result column="assessment_activity_name" property="assessmentActivityName" jdbcType="VARCHAR" />
+        <result column="assessment_activity_content" property="assessmentActivityContent" jdbcType="VARCHAR" />
+          <result column="createDate" property="createdate" jdbcType="DATE" />
+        <association property="kgAssessmentType" javaType="cn.huan.kindergarten.dto.KgAssessmentType">
+            <id column="assessment_type_id" property="id"></id>
+            <result column="assessment_type_name" property="assessmentTypeName"/>
+        </association>
+    </resultMap>
+
+ <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="cn.huan.kindergarten.dto.KgAssessmentActivity">
+        select a.*,b.assessment_type_name from kg_assessment_activity a left join kg_assessment_type b
+            on a.assessment_type_id=b.id 
+           <where>
+           		<if test="assessmentActivityName != null">
+           			AND a.assessment_activity_name  like CONCAT('%',#{assessmentActivityName},'%') 
+           		</if>
+           		<if test="assessmentTypeId != null">
+           			AND a.assessment_type_id = #{assessmentTypeId}
+           		</if>
+           		<if test="attributeid != null">
+           		 	AND FIND_IN_SET(#{attributeid},a.attributeId) 
+           		</if>
+           </where>
+           ORDER BY a.createDate DESC
+    </select>
+    
+   <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgAssessmentActivity">
+        select count(1) from kg_assessment_activity a
+           <where>
+           		<if test="assessmentActivityName != null">
+           			AND a.assessment_activity_name  like CONCAT('%',#{assessmentActivityName},'%') 
+           		</if>
+           		<if test="assessmentTypeId != null">
+           			AND a.assessment_type_id = #{assessmentTypeId}
+           		</if>
+           		<if test="attributeid != null">
+           		 	AND FIND_IN_SET(#{attributeid},a.attributeId) 
+           		</if>
+           </where>
+    </select>
+</mapper>

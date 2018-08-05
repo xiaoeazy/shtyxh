@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html manifest="">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+
+    <title>后台</title>
+	<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+	<script>
+		var _basePath = '${base.contextPath}',_locale='${base.locale}'; 
+	</script>
+	<!-- extjs -->
+	<script src="${base.contextPath}/lib/extjs/build/ext-all.js"></script>
+	<script src="${base.contextPath}/lib/extjs/build/packages/ext-locale/build/ext-locale-zh_CN.js"></script>
+	<link href="${base.contextPath}/lib/extjs/build/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css" rel="stylesheet" />
+	
+	<script src="${base.contextPath}/lib/extjs/build/examples/ux/form/ItemSelector.js"></script>
+	<script src="${base.contextPath}/lib/extjs/build/examples/ux/form/MultiSelect.js"></script>
+	<link href="${base.contextPath}/lib/extjs/build/examples/ux/css/ItemSelector.css" rel="stylesheet" />
+	
+	<!-- 自己的js -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Header/Header.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/main.js"></script>
+	
+	<!-- 公共 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/common/common.js"></script>
+	
+	<!-- 超链接 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Link/Link.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/Link/item/addorUpdateLinkWindow.js"></script>
+	<!-- 简介 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Introduction/Introduction.js"></script>
+	
+	<!-- ueditor -->
+	<script type="text/javascript" charset="utf-8">
+    	window.UEDITOR_HOME_URL = "${base.contextPath}/lib/extjs/ueditor/utf8-jsp/"; //UEDITOR_HOME_URL、config、all这三个顺序不能改变
+	</script>
+	<script type="text/javascript" charset="utf-8" src="${base.contextPath}/lib/extjs/ueditor/utf8-jsp/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="${base.contextPath}/lib/extjs/ueditor/utf8-jsp/ueditor.all.js"></script>
+	<script type="text/javascript" charset="utf-8" src="${base.contextPath}/lib/extjs/ueditor/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+	<script src="${base.contextPath}/lib/extjs/ueditor/ueditor.js"></script>
+	
+	<!-- 图片上传 -->
+	<script type="text/javascript" charset="utf-8" src="${base.contextPath}/lib/extjs/upload/uploadImageBaseWin.js"></script>
+	
+	<!-- 资讯类别 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/NewsType/NewsType.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/NewsType/item/addorUpdateNewsTypeWindow.js"></script>
+	
+	<!-- 资讯来源类别 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/NewsSource/NewsSource.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/NewsSource/item/addorUpdateNewsSourceWindow.js"></script>
+	
+	<!-- 资讯自定义属性类别 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/NewsAttribute/NewsAttribute.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/NewsAttribute/item/addorUpdateNewsAttributeWindow.js"></script>
+	
+	<!-- 资讯 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/News/News.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/News/item/addorUpdateNewsWindow.js"></script>
+	
+	<!-- 用户 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/User/User.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/User/item/addorUpdateUserWindow.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/User/item/updateCurrentUser.js"></script>
+	<!-- 角色 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Role/Role.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/Role/item/addorUpdateRoleWindow.js"></script>
+	
+	<!-- 系统设置 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Config/Config.js"></script>
+	<!-- 联系我们 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Contact/Contact.js"></script>
+	
+	<!-- 评估任务类别 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentType/AssessmentType.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentType/item/addorUpdateAssessmentTypeWindow.js"></script>
+	<!-- 评估任务 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentActivity/AssessmentActivity.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentActivity/item/addorUpdateAssessmentActivityWindow.js"></script>
+	<!-- 评估用户任务 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/AssessmentUserProcess.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/item/addorUpdateAdminAssessmentUserProcess.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/item/assessmentUserToExpert.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/item/showAssessmentUserExpertSuggest.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/AssessmentUserProcess/item/showUserUpload.js"></script>
+	<!-- 轮播图 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Carousel/Carousel.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/Carousel/item/addorUpdateCarouselWindow.js"></script>
+	<!-- 下载 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Download/Download.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/Download/item/addorUpdateDownloadWindow.js"></script>
+	
+	<!-- 问卷调查 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/QuestionSurvey.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/addorUpdateQuestionSurveyWindow.js"></script>
+	
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/QuestionAnalysis.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/showAnalysisWindow.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/showUrlWindow.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/analysisTree.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/chartA.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/chartB.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/chartC.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/chartEmpty.js"></script>
+	<script src="${base.contextPath}/lib/extjs/build/packages/ext-charts/build/ext-charts.js"></script>
+	
+	
+	<!-- 专家评论-->
+	<script src="${base.contextPath}/lib/extjs/myExt/ExpertAssessmentUserProcess/ExpertAssessmentUserProcess.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/ExpertAssessmentUserProcess/item/addorUpdateExpertAssessmentUserProcess.js"></script>
+	
+	<script src="${base.contextPath}/admin/getUserFunc"></script>
+	
+	
+	
+		<script type="text/javascript">
+				Array.prototype.in_array = function (element) { 
+				　　for (var i = 0; i < this.length; i++) { 
+				　　if (this[i] == element) { 
+				　　			return true; 
+				   	} 
+				   } 
+					return false; 
+				} 
+				var theLoginUserName = ' ${Session["userRealName"]}';
+				var theLoginUserId = ' ${Session["userId"]}';
+			
+		</script>
+	
+</head>
+<body>
+
+
+<input type="hidden" id="theVersion" value="0.0.0" />
+<input type="hidden" id="theLoginUserName" value="admin" />  
+</body>
+</html>
+
+
+
+
+

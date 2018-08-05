@@ -1,0 +1,29 @@
+<!-- 页脚 S-->
+<div id="footer">
+	<div class="copyright">
+		<div class="link">友情链接：
+			<#list linkList as linkList>
+					<a href="${linkList.linkUrl}" target="_blank">${linkList.linkName}</a>&nbsp;&nbsp;&nbsp;
+			</#list>
+			
+		</div>
+		<div class="siteWidth">
+			<#if copyright??>
+				版权所有：${copyright}<br>
+			</#if>
+		</div>
+		<div class="siteWidth">
+			&nbsp;&nbsp; 
+			<#if ICPlicense??>
+			<a target="_blank" href="${ICPlicensePath}"
+				style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px;">
+				<img src="${base.contextPath}/lib/index/img/batb.png"
+				style="float: left;" />
+			<p style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #ffffff;">${ICPlicense}</p>
+			</a>
+			</#if>
+		</div>
+
+		<div class="footerLinks"></div>
+	</div>
+</div>

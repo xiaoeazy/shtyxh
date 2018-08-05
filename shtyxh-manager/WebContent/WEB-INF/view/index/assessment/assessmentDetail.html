@@ -1,0 +1,350 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>${assessmentInfo.assessmentActivityName}_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
+
+<script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+
+<!-- bootstrap插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+<!-- bootstraptable插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-table/css/bootstrap-table.min.css" />
+<script src="${base.contextPath}/lib/bootstrap-table/js/bootstrap-table.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- bootstrap-fileupload -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-fileupload/css/fileinput.min.css"  />
+<script src="${base.contextPath}/lib/bootstrap-fileupload/js/fileinput.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-fileupload/js/locales/zh.js"></script>
+
+<script>
+function dowload(filePath){
+	window.open("${base.contextPath}"+filePath);
+}
+function btn_fresh(){
+	$("#table").bootstrapTable('refresh');
+}
+function btn_add(){
+	var flag = judgeState();//true 表示正在进行
+	if(flag){
+		 $('#txt_file').fileinput('refresh');
+		 $("#myModal").modal().show();
+	}
+}
+//判断活动是否结束
+function judgeState(){
+	var flag = true;
+	$.ajax({
+        type: "post",
+        async: false,
+        dataType: "json",
+        contentType: 'application/json',
+        url:  '${base.contextPath}/index/admin/assessment/updateState?id='+${assessmentInfo.id},
+        data: '',
+        success: function (data) {
+            if (data.success) {
+            	flag=true
+            }else{
+            	alert(data.message);
+            	flag=false;
+            }
+        }
+	 });
+	return flag;
+}
+
+function btn_delete(){
+	var flag = judgeState();//true 表示正在进行
+	if(flag){
+		toDelete();
+	}
+}
+
+function toDelete(){
+	var jsonArray = [];
+	var allTableData = $('#table').bootstrapTable('getSelections');
+    for(var i = 0; i < allTableData.length; i++) {
+    	var id =allTableData[i].id;
+    	var filePath = allTableData[i].filePath;
+    	jsonArray.push({id:id,filePath:filePath});
+     }
+	$.ajax({
+        type: "post",
+        dataType: "json",
+        contentType: 'application/json',
+        url:  '${base.contextPath}/index/admin/assessment/delete',
+        data: JSON.stringify(jsonArray),
+        success: function (data) {
+            if (data.success) {
+            	btn_fresh();
+            }else{
+            	alert(data.message);
+            }
+        }
+	 });
+}
+
+function uploadState(flag,message){
+	if(flag==true){
+// 		alert("上传成功");
+	}else{
+		alert("上传失败:"+message);
+	}
+}
+
+
+
+</script>
+</head>
+<body id="detail">
+<#include "../../include/navigation.html">
+
+
+<div class="main">
+<div class="main_container">
+
+
+
+<div class="main_left_block mt13">
+<div class="wz_block">
+    <div class="vF_deail_currentloc">
+        <p>当前位置：<a href="${base.contextPath}/index/assessmentTypeList" title="" class="CurrChnlCls">评估任务</a>
+          &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/assessmentTypeList?typeid=${assessmentType.id}" title="${assessmentType.assessmentTypeName}" class="CurrChnlCls">${assessmentType.assessmentTypeName}</a>
+           &nbsp;&raquo;&nbsp;${assessmentInfo.assessmentActivityName}
+        </p>
+    </div>
+    <div class="vF_deail_maincontent">
+
+		<div class="vF_detail_main">
+            <div class="vF_detail_header"><h2 class="tc">${assessmentInfo.assessmentActivityName};</h2>
+            <p class="tc"><span id="pubTime">${assessmentInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span></p>
+            </div>
+            <div class="vF_detail_content">
+                ${assessmentInfo.assessmentActivityContent};
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <#if Session["userId"]?exists>
+    	<!-- 弹出框 -->
+    	<form>
+		    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		        <div class="modal-dialog modal-lg" role="document">
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		                    <h4 class="modal-title" id="myModalLabel">请选择文件</h4>
+		                </div>
+		                <div class="modal-body">
+		                    <input type="file" name="txt_file" id="txt_file" multiple class="file-loading" />
+		                </div></div>
+		        </div>
+		    </div>
+		</form>
+    
+    	<div id="toolbar" class="btn-group">
+            <button id="btn_add" type="button" class="btn btn-default"  onclick="btn_add()" >
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+            <button id="btn_delete" type="button" class="btn btn-default" onclick="btn_delete()">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>
+            <button id="btn_fresh" type="button" class="btn btn-default" onclick="btn_fresh()" >
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+            </button>
+           
+            
+        </div>
+	    <div id="uploader" class="wu-example" style="float:left;width:100%">
+		</div>
+	    
+	    <div class="vF_detail_relcontent mt13">
+		    <h2>
+		    </h2>
+		    <div class="vF_detail_relcontent_lst">
+	<!-- 	       	  <ul class="c_list_tat"> -->
+	<!--         	 </ul> -->
+	        	 	<table id="table"></table>
+		    </div>
+		</div>
+	</#if>
+
+</div>
+</div>
+
+    <div class="main_right_block" style="margin-top:43px">
+
+
+
+
+<!--OTsidebar-->
+	<#list rightAttributeList as rightAttributeList>
+		<#if rightAttributeList_index = 0>
+			<div class="main_right_cbl " style="margin-top:4px">
+            	<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+                	<#list rightAttributeList.assessmentActivityList as assessmentActivityList>
+                		<li><a href="${base.contextPath}/index/assessmentDetail?id=${assessmentActivityList.id}" target="_blank" title="${assessmentActivityList.assessmentActivityName}">${assessmentActivityList.assessmentActivityName}</a></li>
+                	</#list>
+				 </ul>
+                </div>
+       		 </div>
+		<#else>
+			<div class="main_right_cbl mt13">
+          		<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+					<#list rightAttributeList.assessmentActivityList as assessmentActivityList>
+						<li><a href="${base.contextPath}/index/assessmentDetail?id=${assessmentActivityList.id}"  target="_blank" title="${assessmentActivityList.assessmentActivityName}">${assessmentActivityList.assessmentActivityName}</a></li>
+					</#list>
+                </ul>
+                </div>
+        	</div>
+		</#if>
+	</#list>
+        
+
+        
+<!--OTsidebar-->
+        </div>
+    </div>
+</div>
+
+<script>
+
+var FileInput = function () {
+    var oFile = new Object();
+
+    //初始化fileinput控件（第一次初始化）
+    oFile.Init = function(ctrlName, uploadUrl) {
+	    var control = $('#' + ctrlName);
+	    //初始化上传控件的样式
+	    control.fileinput({
+	        language: 'zh', //设置语言
+	        uploadUrl: uploadUrl, //上传的地址
+// 	        allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+	        showUpload: true, //是否显示上传按钮
+	        showCaption: false,//是否显示标题
+	        browseClass: "btn btn-primary", //按钮样式     
+	        //dropZoneEnabled: false,//是否显示拖拽区域
+	        //minImageWidth: 50, //图片的最小宽度
+	        //minImageHeight: 50,//图片的最小高度
+	        //maxImageWidth: 1000,//图片的最大宽度
+	        //maxImageHeight: 1000,//图片的最大高度
+	        //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+	        //minFileCount: 0,
+	        maxFileCount: 10, //表示允许同时上传的最大文件个数
+	        enctype: 'multipart/form-data',
+	        validateInitialCount:true,
+	        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+	        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+	    });
+	
+	    //导入文件上传完成之后的事件
+	    $("#"+ctrlName).on("fileuploaded", function (event, data, previewId, index) {
+	       
+	        var success = data.response.success;
+	        if (success == false) {
+	            alert(data.response.message);
+	            return;
+	        }
+	        $("#myModal").modal("hide");
+	        btn_fresh();
+	       
+	    });
+	}
+    
+    return oFile;
+};
+
+$(function () {
+	 	var oFileInput = new FileInput();
+	    oFileInput.Init("txt_file", "${base.contextPath}/index/admin/assessment/upload?assessmentActivityId="+${assessmentInfo.id});
+	    
+	    
+		$("#table").bootstrapTable({ // 对应table标签的id
+		      url: "${base.contextPath}/index/admin/assessmentDetail/uploadList?activityId="+${assessmentInfo.id}, // 获取表格数据的url
+		      toolbar: '#toolbar',
+		      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+		      striped: true,  //表格显示条纹，默认为false
+		      pagination: true, // 在表格底部显示分页组件，默认false
+		      pageList: [10, 20], // 设置页面可以显示的数据条数
+		      pageSize: 10, // 页面数据条数
+		      pageNumber: 1, // 首页页码
+		      sidePagination: 'server', // 设置为服务器端分页
+		      queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+		          return {
+		              pageSize: params.limit, // 每页要显示的数据条数
+		              offset: params.offset, // 每页显示数据的开始行号
+		              sort: params.sort, // 要排序的字段
+		              sortOrder: params.order, // 排序规则
+		          }
+		      },
+		      responseHandler: function(res) {
+	                return {
+	                    "total": res.totalProperty,//总页数
+	                    "rows": res.results   //数据
+	                 };
+	          },
+		      sortName: 'id', // 要排序的字段
+		      sortOrder: 'desc', // 排序规则
+		      columns: [
+		          {
+		              checkbox: true, // 显示一个勾选框
+		              align: 'center' // 居中显示
+		          },{  
+                      title: '序号',//标题  可不加  
+                      formatter: function (value, row, index) {  
+//                           return index+1;  
+  							 var pageSize=$('#table').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
+               				 var pageNumber=$('#table').bootstrapTable('getOptions').pageNumber;//通过表的#id 可以得到当前第几页
+               				 return pageSize * (pageNumber - 1) + index + 1;    //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+                      }  
+                  }, {
+		              field: 'fileName',
+		              title: '评估活动名称',
+		              align: 'center',
+		              valign: 'middle'
+		          }, {
+		              title: "操作",
+		              align: 'center',
+		              valign: 'middle',
+		              width: 160, // 定义列的宽度，单位为像素px
+		              formatter: function (value, row, index) {
+		                  return '<button class="btn btn-primary btn-sm" onclick="dowload(\'' + row.filePath + '\')">下载</button>';
+		              }
+		          }
+		      ],
+		      onLoadSuccess: function(){  //加载成功时执行
+		            console.info("加载成功");
+		      },
+		      onLoadError: function(){  //加载失败时执行
+		            console.info("加载数据失败");
+		      }
+
+		})
+
+});
+
+
+
+		</script>
+
+<#include "../../include/footer.html">
+</body>
+</html>

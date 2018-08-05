@@ -1,0 +1,372 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title></title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/banner.css"
+	rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/indexonly.css"
+	rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/responsiveslides.min.js"></script>
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/index/common.js"></script>
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/index/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body id="index">
+
+	<!--固定菜单 start-->
+	<div id="top">
+		<ul>
+			<li><a class="web" href='javascript:void(0);'><img
+					src="${base.contextPath}/lib/index/img/theme/default/wb.png" /></a>
+				<div class="ewm_co2">
+					<img src="${base.contextPath}/lib/index/img/theme/default/wbe.png" />
+				</div></li>
+			<li class="ewm"><a href='javascript:void(0);'><img
+					src="${base.contextPath}/lib/index/img/theme/default/wx.png" /></a>
+				<div class="ewm_co">
+					<img src="${base.contextPath}/lib/index/img/theme/default/wbe.png" />
+				</div></li>
+			<li class="dianh"><a href='javascript:void(0);'><img
+					src="${base.contextPath}/lib/index/img//theme/default/dh.png" /></a>
+				<div class="phone">
+					<span>021-123456</span>
+				</div></li>
+		</ul>
+	</div>
+	<!--固定菜单 end-->
+	<#include "../include/navigation.html"> <!-- banner start -->
+	<div class="banner">
+		<div class="js-sCont">
+			<ul>
+
+
+				<#list carouselList as carouselList>
+				<li><#if carouselList.urltype==0> <a
+						href="${carouselList.webUrl}" title="" target="_blank"> <#elseif
+							carouselList.urltype==1> <a
+							href="${base.contextPath}/index/newsDetail?id=${carouselList.newsId}"
+							title="" target="_blank"> <#else> <a
+								href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}"
+								title="" target="_blank"></#if> <img
+					src="${base.contextPath}${carouselList.filePath}" alt=""
+					width="1920" height="675" title="" /> </a></li>
+				</#list>
+			</ul>
+		</div>
+		<div class="js-sDot">
+			<ul></ul>
+		</div>
+		<a href="javascript:;" class="js-prev bannerBnt"></a> <a
+			href="javascript:;" class="js-next bannerBnt"></a>
+	</div>
+
+	<!-- banner end -->
+
+
+
+
+	<div class="main">
+		<div class="main_container">
+
+			<h3 class="index_tit" style="">
+				<a href="javascript:;" target="_blank"></a>
+			</h3>
+
+
+			<div class="main_topic_block mt13">
+				<div class="picnews">
+					<div class="vT_t1 picnews flexslider" id="demo02">
+						<ul class="slides">
+							<#list newsThumbNailList as newsThumbNailList> <#if
+								newsThumbNailList_index==0>
+							<li><div class="word_bg">
+									<p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newstitle}</p>
+								</div>
+								<div class="img">
+									<a
+										href="${base.contextPath}/index/newsDetail?id=${newsThumbNailList.id}"
+										target='_blank' thumb="" alt="" text=""><img
+										src="${base.contextPath}${newsThumbNailList.thumbnail}"
+										border='0' width="390px" height="285px"
+										alt='${newsThumbNailList.newstitle}'
+										title='${newsThumbNailList.newstitle}' /></a>
+								</div></li>
+							<#else>
+							<li style="display: none"><div class="word_bg">
+									<p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newstitle}</p>
+								</div>
+								<div class="img">
+									<a
+										href="${base.contextPath}/index/newsDetail?id=${newsThumbNailList.id}"
+										target='_blank' thumb="" alt="" text=""><img
+										src="${base.contextPath}${newsThumbNailList.thumbnail}"
+										border='0' width="390px" height="285px"
+										alt='${newsThumbNailList.newstitle}'
+										title='${newsThumbNailList.newstitle}' /></a>
+								</div></li></#if> </#list>
+						</ul>
+					</div>
+				</div>
+				<div class="txtnews">
+					<div class="txtnews_topic">
+						<p>
+							<#list newsList as newsList> <#if newsList_index==0>
+							<a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
+								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+							</#if> </#list>
+						</p>
+					</div>
+					<div class="txtnews_list_contianer">
+						<ul class="txtnews_list">
+							<#list newsList as newsList> <#if (newsList_index>0
+							&& newsList_index<8) >
+							<li><a
+								href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
+								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+							</#if> </#list>
+						</ul>
+						<ul class="txtnews_list">
+							<#list newsList as newsList> <#if (newsList_index>=8)
+							>
+							<li><a
+								href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
+								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+							</#if> </#list>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="main_left_block mt13">
+					<div class="banner_block ">
+						<div class="vF_banner bx_log">
+							<p class="ml92 dlzc">
+								<a href="${base.contextPath}/index/newsSearch">内容检索</a>
+							</p>
+							<p class="ml67 dlzc"></p>
+							<p class="ml92 dlzc"></p>
+						</div>
+					</div>
+
+					<div class="wz_block">
+						<div class="newslist_bl_nor mt13">
+							<div class="newslist">
+								<div class="vF_t2">
+									<div class="vF_t2_r1" style="height: 80px">
+										<div class="vF_tab unit2">
+											<div class="vF_title_bar2">
+												<h2 class="ui_til4_tab_u current2 word8">
+													<a href="${base.contextPath}/index/assessmentTypeList">评估任务</a>
+												</h2>
+											</div>
+										</div>
+									</div>
+									<ul class="c_list mt10 mb10 split" id="area3_con1">
+										<#list assessmentList as assessmentList>
+										<li><a href="${base.contextPath}/index/assessmentDetail?id=${assessmentList.id}" target="_blank"
+											title="${assessmentList.assessmentActivityName}">${assessmentList.newsSimpleAssessmentActivityName}</a></li>
+										</#list>
+									</ul>
+
+
+									<div class="vT_t3_r3">
+										<div class="vT_pg">
+											<div id="area3_sel_1"></div>
+											<div id="area3_sel_2"></div>
+											<div id="area3_sel_3"></div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<!--newslist-->
+						</div>
+
+						<div class="newslist_bl_nor mt13">
+							<div class="newslist">
+								<div class="vF_t2">
+									<div class="vF_t2_r1" style="height: 80px">
+										<div class="vF_tab unit2">
+											<div class="vF_title_bar2">
+												<h2 class="ui_til4_tab_u current2 word8">
+													<a href="cggg/dfgg/index.htm">尚无内容</a>
+												</h2>
+												<ul class="c_list_bidtype">
+												</ul>
+											</div>
+										</div>
+									</div>
+
+
+
+
+
+									<ul class="c_list mt10 mb10 split" id="area4_con1">
+										<li><a
+											href="cggg/dfgg/fblbgg/201803/t20180315_9667199.htm"
+											target="_blank"
+											title="尚无内容">尚无内容...</a></li>
+									</ul>
+
+
+									<div class="vT_t3_r3">
+										<div class="vT_pg">
+											<div id="area4_sel_1"></div>
+											<div id="area4_sel_2"></div>
+											<div id="area4_sel_3"></div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<!--newslist-->
+						</div>
+
+
+
+
+
+
+					</div>
+					<div class="banner_block mt10"
+						style="height: 98px; overflow: hidden;">
+						<!--ccccc-->
+						<div id="wrapper">
+							<div class="callbacks_container">
+								<ul class="rslides" id="slider4">
+									<li><a href="specialtopic/2018yd/index.shtml.htm"
+										tppabs="http://www.ccgp.gov.cn/specialtopic/2018yd/index.shtml"
+										title="2018年春节专题"><img src="img/18cjbanner.jpg"
+											tppabs="http://www.ccgp.gov.cn/img/18cjbanner.jpg" alt="" /></a>
+									</li>
+									<li><a href="specialtopic/index.htm"
+										tppabs="http://www.ccgp.gov.cn/specialtopic/" title="专题专栏"><img
+											src="img/ztzl.jpg"
+											tppabs="http://www.ccgp.gov.cn/img/ztzl.jpg" alt="" /></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+					<div class="banner_block mt10">
+						<div class="vF_banner banner2"></div>
+					</div>
+
+				</div>
+
+				<div class="main_right_block mt13">
+
+
+					<div class="main_right_cbl ">
+						<h2>
+							<a href="${base.contextPath}/index/admin/download"
+								target="_blank">资料下载</a>
+						</h2>
+						<ul class="xzzqlinks mb15">
+							<#list downloadList as downloadList> <#if
+								downloadList.password!="">
+							<li class="xzzqlinks sys1"><p>${downloadList.fileTitle}</p></li>
+							<#else>
+							<li class="xzzqlinks sys1"><p>
+									<a
+										href="${base.contextPath}/index/admin/file/download?fileId=${downloadList.id}"
+										target="_blank">${downloadList.fileTitle}</a>
+								</p></li></#if> </#list>
+						</ul>
+					</div>
+
+
+
+					<div class="main_right_cbl mt13">
+						<h2 class="tpjj">
+							<a href="tupian/index.htm"
+								tppabs="http://www.ccgp.gov.cn/tupian/">图片集锦</a>
+						</h2>
+						<!--div class="tpjj_btn"><img src="img/btn_arrow_left.gif" alt="" /><img src="img/btn_arrow_right.gif" alt="" /></div-->
+						<ul class="tpjjlinks mt10 mb15">
+							<li class="tpjjlinks sys1"><a
+								href="tupian/201712/t20171213_9327772.htm"
+								tppabs="http://www.ccgp.gov.cn/tupian/201712/t20171213_9327772.htm"
+								target="_blank"><img
+									src="tupian/201712/W020180109518455960337.jpg"
+									tppabs="http://www.ccgp.gov.cn/tupian/201712/W020180109518455960337.jpg"
+									alt="W020171213410321008054.jpg" /></a></li>
+						</ul>
+					</div>
+
+
+					<div class="main_right_cbl mt13">
+						<h2>电子政务</h2>
+						<div class="dzzwlinks mt10">
+							<img src="img/wx_mof.gif"
+								tppabs="http://www.ccgp.gov.cn/img/wx_mof.gif" alt="" /><img
+								src="img/wx_ccgp.gif"
+								tppabs="http://www.ccgp.gov.cn/img/wx_ccgp.gif" alt="" /> <img
+								src="img/app_qrcode.gif"
+								tppabs="http://www.ccgp.gov.cn/img/app_qrcode.gif" alt=""
+								style="margin-top: 6px" />
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<#include "../include/footer.html">
+</body>
+<!-- <script type="text/javascript" src="${base.contextPath}/lib/index/js/indexonly.js" ></script> -->
+<script type="text/javascript">
+$(function(){
+	$('#demo02').flexslider({
+	    animation: "fade",
+	    direction:"horizontal",
+	    easing:"swing",
+	    slideshowSpeed: 10000
+	})
+	
+	$(".dianh").mouseover(function(){
+		$(".phone").show();	
+	    $(".phone").stop(true,true).animate({right:'25px'});
+	  });
+	  $(".dianh").mouseout(function(){
+		$(".phone").hide();							
+	    $(".phone").animate({right:'-150px'});
+	  });
+	  $(".ewm").mouseover(function(){
+		$(".ewm_co").show(500);	
+	  });
+	  $(".ewm").mouseout(function(){
+		$(".ewm_co").stop(true,true).hide(500);	
+	  });
+	  $(".web").mouseover(function(){
+		$(".ewm_co2").show(500);	
+	  });
+	  $(".web").mouseout(function(){
+		$(".ewm_co2").stop(true,true).hide(500);	
+	  });
+
+	
+});
+</script>
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/slider.js"></script>
+<script language="javascript" src="images/vr.js"
+	tppabs="http://www.ccgp.gov.cn/images/vr.js"></script>
+</html>

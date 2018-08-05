@@ -1,0 +1,49 @@
+/*
+----------------
+| banner style |
+----------------
+.banner{position: relative;width: 100%;height: 675px;overflow: hidden;}
+.banner .js-sCont{position: absolute;top: 0;left: 50%;margin-left: -960px;width: 1920px;height: 675px;overflow: hidden;}
+.banner .js-sCont li{width: 1920px;height: 500px;text-align: center;}
+.banner .js-sDot{position: absolute;bottom: 20px;left: 50%;z-index: 2;margin-left: -150px;width: 300px;height: 14px;text-align: center;}
+.banner .js-sDot li{width: 14px;height: 14px;border-radius: 50%;text-indent: -100%;cursor: pointer;background-color: #DECAC1;margin: 0 6px;overflow: hidden;display: inline-block;*display: inline;*zoom: 1;border: 3px solid #fff;}
+.banner .js-sDot li.cur{background-color: #231815;}
+.banner .bannerBnt{position: absolute;top: 240px;width: 44px;height: 44px;background-image: url("../img/index/bannerBnt.png");background-repeat: no-repeat;top: 45%;}
+.banner .js-prev{left: 6%;background-position: 0 0;}
+.banner .js-next{right: 6%;background-position: 0px -44px;}
+*/
+
+.banner{position: relative;width: 1000px;height: 475px;overflow: hidden;    margin: 0 auto;}
+.banner .js-sCont{position: absolute;top: 0;margin: 0 auto;width: 1000px;height: 475px;overflow: hidden;}
+.banner .js-sCont li{width: 1000px;height: 470px;text-align: center;}
+.banner .js-sDot{position: absolute;bottom: 20px;left: 50%;z-index: 2;margin-left: -150px;width: 300px;height: 14px;text-align: center;}
+.banner .js-sDot li{width: 14px;height: 14px;border-radius: 50%;text-indent: -100%;cursor: pointer;background-color: #DECAC1;margin: 0 6px;overflow: hidden;display: inline-block;*display: inline;*zoom: 1;border: 3px solid #fff;}
+.banner .js-sDot li.cur{background-color: #231815;}
+.banner .bannerBnt{position: absolute;top: 240px;width: 44px;height: 44px;background-image: url("../img/index/bannerBnt.png");background-repeat: no-repeat;top: 45%;}
+.banner .js-prev{left: 6%;background-position: 0 0;}
+.banner .js-next{right: 6%;background-position: 0px -44px;}
+/*
+---------------------
+| bannerTools style |
+---------------------
+*/
+.bannerTools{height: 100px;white-space: nowrap; text-align: center;}
+.bannerTools li{width: 163px;height: 40px;display: inline-block;*display: inline;*zoom: 1; padding: 30px 16px;overflow: hidden;}
+.bannerTools li.line{background-color: #f3f4ee;padding: 30px 0;}
+.bannerTools a,.footerTools a{width: 113px;height: 40px;padding-right: 50px;font: 16px/22px "Microsoft YaHei";text-align: left; color: #68bdb4;display: block;overflow: hidden;}
+.bannerTools a b,.footerTools a b{font: 12px/18px "Microsoft YaHei";color: #8bc9c3;display: block;} 
+
+/*
+	轮播图下面的标题
+*/
+.index_tit {
+	background: url(../img/index/index_hd_title.png) no-repeat center bottom;
+    text-align: center;
+    font-size: 30px;
+    color: #4d4d4d;
+/*     width: 1180px; */
+    margin: 0 auto;
+    padding-top: 50px;
+    font-weight: bold;
+    height: 40px;
+}

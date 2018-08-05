@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>个人中心_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/channel.css" rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/index/user.css" rel="stylesheet" type="text/css" />
+
+<script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap-theme.min.css">
+<script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+<style type="text/css" media="screen">
+.fl { float: left;}
+.fr { float: right;}
+</style>
+<script>
+	function toUpdate(){
+		var realName = $("#realName").val();
+		var password = $("#password").val();
+		var email = $("#email").val();
+		var phone = $("#phone").val();
+		if(realName==""){
+			alert("请输入姓名！");
+			return;
+		}
+		if(password.length>8){
+			alert("密码长度大于8位！");
+			return;
+		}
+		var addOrUpdateUserObj = {
+	        	  realName:realName,
+	        	  passwordEncrypted:password,
+	        	  email:email,
+	        	  phone : phone
+	          };
+		 $.ajax({  
+	            "url":"${base.contextPath}/index/admin/user/submit",  
+	            "type":"post",  
+	            headers: {'Content-Type':'application/json'},
+	            "data":JSON.stringify(addOrUpdateUserObj),
+	            "success":function(obj){
+	            	 var json = eval(obj); 
+	            	 if(json.success){
+	            		 alert("更新成功");
+	            	 }
+	            },  
+	            "error":function(obj){
+	            	console.log(obj)
+	            },  
+	            "dataType":"json",  
+	            "async":false  
+	        });  
+	}
+</script>
+</head>
+<body>
+<#include "../../include/navigation.html">
+
+<div class="main">
+<div class="main_container">
+
+	<!-- 内容  开始-->
+		<div class="wrap">
+			<div class="vip_cont c100 clearfix">
+				<!--左边列表导航  开始-->
+				<div class="fl vip_left vip_magLeft">
+					<dl>
+						<dt>用户管理</dt>
+						<dd>
+							<p><a href="#">基本信息</a></p>
+						</dd>
+					</dl>
+					<dl>
+						<dt>评选评估</dt>
+						<dd>
+							<p><a href="${base.contextPath}/index/admin/userAssessment" >参与评估</a></p>
+						</dd>
+					</dl>
+				</div>
+				<!--左边列表导航  结束-->
+
+				<!--右边列表内容  开始-->
+				<div class="fr vip_right vip_magRight">
+					<!--用户信息  开始 -->
+					<div class="cus01">
+<!-- 						<div class="cusImg"> -->
+<!-- 							<img src="images/customerImg.png" title="更换头像" /> -->
+<!-- 						</div> 
+						<div class="cusName">
+							<p title="用户名称">基本信息</p>
+								<span title="姓名">姓名:<input type="text" value ="" /></span>
+								<span class="bdTell">密码<i></i><em>187****3765</em></span>
+						</div>-->
+						<h3 title="用户名称">基本信息</h3>
+						<form role="form">
+						    <div class="form-group">
+						        <label for="realName">姓名</label>
+						        <input type="text" class="form-control" id="realName" value="${(user.realName)!}" placeholder="请输入姓名">
+						    </div>
+						    <div class="form-group">
+						        <label for="email">email</label>
+						        <input type="text" class="form-control" id="email" value="${(user.realName)!}" placeholder="请输入email">
+						    </div>
+						    <div class="form-group">
+						        <label for="phone">电话</label>
+						        <input type="text" class="form-control" id="phone"  value="${(user.phone)!}" placeholder="请输入电话">
+						    </div>
+					       <div class="form-group">
+						        <label for="password">密码</label>
+						        <input type="text" class="form-control" id="password" value="${(user.password)!}" placeholder="请输入要修改的密码，填空默认不修改">
+						    </div>
+						
+<!-- 						    <div class="form-group"> -->
+<!-- 						        <label for="inputfile">文件输入</label> -->
+<!-- 						        <input type="file" id="inputfifle"> -->
+<!-- 						        <p class="help-block">这是块级帮助文本的实例</p> -->
+<!-- 						    </div> -->
+						
+						  
+						
+						    <button type="button" onclick="toUpdate()" class="btn btn-default">提交</button>
+						</form>
+					</div>
+				
+					<!-- 用户信息  结束 -->
+					<!-- <div class="cus03">
+						<div class="mess">
+							<a href="#" target="_blank"><i></i>aaaa</a>
+						</div>
+					</div>-->
+				</div>
+				<!--右边列表内容  结束-->
+			</div>
+		</div>
+
+		<!-- 内容  结束-->
+
+
+
+    </div>
+</div>
+<#include "../../include/footer.html">
+</body>
+</html>

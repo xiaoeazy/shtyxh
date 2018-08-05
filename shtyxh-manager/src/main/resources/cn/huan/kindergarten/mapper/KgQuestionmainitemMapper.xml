@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.huan.kindergarten.mapper.KgQuestionmainitemMapper">
+    <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.KgQuestionmainitem">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="sid" property="sid" jdbcType="DECIMAL" />
+        <result column="Q_ITEMS_TITLE" property="qItemsTitle" jdbcType="VARCHAR" />
+        <result column="analysis" property="analysis" jdbcType="VARCHAR" />
+        <result column="ITEM_TYPE" property="itemType" jdbcType="VARCHAR" />
+    </resultMap>
+
+ 	<resultMap id="OtherResultMap" type="cn.huan.kindergarten.dto.KgQuestionmainitem" >  
+        <id column="id" property="id"/>  
+        <result column="sid" property="sid" jdbcType="DECIMAL" />
+        <result column="Q_ITEMS_TITLE" property="qItemsTitle" jdbcType="VARCHAR" />
+        <result column="analysis" property="analysis" jdbcType="VARCHAR" />
+        <result column="ITEM_TYPE" property="itemType" jdbcType="VARCHAR" />
+        <collection property="qListItems" ofType="cn.huan.kindergarten.dto.KgQuestionAnswer">  
+            <id column="tid" property="id"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->  
+            <result column="tqid" property="qid"/><!-- property对应JavaBean中的属性名 -->  
+            <result column="name" property="name"/>  
+            <result column="value" property="value"/>  
+            <result column="checkcurr" property="checkcurr"/>  
+        </collection>  
+    </resultMap>  
+    
+    <!-- 查询所有的老师级各自的所有学生 -->  
+    <select id="questionmainitem" parameterType="cn.huan.kindergarten.dto.KgQuestionmainitem" resultMap="OtherResultMap">  
+        SELECT  
+            a.id,  
+            a.sid,  
+            a.Q_ITEMS_TITLE,  
+            a. analysis ,
+            a.ITEM_TYPE ,
+            b.id as tid,
+            b.qid as tqid,
+            b.name,
+            b.value,
+            b.checkcurr
+        FROM  
+            kg_questionmainitem a  
+        LEFT JOIN 
+        	kg_question_answer b 
+        ON 
+        	a.id = b.qid  
+        <where>
+        		<if test="sid != null">
+           			AND a.sid  = #{sid}
+           		</if>
+        </where>
+    </select>  
+    
+</mapper>

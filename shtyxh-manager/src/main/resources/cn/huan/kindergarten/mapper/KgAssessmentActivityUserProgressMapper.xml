@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.huan.kindergarten.mapper.KgAssessmentActivityUserProgressMapper">
+    <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="assessment_activity_id" property="assessmentActivityId" jdbcType="DECIMAL" />
+        <result column="upload_user_id" property="uploadUserId" jdbcType="DECIMAL" />
+        <result column="admin_suggestion" property="adminSuggestion" jdbcType="VARCHAR" />
+        <result column="expert_user_id" property="expertUserId" jdbcType="DECIMAL" />
+        <result column="expert_suggestion" property="expertSuggestion" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+         <result column="createDate" property="createdate" jdbcType="DATE" />
+    </resultMap>
+    
+     <resultMap  id="OtherResultMap" type="cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="assessment_activity_id" property="assessmentActivityId" jdbcType="DECIMAL" />
+        <result column="upload_user_id" property="uploadUserId" jdbcType="DECIMAL" />
+        <result column="admin_suggestion" property="adminSuggestion" jdbcType="VARCHAR" />
+        <result column="expert_user_id" property="expertUserId" jdbcType="DECIMAL" />
+        <result column="expert_suggestion" property="expertSuggestion" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+         <result column="createDate" property="createdate" jdbcType="DATE" />
+        
+        <association property="kgAssessmentActivity" javaType="cn.huan.kindergarten.dto.KgAssessmentActivity">
+            <id column="assessment_activity_id" property="id"></id>
+            <result column="assessment_activity_name" property="assessmentActivityName"/>
+        </association>
+    </resultMap>
+
+	 <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress">
+        select a.*,b.assessment_activity_name from kg_assessment_activity_user_progress a left join kg_assessment_activity b
+            on a.assessment_activity_id=b.id 
+           <where>
+           		<if test="uploadUserId != null">
+           			AND a.upload_user_id  = #{uploadUserId}
+           		</if>
+           		<if test="assessmentActivityId != null">
+           			AND a.assessment_activity_id = #{assessmentActivityId}
+           		</if>
+           		<if test="expertUserId != null">
+           			AND a.expert_user_id = #{expertUserId}
+           		</if>
+           		<if test="state != null">
+           			AND a.state = #{state}
+           		</if>
+           </where>
+    </select>
+    
+   <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress">
+        select count(1) from kg_assessment_activity_user_progress a
+           <where>
+           		<if test="uploadUserId != null">
+           			AND a.upload_user_id  = #{uploadUserId}
+           		</if>
+           		<if test="assessmentActivityId != null">
+           			AND a.assessment_activity_id = #{assessmentActivityId}
+           		</if>
+           		<if test="expertUserId != null">
+           			AND a.expert_user_id = #{expertUserId}
+           		</if>
+           		<if test="state != null">
+           			AND a.state = #{state}
+           		</if>
+           </where>
+    </select>
+    
+    <select id="countLockTable" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress">
+        select count(1) from kg_assessment_activity_user_progress a  for update
+    </select>
+    
+
+</mapper>

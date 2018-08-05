@@ -1,0 +1,245 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>资讯中心_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/channel.css" rel="stylesheet" type="text/css" />
+<script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<script language="javascript">
+
+function CompareDate(d1,d2)
+{
+  return ((new Date(d1.replace(/-/g,"\/"))) > (new Date(d2.replace(/-/g,"\/"))));
+}
+
+function dosearch(e){
+	var value1 = $("#dateissuestart").val();
+	var value2 = $("#dateissueend").val();
+	alert(value1);
+	alert(value2);
+	if((value1!=="" && value2=="")||(value1=="" && value2!==""))
+	{
+		if(value1==""){alert("请选择颁布日期的起始时间。");}
+		if(value2==""){alert("请选择颁布日期的结束时间。");}
+		return false;
+	}
+	if(CompareDate(value1,value2)){
+		alert("结束时间小于开始时间");
+		return false;
+	}
+    document.searchForm.submit();
+}
+function doreset(){
+	$("#searchparam").val("");
+	$("#dateissuestart").val("");
+	$("#dateissueend").val("");
+	$("#newstype").val("");
+	$("#newssource").val("");
+ }
+ 
+$(document).ready(function(){
+    $("#doSearch").click(function(){
+    	dosearch(1);
+    });
+    $("#doReset").click(function(){
+        doreset();
+    });
+
+    $("#dateissuestart").css("cursor","pointer");
+    $("#dateissueend").css("cursor","pointer");
+})
+
+</script>
+<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/laydate/laydate.js" ></script>
+</head>
+<body id="zcfg">
+<#include "../../include/navigation.html">
+
+<div class="main">
+<div class="main_container">
+
+
+
+<div class="main_topic_block mt13">
+<form name="searchForm" id="searchForm" action="newsSearch" method="post">
+<input type="hidden" name="page_index" id="page_index" value="1" />
+<style>
+#vT_bidSearch_o {width:1000px;}
+.vT_bidSearch_outsider{width:100%}
+.vT_bidSearch_addon_con{width:100%;border-bottom:1px dotted #eee}
+.vT_bidSearch_addon_block{width:240px;height:50px;float:left;margin-left:30px;}
+.vT_bidSearch_addon_block2{width:80px;height:50px;float:left;margin-left:30px;}
+.vT_bidSearch_addon_block2 p,.vT_bidSearch_addon_block p{width:80px;text-align:right;font-size:14px;font-weight:bolder;color:#6a6a6a;display:block;margin-right:10px;float:left;margin-top:13px;height:30px}
+.vT_bidSearch_addon_block input{font-size:16px;width:130px;line-height:20px;height:21px;margin-top:15px; border:1px solid #c7d8e3;}
+.vT-srch-result-channel-list3 li,.vT-srch-result-channel-list2 li{line-height:20px;margin-left:25px;display:block;float:left;width:90px;height:20px;font-size:14px;color:#6a6a6a;margin-bottom:10px;text-align:center}
+.vT-srch-result-channel-list3 li{width:90px}
+</style>
+<div class="vT_z" id="vT_bidSearch_o">
+    <div class="vT_bidSearch_outsider">
+        <div class="vT_bidSearch_addon_con" style="margin-top:5px">
+
+         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:660px"><p>标　　题</p><input type="text" name="searchparam" id="searchparam" style="width:550px" value="" /></div>
+         <div style="clear:both"></div></div>
+
+         <div class="vT_bidSearch_addon_con" style="margin-top:5px">
+         <div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>发布日期</p><input type="text" name="dateissuestart" id="dateissuestart" style="width:90px" value="" class="laydate-icon" /> 至 <input type="text" name="dateissueend" id="dateissueend" style="width:90px" value="" class="laydate-icon" /></div>
+        
+         <div style="clear:both"></div></div>
+
+   
+        <!--选择内容-->
+		<div class="vT_bidSearch_addon_con" style="margin-top:5px">
+				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>咨讯类别</p><select id="newstype" size=1 name="newstype" style="margin-top:8px;height:30px;line-height:24px">
+					<option value="" >全部</option>
+					
+						<#list kgNewstypeList as newstypeList>   
+								    <option value="${newstypeList.id}">${newstypeList.typename}</option>
+					    </#list>   
+					
+				</select></div>
+				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>咨讯来源</p><select id="newssource" size=1 name="newssource" style="margin-top:8px;height:30px;line-height:24px">
+					<option value="" >全部</option>
+					<#list KgNewsSourceList as newsSourceList>   
+								    <option value="${newsSourceList.id}">${newsSourceList.sourcename}</option>
+				    </#list>   
+				</select></div>
+			<div style="clear:both"></div></div>
+       <!--输入内容-->
+        <div class="vT_bidSearch_addon_con" style="margin-top:10px;margin-bottom:10px;text-align:center">
+            <button class="ui gray button"  id="doSearch" > 检索</button>
+            <button class="ui gray button" id="doReset" >重置 </button>
+            <div style="clear:both"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+</div>
+</form>
+</div>
+
+
+
+<#if newsTop??>
+	<div class="vF-cht-section-newsblock mt13">
+           <div class="vT-zcfg-cgf-t">
+               <div class="vT-zcfg-cgf-t-pic"><a href="${base.contextPath}/index/newsDetail?id=${newsTop.id}" style="text-decoration:none">
+               	<font style="font-weight:bold;font-size:30px;color:red">${newsTop.newstitle}</font></a>
+               </div>
+                <p class="shuoming">&nbsp;&nbsp;&nbsp;&nbsp;</p> 
+           </div>
+           <div class="vT-zcfg-cgf-con">
+               ${newsTop.content}
+              
+           </div>
+      </div>
+	<#if newsTop.thumbnail??>
+	     <div class="vT-cht-section-picnews mt13">
+			<a href="${base.contextPath}/index/newsDetail?id=${newsTop.id}"  target='_blank'  thumb="" alt="" text="">
+			<img src="${base.contextPath}${newsTop.thumbnail}"  border='0' alt='中华人民共和国政府采购法实施条例（中华人民共和国国务院令 第658号）' width="383px" height="237px" /></a>
+		 </div>
+	 </#if>
+</#if>
+
+
+
+	<!--left newslist start-->
+    <div class="main_left_block mt13">
+        <div class="wz_block">
+        
+        	<#list typeList as typeList>   
+			    <div class="newslist_bl_nor">
+	                <div class="newslist">
+			               <div class="vF_t2">
+			                 <div class="vF_t2_r1">
+			                    <div class="vF_tab unit2">
+			                        <div class="vF_title_bar2">
+			                          <h2 class="ui_til4_tab_u current2 word5"><a href="${base.contextPath}/index/newsTypeList?typeid=${typeList.id}" >${typeList.typename}</a></h2>
+			                        </div>
+			                    </div>
+			                 </div>
+			
+			                 <ul class="c_list mt10 mb10 tab-con split" style="display:block">
+			                 	<#list typeList.newsList as newsList>   
+									<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a></li>
+								</#list>
+		                	 </ul>
+			            </div>
+	                </div>
+            	</div>
+    		</#list> 
+        </div>
+    </div>
+	<!--left newslist end-->
+	
+    <div class="main_right_block mt13">
+        <div class="main_right_cbl">
+            <h2>分类总览</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list">
+                		<#list typeList as typeList> 
+							<li class="sorthead1"><a href="${base.contextPath}/index/newsTypeList?typeid=${typeList.id}"  target="_blank" title="${typeList.typename}">${typeList.typename}</a>(${typeList.count})</li>
+						</#list> 
+                </ul>
+                </div>
+        </div>
+
+        <div class="main_right_cbl mt13">
+            <h2>文章来源</h2>
+            <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list">
+						<#list sourceList as sourceList> 
+							<li class="sorthead1"><a href="${base.contextPath}/index/newsSourceList?sourceid=${sourceList.id}"  target="_blank" title="sourceList.soucename">${sourceList.sourcename}</a>(${sourceList.count})</li>
+						</#list> 
+                </ul>
+                </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+<#include "../../include/footer.html">
+</body>
+<script language="javascript">
+function showd(n)
+{
+var uom = new Date(new Date()-0+n*86400000);
+uom = uom.getFullYear() + "," + (uom.getMonth()+1) + "," + uom.getDate();
+return uom;
+}
+var dayLT=showd(0);
+var gEndT = dayLT.split(",");
+var gEnd=gEndT[0]-0 + "-" + gEndT[1] + "-" +gEndT[2];
+
+laydate({
+  elem: '#dateissuestart',
+  format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+  festival: false, //显示节日
+  max:gEnd,
+  choose: function(datas){ //选择日期完毕的回调
+    //alert('得到：'+datas);
+  }
+});
+laydate({
+      elem: '#dateissueend',
+      format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+      festival: false, //显示节日
+      max:gEnd,
+      choose: function(datas){ //选择日期完毕的回调
+        //alert('得到：'+datas);
+      }
+    });
+
+/*
+laydate({
+  elem: '#hello3',
+  min: laydate.now(-1), //-1代表昨天，-2代表前天，以此类推
+  max: laydate.now(+1) //+1代表明天，+2代表后天，以此类推
+});
+*/
+</script>
+<script language="javascript" src="${base.contextPath}/lib/index/js/channel.js"></script>
+</html>

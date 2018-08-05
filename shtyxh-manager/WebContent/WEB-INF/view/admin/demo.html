@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html manifest="">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+
+    <title>app</title>
+	<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+	<script>
+		var _basePath = '${base.contextPath}',_locale='${base.locale}'; 
+	</script>
+	<!-- extjs -->
+	<script src="${base.contextPath}/lib/extjs/build/ext-all.js"></script>
+	<script src="${base.contextPath}/lib/extjs/build/packages/ext-locale/build/ext-locale-zh_CN.js"></script>
+	<link href="${base.contextPath}/lib/extjs/build/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css" rel="stylesheet" />
+	
+	<script src="${base.contextPath}/lib/extjs/build/examples/ux/form/ItemSelector.js"></script>
+	<script src="${base.contextPath}/lib/extjs/build/examples/ux/form/MultiSelect.js"></script>
+	<link href="${base.contextPath}/lib/extjs/build/examples/ux/css/ItemSelector.css" rel="stylesheet" />
+	
+	<!-- 自己的js -->
+	<script src="${base.contextPath}/lib/extjs/myExt/Header/Header.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/demo.js"></script>
+	
+	<!-- 公共 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/common/common.js"></script>
+	
+	<!-- ueditor -->
+	<script type="text/javascript" charset="utf-8">
+    	window.UEDITOR_HOME_URL = "${base.contextPath}/lib/extjs/ueditor/utf8-jsp/"; //UEDITOR_HOME_URL、config、all这三个顺序不能改变
+	</script>
+	<script type="text/javascript" charset="utf-8" src="${base.contextPath}/lib/extjs/ueditor/utf8-jsp/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="${base.contextPath}/lib/extjs/ueditor/utf8-jsp/ueditor.all.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="${base.contextPath}/lib/extjs/ueditor/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+	<script src="${base.contextPath}/lib/extjs/ueditor/ueditor.js"></script>
+	
+	
+	<!-- 问卷调查 -->
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/QuestionSurvey.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/addorUpdateQuestionSurveyWindow.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/QuestionAnalysis.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/analysisTree.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/chartA.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/chartB.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/chartC.js"></script>
+	<script src="${base.contextPath}/lib/extjs/myExt/QuestionSurvey/item/item/chartEmpty.js"></script>
+	<script src="${base.contextPath}/lib/extjs/build/packages/ext-charts/build/ext-charts.js"></script>
+	
+		<script type="text/javascript">
+				Array.prototype.in_array = function (element) { 
+				　　for (var i = 0; i < this.length; i++) { 
+				　　if (this[i] == element) { 
+				　　			return true; 
+				   	} 
+				   } 
+					return false; 
+				} 
+				var theLoginUserName = ' ';
+				var theLoginUserId = '';
+			
+		</script>
+	
+</head>
+<body>
+
+
+<input type="hidden" id="theVersion" value="0.0.0" />
+<input type="hidden" id="theLoginUserName" value="admin" />  
+</body>
+</html>
+
+
+
+
+

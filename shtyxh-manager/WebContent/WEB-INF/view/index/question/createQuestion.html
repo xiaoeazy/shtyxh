@@ -1,0 +1,190 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<title>问卷</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta name="robots" content="noindex,nofollow">
+		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<link href="${base.contextPath}/lib/question/resources/skin/font/iconfont.woff" rel="stylesheet" type="text/css" />
+		<link href="${base.contextPath}/lib/question/resources/skin/base.css" rel="stylesheet" type="text/css" />
+		<link href="${base.contextPath}/lib/question/resources/skin/blue.css" rel="stylesheet" type="text/css" />
+		<link href="${base.contextPath}/lib/question/resources/skin/content.css" rel="stylesheet" type="text/css" />
+		<link href="${base.contextPath}/lib/question/resources/script/layer/skin/layer.css" rel="stylesheet" type="text/css" />
+		<style>
+			.pagebox{
+				background-image: url(${base.contextPath}/lib/index/img/questionbg/questionBg.png);
+			    background-position: top center;
+			    background-attachment: fixed;
+			    background-size: cover;
+			    background-repeat: no-repeat;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<!--主体框架开始-->
+		<div class="pagebox" id="pageContentId">
+			<div class="home-desktop" id="desktop_scroll" >
+				<div style="width:900px;  margin:auto">
+					<div >
+						<!--出题-->
+						<div class="create-questions" >
+							<div class="questions-head-title">
+								<h4 class="h4-bg T_edit T-center" data-Tid="10001" id="surveyName"><span style="font-size:18px;">${questionsurvey.surveyName}</span></h4></div>
+							<#if questionsurvey.surveyDesc!=''>
+								<table class="questions-items-title">
+									<tbody>
+										<tr>
+											<td class="module-menu">&nbsp;</td>
+											<td>
+												<div class="cq-title T_edit" data-Tid="10002" id="surveyDesc"><span style="font-size:16px;">${questionsurvey.surveyDesc}</span></div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</#if>
+							<ul class="ui-questions-content-list">
+								<#list questionMainItemlist as questionMainItemlist>
+									<#if questionMainItemlist.itemType=='1'||questionMainItemlist.itemType=='2'>
+											<!-- 单选题start -->
+												<li class="ui-module items-questions">
+													<div class="theme-type">
+														<div class="module-menu">
+															<h4>Q${questionMainItemlist_index+1}</h4>
+														</div>
+														<div class="ui-drag-area">
+															<div class="cq-title T_edit T_plugins" ><span style="font-size:16px;">${questionMainItemlist.qItemsTitle}</span></div>
+															<div class="hiddenType" style="display:none">${questionMainItemlist.itemType}</div>
+															<div class="hiddenId" style="display:none">${questionMainItemlist.id}</div>
+														</div>
+														<div class="cq-items-content">
+															<ul class="cq-unset-list" data-checkType="${questionMainItemlist.itemType}" >
+																<#list questionMainItemlist.qListItems as qListItems>
+																	<li>
+																		<label class="input-check">
+																		
+																			<input  type="<#if questionMainItemlist.itemType=='1'>radio<#else>checkbox</#if>"   name="${qListItems.name}"  value="${qListItems.value?html}"  <#if qListItems.checkcurr>checked</#if> />
+																		</label>
+																		<div class="cq-answer-content T_edit T_plugins" >${qListItems.value?html}</div>
+																		<div class="hiddenAId" style="display:none">${qListItems.id}</div>
+																		
+																	</li>
+																</#list>
+															</ul>
+															<div class="cq-items-ctrl">
+																	${questionMainItemlist.analysis}
+															</div>
+														</div>
+														
+													</div>
+												</li>
+											<!-- 单选题end -->
+									<#elseif questionMainItemlist.itemType=='5'>
+										<!-- 填空start -->
+											<li class="ui-module items-questions">
+												<div class="theme-type">
+													<div class="module-menu">
+															<h4>Q${questionMainItemlist_index+1}</h4>
+													</div>
+													<div class="ui-drag-area">
+														<div class="cq-title T_edit T_plugins" ><span style="font-size:16px;">${questionMainItemlist.qItemsTitle}</span></div>
+														<div class="hiddenType" style="display:none">${questionMainItemlist.itemType}</div>
+													</div>
+													<div class="cq-items-content">
+														<div class="describe-edit-content T_edit T_plugins" >
+															<textarea style="width:100%;height:100px" class="contentInfo"></textarea>
+														</div>
+														<#list questionMainItemlist.qListItems as qListItems>
+															<div class="hiddenAId" style="display:none">${qListItems.id}</div>
+														</#list>
+													</div>
+												</div>
+											</li>
+										<!-- 填空end -->
+									</#if>
+								</#list>
+							
+							
+							</ul>
+							<ul class="ui-foot-all-list"></ul>
+						</div>
+					</div>
+					<div style="height:40px; margin: 20px 0; text-align: right;">
+						<button type="button" class="cotrlBtn exam-save-btn btnBlue" id="saveQuestion" style="height:40px;width: 140px; font-size:18px;">提交</button>
+					</div>
+				</div>
+			</div>
+
+			
+			<script type="text/javascript">
+				$(function() {
+                    $('#saveQuestion').on('click',function(){
+						var questionItems = [];
+                    	//封装所有题列表，遍历提取值analysis（答案）、题列表（数组对象）；
+                    	$('.ui-questions-content-list').children('li').each(function(i){
+//                     		var dataTx={},qListItems=[];
+//                     		dataTx.id=$(this).find('.hiddenId').html();
+							var dataTx={};
+                    		var itemType=$(this).find('.hiddenType').html();
+                    		//封装单题，遍历提取值name、value、checkCurr（选中状态）；
+                    		$(this).find('ul.cq-unset-list').children('li').each(function(j){
+                    			var listItems={};
+                    			var checked = $(this).find('input').prop('checked');
+                    			if(checked==true){
+                    				listItems.aid = $(this).find('.hiddenAId').html();
+                    				listItems.sid = ${questionsurvey.id};
+                    				listItems.checkcurr=checked;
+                    				questionItems.push(listItems)
+                    			}
+                    		});
+                    		if(itemType==5){
+                    			$(this).find('.cq-items-content').each(function(j){
+                        			var listItems={};
+                        				listItems.aid = $(this).find('.hiddenAId').html();
+                        				listItems.sid = ${questionsurvey.id};
+                        				listItems.content = $(this).find('.contentInfo').val();
+                        				if($(this).find('.contentInfo').val()!=""){
+                        					questionItems.push(listItems);
+                        				}
+                        		});
+                    		}
+                    	});
+                    	console.log(JSON.stringify(questionItems));
+                    	if(questionItems==false){
+                    		return;
+                    	}
+	               		 $.ajax({  
+	         	            "url":"${base.contextPath}/index/kg/user/q/answer/submit?sid="+${questionsurvey.id},  
+	         	            "type":"post",  
+	         	            headers: {'Content-Type':'application/json'},
+	         	            "data":JSON.stringify(questionItems),
+	         	            "dataType":"json",  
+	         	            "async":false  ,
+	         	            "success":function(obj){
+	         	            	 var json = eval(obj); 
+	         	            	 if(json.success){
+	         	            		 alert("提交成功");
+	         	            	 }else{
+	         	            		 alert(json.message);
+	         	            	 }
+	         	            },  
+	         	            "error":function(obj){
+	         	            	console.log(obj)
+	         	            },  
+	         	           
+	         	        });  
+                    	
+                    	
+                    });
+				});
+			</script>
+		</div>
+		<!--主体框架结束-->
+	</body>
+
+</html>

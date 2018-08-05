@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+
+	<bean id="jacksonObjectMapper" class="com.huan.HTed.core.json.JacksonMapper" ></bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="jacksonObjectMapper" />
+        <property name="targetMethod" value="configure" />
+        <property name="arguments">
+            <list>
+                <value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value>
+                <value>false</value>
+            </list>
+        </property>
+    </bean>
+
+	
+	  <!-- Enables the Spring MVC @Controller programming model -->
+	<!-- <mvc:annotation-driven /> -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <ref bean="jacksonObjectMapper"/>
+                </property>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+	
+	<bean id="validator" class="com.huan.HTed.core.validator.ComplexCommonValidator"/>
+
+	<mvc:resources mapping="/lib/**" location="/lib/" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/uploadFile/**" location="/uploadFile/" />
+	<mvc:resources mapping="/ueditor/**" location="/ueditor/" />
+	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
+	<!-- 配置视图解析器 如何把handler 方法返回值解析为实际的物理视图 根据控制器返回的字符串拼接成jsp路径：/WEB-INF/jsp/xx.jsp -->
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+	<!-- <property name = "prefix" value="/WEB-INF/jsp/"></property> -->
+	<!-- <property name = "suffix" value = ".jsp"></property> -->
+	<!-- </bean> -->
+
+
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPaths">
+			<list>
+				<value>/WEB-INF/view</value>
+			</list>
+		</property>
+		<!-- <property name="templateLoaderPath" value="/WEB-INF/screen" /> -->
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="auto_import">spring.ftl as spring</prop>
+				<prop key="template_update_delay">2</prop><!-- 模板更新检查时间(秒) -->
+				<prop key="number_format">#</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="time_format">HH:mm:ss</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+				<!-- <prop key="classic_compatible">true</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="viewClass" value="com.huan.HTed.core.web.DefaultFreeMarkerView" />
+		<property name="cache" value="false" />
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="requestContextAttribute" value="base" />
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="allowSessionOverride" value="true" />
+	</bean>
+	
+    <bean  class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="messageSource" class="com.huan.HTed.core.i18n.CacheMessageSource"></bean>
+    
+     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="zh_CN"/>
+    </bean>
+	
+	<!-- 自动扫描controller包下的所有类，使其认为是spring mvc的控制器 路径即为类路径 -->
+	<context:annotation-config/>
+	<context:component-scan base-package="**.controllers" />
+	
+	
+	
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/admin/**"/>
+	        <mvc:mapping path="/index/admin/**"/>
+	        <mvc:exclude-mapping path="/admin/login.html"/>    <!-- 不拦截登录请求 -->
+	        <mvc:exclude-mapping path="/admin/login"/> 
+	        <mvc:exclude-mapping path="/admin/logout"/>    <!-- 不拦截注销请求 -->
+	        <bean class="cn.huan.kindergarten.interceptor.SessionInterceptor"></bean>
+	    </mvc:interceptor>
+	</mvc:interceptors>
+	
+	<bean id="springContext" class="cn.huan.kindergarten.linstener.InitDataListener" lazy-init="false"/> 
+	
+</beans>

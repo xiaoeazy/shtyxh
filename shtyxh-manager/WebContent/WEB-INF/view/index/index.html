@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/banner.css"
+	rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/indexonly.css"
+	rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<!-- 主要内容轮播 -->
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/responsiveslides.min.js"></script>
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/index/common.js"></script>
+<!-- 导航下轮播 -->
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/index/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body id="index">
+
+	<!--固定菜单 start-->
+	<div id="top">
+		<ul>
+			<#if wb??&&wb!="">
+				<li>
+					<a class="web" href='javascript:void(0);'><img src="${base.contextPath}/lib/index/img/theme/default/wb.png" /></a>
+					<div class="ewm_co2">
+						<img src="${base.contextPath}${wb}" />
+					</div>
+				</li>
+			</#if>
+			<#if wx??&&wx!="">
+				<li class="ewm">
+					<a href='javascript:void(0);'><img src="${base.contextPath}/lib/index/img/theme/default/wx.png" /></a>
+					<div class="ewm_co">
+						<img src="${base.contextPath}${wx}" />
+					</div>
+				</li>
+			</#if>
+			<#if tel??&&tel!="">
+				<li class="dianh">
+					<a href='javascript:void(0);'><img src="${base.contextPath}/lib/index/img//theme/default/dh.png" /></a>
+					<div class="phone">
+						<span>${tel}</span>
+					</div>
+				</li>
+			</#if>
+		</ul>
+	</div>
+	<!--固定菜单 end-->
+	<#include "../include/navigation.html"> <!-- banner start -->
+	<div class="banner">
+		<div class="js-sCont">
+			<ul>
+
+
+				<#list carouselList as carouselList>
+				<li>
+					<#if carouselList.urltype==0> 
+						<a href="${carouselList.webUrl}" title="" target="_blank"> 
+					<#elseif carouselList.urltype==1> 
+						<a href="${base.contextPath}/index/newsDetail?id=${carouselList.newsId}" title="" target="_blank"> 
+					<#else> 
+						<a href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}" title="" target="_blank">
+					</#if> 
+				<img src="${base.contextPath}${carouselList.filePath}" alt="" width="1000" height="475" title="" /></a>
+				</li>
+				</#list>
+			</ul>
+		</div>
+		<div class="js-sDot">
+			<ul></ul>
+		</div>
+		<a href="javascript:;" class="js-prev bannerBnt"></a> <a
+			href="javascript:;" class="js-next bannerBnt"></a>
+	</div>
+
+	<!-- banner end -->
+
+
+
+
+	<div class="main">
+		<div class="main_container">
+
+			<h3 class="index_tit" style="">
+				<a href="javascript:;" target="_blank"></a>
+			</h3>
+
+
+			<div class="main_topic_block mt13">
+				<div class="picnews">
+					<div class="vT_t1 picnews flexslider" id="demo02">
+						<ul class="slides">
+							<#list newsThumbNailList as newsThumbNailList> <#if
+								newsThumbNailList_index==0>
+							<li><div class="word_bg">
+									<p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newstitle}</p>
+								</div>
+								<div class="img">
+									<a
+										href="${base.contextPath}/index/newsDetail?id=${newsThumbNailList.id}"
+										target='_blank' thumb="" alt="" text=""><img
+										src="${base.contextPath}${newsThumbNailList.thumbnail}"
+										border='0' width="390px" height="285px"
+										alt='${newsThumbNailList.newstitle}'
+										title='${newsThumbNailList.newstitle}' /></a>
+								</div></li>
+							<#else>
+							<li style="display: none"><div class="word_bg">
+									<p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newstitle}</p>
+								</div>
+								<div class="img">
+									<a
+										href="${base.contextPath}/index/newsDetail?id=${newsThumbNailList.id}"
+										target='_blank' thumb="" alt="" text=""><img
+										src="${base.contextPath}${newsThumbNailList.thumbnail}"
+										border='0' width="390px" height="285px"
+										alt='${newsThumbNailList.newstitle}'
+										title='${newsThumbNailList.newstitle}' /></a>
+								</div></li></#if> </#list>
+						</ul>
+					</div>
+				</div>
+				<div class="txtnews">
+					<div class="txtnews_topic">
+						<p>
+							<#list newsList as newsList> <#if newsList_index==0>
+							<a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
+								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+							</#if> </#list>
+						</p>
+					</div>
+					<div class="txtnews_list_contianer">
+						<ul class="txtnews_list">
+							<#list newsList as newsList> <#if (newsList_index>0
+							&& newsList_index<8) >
+							<li><a
+								href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
+								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+							</#if> </#list>
+						</ul>
+						<ul class="txtnews_list">
+							<#list newsList as newsList> <#if (newsList_index>=8)
+							>
+							<li><a
+								href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
+								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+							</#if> </#list>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="main_left_block mt13">
+					<!-- 内容检索start -->
+					<div class="banner_block ">
+						<div class="vF_banner bx_log">
+							<p class="ml92 dlzc">
+								<a href="${base.contextPath}/index/newsSearch">内容检索</a>
+							</p>
+							<p class="ml67 dlzc"></p>
+							<p class="ml92 dlzc"></p>
+						</div>
+					</div>
+					<!-- 内容检索end  -->
+
+					<!-- 评估入口start -->
+					<div class="wz_block mt10" style="height: 120px; overflow: hidden;">
+						<div class="newslist_bl_gsgg" style="">
+							<div style="">
+								<div style=" float:left; width:25%;  height:120px;">
+									<a href="${base.contextPath}/index/assessmentTypeList" target="_blank">
+										<img src="${base.contextPath}/resources/images/assessment/assessmentEntrance.jpg" height="120" width="170" alt="图片" style="vertical-align:middle;" />
+									</a>
+								</div>
+								<div style=" float:left; width:25%;  height:120px;line-height: 120px;vertical-align:middle;text-align:center">
+									<a href="${base.contextPath}/index/assessmentTypeList" target="_blank" style="text-decoration:none">
+										<font size="5px">评估入口</font>
+									</a>
+								</div>
+								<#if typeEntranceShow??>
+									<div style=" float:left; width:25%;  height:120px;">
+										<img src="${base.contextPath}${typeEntranceShow.entranceimagepath}" height="120" width="170" alt="图片" style="vertical-align:middle;" />
+									</div>
+									<div style=" float:left; width:25%;  height:120px;line-height: 120px;vertical-align:middle;text-align:center">
+										<a href="${base.contextPath}/index/newsTypeList?typeid=${typeEntranceShow.id}" target="_blank" style="text-decoration:none">
+											<font size="5px">${typeEntranceShow.typename}</font>
+										</a>
+									</div>
+								</#if>
+							</div>
+								
+						</div>
+					</div>
+					<!-- 评估入口end -->
+
+					<!-- 公告公示 -->
+					<#if typeNewsShow??>
+					
+					
+						<div class="wz_block">
+								<div class="newslist_bl_gsgg mt13">
+								<div class="newslist">
+									<div class="vF_t3">
+										<div class="vF_t2_r1" style="">
+											<div class="vF_tab unit2">
+												<div class="vF_title_bar3">
+													<h2 class="ui_til4_tab_u current2 word8">
+														<a href="${base.contextPath}/index/assessmentTypeList">${typeNewsShow.typename}</a>
+													</h2>
+												</div>
+											</div>
+										</div>
+										<ul class="c_list mt10 mb10 split" id="area3_con1">
+											<#list typeNewsShow.newsList as newsList>
+											<li style="width:628px"><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank"
+												title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+												<font style="float:right">${newsList.createdate?string('yyyy-MM-dd')}</font>
+											</li>
+											</#list>
+										</ul>
+	
+	
+										<div class="vT_t3_r3">
+											<div class="vT_pg">
+												<div id="area3_sel_1"></div>
+												<div id="area3_sel_2"></div>
+												<div id="area3_sel_3"></div>
+											</div>
+										</div>
+	
+									</div>
+								</div>
+							</div>
+						</div>
+					</#if>
+					<!-- 公告公示 end-->
+				</div>
+
+				<div class="main_right_block mt13">
+					<!-- 资料下载start -->
+					<div class="main_right_cbl ">
+						<h2>
+							<a href="${base.contextPath}/index/admin/download"
+								target="_blank">资料下载</a>
+						</h2>
+						<ul class="xzzqlinks mb15">
+							<#list downloadList as downloadList> <#if
+								downloadList.password!="">
+							<li class="xzzqlinks sys1"><p>${downloadList.fileTitle}</p></li>
+							<#else>
+							<li class="xzzqlinks sys1"><p>
+									<a
+										href="${base.contextPath}/index/admin/file/download?fileId=${downloadList.id}"
+										target="_blank">${downloadList.fileTitle}</a>
+								</p></li></#if> </#list>
+						</ul>
+					</div>
+					<!-- 资料下载end -->
+					<!--预留广告位start-->
+					<#if 1!=1>
+					<div class="main_right_cbl mt13">
+						<h2></h2>
+						<div class="dzzwlinks mt10">
+							<img src="img/wx_mof.gif" alt="" />
+							<img src="img/wx_ccgp.gif" alt="" /> 
+							<img src="img/app_qrcode.gif" alt="" style="margin-top: 6px" />
+						</div>
+					</div>
+					</#if>
+					<!-- 预留广告位end -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<#include "../include/footer.html">
+</body>
+<!-- <script type="text/javascript" src="${base.contextPath}/lib/index/js/indexonly.js" ></script> -->
+<script type="text/javascript">
+$(function(){
+	$('#demo02').flexslider({
+	    animation: "fade",
+	    direction:"horizontal",
+	    easing:"swing",
+	    slideshowSpeed: 10000
+	})
+	
+	$(".dianh").mouseover(function(){
+		$(".phone").show();	
+	    $(".phone").stop(true,true).animate({right:'25px'});
+	  });
+	  $(".dianh").mouseout(function(){
+		$(".phone").hide();							
+	    $(".phone").animate({right:'-150px'});
+	  });
+	  $(".ewm").mouseover(function(){
+		$(".ewm_co").show(500);	
+	  });
+	  $(".ewm").mouseout(function(){
+		$(".ewm_co").stop(true,true).hide(500);	
+	  });
+	  $(".web").mouseover(function(){
+		$(".ewm_co2").show(500);	
+	  });
+	  $(".web").mouseout(function(){
+		$(".ewm_co2").stop(true,true).hide(500);	
+	  });
+
+	
+});
+</script>
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/slider.js"></script>
+</html>

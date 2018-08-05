@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+                           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+
+  
+    <context:property-placeholder location="classpath:config.properties"/>
+
+    <!-- 配置数据源，dbcp -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="30"/>
+        <property name="maxIdle" value="5"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="validationQuery" value="select 1"/>
+    </bean>
+    
+ 
+    
+    <!-- mapper扫描器 -->
+<!--     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> -->
+<!--         扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开  -->
+<!--         <property name="basePackage" value="*.**.mapper"/> -->
+<!--         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/> -->
+<!--     </bean> -->
+    
+    
+        <!-- mapper definition -->
+    <bean id="mapperScannerConfigurer" class="com.huan.HTed.mybatis.spring.MapperScannerConfigurer">
+        <property name="basePackage" value="*.**.mapper"/>
+        <property name="processPropertyPlaceHolders" value="true"/>
+        <property name="propertiesMap">
+            <map>
+                <entry key="mappers" value="com.huan.HTed.mybatis.common.Mapper"/>
+                <entry key="IDENTITY" value="${mybatis.identity}"/>
+                <entry key="seqFormat" value="{3}_s.nextVal"/>
+            </map>
+        </property>
+    </bean>
+    
+    
+     <!-- 事务管理器对mybatis操作数据库事务控制，spring使用jdbc的事务控制类 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>    
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+   <!-- sqlSessinFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 加载mybatis的全局配置文件 -->
+        <property name="configLocation" value="classpath:mybatis/mybatis-configuration.xml" />
+        <!-- 加载mybatis的配置文件 -->
+        <property name="mapperLocations" value="classpath*:/**/*Mapper.xml"/>
+        <!-- 数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+        
+         <property name="plugins">
+            <array>
+<!--                 <bean class="com.huan.HTed.core.interceptor.RequestContextInterceptor"/> -->
+                <bean class="com.huan.HTed.core.interceptor.OvnInterceptor"/>
+                <bean class="com.github.pagehelper.PageHelper"/>
+            </array>
+        </property>
+    </bean>
+
+
+</beans>

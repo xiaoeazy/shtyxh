@@ -1,0 +1,98 @@
+<link href="${base.contextPath}/lib/index/css/inc.css" rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/my.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    // 设置为主页 
+    function SetHomeFoot(obj, vrl) {
+        try {
+            obj.style.behavior = 'url(#default#homepage)';
+            obj.setHomePage(vrl);
+        } catch(e) {
+            if (window.netscape) {
+                try {
+                    netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                } catch(e) {
+                    alert("此操作被浏览器拒绝！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。");
+                }
+                var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+                prefs.setCharPref('browser.startup.homepage', vrl);
+            } else {
+                alert("您的浏览器不支持，请按照下面步骤操作：1.打开浏览器设置。2.点击设置网页。3.输入：" + vrl + "点击确定。");
+            }
+        }
+    }
+    // 加入收藏 兼容360和IE6 
+    function shouCangFoot(sURL, sTitle) {
+        try {
+            window.external.addFavorite(sURL, sTitle);
+        } catch(e) {
+            try {
+                window.sidebar.addPanel(sTitle, sURL, "");
+            } catch(e) {
+                alert("加入收藏失败，请使用Ctrl+D进行添加");
+            }
+        }
+    }
+</script>
+
+<style>
+/* .logo_gh{width:388px;height:80px;float:left;background:url("${base.contextPath}/resources/upload/logo/logo.png") no-repeat left top;} */
+.logo_gh{width:90px;height:80px;float:left;background:url("${base.contextPath}/resources/upload/logo/logo.png") no-repeat left top;background-size:90px 80px;}
+.logo_title{width:600px;height:80px;float:left;}
+</style>
+<div class="v4incheadertop">
+    <div class="v4incheadertop_tel_block">
+        <div class="v4incheadertop_tel">
+            <p class="cl"></p><p class="cr" style="float:right">
+            	<a href="javascript:void(0)" onclick="javascript:SetHomeFoot(this,&#39;${webIp}&#39;)" title="" style="color:#fff"> 设为首页 </a><span class="spe"> | </span> 
+			 	<a href="javascript:void(0)" onclick="javascript:shouCangFoot(&#39;${webIp}&#39;,&#39;${webname}&#39;)" title="" style="color:#fff"> 收藏本站 </a> <span class="spe"> | </span>
+			 <#if Session["userId"]?exists>
+				<a href="${base.contextPath}/index/admin/user"  style="color:#fff">${Session["userRealName"]}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="${base.contextPath}/index/logout"  style="color:#fff">退出</a>
+			 <#else>
+			 	<a href="${base.contextPath}/index/loginPage"  style="color:#fff">登录</a>
+			 </#if>
+			</p>
+        </div>
+    </div>
+    <div class="v4incheadertop_logosearch_block2">
+        <div class="v4incheadertop_logosearch">
+        <div class="searcharea1">
+            <div class="logo_gh" style="margin-top:40px">
+           		
+            </div>
+            <div class="logo_title"  style="margin:40px 0 0 40px">
+            			<img src="${base.contextPath}/resources/images/header/title.png" height="80"/>
+            </div>
+        </div>
+
+<!--         <div class="searcharea2"> -->
+<!--             <div class="sangong_bl"></div> -->
+
+<!--         </div> -->
+        </div>
+    </div>
+    <div class="v4incheadertop_nav_block">
+        <div class="v4incheadertop_nav">
+            <ul class="v4incheadertop_nav_ls">
+              	<li  id="ch_index" <#if chanel =='CH_INDEX'> class="actv" </#if>><a href="${base.contextPath}" >首页</a></li> <!-- class="fst"-->
+                <li id="ch_xhjj" <#if chanel =='CH_XHJJ'> class="actv" </#if>><a href="${base.contextPath}/index/about" >协会简介</a></li>
+                <li id="ch_zxzx" <#if chanel =='CH_ZXZX'> class="actv" </#if>><a href="${base.contextPath}/index/news" >资讯中心</a>
+                <ul>
+                	<#list kgNewstypeList as typeList>   
+							<li><a href="${base.contextPath}/index/newsTypeList?typeid=${typeList.id}">${typeList.typename}</a></li> 
+					</#list>
+					
+                </ul>
+                </li>
+                <li id="ch_xhgz" <#if chanel =='CH_XHGZ'> class="actv" </#if>><a href="${base.contextPath}/index/assessmentTypeList" >评选评估</a>
+<!--                 <ul> -->
+<!--                		 <li><a href="${base.contextPath}/index/assessmentTypeList">评选评估</a></li>  -->
+<!--                 </ul> -->
+                </li>
+                <li id="ch_lxwm" <#if chanel =='CH_LXWM'> class="actv" </#if>><a href="${base.contextPath}/index/contact" >联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="clb"></div>
+</div>
