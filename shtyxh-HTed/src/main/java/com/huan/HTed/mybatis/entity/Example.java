@@ -173,6 +173,10 @@ public class Example implements IDynamicTableName {
         return distinct;
     }
 
+    public boolean getDistinct() {
+        return distinct;
+    }
+    
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
     }

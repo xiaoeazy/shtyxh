@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import com.huan.HTed.mybatis.annotation.ExtensionAttribute;
 import org.hibernate.validator.constraints.Length;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.huan.HTed.system.dto.BaseDTO;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
@@ -16,7 +18,7 @@ public class KgMemberUnits extends BaseDTO {
 
      public static final String FIELD_ID = "id";
      public static final String FIELD_MEMBERNO = "memberno";
-     public static final String FIELD_CANTON = "canton";
+     public static final String FIELD_CANTON = "cantonid";
      public static final String FIELD_KINDERGARTENNAME = "kindergartenname";
      public static final String FIELD_KINDERGARTENSITE = "kindergartensite";
      public static final String FIELD_ZIPCODE = "zipcode";
@@ -24,7 +26,6 @@ public class KgMemberUnits extends BaseDTO {
      public static final String FIELD_LEVEL = "level";
      public static final String FIELD_NATURE = "nature";
      public static final String FIELD_ADMISSIONTIME = "admissiontime";
-     public static final String FIELD_TYPEID = "typeid";
 
 
      @Id
@@ -36,7 +37,7 @@ public class KgMemberUnits extends BaseDTO {
      private String memberno;
 
      @NotNull
-     private Long canton;
+     private Long cantonid;
 
      @NotEmpty
      @Length(max = 45)
@@ -64,9 +65,9 @@ public class KgMemberUnits extends BaseDTO {
 
      private Date admissiontime;
 
-     @Length(max = 20)
-     private String typeid;
 
+     @Transient
+     private KgCanton kgcanton;
 
      public void setId(String id){
          this.id = id;
@@ -84,15 +85,17 @@ public class KgMemberUnits extends BaseDTO {
          return memberno;
      }
 
-     public void setCanton(Long canton){
-         this.canton = canton;
-     }
+  
 
-     public Long getCanton(){
-         return canton;
-     }
+     public Long getCantonid() {
+		return cantonid;
+	}
 
-     public void setKindergartenname(String kindergartenname){
+	public void setCantonid(Long cantonid) {
+		this.cantonid = cantonid;
+	}
+
+	public void setKindergartenname(String kindergartenname){
          this.kindergartenname = kindergartenname;
      }
 
@@ -148,12 +151,14 @@ public class KgMemberUnits extends BaseDTO {
          return admissiontime;
      }
 
-     public void setTypeid(String typeid){
-         this.typeid = typeid;
-     }
 
-     public String getTypeid(){
-         return typeid;
-     }
+	public KgCanton getKgcanton() {
+		return kgcanton;
+	}
+
+	public void setKgcanton(KgCanton kgcanton) {
+		this.kgcanton = kgcanton;
+	}
+     
 
      }

@@ -165,6 +165,8 @@ function getQuestion(funcs) {
 }
 function getNews(funcs){
 	var str = "";
+	str +=addFunc('news1.png','news2.png','offers');
+	str +=addFunc('news1.png','news2.png','memberUnits');
 	if(isHaveFunc(funcs,6))
 		str +=addFunc('news1.png','news2.png','news');
 	if(isHaveFunc(funcs,7))
@@ -324,6 +326,16 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'专家审核');
+	}else if(us == "memberUnits"){
+		var panel=  new MemberUnits.MemberUnitsPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'会员单位');
+	}else if(us == "offers"){
+		var panel=  new Offers.OffersPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'园所招聘');
 	}
 }
 

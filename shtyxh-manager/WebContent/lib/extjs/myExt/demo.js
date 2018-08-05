@@ -6,9 +6,13 @@ var nonePic = _basePath +"/resources/images/none/none.jpg";
 
 Ext.onReady(function() {
 	
-	var panel =new QuestionAnalysis.QuestionAnalysisPanel({
-		mainId:"mainId",
-		sid:15
+//	var panel =new QuestionAnalysis.QuestionAnalysisPanel({
+//		mainId:"mainId",
+//		sid:15
+//	});
+	
+	var panel=  new Offers.OffersPanel({
+		mainId: "mainId"
 	});
 	
 	
