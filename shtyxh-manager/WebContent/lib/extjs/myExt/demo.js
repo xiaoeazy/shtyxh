@@ -11,7 +11,7 @@ Ext.onReady(function() {
 //		sid:15
 //	});
 	
-	var panel=  new Offers.OffersPanel({
+	var panel=  new History.HistoryPanel({
 		mainId: "mainId"
 	});
 	

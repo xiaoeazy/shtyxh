@@ -165,8 +165,11 @@ function getQuestion(funcs) {
 }
 function getNews(funcs){
 	var str = "";
-	str +=addFunc('news1.png','news2.png','offers');
-	str +=addFunc('news1.png','news2.png','memberUnits');
+	str +=addFunc('offers1.png','offers2.png','companyFramework');
+	str +=addFunc('offers1.png','offers2.png','companyDirector');
+	str +=addFunc('offers1.png','offers2.png','history');
+	str +=addFunc('offers1.png','offers2.png','offers');
+	str +=addFunc('member1.png','member2.png','memberUnits');
 	if(isHaveFunc(funcs,6))
 		str +=addFunc('news1.png','news2.png','news');
 	if(isHaveFunc(funcs,7))
@@ -336,6 +339,21 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'园所招聘');
+	}else if(us == "history"){
+		var panel=  new History.HistoryPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'园所招聘');
+	}else if(us == "companyFramework"){
+		var panel=  new CompanyFramework.CompanyFrameworkPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'协会架构图');
+	}else if(us == "companyDirector"){
+		var panel=  new CompanyDirector.CompanyDirectorPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'历届理事');
 	}
 }
 

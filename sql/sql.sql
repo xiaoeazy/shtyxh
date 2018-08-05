@@ -22,6 +22,43 @@ CREATE DATABASE IF NOT EXISTS kindergarten_dev;
 USE kindergarten_dev;
 
 --
+-- Definition of table `kg_allonetext`
+--
+
+DROP TABLE IF EXISTS `kg_allonetext`;
+CREATE TABLE `kg_allonetext` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) NOT NULL,
+  `typeCode` varchar(45) NOT NULL,
+  `content` text,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_allonetext`
+--
+
+/*!40000 ALTER TABLE `kg_allonetext` DISABLE KEYS */;
+INSERT INTO `kg_allonetext` (`id`,`title`,`typeCode`,`content`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,'协会简介','introduction','1',2,-1,-1,-1,'2018-08-05 21:16:54',-1,'2018-08-05 21:21:19',-1,'ID',NULL,NULL,NULL),
+ (2,'协会架构图','companyFramework','<p>3</p>',4,-1,-1,-1,'2018-08-05 21:16:54',-1,'2018-08-05 21:33:03',-1,'ID',NULL,NULL,NULL),
+ (3,'历届理事','companyDirector','<p>4</p>',2,-1,-1,-1,'2018-08-05 21:16:54',-1,'2018-08-05 21:33:06',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `kg_allonetext` ENABLE KEYS */;
+
+
+--
 -- Definition of table `kg_assessment_activity`
 --
 
@@ -47,13 +84,15 @@ CREATE TABLE `kg_assessment_activity` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity`
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity` DISABLE KEYS */;
+INSERT INTO `kg_assessment_activity` (`id`,`finished`,`assessment_type_id`,`attributeId`,`assessment_activity_name`,`assessment_activity_content`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (31,1,18,'1','评估任务A','<p>11</p>','2018-08-04 15:03:31',2,-1,-1,-1,'2018-08-04 15:03:31',-1,'2018-08-04 15:03:36',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity` ENABLE KEYS */;
 
 
@@ -85,13 +124,15 @@ CREATE TABLE `kg_assessment_activity_user_progress` (
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `Index_2` (`assessment_activity_id`,`upload_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_progress`
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` DISABLE KEYS */;
+INSERT INTO `kg_assessment_activity_user_progress` (`id`,`assessment_activity_id`,`upload_user_id`,`admin_suggestion`,`expert_user_id`,`expert_suggestion`,`createDate`,`state`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (16,31,10013,'11',10032,NULL,'2018-08-04 15:04:02',40,3,-1,-1,-1,'2018-08-04 15:04:02',-1,'2018-08-04 15:09:17',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_progress` ENABLE KEYS */;
 
 
@@ -120,13 +161,15 @@ CREATE TABLE `kg_assessment_activity_user_upload` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_activity_user_upload`
 --
 
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` DISABLE KEYS */;
+INSERT INTO `kg_assessment_activity_user_upload` (`id`,`upload_user_id`,`progress_id`,`file_name`,`file_path`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (28,10013,16,'wx.png','/uploadFile/assessment/31/10013/462eb08e-b546-441a-abc0-12987a1e5aa1.PNG','2018-08-04 15:04:02',1,-1,-1,-1,'2018-08-04 15:04:02',-1,'2018-08-04 15:04:02',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_activity_user_upload` ENABLE KEYS */;
 
 
@@ -151,7 +194,7 @@ CREATE TABLE `kg_assessment_type` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_assessment_type`
@@ -160,8 +203,43 @@ CREATE TABLE `kg_assessment_type` (
 /*!40000 ALTER TABLE `kg_assessment_type` DISABLE KEYS */;
 INSERT INTO `kg_assessment_type` (`id`,`assessment_type_name`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (18,'学校评估',3,-1,-1,-1,'2018-06-18 12:08:49',-1,'2018-06-20 20:59:29',-1,'ID',NULL,NULL,NULL),
- (19,'教师评估',1,-1,-1,-1,'2018-06-18 12:09:15',-1,'2018-06-18 12:09:15',-1,'ID',NULL,NULL,NULL);
+ (19,'教师评估',1,-1,-1,-1,'2018-06-18 12:09:15',-1,'2018-06-18 12:09:15',-1,'ID',NULL,NULL,NULL),
+ (20,'aa',1,-1,-1,-1,'2018-08-04 15:10:09',-1,'2018-08-04 15:10:09',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_assessment_type` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_canton`
+--
+
+DROP TABLE IF EXISTS `kg_canton`;
+CREATE TABLE `kg_canton` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `cantonName` varchar(45) NOT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_canton`
+--
+
+/*!40000 ALTER TABLE `kg_canton` DISABLE KEYS */;
+INSERT INTO `kg_canton` (`id`,`cantonName`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,'静安',1,-1,-1,-1,'2018-08-05 10:37:21',-1,'2018-08-05 10:37:21',-1,'ID',NULL,NULL,NULL),
+ (2,'杨浦',1,-1,-1,-1,'2018-08-05 10:37:27',-1,'2018-08-05 10:37:27',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `kg_canton` ENABLE KEYS */;
 
 
 --
@@ -190,7 +268,7 @@ CREATE TABLE `kg_carousel` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_carousel`
@@ -198,8 +276,8 @@ CREATE TABLE `kg_carousel` (
 
 /*!40000 ALTER TABLE `kg_carousel` DISABLE KEYS */;
 INSERT INTO `kg_carousel` (`id`,`file_path`,`sequence`,`urltype`,`web_url`,`activity_id`,`news_id`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (16,'/uploadFile/carousel/20180618220403_1000_475.jpg',1,0,'http://www.baidu.com',-1,-1,4,-1,-1,-1,'2018-06-01 16:10:44',-1,'2018-06-18 22:04:04',-1,'ID',NULL,NULL,NULL),
- (21,'/uploadFile/carousel/20180618184523_1000_475.jpg',0,1,'',-1,50,1,-1,-1,-1,'2018-06-18 18:45:29',-1,'2018-06-18 18:45:29',-1,'ID',NULL,NULL,NULL);
+ (21,'/uploadFile/carousel/20180618184523_1000_475.jpg',0,1,'',-1,50,1,-1,-1,-1,'2018-06-18 18:45:29',-1,'2018-06-18 18:45:29',-1,'ID',NULL,NULL,NULL),
+ (22,'/uploadFile/carousel/20180804151133_1000_475.jpg',0,0,'http://www.baidu.com',-1,-1,1,-1,-1,-1,'2018-08-04 15:11:44',-1,'2018-08-04 15:11:44',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_carousel` ENABLE KEYS */;
 
 
@@ -348,7 +426,7 @@ CREATE TABLE `kg_download` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_download`
@@ -356,12 +434,44 @@ CREATE TABLE `kg_download` (
 
 /*!40000 ALTER TABLE `kg_download` DISABLE KEYS */;
 INSERT INTO `kg_download` (`id`,`file_title`,`file_path`,`summary`,`password`,`createDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (9,'学前教育人才交流登记表.doc','/uploadFile/download/学前教育人才交流登记表.doc','','','2018-06-19 20:36:04',1,-1,-1,-1,'2018-06-19 20:36:04',-1,'2018-06-19 20:36:04',-1,'ID',NULL,NULL,NULL),
- (10,'学员报名调查表.xls','/uploadFile/download/学员报名调查表.xls','','','2018-06-19 20:36:53',1,-1,-1,-1,'2018-06-19 20:36:53',-1,'2018-06-19 20:36:53',-1,'ID',NULL,NULL,NULL),
- (11,'学前岗位班招生简章2016.doc','/uploadFile/download/学前岗位班招生简章2016.doc','','','2018-06-19 20:37:07',1,-1,-1,-1,'2018-06-19 20:37:07',-1,'2018-06-19 20:37:07',-1,'ID',NULL,NULL,NULL),
- (12,'各专业开班预排表.doc','/uploadFile/download/各专业开班预排表.doc','','','2018-06-19 20:38:34',1,-1,-1,-1,'2018-06-19 20:38:34',-1,'2018-06-19 20:38:34',-1,'ID',NULL,NULL,NULL),
- (13,'保健教师培训资料2014.3.zip','/uploadFile/download/保健教师培训资料2014.3.zip','','','2018-06-19 20:41:07',1,-1,-1,-1,'2018-06-19 20:41:07',-1,'2018-06-19 20:41:07',-1,'ID',NULL,NULL,NULL);
+ (14,'rotate-bg.png','/uploadFile/download/rotate-bg.png','','','2018-08-04 15:10:40',1,-1,-1,-1,'2018-08-04 15:10:40',-1,'2018-08-04 15:10:40',-1,'ID',NULL,NULL,NULL),
+ (15,'bg1.png','/uploadFile/download/bg1.png','','','2018-08-04 15:10:57',1,-1,-1,-1,'2018-08-04 15:10:57',-1,'2018-08-04 15:10:57',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_download` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_history`
+--
+
+DROP TABLE IF EXISTS `kg_history`;
+CREATE TABLE `kg_history` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) NOT NULL,
+  `content` varchar(200) NOT NULL,
+  `historyTime` varchar(45) NOT NULL,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_history`
+--
+
+/*!40000 ALTER TABLE `kg_history` DISABLE KEYS */;
+INSERT INTO `kg_history` (`id`,`title`,`content`,`historyTime`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (12,'1','1','1',1,-1,-1,-1,'2018-08-05 19:35:41',-1,'2018-08-05 19:35:41',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `kg_history` ENABLE KEYS */;
 
 
 --
@@ -419,7 +529,7 @@ CREATE TABLE `kg_link` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_link`
@@ -429,8 +539,53 @@ CREATE TABLE `kg_link` (
 INSERT INTO `kg_link` (`id`,`link_name`,`link_url`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (8,'百度','http://www.baidu.com',2,-1,-1,-1,'2018-04-06 19:06:57',-1,'2018-05-12 14:02:18',-1,'ID',NULL,NULL,NULL),
  (9,'新浪','https://www.sina.com.cn/',2,-1,-1,-1,'2018-04-06 19:07:00',-1,'2018-05-12 14:04:10',-1,'ID',NULL,NULL,NULL),
- (10,'新浪体育','http://sports.sina.com.cn/',2,-1,-1,-1,'2018-04-14 10:43:51',-1,'2018-05-12 14:04:30',-1,'ID',NULL,NULL,NULL);
+ (10,'新浪体育','http://sports.sina.com.cn/',2,-1,-1,-1,'2018-04-14 10:43:51',-1,'2018-05-12 14:04:30',-1,'ID',NULL,NULL,NULL),
+ (11,'aa','aa',1,-1,-1,-1,'2018-08-04 15:13:04',-1,'2018-08-04 15:13:04',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_link` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_member_units`
+--
+
+DROP TABLE IF EXISTS `kg_member_units`;
+CREATE TABLE `kg_member_units` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `memberNo` varchar(45) NOT NULL,
+  `cantonId` bigint(20) NOT NULL,
+  `kindergartenName` varchar(45) NOT NULL,
+  `kindergartenSite` varchar(45) NOT NULL,
+  `zipCode` varchar(45) NOT NULL,
+  `telphone` varchar(45) NOT NULL,
+  `level` varchar(45) NOT NULL,
+  `nature` varchar(45) NOT NULL COMMENT '性质',
+  `admissionTime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `Index_2` (`memberNo`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_member_units`
+--
+
+/*!40000 ALTER TABLE `kg_member_units` DISABLE KEYS */;
+INSERT INTO `kg_member_units` (`id`,`memberNo`,`cantonId`,`kindergartenName`,`kindergartenSite`,`zipCode`,`telphone`,`level`,`nature`,`admissionTime`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (1,'3',1,'中心幼儿园','长江西路共江路','123456','12345678901','1','民办','2018-08-05 10:16:08',2,-1,-1,-1,'2018-08-05 10:16:08',-1,'2018-08-05 11:36:41',-1,'ID',NULL,NULL,NULL),
+ (24,'2',1,'2','2','2','2','2','2','2018-08-05 11:25:30',1,-1,-1,-1,'2018-08-05 11:25:30',-1,'2018-08-05 11:25:30',-1,'ID',NULL,NULL,NULL),
+ (26,'1',1,'1','1','1','1','1','2','2018-08-05 15:15:39',2,-1,-1,-1,'2018-08-05 15:15:39',-1,'2018-08-05 15:15:45',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `kg_member_units` ENABLE KEYS */;
 
 
 --
@@ -466,7 +621,7 @@ CREATE TABLE `kg_news` (
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_2` (`newsTitle`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_news`
@@ -481,7 +636,9 @@ INSERT INTO `kg_news` (`id`,`typeId`,`sourceId`,`attributeId`,`newsTitle`,`summa
  (48,1,1,'','2018教育改革的十个关键词','教育改革的十个关键词','',NULL,'<p style=\"margin-bottom: 14px; white-space: normal; text-align: center; border: none; padding: 0px;\"><strong><span style=\"font-size: 20px; font-family: 宋体;\">全国教育工作会议：2018，教育改革的十个关键词</span></strong><span style=\"font-family: 宋体;\"><a href=\"https://mp.weixin.qq.com/s?__biz=MzAxMjAzODUzNw==&mid=2652211438&idx=1&sn=d01b0f415eb10818fdd0df981aff2ed2&chksm=8056d008b721591e103fc7a24c8a612824b54484f9ad9fc23a24f838161973f1b5e61cdd5681&mpshare=1&scene=1&srcid=0228q0pzVK1OGTsWk5dt6ty0&pass_ticket=wYe8i9wdWWRUVm85YpJzyljvfBwZaoqrqMqG2v9orXh4tHG%2FX1qvpr1UkKAOgWOV##\"></a></span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\"></span></p><hr style=\"white-space: normal;\"/><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">“当前我国教育正面临新的形势和任务，机遇前所未有，挑战前所未有，许多新情况新问题都需要我们去面对、去解决。”在23日召开的2018年全国教育工作会议上，教育部部长陈宝生在详尽列举十八大以来中国教育事业发展成就之后强调，“我国教育整体大踏步前进，但局部差距依然存在；人民群众总体受教育机会大幅提升，但个性化、多样化需求仍未有效满足；目前我们人才总供给能力显著增强，但结构性矛盾尚未解决……解决教育发展不平衡不充分的问题，将是我们长期要面对的工作主题”。</span><br/></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">2018</span><span style=\"color: rgb(62, 62, 62);\">年，我国教育事业将在哪些方面着力，突破哪些难点？在这次会议中，陈宝生给出了2018年中国教育改革发展索引。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"white-space: normal; text-align: center;\"><strong><span style=\"font-family: 宋体; color: rgb(62, 62, 62); background: white;\">关键词</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">党建</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">2018</span><span style=\"color: rgb(62, 62, 62);\">年，教育系统全面启动党建质量年。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">陈宝生强调：“要把党的政治建设摆在首位，用习近平新时代中国特色社会主义思想武装头脑、指导实践、推动工作”。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">教育系统将以提升组织力为重点，实施党建工作“对标争先”计划，把教育系统每一个基层党组织都建设成为坚强的战斗堡垒。要研究制订党建工作考核办法、基层党组织书记考核细则、党支部工作规程、高校党委工作条例等规章制度，不断完善党建工作制度体系。要推进中小学校党组织和党的工作全覆盖。建立健全民办高校党组织，全面推行党组织书记选派，加强中外合作办学党建工作。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">思政工作</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">今年，教育系统将全面加强马克思主义理论学科建设，深入研究习近平新时代中国特色社会主义思想和习近平教育思想，支持高校在教育学、马克思主义理论等一级学科设立习近平教育思想研究方向，编写《习近平教育思想讲义》。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">陈宝生强调，要深入实施高校思想政治工作质量提升工程，研究制订学科德育指导纲要。实施“高校思想政治教育名师支持计划”，开展“高校思政课教师队伍建设年”专项工作，持续提升思政课质量。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">扶贫</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">每一个“冰花男孩”的出现，都会触动社会的神经。对于教育扶贫这一重大任务，今年，教育部将出台深度贫困地区教育脱贫攻坚实施方案，重点攻克“三区三州”贫困堡垒。实施“中西部高等教育振兴计划升级版”，推进中西部高校综合实力提升工程、中西部高校基础能力建设工程和对口支援西部高校计划，加强省部共建、部省合作，签订部省合建中西部14所高校协议。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">“继续实施支援中西部地区招生协作计划、农村和贫困地区定向招生专项计划、职业教育东西协作行动计划。落实好各类内地民族班招生计划，开展教学质量监测评价，深入推进新疆、西藏和四省藏区教育发展。”陈宝生说，今年，还要组织开展加快中西部教育发展工作督导评估监测，各地应抓紧制定工作措施。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">双一流”建设</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">2017</span><span style=\"color: rgb(62, 62, 62);\">年“双一流”建设名单发布后，“双一流”高校如何建，成为高等教育内涵发展的关键问题。陈宝生表示，“双一流”建设要注重绩效管理，研究制定“双一流”建设绩效评价办法，推动建设高校从凝练学科方向、编制建设方案转到全面落实。同时，要探索建设一批新时代中国特色社会主义标杆大学，发挥其排头兵作用。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">推动高等教育内涵发展，今年还有哪些新举措？陈宝生列举道，实施高等教育“六卓越——拔尖计划”2.0版，建设一批“一流本科、一流专业、一流人才”示范引领基地；发布实施普通高校本科专业类教学质量国家标准，形成周期性评估和常态监测相结合的多方质量保障机制；推进科教融合，启动实施高等学校基础研究珠峰计划，加强协同创新平台建设。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">教材建设</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">课程教材是国家事权。陈宝生指出，要加强课程教材建设和管理，颁布实施大中小学教材建设五年规划，统筹设计未来五年大中小学教材建设目标、任务和措施。出台中小学、职业院校、高等院校教材以及引进教材管理办法，印发中职德育、语文、历史三科公共基础课程标准，形成全面覆盖大中小学教材基本管理制度体系。健全完善教材编写审查制度，推进国家统编教材统一使用。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">学前教育</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">目前，“入园难”问题基本解决，但仍面临普惠性资源不足、教师队伍素质不高、保障机制不健全、社会热点时有发生等问题。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">对此，陈宝生表示，要坚持公益普惠，在大力发展公办园的同时，积极引导和扶持民办园提供普惠性服务，大力支持农村地区、脱贫攻坚地区、城乡接合部和二孩政策新增人口集中地区新建、改扩建幼儿园。建立健全“国务院领导、省市统筹、以县为主”的学前教育管理体制。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">投入上，将建立生均拨款、收费、资助一体化机制，出台公办园生均拨款、普惠性民办园补助标准，健全资助标准。师资上，将完善编制管理办法和工资待遇保障机制，引导和监督依法配足配齐保教人员。要提高保教质量，完善质量评估体系，建立办园行为常态监测机制，确保依法依规办园。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">城乡义务教育一体化</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">陈宝生指出，要确保今年底校舍建设和设施设备采购任务“过九成”，基本消除66人以上超大班额。全面加强乡村小规模学校和乡镇寄宿制学校建设，大力推进两类学校建设底部攻坚，力争2019年秋季开学前办学条件达到省定标准，让乡村小规模学校小而优、小而美。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">陈宝生强调，九年义务教育制度是《教育法》和《义务教育法》的明确规定，对于少数地方自行延长义务教育年限的冲动，要严肃排查、坚决制止。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">“大力规范校外教育培训机构，这件事迟早要做，迟做不如早做，小修不如大修。”陈宝生透露，今年将出台促进校外教育培训机构规范有序发展的意见，探索建立负面清单制度和联合监管机制，使其成为学校教育的有益补充者，而不是教育秩序的干扰者。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">考招改革</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">今年，教育系统要总结上海、浙江高考改革试点经验，为后续启动改革的省份提供借鉴。同时，进一步扩大试点范围，增加北京、天津、山东、海南4个省份。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">陈宝生透露，推进“新高考”考试内容改革，将更加突出考查学生运用所学知识分析问题、解决问题的能力。加强和改进普通高中学生综合素质评价，各地应抓紧出台配套文件，转变以考试成绩为唯一标准评价学生的做法。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">教师队伍</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">实现高质量发展，关键还是靠教师。今年，教育部将实施师德师风建设工程，大力提升教师思想政治素质和师德涵养。推行师德考核负面清单制度，实行师德“一票否决”。严格师德惩处，建立师德失范曝光平台和定期通报制度。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">教育部将实施教师教育振兴行动计划，建设一批高水平教师教育基地，分级分类开展师范类专业认证。国培计划要继续向集中连片特困地区、民族地区、“三区三州”倾斜，2018年实现832个集中连片特困地区县和国家级贫困县乡村教师培训全员覆盖。落实中小学教职工编制标准，编制向乡村小规模学校倾斜。深化大中小学教师职称制度、考核评价制度改革与监管，优化岗位设置，激发教师教书育人的积极性、创造性。</span></p><p style=\"white-space: normal;\"><span style=\"font-family: 宋体;\">&nbsp;</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: center; line-height: 24px; background: white;\"><strong><span style=\"font-family: 宋体; color: rgb(0, 82, 255);\">教育保障</span></strong></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">办出高质量、现代化的教育，必须要有科学、规范、高效的保障机制。今年，继续保证国家财政性教育经费支出占国内生产总值比例不低于4%，确保一般公共预算教育支出只增不减，确保按在校学生人数平均的一般公共预算教育支出只增不减。</span></p><p style=\"margin-bottom: 0px; white-space: normal; text-align: justify; text-indent: 32px; line-height: 24px; background: white;\"><span style=\"color: rgb(62, 62, 62);\">同时，教育部将出台调整优化结构提高经费使用效益的意见，既要优先保障也要优化结构，既要精准投入也要精细管理。调整优化来源结构，在继续保证财政投入稳步增长同时，进一步扩大社会投入比重。调整优化支出结构，更多向农村、边远、贫困、民族地区倾斜，向学前教育、义务教育、职业教育倾斜，向基层教师和困难学生倾斜。</span></p><p style=\"white-space: normal; text-align: right;\"><span style=\"font-size: 14px; font-family: Calibri, sans-serif; color: rgb(62, 62, 62);\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style=\"font-size: 14px; font-family: 宋体; color: rgb(62, 62, 62);\">摘自中国职业教育</span><span style=\"font-size: 14px; font-family: Calibri, sans-serif; color: rgb(62, 62, 62);\">&nbsp;2018-01-24</span></p><p><span style=\"font-size: 14px; font-family: Calibri, sans-serif; color: rgb(62, 62, 62);\"><br/></span></p><p><br/></p>',0,'N','2018-06-18 18:39:43',0,1,-1,-1,-1,'2018-06-18 18:39:43',-1,'2018-06-18 18:39:43',-1,'ID',NULL,NULL,NULL);
 INSERT INTO `kg_news` (`id`,`typeId`,`sourceId`,`attributeId`,`newsTitle`,`summary`,`thumbnail`,`author`,`content`,`sequence`,`indexshow`,`createDate`,`viewsCount`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
  (49,1,1,'2','上海率先发布新“民促法”','12月27日，上海市政府出台了《上海市民办学校分类许可登记管理办法》','',NULL,'<p style=\"white-space: normal; text-align: center;\"><strong><span style=\"font-size: 24px; font-family: 宋体; color: rgb(34, 34, 34);\">上海率先发布新《民促法》实施细则</span></strong><strong>&nbsp;</strong><strong><span style=\"font-size: 24px; font-family: 宋体; color: rgb(34, 34, 34);\">民办学校将分类管理</span></strong></p><p style=\"white-space: normal; text-align: center;\"><span style=\"font-size: 12px; font-family: Arial, sans-serif;\"></span></p><hr style=\"white-space: normal;\"/><p style=\"white-space: normal; text-align: center;\"><br/></p><p style=\"white-space: normal;\"><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">12</span><span style=\"font-size: 12px; font-family: 宋体;\">月</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">27</span><span style=\"font-size: 12px; font-family: 宋体;\">日，上海市政府出台了《上海市民办学校分类许可登记管理办法》（以下简称《分类办法》）。《分类办法》明确了各级各类民办学校的许可登记部门和流程，现有民办学校的过渡期，以及对民办学校的奖励补偿方案。</span></p><p style=\"white-space: normal;\"><span style=\"font-size: 12px; font-family: 宋体;\">上海市的《分类办法》是新《民促法》正式施行后，首个具体落地的地方民办教育促进法操作方案，或将拉开各地教育分类管理细则发布序幕。</span></p><p style=\"white-space: normal;\"><span style=\"font-size: 12px; font-family: 宋体;\">新《民促法》于今年</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">9</span><span style=\"font-size: 12px; font-family: 宋体;\">月</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">1</span><span style=\"font-size: 12px; font-family: 宋体;\">日正式施行，首次提出民办学校分类管理改革，即民办学校不再默认为非营利属性，而是以是否获得</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">“</span><span style=\"font-size: 12px; font-family: 宋体;\">办学收益和办学结余</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">”</span><span style=\"font-size: 12px; font-family: 宋体;\">，分为营利性与非营利性两者类型，并进行分类管理。</span></p><p style=\"white-space: normal;\"><span style=\"font-size: 12px; font-family: 宋体;\">在新《民促法》出台前，非营利民办学校被定义为</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">“</span><span style=\"font-size: 12px; font-family: 宋体;\">民办非企业</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">”</span><span style=\"font-size: 12px; font-family: 宋体;\">法人单位，允许获得合理回报。修订后的法律则不再出现</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">“</span><span style=\"font-size: 12px; font-family: 宋体;\">合理回报</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">”</span><span style=\"font-size: 12px; font-family: 宋体;\">的字眼，并规定</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">“</span><span style=\"font-size: 12px; font-family: 宋体;\">非营利民办学校</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">”</span><span style=\"font-size: 12px; font-family: 宋体;\">不能获得办学收益和办学结余。</span></p><p style=\"white-space: normal;\"><span style=\"font-size: 12px; font-family: 宋体;\">然而，由于牵涉的利益主体复杂、改革幅度大，地方省市的新《民促法》配套落地方案迟迟未能出台，安徽、辽宁等少数省份发布的相关文件，也仅是框架性的指导意见。民办教育领域普遍认为，地方的政策跟进速度比预期要慢。民办学校的态度也以观望为主。</span></p><p style=\"white-space: normal;\"><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">“</span><span style=\"font-size: 12px; font-family: 宋体;\">这是</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">9</span><span style=\"font-size: 12px; font-family: 宋体;\">月份民促法出台后，第一个出台细则管理办法的一线城市，</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">”</span><span style=\"font-size: 12px; font-family: 宋体;\">通江资本教育领域负责人侯凯告诉经济观察网。他表示，相比于之前出台实施意见的省份，上海的分类办法适用范围更广，不仅包含了民办幼儿园、中小学、高等学校，还包含了民办培训机构。</span></p><p style=\"white-space: normal;\"><span style=\"font-size: 12px; font-family: 宋体;\">另外，《分类办法》内容详细，可操作性更强。上海细化了各类民办学校申请办学许可的机关与流程，规定民办幼儿园，中小学，培训机构到区教育行政部门审批，民办职业培训类机构到区人社部审批，然后由民政部门或工商部门进行登记备案。</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">“</span><span style=\"font-size: 12px; font-family: 宋体;\">在分管边界上较之前更为明确。</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">”</span><span style=\"font-size: 12px; font-family: 宋体;\">侯凯说。</span></p><p style=\"white-space: normal;\"><span style=\"font-size: 12px; font-family: 宋体;\">对于分类管理后的补偿奖励机制，《分类办法》也提出了更为具体的计算方案。《分类办法》规定，现有民办学校如果选择非营利性办学，将来终止后能够获得一定的补偿奖励。根据举办者</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">2017</span><span style=\"font-size: 12px; font-family: 宋体;\">年</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">9</span><span style=\"font-size: 12px; font-family: 宋体;\">月</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">1</span><span style=\"font-size: 12px; font-family: 宋体;\">日前的出资和已经取得的合理回报进行补偿计算，奖励的金额则依据以后的学校年度检查结论。</span></p><p style=\"white-space: normal;\"><span style=\"font-size: 12px; font-family: 宋体;\">除此外，《分类办法》也首次明确了分类登记的过渡期，要求现有的民办学校举办者在</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">2018</span><span style=\"font-size: 12px; font-family: 宋体;\">年</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">12</span><span style=\"font-size: 12px; font-family: 宋体;\">月</span><span style=\"font-size: 12px; font-family: Arial, sans-serif;\">31</span><span style=\"font-size: 12px; font-family: 宋体;\">日之前，向许可机关提交关于学校办学属性选择的书面材料。一位业内人士向记者表示，《分类办法》的过渡期比预期的要短，但政策落地的效率会相应更高。</span></p><p style=\"white-space: normal;\">&nbsp;</p><p style=\"white-space: normal; text-align: right;\"><span style=\"font-family: 宋体;\">转载自 经济观察报</span>2017-12-28</p><p><br/></p>',0,'N','2018-06-18 18:40:11',0,1,-1,-1,-1,'2018-06-18 18:40:11',-1,'2018-06-18 18:40:11',-1,'ID',NULL,NULL,NULL),
- (50,4,1,'2','悦读慧心 上海市托幼协会赠书仪式','“六一”前夕，上海73所集办托幼园所获赠书香礼物，早期阅读助力成长','/uploadFile/news/20180618185720_390_285.jpg',NULL,'<p style=\"white-space: normal; text-align: center;\"><img src=\"http://118.31.36.160:8080/kindergarten/ueditor/jsp/upload/image/20180614/1528940968113063716.jpg\" title=\"1528940968113063716.jpg\" alt=\"微信图片_20180614095033.jpg\"/></p><p style=\"white-space: normal; text-align: center;\">阅读越早开始越好。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">“藏在蛋里的宝宝是谁呀？快点出来吧！”一声号召，小鸡、乌龟、小蛇、企鹅、恐龙、鳄鱼等动物从大大小小、形状各不相同的蛋里破壳而出，台下的孩子们欢呼声一片。5月22日，“悦读慧心——2018‘六一’上海市托幼协会赠书仪式”在杨浦实验托儿所举行。上海托幼协会向上海8区73所集办托幼园所赠书，包括少年儿童出版社出版的绘本《蛋宝宝》《条纹，条纹，发现啦！》，阅读对象为2至3岁的孩子，福建少儿出版社针对3至6岁孩子的《台湾儿童文学馆·林良童心绘本2》系列等。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\"><img src=\"http://118.31.36.160:8080/kindergarten/ueditor/jsp/upload/image/20180614/1528941081024007031.jpg\" title=\"1528941081024007031.jpg\" alt=\"微信图片_20180614095043.jpg\"/></p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">最近几年，3岁以下婴幼儿的托育服务供给成为全社会关心的问题。今年4月底，上海率先出台托育服务“1+2”文件，鼓励多方参与，为3岁以下幼儿及其家长提供幼儿保育和科学育儿指导的服务，鼓励社会组织、企业、事业单位或个人举办，面向3岁以下幼儿，尤其是2至3岁幼儿实施保育为主、教养融合的幼儿照护的全日制、半日制或计时制机构。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">&nbsp;</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">上海市托幼协会成立于2002年，前身为“上海市地区托幼协会”。上世纪80年代，“上海市地区托儿所协会”下属会员单位约有300多家，均属集体所有制性质的单位，集体办单位前身由各区街道，街镇办的生产组、加工厂等组建，归各区集体事业管理办公室统一管理，而集体办托幼园所是带有教育福利事业性质的机构，简称为“地区托幼园所”， 也称“集办托幼园所”。上海市托幼协会秘书长胡育告诉记者，集办托幼园所在上世纪70、80年代幼儿入托入园各高峰期均发挥了蓄水池作用，为缓解本市入托入园矛盾发挥过很大作用。但随着1999年上海实施托幼一体化管理体制后，部分集办托幼园所受限于体制问题，发展进度存在较大差异，活力相对不足。目前，全市16个区中拥有集办托幼园所的共8个区，分别为黄浦、徐汇、长宁、静安、虹口、杨浦、宝山及浦东新区，共有73家园所，约有14000多名2至6岁幼儿在园；其中，12家园所招收1.5至2岁的孩子，253名在托；73家园所均招收2至3岁孩子，4400多名在托。据最新统计数据，目前上海17840名2至3岁孩子入托在全市社会力量办园的园所中，集办托幼园占24.67%。集办园所的保教质量也不断提升，和公办、民办托幼机构形成区域学前教育三足鼎立的状态，有效缓解了入托入园难的问题。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">&nbsp;</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">随着二胎政策开放，上海正值入园入托高峰，为推进多元化办园，提高集办托幼园所的办园积极性，2015年起，上海市托幼协会自筹经费，每年拨出12万元，购置玩具及图书，分发给8区集办托幼园所，鼓励园所进一步提高保教质量，满足百姓需求，促进儿童健康发展，为推进上海学前教育事业发展作出贡献。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\"><img src=\"http://118.31.36.160:8080/kindergarten/ueditor/jsp/upload/image/20180614/1528941104110024529.jpg\" title=\"1528941104110024529.jpg\" alt=\"微信图片_20180614095054.jpg\"/></p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">在专家看来，开展早期阅读对孩子的成长十分关键，既是幼儿增长知识、开拓眼界和陶冶情操的有效途径，也是孩子们接受新事物的重要方式，更是孩子们在丰富语言，表达感受，与同伴交流必不可少的语言学习途径。今年，上海市托幼协会与上海图书有限公司合作，结合专家推荐，精心挑选适合托幼阶段儿童阅读的绘本。赠书仪式上，杨浦区学前教育管理服务中心的老师和少儿出版社编辑及绘本中文译者带领孩子们从不同角度围绕《蛋宝宝》绘本进行多元化阅读，为家庭及托幼园所的早期阅读作了示范。《蛋宝宝》绘本富有科普性质的自然原理讲述与具有音响韵律感的拟声词描绘相结合，让孩子们在与各种动物宝宝“交朋友”过程中获得知识，收获发现的愉悦，有利于发展孩子们自然观察智能和人际社会智能。在简洁的线条和鲜艳的色彩间还点缀着各种动物不同的神态和表情，趣味盎然。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\"><img src=\"http://118.31.36.160:8080/kindergarten/ueditor/jsp/upload/image/20180614/1528941112240091152.jpg\" title=\"1528941112240091152.jpg\" alt=\"微信图片_20180614095104.jpg\"/></p><p><br/></p>',2,'Y','2018-06-18 18:41:06',0,5,-1,-1,-1,'2018-06-18 18:41:06',-1,'2018-06-18 19:10:42',-1,'ID',NULL,NULL,NULL);
+ (50,4,1,'2','悦读慧心 上海市托幼协会赠书仪式','“六一”前夕，上海73所集办托幼园所获赠书香礼物，早期阅读助力成长','/uploadFile/news/20180618185720_390_285.jpg',NULL,'<p style=\"white-space: normal; text-align: center;\"><img src=\"http://118.31.36.160:8080/kindergarten/ueditor/jsp/upload/image/20180614/1528940968113063716.jpg\" title=\"1528940968113063716.jpg\" alt=\"微信图片_20180614095033.jpg\"/></p><p style=\"white-space: normal; text-align: center;\">阅读越早开始越好。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">“藏在蛋里的宝宝是谁呀？快点出来吧！”一声号召，小鸡、乌龟、小蛇、企鹅、恐龙、鳄鱼等动物从大大小小、形状各不相同的蛋里破壳而出，台下的孩子们欢呼声一片。5月22日，“悦读慧心——2018‘六一’上海市托幼协会赠书仪式”在杨浦实验托儿所举行。上海托幼协会向上海8区73所集办托幼园所赠书，包括少年儿童出版社出版的绘本《蛋宝宝》《条纹，条纹，发现啦！》，阅读对象为2至3岁的孩子，福建少儿出版社针对3至6岁孩子的《台湾儿童文学馆·林良童心绘本2》系列等。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\"><img src=\"http://118.31.36.160:8080/kindergarten/ueditor/jsp/upload/image/20180614/1528941081024007031.jpg\" title=\"1528941081024007031.jpg\" alt=\"微信图片_20180614095043.jpg\"/></p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">最近几年，3岁以下婴幼儿的托育服务供给成为全社会关心的问题。今年4月底，上海率先出台托育服务“1+2”文件，鼓励多方参与，为3岁以下幼儿及其家长提供幼儿保育和科学育儿指导的服务，鼓励社会组织、企业、事业单位或个人举办，面向3岁以下幼儿，尤其是2至3岁幼儿实施保育为主、教养融合的幼儿照护的全日制、半日制或计时制机构。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">&nbsp;</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">上海市托幼协会成立于2002年，前身为“上海市地区托幼协会”。上世纪80年代，“上海市地区托儿所协会”下属会员单位约有300多家，均属集体所有制性质的单位，集体办单位前身由各区街道，街镇办的生产组、加工厂等组建，归各区集体事业管理办公室统一管理，而集体办托幼园所是带有教育福利事业性质的机构，简称为“地区托幼园所”， 也称“集办托幼园所”。上海市托幼协会秘书长胡育告诉记者，集办托幼园所在上世纪70、80年代幼儿入托入园各高峰期均发挥了蓄水池作用，为缓解本市入托入园矛盾发挥过很大作用。但随着1999年上海实施托幼一体化管理体制后，部分集办托幼园所受限于体制问题，发展进度存在较大差异，活力相对不足。目前，全市16个区中拥有集办托幼园所的共8个区，分别为黄浦、徐汇、长宁、静安、虹口、杨浦、宝山及浦东新区，共有73家园所，约有14000多名2至6岁幼儿在园；其中，12家园所招收1.5至2岁的孩子，253名在托；73家园所均招收2至3岁孩子，4400多名在托。据最新统计数据，目前上海17840名2至3岁孩子入托在全市社会力量办园的园所中，集办托幼园占24.67%。集办园所的保教质量也不断提升，和公办、民办托幼机构形成区域学前教育三足鼎立的状态，有效缓解了入托入园难的问题。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">&nbsp;</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">随着二胎政策开放，上海正值入园入托高峰，为推进多元化办园，提高集办托幼园所的办园积极性，2015年起，上海市托幼协会自筹经费，每年拨出12万元，购置玩具及图书，分发给8区集办托幼园所，鼓励园所进一步提高保教质量，满足百姓需求，促进儿童健康发展，为推进上海学前教育事业发展作出贡献。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\"><img src=\"http://118.31.36.160:8080/kindergarten/ueditor/jsp/upload/image/20180614/1528941104110024529.jpg\" title=\"1528941104110024529.jpg\" alt=\"微信图片_20180614095054.jpg\"/></p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\">在专家看来，开展早期阅读对孩子的成长十分关键，既是幼儿增长知识、开拓眼界和陶冶情操的有效途径，也是孩子们接受新事物的重要方式，更是孩子们在丰富语言，表达感受，与同伴交流必不可少的语言学习途径。今年，上海市托幼协会与上海图书有限公司合作，结合专家推荐，精心挑选适合托幼阶段儿童阅读的绘本。赠书仪式上，杨浦区学前教育管理服务中心的老师和少儿出版社编辑及绘本中文译者带领孩子们从不同角度围绕《蛋宝宝》绘本进行多元化阅读，为家庭及托幼园所的早期阅读作了示范。《蛋宝宝》绘本富有科普性质的自然原理讲述与具有音响韵律感的拟声词描绘相结合，让孩子们在与各种动物宝宝“交朋友”过程中获得知识，收获发现的愉悦，有利于发展孩子们自然观察智能和人际社会智能。在简洁的线条和鲜艳的色彩间还点缀着各种动物不同的神态和表情，趣味盎然。</p><p style=\"white-space: normal; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-margin-before: 0.5em; -webkit-margin-after: 0.5em;\"><img src=\"http://118.31.36.160:8080/kindergarten/ueditor/jsp/upload/image/20180614/1528941112240091152.jpg\" title=\"1528941112240091152.jpg\" alt=\"微信图片_20180614095104.jpg\"/></p><p><br/></p>',2,'Y','2018-06-18 18:41:06',0,5,-1,-1,-1,'2018-06-18 18:41:06',-1,'2018-06-18 19:10:42',-1,'ID',NULL,NULL,NULL),
+ (53,1,1,'1','11','1','',NULL,'<p>111</p>',1,'Y','2018-08-04 14:59:54',0,2,-1,-1,-1,'2018-08-04 14:59:54',-1,'2018-08-04 15:00:01',-1,'ID',NULL,NULL,NULL),
+ (54,1,1,'','1','1','',NULL,'<p>1</p>',0,'N','2018-08-05 14:28:20',0,1,-1,-1,-1,'2018-08-05 14:28:20',-1,'2018-08-05 14:28:20',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_news` ENABLE KEYS */;
 
 
@@ -579,7 +736,7 @@ CREATE TABLE `kg_newstype` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_newstype`
@@ -587,11 +744,49 @@ CREATE TABLE `kg_newstype` (
 
 /*!40000 ALTER TABLE `kg_newstype` DISABLE KEYS */;
 INSERT INTO `kg_newstype` (`id`,`typeName`,`showIndex`,`entranceImagePath`,`showEntrance`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'公告通知',1,'',0,11,-1,-1,-1,'2018-04-10 10:10:56',-1,'2018-06-19 21:19:10',-1,'ID',NULL,NULL,NULL),
- (2,'政策法规',0,'/uploadFile/entranceimage/entranceimage.png',1,12,-1,-1,-1,'2018-06-17 18:16:00',-1,'2018-06-19 21:19:10',-1,'ID',NULL,NULL,NULL),
- (3,'培训通知',0,'',0,11,-1,-1,-1,'2018-04-10 10:11:12',-1,'2018-06-19 21:19:10',-1,'ID',NULL,NULL,NULL),
- (4,'协会动态',0,'',0,9,-1,-1,-1,'2018-06-17 18:17:16',-1,'2018-06-19 21:19:10',-1,'ID',NULL,NULL,NULL);
+ (1,'公告通知',0,'',0,13,-1,-1,-1,'2018-04-10 10:10:56',-1,'2018-08-04 15:03:09',-1,'ID',NULL,NULL,NULL),
+ (2,'政策法规',0,'/uploadFile/entranceimage/entranceimage.png',0,14,-1,-1,-1,'2018-06-17 18:16:00',-1,'2018-08-04 15:03:09',-1,'ID',NULL,NULL,NULL),
+ (3,'培训通知',0,'',0,13,-1,-1,-1,'2018-04-10 10:11:12',-1,'2018-08-04 15:03:09',-1,'ID',NULL,NULL,NULL),
+ (4,'协会动态',0,'',0,11,-1,-1,-1,'2018-06-17 18:17:16',-1,'2018-08-04 15:03:09',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_newstype` ENABLE KEYS */;
+
+
+--
+-- Definition of table `kg_offers`
+--
+
+DROP TABLE IF EXISTS `kg_offers`;
+CREATE TABLE `kg_offers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `publishUnit` varchar(45) NOT NULL,
+  `contactPerson` varchar(200) NOT NULL,
+  `contactTel` varchar(20) DEFAULT NULL,
+  `salary` varchar(20) DEFAULT NULL,
+  `content` text,
+  `publishDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `OBJECT_VERSION_NUMBER` bigint(20) DEFAULT '1',
+  `REQUEST_ID` bigint(20) DEFAULT '-1',
+  `PROGRAM_ID` bigint(20) DEFAULT '-1',
+  `CREATED_BY` bigint(20) DEFAULT '-1',
+  `CREATION_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATED_BY` bigint(20) DEFAULT '-1',
+  `LAST_UPDATE_DATE` datetime DEFAULT CURRENT_TIMESTAMP,
+  `LAST_UPDATE_LOGIN` bigint(20) DEFAULT '-1',
+  `CERTIFICATE_TYPE` varchar(240) DEFAULT 'ID' COMMENT '证件类型',
+  `EFFECTIVE_START_DATE` date DEFAULT NULL COMMENT '有效日期从',
+  `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
+  `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kg_offers`
+--
+
+/*!40000 ALTER TABLE `kg_offers` DISABLE KEYS */;
+INSERT INTO `kg_offers` (`id`,`publishUnit`,`contactPerson`,`contactTel`,`salary`,`content`,`publishDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
+ (55,'2','2','2',NULL,'<p>2222</p>','2018-08-05 14:31:45',1,-1,-1,-1,'2018-08-05 14:31:45',-1,'2018-08-05 14:31:45',-1,'ID',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `kg_offers` ENABLE KEYS */;
 
 
 --
