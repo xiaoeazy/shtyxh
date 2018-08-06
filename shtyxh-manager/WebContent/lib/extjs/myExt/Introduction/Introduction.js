@@ -56,12 +56,12 @@ Ext.extend(Introduction.IntroductionPanel, Ext.Panel, {
 			listeners:{
 				render:function(){
 					  Ext.Ajax.request({
-							url : appName + '/admin/introduction/query',
+							url : appName + '/admin/allonetext/query',
 				            method : 'post',
 				            headers: {'Content-Type':'application/json'},
-				            params : JSON.stringify([{
+				            params : JSON.stringify({
 				            	id:'1'
-				            }]),
+				            }),
 				            success : function(response, options) {
 				          	  Ext.getBody().unmask();
 				          	  var responseArray = Ext.util.JSON.decode(response.responseText);
@@ -88,11 +88,11 @@ Ext.extend(Introduction.IntroductionPanel, Ext.Panel, {
 		  Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 		  var linkobj = [{
 			  id:'1',
-			  introduction:text,
+			  content:text,
 			  __status : 'update'
 		  }];
 		  Ext.Ajax.request({
-			url : appName + '/admin/introduction/submit',
+			url : appName + '/admin/allonetext/submit',
             method : 'post',
             headers: {'Content-Type':'application/json'},
             params : JSON.stringify(linkobj),

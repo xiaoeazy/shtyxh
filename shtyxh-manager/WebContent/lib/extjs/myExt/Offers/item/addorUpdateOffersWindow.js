@@ -204,6 +204,7 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
                 	  contactperson:contactperson,
                 	  contacttel:contacttel,
                 	  content : content,
+                	  salary:salary,
                 	  id : id
                   }]),
                   success : function(response, options) {

@@ -15,11 +15,11 @@
 
 
 --
--- Create schema kindergarten_dev
+-- Create schema shtyxh_dev
 --
 
-CREATE DATABASE IF NOT EXISTS kindergarten_dev;
-USE kindergarten_dev;
+CREATE DATABASE IF NOT EXISTS shtyxh_dev;
+USE shtyxh_dev;
 
 --
 -- Definition of table `kg_allonetext`
@@ -52,9 +52,9 @@ CREATE TABLE `kg_allonetext` (
 
 /*!40000 ALTER TABLE `kg_allonetext` DISABLE KEYS */;
 INSERT INTO `kg_allonetext` (`id`,`title`,`typeCode`,`content`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'协会简介','introduction','1',2,-1,-1,-1,'2018-08-05 21:16:54',-1,'2018-08-05 21:21:19',-1,'ID',NULL,NULL,NULL),
- (2,'协会架构图','companyFramework','<p>3</p>',4,-1,-1,-1,'2018-08-05 21:16:54',-1,'2018-08-05 21:33:03',-1,'ID',NULL,NULL,NULL),
- (3,'历届理事','companyDirector','<p>4</p>',2,-1,-1,-1,'2018-08-05 21:16:54',-1,'2018-08-05 21:33:06',-1,'ID',NULL,NULL,NULL);
+ (1,'协会简介','introduction','<p>&nbsp; &nbsp; &nbsp; &nbsp;上海市托幼协会是经上海市教育委员会同意，上海市社会团体管理局核准登记，取得法人资格的行业性、自律性的非营利性社会组织。</p><p>　　上海市托幼协会是为适应政府职能转变，适应上海学前教育事业发展的需要，更好地为本市各级各类学前教育机构服务，进一步推动本市托幼事业的发展而建立的。它的宗旨是：坚持四项基本原则, 遵守宪法、法律、法规, 贯彻党和政府的方针、政策, 团结全市各级各类学前教育机构和广大学前教育工作者，开展有关学前教育的理论、政策和实际问题等方面的研究, 协助政府加强学前教育管理，保护会员的合法权益，提高学前教育队伍的整体素质，推进托幼事业的发展。协会是会员的服务机构，协会是会员的自律组织，协会是会员的代表，协会也是行业的协调组织。</p><p>　　上海市托幼协会自2002年成立以来，得到了市各有关部门及领导的关心与支持。原市人大教科文委主任夏秀蓉、市教委副主任张民生任名誉会长，原市人大常委会副主任胡正昌、华师大潘洁教授、市教委基教处何幼华副处长任顾问，市卫生局、市妇联委派相关领导担任协会副会长参与协会的领导工作，现市人大常委、市政府参事瞿钧任会长。</p><p>　　协会的业务范围是：信息咨询，内外协调，业务培训，交流研讨、资质审核等。</p><p>　　协会的具体工作职责如下：</p><p>　　（一）积极宣传、贯策党和国家有关学前教育的方针、政策，宣传学前教育的地位、作用，团结、依靠社会各方面的力量，关心、支持学前教育工作。</p><p>　　（二）开展学前教育业务培训、保教业务咨询、保教人才交流等服务工作。</p><p>　　（三）开展国内外学前教育的合作与交流，推广研究成果和经验。</p><p>　　（四）就学前教育事业发展过程中存在的问题开展调研，参与有关学前教育发展、改革以及与托、幼园所利益相关的政府决策论证，提出事业发展中有关政策和立法的建议，并为政府提供决策依据。</p><p>　　（五）推进依法办园办所，创导良好的行风。对参与不正当竞争，有损事业整体形象的会员，协会采取警告、批评、开除会员资格等惩戒措施，也可建议有关行政机构依法对非会员单位的违法活动进行处理。</p><p>　　（六）依据学前教育有关法规，制定本市托幼保教质量规范，服务标准。</p><p>　　（七）接受政府有关职能部门委托，依法开展与学前教育发展相关的工作，如统计、调查、发布信息、公信证明、收费价格协调、资质审核等。</p><p>　　（八）协调会员与会员，会员与非会员，会员与幼儿家长、保教人员，会员与其它单位及社会组织的关系并维护其合法权益。</p><p>　　协会建立后将首先接受上海市教育委员会的委托开展对一级幼儿园、托儿所的认定、发证工作，上海市教委与上海市卫生局还在研究有关其他工作的委托。同时协会将充分发挥本市教育资源及人才资源的优势，开展学前教育培训、保教业务咨询、保教人才交流等服务工作。协会还将创造条件开展国内外学前教育的合作与交流，还将就多元化办园体制等问题开展调查、研究，总结经验，建立必要的行业规范，并为政府提供决策依据。</p><p>　　协会由单位会员和个人会员组成，凡经本市教育行政部门批准从事学前教育的机构和研究单位及在学前教育研究上有显著成绩或对学前教育事业发展有较大贡献的个人，承认本团体的章程，有加入本团体的愿望，填写入会申请，经理事会讨论通过均能成为本协会的单位会员和个人会员，会员享有参加本团体的活动，优先获得本团体服务的权利，并享有选举权、被选举权和表决权，同时还有对本团体工作的批评建议权和监督权。会员也应履行执行本团体决议，完成团体交代的工作及按时交纳会费的义务。</p><p>　　协会愿与所有会员单位共同努力，为上海托幼事业的发展作出贡献。</p><p>　　</p><p>　　</p><p>　　</p><p>　　 上海市托幼协会</p><p>　　</p><p>　　</p><p>　　</p><p>　　 上海市托幼协会地址：石门二路199弄1号404室</p><p>　　&nbsp;</p><p>　　邮编：200041 电话：62671784</p><p><br/></p>',5,-1,-1,-1,'2018-08-05 21:16:54',-1,'2018-08-06 20:35:18',-1,'ID',NULL,NULL,NULL),
+ (2,'协会架构图','companyFramework','<p><img src=\"/shtyxh/ueditor/jsp/upload/image/20180806/1533559079350036854.jpg\" title=\"1533559079350036854.jpg\" alt=\"1111.jpg\"/></p>',5,-1,-1,-1,'2018-08-05 21:16:54',-1,'2018-08-06 20:38:04',-1,'ID',NULL,NULL,NULL),
+ (3,'历届理事','companyDirector','<h3 class=\"chs\" style=\"box-sizing: border-box; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; line-height: 1.1; color: rgb(51, 51, 51); margin-top: 20px; margin-bottom: 10px; font-size: 16.8px; white-space: normal; background-color: rgb(255, 255, 255);\">第七届理事会</h3><p class=\"chs\" style=\"box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; line-height: 2em; text-indent: 2em; color: rgb(51, 51, 51); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"box-sizing: border-box; font-weight: 700;\">理事长</span>：<a href=\"http://www.cinnet.cn/zh-hans/about/director/xu-zu-yuan.htm\" style=\"box-sizing: border-box; background-color: transparent; color: rgb(51, 122, 183); text-decoration-line: none;\">A</a>A</p><p class=\"chs\" style=\"box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; line-height: 2em; text-indent: 2em; color: rgb(51, 51, 51); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"box-sizing: border-box; font-weight: 700;\">常务副理事长</span>：<a href=\"http://www.cinnet.cn/zh-hans/about/director/liu-gong-chen.htm\" style=\"box-sizing: border-box; background-color: transparent; color: rgb(51, 122, 183); text-decoration-line: none;\">A</a>A</p><p class=\"chs\" style=\"box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; line-height: 2em; text-indent: 2em; color: rgb(51, 51, 51); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"box-sizing: border-box; font-weight: 700;\">副理事长</span>：<a href=\"http://www.cinnet.cn/zh-hans/about/director/ding-xiao-gang.htm\" style=\"box-sizing: border-box; background-color: transparent; color: rgb(51, 122, 183); text-decoration-line: none;\">A</a>、B、C、D、E、F、G、H、I、J、</p><p class=\"chs\" style=\"box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; line-height: 2em; text-indent: 2em; color: rgb(51, 51, 51); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"box-sizing: border-box; font-weight: 700;\">秘书长</span>：E</p><p class=\"chs\" style=\"box-sizing: border-box; margin-top: 1em; margin-bottom: 1em; line-height: 2em; text-indent: 2em; color: rgb(51, 51, 51); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);\">&nbsp;</p><h3 class=\"chs\" style=\"white-space: normal; box-sizing: border-box; font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; line-height: 1.1; color: rgb(51, 51, 51); margin-top: 20px; margin-bottom: 10px; font-size: 16.8px; background-color: rgb(255, 255, 255);\">第六届理事会</h3><p class=\"chs\" style=\"margin-top: 1em; margin-bottom: 1em; white-space: normal; box-sizing: border-box; line-height: 2em; text-indent: 2em; color: rgb(51, 51, 51); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);\"><span style=\"box-sizing: border-box; font-weight: 700;\">理事长</span>：<a href=\"http://www.cinnet.cn/zh-hans/about/director/xu-zu-yuan.htm\" style=\"box-sizing: border-box; background-color: transparent; color: rgb(51, 122, 183); text-decoration-line: none;\">A</a>A</p><p class=\"chs\" style=\"margin-top: 1em; margin-bottom: 1em; white-space: normal; box-sizing: border-box; line-height: 2em; text-indent: 2em; color: rgb(51, 51, 51); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);\"><span style=\"box-sizing: border-box; font-weight: 700;\">常务副理事长</span>：<a href=\"http://www.cinnet.cn/zh-hans/about/director/liu-gong-chen.htm\" style=\"box-sizing: border-box; background-color: transparent; color: rgb(51, 122, 183); text-decoration-line: none;\">A</a>A</p><p class=\"chs\" style=\"margin-top: 1em; margin-bottom: 1em; white-space: normal; box-sizing: border-box; line-height: 2em; text-indent: 2em; color: rgb(51, 51, 51); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);\"><span style=\"box-sizing: border-box; font-weight: 700;\">副理事长</span>：<a href=\"http://www.cinnet.cn/zh-hans/about/director/ding-xiao-gang.htm\" style=\"box-sizing: border-box; background-color: transparent; color: rgb(51, 122, 183); text-decoration-line: none;\">A</a>、B、C、D、E、F、G、H、I、J、</p><p class=\"chs\" style=\"margin-top: 1em; margin-bottom: 1em; white-space: normal; box-sizing: border-box; line-height: 2em; text-indent: 2em; color: rgb(51, 51, 51); font-family: Lato, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);\"><span style=\"box-sizing: border-box; font-weight: 700;\">秘书长</span>：E</p><p><br/></p>',3,-1,-1,-1,'2018-08-05 21:16:54',-1,'2018-08-06 20:40:14',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_allonetext` ENABLE KEYS */;
 
 
@@ -276,8 +276,7 @@ CREATE TABLE `kg_carousel` (
 
 /*!40000 ALTER TABLE `kg_carousel` DISABLE KEYS */;
 INSERT INTO `kg_carousel` (`id`,`file_path`,`sequence`,`urltype`,`web_url`,`activity_id`,`news_id`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (21,'/uploadFile/carousel/20180618184523_1000_475.jpg',0,1,'',-1,50,1,-1,-1,-1,'2018-06-18 18:45:29',-1,'2018-06-18 18:45:29',-1,'ID',NULL,NULL,NULL),
- (22,'/uploadFile/carousel/20180804151133_1000_475.jpg',0,0,'http://www.baidu.com',-1,-1,1,-1,-1,-1,'2018-08-04 15:11:44',-1,'2018-08-04 15:11:44',-1,'ID',NULL,NULL,NULL);
+ (21,'/uploadFile/carousel/20180618184523_1000_475.jpg',0,1,'',-1,50,1,-1,-1,-1,'2018-06-18 18:45:29',-1,'2018-06-18 18:45:29',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_carousel` ENABLE KEYS */;
 
 
@@ -462,7 +461,7 @@ CREATE TABLE `kg_history` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_history`
@@ -470,7 +469,9 @@ CREATE TABLE `kg_history` (
 
 /*!40000 ALTER TABLE `kg_history` DISABLE KEYS */;
 INSERT INTO `kg_history` (`id`,`title`,`content`,`historyTime`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (12,'1','1','1',1,-1,-1,-1,'2018-08-05 19:35:41',-1,'2018-08-05 19:35:41',-1,'ID',NULL,NULL,NULL);
+ (15,'出生','新中国刮刮落地','1949年',1,-1,-1,-1,'2018-08-06 20:40:58',-1,'2018-08-06 20:40:58',-1,'ID',NULL,NULL,NULL),
+ (16,'改革开放','改革开放','1978年',1,-1,-1,-1,'2018-08-06 20:41:29',-1,'2018-08-06 20:41:29',-1,'ID',NULL,NULL,NULL),
+ (17,'香港回归','香港回归','1997年',2,-1,-1,-1,'2018-08-06 20:41:41',-1,'2018-08-06 20:41:50',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_history` ENABLE KEYS */;
 
 
@@ -736,7 +737,7 @@ CREATE TABLE `kg_newstype` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_newstype`
@@ -744,10 +745,14 @@ CREATE TABLE `kg_newstype` (
 
 /*!40000 ALTER TABLE `kg_newstype` DISABLE KEYS */;
 INSERT INTO `kg_newstype` (`id`,`typeName`,`showIndex`,`entranceImagePath`,`showEntrance`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (1,'公告通知',0,'',0,13,-1,-1,-1,'2018-04-10 10:10:56',-1,'2018-08-04 15:03:09',-1,'ID',NULL,NULL,NULL),
- (2,'政策法规',0,'/uploadFile/entranceimage/entranceimage.png',0,14,-1,-1,-1,'2018-06-17 18:16:00',-1,'2018-08-04 15:03:09',-1,'ID',NULL,NULL,NULL),
- (3,'培训通知',0,'',0,13,-1,-1,-1,'2018-04-10 10:11:12',-1,'2018-08-04 15:03:09',-1,'ID',NULL,NULL,NULL),
- (4,'协会动态',0,'',0,11,-1,-1,-1,'2018-06-17 18:17:16',-1,'2018-08-04 15:03:09',-1,'ID',NULL,NULL,NULL);
+ (1,'政策法规',0,'',0,14,-1,-1,-1,'2018-04-10 10:10:56',-1,'2018-08-06 20:52:56',-1,'ID',NULL,NULL,NULL),
+ (2,'政策解读',0,'/uploadFile/entranceimage/entranceimage.png',0,15,-1,-1,-1,'2018-06-17 18:16:00',-1,'2018-08-06 20:53:06',-1,'ID',NULL,NULL,NULL),
+ (3,'专家观点',0,'',0,15,-1,-1,-1,'2018-04-10 10:11:12',-1,'2018-08-06 20:58:24',-1,'ID',NULL,NULL,NULL),
+ (4,'协会章程',0,'',0,12,-1,-1,-1,'2018-06-17 18:17:16',-1,'2018-08-06 20:53:25',-1,'ID',NULL,NULL,NULL),
+ (8,'大事记',0,'',0,1,-1,-1,-1,'2018-08-06 20:53:32',-1,'2018-08-06 20:53:32',-1,'ID',NULL,NULL,NULL),
+ (9,'协会简报',0,'',0,1,-1,-1,-1,'2018-08-06 20:53:38',-1,'2018-08-06 20:53:38',-1,'ID',NULL,NULL,NULL),
+ (10,'协会活动',0,'',0,1,-1,-1,-1,'2018-08-06 20:56:00',-1,'2018-08-06 20:56:00',-1,'ID',NULL,NULL,NULL),
+ (11,'会员活动',0,'',0,2,-1,-1,-1,'2018-08-06 20:56:05',-1,'2018-08-06 20:57:54',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_newstype` ENABLE KEYS */;
 
 
@@ -777,7 +782,7 @@ CREATE TABLE `kg_offers` (
   `EFFECTIVE_END_DATE` date DEFAULT NULL COMMENT '有效日期至',
   `ATTRIBUTE_CATEGORY` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kg_offers`
@@ -785,7 +790,7 @@ CREATE TABLE `kg_offers` (
 
 /*!40000 ALTER TABLE `kg_offers` DISABLE KEYS */;
 INSERT INTO `kg_offers` (`id`,`publishUnit`,`contactPerson`,`contactTel`,`salary`,`content`,`publishDate`,`OBJECT_VERSION_NUMBER`,`REQUEST_ID`,`PROGRAM_ID`,`CREATED_BY`,`CREATION_DATE`,`LAST_UPDATED_BY`,`LAST_UPDATE_DATE`,`LAST_UPDATE_LOGIN`,`CERTIFICATE_TYPE`,`EFFECTIVE_START_DATE`,`EFFECTIVE_END_DATE`,`ATTRIBUTE_CATEGORY`) VALUES 
- (55,'2','2','2',NULL,'<p>2222</p>','2018-08-05 14:31:45',1,-1,-1,-1,'2018-08-05 14:31:45',-1,'2018-08-05 14:31:45',-1,'ID',NULL,NULL,NULL);
+ (59,'徐汇AA幼儿园','AA','123456789','面谈','<p>招收一两个清洁工</p>','2018-08-06 20:42:34',2,-1,-1,-1,'2018-08-06 20:42:34',-1,'2018-08-06 20:43:54',-1,'ID',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `kg_offers` ENABLE KEYS */;
 
 

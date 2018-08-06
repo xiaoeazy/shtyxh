@@ -71,6 +71,13 @@ Ext.onReady(function() {
 					animate : true
 				},
 				items : [ {
+					title : '协会概况',
+					xtype:'panel',
+					id:'main_xhgk',
+					border : false,
+					iconCls : 'nav',
+					html : getXHGK(funcs)
+				}, {
 					title : '资讯中心',
 					xtype:'panel',
 					id:'main_zxzx',
@@ -78,7 +85,7 @@ Ext.onReady(function() {
 					iconCls : 'nav',
 					html : getNews(funcs)
 				},{
-					title : '评估任务',
+					title : '培训与鉴定',
 					id:'main_pgrw',
 					border : false,
 					iconCls : 'nav',
@@ -163,13 +170,20 @@ function getQuestion(funcs) {
 		newsQuestionNum=1;
 	return addFuncStr(str);
 }
+
+function getXHGK(funcs){
+	var str = "";
+	str +=addFunc('introduction1.png','introduction2.png','introduction');
+	str +=addFunc('companyFramework1.png','companyFramework2.png','companyFramework');
+	str +=addFunc('companyDirector1.png','companyDirector2.png','companyDirector');
+	str +=addFunc('history1.png','history2.png','history');
+
+	str +=addFunc('member1.png','member2.png','memberUnits');
+	str +=addFunc('contact1.png','contact2.png','contact');
+	return addFuncStr(str);
+}
 function getNews(funcs){
 	var str = "";
-	str +=addFunc('offers1.png','offers2.png','companyFramework');
-	str +=addFunc('offers1.png','offers2.png','companyDirector');
-	str +=addFunc('offers1.png','offers2.png','history');
-	str +=addFunc('offers1.png','offers2.png','offers');
-	str +=addFunc('member1.png','member2.png','memberUnits');
 	if(isHaveFunc(funcs,6))
 		str +=addFunc('news1.png','news2.png','news');
 	if(isHaveFunc(funcs,7))
@@ -178,6 +192,7 @@ function getNews(funcs){
 		str +=addFunc('source1.png','source2.png','newsSource');
 	if(str!="")
 		newsRoleNum = 1;
+	str +=addFunc('offers1.png','offers2.png','offers');
 	return addFuncStr(str);
 }
 
@@ -199,12 +214,8 @@ function getAssessment(funcs){
 
 function getOthers(funcs){
 	var str = "";
-	if(isHaveFunc(funcs,1))
-		str +=addFunc('introduction1.png','introduction2.png','introduction');
 	if(isHaveFunc(funcs,5))
 		str +=addFunc('download1.png','download2.png','download');
-	if(isHaveFunc(funcs,15))
-		str +=addFunc('contact1.png','contact2.png','contact');
 	if(isHaveFunc(funcs,14))
 		str +=addFunc('carousel1.png','carousel2.png','carousel');
 	if(str!="")
@@ -343,7 +354,7 @@ function addtabs(us) {
 		var panel=  new History.HistoryPanel({
 			mainId: us
 		});
-		addTabFuns(us,panel,'园所招聘');
+		addTabFuns(us,panel,'历史沿革');
 	}else if(us == "companyFramework"){
 		var panel=  new CompanyFramework.CompanyFrameworkPanel({
 			mainId: us
