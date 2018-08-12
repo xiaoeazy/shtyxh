@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.huan.kindergarten.mapper.KgTypeMapper">
+    <resultMap id="BaseResultMap" type="cn.huan.kindergarten.dto.KgType">
+        <id column="id" property="id" jdbcType="DECIMAL" />
+        <result column="typeName" property="typename" jdbcType="VARCHAR" />
+         <result column="showIndex" property="showindex" jdbcType="TINYINT" />
+        <result column="showEntrance" property="showentrance" jdbcType="TINYINT" />
+        <result column="entranceImagePath" property="entranceimagepath" jdbcType="VARCHAR" />
+        <result column="parentId" property="parentid" jdbcType="DECIMAL" />
+        <result column="relateType" property="relatetype" jdbcType="INTEGER" />
+        <result column="relateTypeId" property="relatetypeid" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <resultMap id="RecursionResultMap" type="cn.huan.kindergarten.dto.KgType">
+        <id column="id" property="id" jdbcType="DECIMAL" />
+        <result column="typeName" property="typename" jdbcType="VARCHAR" />
+         <result column="showIndex" property="showindex" jdbcType="TINYINT" />
+        <result column="showEntrance" property="showentrance" jdbcType="TINYINT" />
+        <result column="entranceImagePath" property="entranceimagepath" jdbcType="VARCHAR" />
+        <result column="parentId" property="parentid" jdbcType="DECIMAL" />
+        <result column="relateType" property="relatetype" jdbcType="INTEGER" />
+        <result column="relateTypeId" property="relatetypeid" jdbcType="DECIMAL" />
+        <collection property ="childType" ofType="cn.huan.kindergarten.dto.KgType" column="id" select="findChildType">
+        </collection>
+    </resultMap>
+    
+    <select id="findChildType" resultMap="RecursionResultMap" >
+    	select * from kg_type where parentId = #{typeid}
+    </select>
+    
+
+</mapper>

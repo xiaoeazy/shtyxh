@@ -1,24 +1,25 @@
 package cn.huan.kindergarten.controllers;
 
-import org.springframework.stereotype.Controller;
-import com.huan.HTed.system.controllers.BaseController;
-import com.huan.HTed.core.IRequest;
-import com.huan.HTed.system.dto.ResponseData;
-import cn.huan.kindergarten.dto.KgHistory;
-import cn.huan.kindergarten.dto.KgMemberUnits;
-import cn.huan.kindergarten.dto.KgNewstype;
-import cn.huan.kindergarten.service.IKgHistoryService;
-import cn.huan.shtyxh.common.bean.ExtAjax;
-import cn.huan.shtyxh.common.bean.ExtStore;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.validation.BindingResult;
-import java.util.List;
+
+import com.huan.HTed.core.IRequest;
+import com.huan.HTed.system.controllers.BaseController;
+import com.huan.HTed.system.dto.ResponseData;
+
+import cn.huan.kindergarten.dto.KgHistory;
+import cn.huan.kindergarten.service.IKgHistoryService;
+import cn.huan.shtyxh.common.bean.ExtAjax;
+import cn.huan.shtyxh.common.bean.ExtStore;
 
     @Controller
     public class KgHistoryController extends BaseController{

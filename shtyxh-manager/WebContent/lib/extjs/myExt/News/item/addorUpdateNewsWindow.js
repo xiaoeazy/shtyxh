@@ -31,11 +31,14 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 	    		pageSize:0,
 	    		proxy: {
 			        type: 'ajax',
-			        url : appName+ '/admin/newstype/queryAll',
+			        url : appName+ '/admin/type/queryAllByParam',
 			        reader: {
 			        	root : "results",
 						totalProperty: "totalProperty",
 						successProperty:'success'
+			        },
+			        extraParams: {
+			        	relatetype :  2 
 			        }
 			    },
 			    autoLoad : true,

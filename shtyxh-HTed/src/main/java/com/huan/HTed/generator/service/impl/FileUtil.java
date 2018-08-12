@@ -66,7 +66,7 @@ public class FileUtil {
         String projectPath = generatorInfo.getProjectPath();
         String parentPackagePath = generatorInfo.getParentPackagePath();
         String packagePath = generatorInfo.getPackagePath();
-        String directory = projectPath + "/src/" + parentPackagePath + "/" + packagePath + "/dto/"
+        String directory = projectPath + "/src/main/java/" + parentPackagePath + "/" + packagePath + "/dto/"
                 + generatorInfo.getDtoName();
 
         File file = new File(directory);
@@ -85,12 +85,18 @@ public class FileUtil {
                     needUtil = true;
                     break;
                 case "BIGINT":
+                	  s.setJavaType("Long");
+                      s.setJdbcType("DECIMAL");
+                      break;
                 case "INT":
                 case "INTEGER":
+                	 s.setJavaType("Long");
+                     s.setJdbcType("DECIMAL");
+                     break;
                 case "DECIMAL":
                 case "TINYINT":
-                    s.setJavaType("Long");
-                    s.setJdbcType("DECIMAL");
+                    s.setJavaType("Boolean");
+                    s.setJdbcType("TINYINT");
                     break;
                 case "DOUBLE":
                     s.setJavaType("Double");
@@ -199,22 +205,22 @@ public class FileUtil {
         String directory = null;
         List<String> importPackages = new ArrayList<>();
         if (type == pType.Controller) {
-            directory = projectPath + "/src/" + pac + "/controllers/" + generatorInfo.getControllerName();
+            directory = projectPath + "/src/main/java/" + pac + "/controllers/" + generatorInfo.getControllerName();
             importPackages.add("org.springframework.stereotype.Controller");
             importPackages.add(BaseController.class.getName());
             importPackages.add(IRequest.class.getName());
             importPackages.add(ResponseData.class.getName());
         } else if (type == pType.Mapper) {
-            directory = projectPath + "/src/" + pac + "/mapper/" + generatorInfo.getMapperName();
+            directory = projectPath + "/src/main/java/" + pac + "/mapper/" + generatorInfo.getMapperName();
             importPackages.add("com.huan.HTed.mybatis.common.Mapper");
         } else if (type == pType.MapperXml) {
-            directory = projectPath + "/resources/" + pac + "/mapper/" + generatorInfo.getMapperXmlName();
+            directory = projectPath + "/src/main/resources/" + pac + "/mapper/" + generatorInfo.getMapperXmlName();
         } else if (type == pType.Service) {
-            directory = projectPath + "/src/" + pac + "/service/" + generatorInfo.getServiceName();
+            directory = projectPath + "/src/main/java/" + pac + "/service/" + generatorInfo.getServiceName();
             importPackages.add(ProxySelf.class.getName());
             importPackages.add(IBaseService.class.getName());
         } else if (type == pType.Impl) {
-            directory = projectPath + "/src/" + pac + "/service/impl/" + generatorInfo.getImplName();
+            directory = projectPath + "/src/main/java/" + pac + "/service/impl/" + generatorInfo.getImplName();
             importPackages.add(BaseServiceImpl.class.getName());
             importPackages.add("org.springframework.stereotype.Service");
         } else if (type == pType.Html) {
@@ -305,8 +311,8 @@ public class FileUtil {
     // 判断文件是否已经存在
     public static int isFileExist(GeneratorInfo generatorInfo) {
         int rs = 0;
-        String classDir = generatorInfo.getProjectPath() + "/src/" + generatorInfo.getParentPackagePath();
-        String xmlDir = generatorInfo.getProjectPath() + "/resources/" + generatorInfo.getParentPackagePath();
+        String classDir = generatorInfo.getProjectPath() + "/src/main/java/" + generatorInfo.getParentPackagePath();
+        String xmlDir = generatorInfo.getProjectPath() + "/src/main/resources/" + generatorInfo.getParentPackagePath();
         String htmlDir = generatorInfo.getProjectPath() + "/WebContent/WEB-INF/view";
         getFileList(classDir, classDir, generatorInfo);
         // 判断有没有重复的java文件
@@ -449,10 +455,10 @@ public class FileUtil {
                 if (files[i].isDirectory()) {
                     getFileList(files[i].getAbsolutePath(), directory, generatorInfo);
                 } else {
-                    if (directory.equals(generatorInfo.getProjectPath() + "/src/"
+                    if (directory.equals(generatorInfo.getProjectPath() + "/src/main/java/"
                             + generatorInfo.getParentPackagePath())) {
                         allClassFiles.add(fileName);
-                    } else if (directory.equals(generatorInfo.getProjectPath() + "/resources/"
+                    } else if (directory.equals(generatorInfo.getProjectPath() + "/src/main/resources/"
                             + generatorInfo.getParentPackagePath())) {
                         allXmlFiles.add(fileName);
                     } else if (directory.equals(generatorInfo.getProjectPath() + "/WebContent/WEB-INF/view")) {

@@ -38,18 +38,18 @@ Ext.extend(addorUpdateHistory.addorUpdateHistoryWindow, Ext.Window, {
 					  			text:''
 				  			},
 				  			{
-				          		fieldLabel:'时间<font color="red">*</font>',
+				          		fieldLabel:'年份<font color="red">*</font>',
 								allowBlank:false,
-								name: 'historytime',
+								name: 'historyyear',
 								blankText:'必须填写',
 								id:mainId+"historytime",
 					            maxLength:45  
 				  			},{
-				          		fieldLabel:'标题<font color="red">*</font>',
+				          		fieldLabel:'日期<font color="red">*</font>',
 								allowBlank:false,
-								name: 'title',
+								name: 'historytime',
 								blankText:'必须填写',
-								id:mainId+"title",
+								id:mainId+"historytime",
 					            maxLength:45  
 				  			},{
 				  				fieldLabel:'内容<font color="red">*</font>',
@@ -57,7 +57,7 @@ Ext.extend(addorUpdateHistory.addorUpdateHistoryWindow, Ext.Window, {
 				  				width:'100%',
 								height:300,
 								allowBlank:false,
-								name: 'title',
+								name: 'content',
 								blankText:'必须填写',
 								id:mainId+"content",
 					            maxLength:200 
@@ -100,12 +100,12 @@ Ext.extend(addorUpdateHistory.addorUpdateHistoryWindow, Ext.Window, {
 				listeners:{
 					show:function(){
 						if(record!=null){
-							var title= record.get("title");
+							var historyyear= record.get("historyyear");
 				    		var content= record.get("content");
 				    		var historytime= record.get("historytime");
 				    		
 				    		Ext.getCmp(mainId+"historytime").setValue(historytime);
-				    		Ext.getCmp(mainId+"title").setValue(title);
+				    		Ext.getCmp(mainId+"historyyear").setValue(historyyear);
 				    		Ext.getCmp(mainId+"content").setValue(content);
 				    		
 				    	}
@@ -118,18 +118,19 @@ Ext.extend(addorUpdateHistory.addorUpdateHistoryWindow, Ext.Window, {
 	
 	
 	addorUpdateHistory : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
-		var title =Ext.getCmp(mainId+"title").getValue().trim();
+		var historyyear =Ext.getCmp(mainId+"historyyear").getValue().trim();
 		var content =Ext.getCmp(mainId+"content").getValue().trim();
 		var historytime =Ext.getCmp(mainId+"historytime").getValue().trim();
 		
+		if(historyyear==""){
+			Ext.getCmp(mainId+"historyyear").markInvalid("年份不能为空！");
+			return;
+		}
 		if(historytime==""){
-			Ext.getCmp(mainId+"historytime").markInvalid("时间不能为空！");
+			Ext.getCmp(mainId+"historytime").markInvalid("日期不能为空！");
 			return;
 		}
-		if(title==""){
-			Ext.getCmp(mainId+"title").markInvalid("标题不能为空！");
-			return;
-		}
+		
 		if(content==""){
 			Ext.getCmp(mainId+"content").markInvalid("内容不能为空！");
 			return;
@@ -144,7 +145,7 @@ Ext.extend(addorUpdateHistory.addorUpdateHistoryWindow, Ext.Window, {
                   params : JSON.stringify([{
                 	  __status : type,
                 	  historytime : historytime,
-                	  title:title,
+                	  historyyear:historyyear,
                 	  content:content,
                 	  id : id
                   }]),

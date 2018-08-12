@@ -25,14 +25,13 @@ import com.huan.HTed.core.impl.RequestHelper;
 import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgCarousel;
 import cn.huan.kindergarten.dto.KgDownload;
-import cn.huan.kindergarten.dto.KgIntroduction;
 import cn.huan.kindergarten.dto.KgNews;
-import cn.huan.kindergarten.dto.KgNewstype;
+import cn.huan.kindergarten.dto.KgType;
 import cn.huan.kindergarten.service.IKgAssessmentActivityService;
 import cn.huan.kindergarten.service.IKgCarouselService;
 import cn.huan.kindergarten.service.IKgDownloadService;
 import cn.huan.kindergarten.service.IKgNewsService;
-import cn.huan.kindergarten.service.IKgNewstypeService;
+import cn.huan.kindergarten.service.IKgTypeService;
 import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
@@ -42,7 +41,7 @@ public class IndexController extends IndexBaseController{
 	@Autowired
 	private IKgDownloadService iKgDownloadService;
 	@Autowired
-	private IKgNewstypeService iKgNewstypeService;
+	private IKgTypeService iKgTypeService;
 	@Autowired
 	private IKgCarouselService iKgCarouselService;
 	@Autowired
@@ -59,8 +58,6 @@ public class IndexController extends IndexBaseController{
     public ModelAndView index(HttpServletRequest request) {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/index");
     	 IRequest requestContext = createRequestContext(request);
-    	 KgIntroduction ki = new KgIntroduction();
-    	 ki.setId(1l);
     	//查询大轮播图和下载资料
     	 KgCarousel kc = new KgCarousel();
     	 kc.setSortorder("desc");
@@ -100,14 +97,14 @@ public class IndexController extends IndexBaseController{
 //    	 CommonUtil.judgeAssessmentActivityTitleLength(assessmentList,22);
 //    	 mv.addObject("assessmentList",assessmentList);
     	 //类型入口
-    	 KgNewstype kne = new KgNewstype();
+    	 KgType kne = new KgType();
     	 kne.setShowentrance(true);
-    	 KgNewstype knea = iKgNewstypeService.selectOne(requestContext, kne);
+    	 KgType knea = iKgTypeService.selectOne(requestContext, kne);
     	 mv.addObject("typeEntranceShow",knea);
     	 //公告通知
-    	 KgNewstype kn = new KgNewstype();
+    	 KgType kn = new KgType();
     	 kn.setShowindex(true);
-    	 KgNewstype knt = iKgNewstypeService.selectOne(requestContext, kn);
+    	 KgType knt = iKgTypeService.selectOne(requestContext, kn);
     	 if(knt!=null) {
     		 KgNews kns = new KgNews();
     		 kns.setTypeid(knt.getId());

@@ -16,11 +16,14 @@ Ext.extend(NewsType.NewsTypePanel, Ext.Panel, {
 			pageSize:10,
 			proxy: {
 		        type: 'ajax',
-		        url : appName+ '/admin/newstype/query',
+		        url : appName+ '/admin/type/query',
 		        reader: {
 		        	root : "results",
 					totalProperty: "totalProperty",
 					successProperty:'success'
+		        },
+		        extraParams: {
+		        	relatetype :  2 
 		        }
 		    },
 		    autoLoad : true,
@@ -151,7 +154,7 @@ Ext.extend(NewsType.NewsTypePanel, Ext.Panel, {
 		  Ext.Msg.confirm('提示信息','确认要删除这些信息吗？',function(op){  
 		        if(op == 'yes'){
 		        	Ext.Ajax.request({
-		    			url : appName + '/admin/newstype/remove',
+		    			url : appName + '/admin/type/remove',
 		                method : 'post',
 		                headers: {'Content-Type':'application/json'},
 		                params : JSON.stringify(linkobj),

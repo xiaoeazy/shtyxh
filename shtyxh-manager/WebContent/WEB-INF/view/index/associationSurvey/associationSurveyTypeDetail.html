@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>关于我们_${webname!}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/common/common.css" rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/associationSurvery/associationSurvery.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+
+
+</head>
+<body>
+	<#include "../../include/navigation.html">
+
+	<div class="main">
+		<div class="main_container">
+			<div class="mainLeft_left_block mt13">
+
+				<!--OTsidebar-->
+				<div class="left_box ">
+					<strong>
+					<span>协会概况</span>
+					<samp></samp>
+					</strong>
+					
+					<ul>
+					<#list leftList as leftList>   
+					              <li id="cid${leftList.id}"><a href="${base.contextPath}/index/associationSurvey/associationSurveyTypeList?typeid=${leftList.id}">${leftList.typename}</a></li>
+				    </#list>  
+					<script>
+						var changeclass=window.document.getElementById('cid${nowType.id}');
+						changeclass.className='on';
+					</script>
+					
+					</ul>
+					
+					
+					</div>
+					
+
+				</div>
+
+				<div class="mainLeft_right_block mt13">
+					<div class="right_box">
+							<strong class="title">
+								<span>${nowType.typename}</span>
+							</strong>
+						<div class="nr_box">
+								<div class="vF_deail_currentloc">
+							         <p>当前位置：<a href="${base.contextPath}/index/associationSurvey/associationSurveyTypeList?typeid=${nowType.id!}" title="" class="CurrChnlCls">${nowType.typename!}</a>
+							          &nbsp;&raquo;&nbsp;${newsInfo.newstitle!}
+       								 </p>
+							    </div>
+						
+								<div class="vF_detail_header">
+					            <h2 class="tc">${newsInfo.newstitle!}&nbsp;</h2>
+					            <p class="tc">
+					            	<span id="pubTime">${newsInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 
+					            	</p>
+					            </div>
+					            <div class="vF_detail_content">
+					                ${newsInfo.content!}&nbsp;
+					            </div>
+							
+						</div>
+					
+					</div>
+				</div>
+
+
+		</div>
+	</div>
+	<#include "../../include/footer.html">
+</body>
+</html>

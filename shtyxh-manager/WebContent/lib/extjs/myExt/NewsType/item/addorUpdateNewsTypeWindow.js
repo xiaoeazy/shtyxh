@@ -22,6 +22,54 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 	    	var text = type=="update"?"更新":"添加";
 	    	var isAdd =  type=="update"?false:true;
 	    	
+	    	//======================================================================
+	    	var typeid_Combo_Store = new Ext.data.Store({
+	    		pageSize:0,
+	    		proxy: {
+			        type: 'ajax',
+			        url : appName+ '/admin/type/queryAllByParam',
+			        reader: {
+			        	root : "results",
+						totalProperty: "totalProperty",
+						successProperty:'success'
+			        },
+			        extraParams: {
+			        	relatetype :  0 
+			        }
+			    },
+			    autoLoad : true,
+			    fields: ['id', 'typename']
+			});
+	    	
+	       var parentTypeCombo = new Ext.form.ComboBox({
+	    	   		fieldLabel:'类型<font color="red">*</font>',
+		    	    id:mainId+"typeid",
+		            store : typeid_Combo_Store,  
+		            valueField : "id",  
+		            mode : 'remote',  
+		            displayField : "typename",  
+		            forceSelection : true,  
+		            blankText : '请选择',  
+		            emptyText : '请选择',  
+		            editable : false,  
+		            triggerAction : 'all',  
+		            allowBlank : false,  
+		            hiddenName : "typename",  
+		            autoShow : true,  
+		            selectOnFocus : true,  
+		            name : "typeid",
+		            listeners:{
+		            	afterrender:function(comb){
+//		            		 typeCombo.setValue(-1);
+//		            	     typeCombo.setRawValue("所有");
+		            	},
+		            	select:function(combo, record, index){
+//		            		var combovalue = combo.getValue();
+//		            		Ext.apply(other_Combo_Store.baseParams, { repid:combovalue  });
+//		            		other_Combo_Store.load();
+		            	}
+		            }
+		        }); 
 	    	 //=====================是否前台显示=========================================
 		       var showIndex_Combo_Store = new Ext.data.Store({
 		    	   fields: [  
@@ -119,6 +167,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 								id:mainId+"typename",
 					            maxLength:45  
 				  			},
+				  			parentTypeCombo,
 				  			showIndexCombo,
 				  			showEntranceCombo,
 				  			{
@@ -198,9 +247,10 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 				    		Ext.getCmp(mainId+"typename").setValue(typename);
 				    		var showindex =  record.get("showindex");
 				    		var showentrance =  record.get("showentrance");
+				    		var parentid =  record.get("parentid");
 				    		showIndexCombo.setValue(showindex);
 				    		showEntranceCombo.setValue(showentrance);
-				    		
+				    		parentTypeCombo.setValue(parentid);
 				    		var entranceimagepath= record.get("entranceimagepath");
 				    		Ext.getCmp(mainId+"entranceimagepath").setValue(entranceimagepath);
 				    		if(entranceimagepath!=null&&entranceimagepath!=""){
@@ -226,17 +276,25 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 		}
 		var showindex =Ext.getCmp(mainId+"showindex").getValue();
 		var showentrance =Ext.getCmp(mainId+"showentrance").getValue();
+		var parentid =  Ext.getCmp(mainId+"typeid").getValue();
+		
+		if(parentid==null){
+			Ext.getCmp(mainId+"parentid").markInvalid("父标签不能为空！");
+			return;
+		}
+		
 		var entranceimagepath = Ext.getCmp(mainId+"entranceimagepath").getValue();
 		
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 			  Ext.Ajax.request({
-            	  url : appName + '/admin/newstype/submit',
+            	  url : appName + '/admin/type/submit',
                   method : 'post',
                   headers: {'Content-Type':'application/json'},
                   params : JSON.stringify([{
                 	  __status : type,
                 	  typename : typename,
+                	  parentid:parentid,
                 	  showindex:showindex,
                 	  showentrance:showentrance,
                 	  entranceimagepath:entranceimagepath,

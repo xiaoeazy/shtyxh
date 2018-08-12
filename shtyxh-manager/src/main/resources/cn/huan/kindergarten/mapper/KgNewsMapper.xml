@@ -32,14 +32,14 @@
         <result column="sequence" property="sequence" jdbcType="DECIMAL" />
         <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
         <result column="viewsCount" property="viewscount" jdbcType="DECIMAL" />
-        <association property="kgNewstype" javaType="cn.huan.kindergarten.dto.KgNewstype">
+        <association property="kgNewstype" javaType="cn.huan.kindergarten.dto.KgType">
             <id column="typeid" property="id"></id>
             <result column="typename" property="typename"/>
         </association>
     </resultMap>
 
    <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="cn.huan.kindergarten.dto.KgNews">
-        select a.*,b.typename from kg_news a left join kg_newstype b
+        select a.*,b.typename from kg_news a left join kg_type b
             on a.typeid=b.id 
            <where>
            		<if test="newstitle != null">
@@ -70,7 +70,7 @@
 			         ORDER BY #{sortname} #{sortorder}
 			    </when>
 			    <otherwise>
-			        ORDER BY a.sequence, a.createDate DESC
+			        ORDER BY a.sequence DESC, a.createDate DESC
 			    </otherwise>
 			</choose>
            

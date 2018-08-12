@@ -173,6 +173,8 @@ function getQuestion(funcs) {
 
 function getXHGK(funcs){
 	var str = "";
+	str +=addFunc('news1.png','news2.png','news');
+	str +=addFunc('type1.png','type2.png','newsType');
 	str +=addFunc('introduction1.png','introduction2.png','introduction');
 	str +=addFunc('companyFramework1.png','companyFramework2.png','companyFramework');
 	str +=addFunc('companyDirector1.png','companyDirector2.png','companyDirector');

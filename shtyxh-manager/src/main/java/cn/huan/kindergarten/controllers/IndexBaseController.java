@@ -14,12 +14,11 @@ import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgLink;
 import cn.huan.kindergarten.dto.KgNewsSource;
-import cn.huan.kindergarten.dto.KgNewstype;
+import cn.huan.kindergarten.dto.KgType;
 import cn.huan.kindergarten.service.IKgConfigService;
 import cn.huan.kindergarten.service.IKgLinkService;
-import cn.huan.kindergarten.service.IKgNewsService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
-import cn.huan.kindergarten.service.IKgNewstypeService;
+import cn.huan.kindergarten.service.IKgTypeService;
 
 /**
  * IndexBaseController.
@@ -31,12 +30,12 @@ public class IndexBaseController extends BaseController{
     
     public static final String  CH_NULL = "NULL";//无
 	public static final String  CH_INDEX = "CH_INDEX";//首页
-	public static final String  CH_XHJJ = "CH_XHJJ";//协会简介
+	public static final String  CH_XHGK = "CH_XHGK";//协会概况
 	public static final String  CH_ZXZX = "CH_ZXZX";//资讯中心
 	public static final String  CH_XHGZ = "CH_XHGZ";//协会工作
 	public static final String  CH_LXWM = "CH_LXWM";//联系我们
 	@Autowired
-	private IKgNewstypeService iKgNewstypeService;
+	private IKgTypeService iKgTypeService;
 	@Autowired
 	private IKgConfigService iKgConfigService;
 	@Autowired
@@ -45,7 +44,9 @@ public class IndexBaseController extends BaseController{
 	private IKgLinkService iKgLinkService;
 	
 	public void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {
-	  	  List<KgNewstype> kgNewstypeList = iKgNewstypeService.selectAll(requestContext);
+		KgType t = new KgType();
+		t.setParentid(3L);
+	  	  List<KgType> kgNewstypeList = iKgTypeService.select(requestContext,t);
 	        List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
 	        List<KgLink> linkList = iKgLinkService.selectAll(requestContext);
 	        mv.addObject("kgNewstypeList", kgNewstypeList);

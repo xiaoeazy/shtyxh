@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class KgHistory extends BaseDTO {
 
      public static final String FIELD_ID = "id";
-     public static final String FIELD_TITLE = "title";
+     public static final String FIELD_YEAR = "historyyear";
      public static final String FIELD_CONTENT = "content";
 
 
@@ -23,7 +23,7 @@ public class KgHistory extends BaseDTO {
 
      @NotEmpty
      @Length(max = 45)
-     private String title;
+     private String historyyear;
 
      @Length(max = 200)
      private String content;
@@ -50,15 +50,17 @@ public class KgHistory extends BaseDTO {
          return id;
      }
 
-     public void setTitle(String title){
-         this.title = title;
-     }
+   
 
-     public String getTitle(){
-         return title;
-     }
+     public String getHistoryyear() {
+		return historyyear;
+	}
 
-     public void setContent(String content){
+	public void setHistoryyear(String historyyear) {
+		this.historyyear = historyyear;
+	}
+
+	public void setContent(String content){
          this.content = content;
      }
 

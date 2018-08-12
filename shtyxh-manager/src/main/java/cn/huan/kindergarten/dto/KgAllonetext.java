@@ -20,7 +20,7 @@ public class KgAllonetext extends BaseDTO {
 
      @Id
      @GeneratedValue
-     private String id;
+     private Long id;
 
      @NotEmpty
      @Length(max = 45)
@@ -34,15 +34,17 @@ public class KgAllonetext extends BaseDTO {
      private String content;
 
 
-     public void setId(String id){
-         this.id = id;
-     }
+   
 
-     public String getId(){
-         return id;
-     }
+     public Long getId() {
+		return id;
+	}
 
-     public void setTitle(String title){
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setTitle(String title){
          this.title = title;
      }
 

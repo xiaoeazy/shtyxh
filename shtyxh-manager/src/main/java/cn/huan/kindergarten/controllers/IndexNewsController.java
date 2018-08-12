@@ -15,12 +15,11 @@ import com.huan.HTed.core.IRequest;
 
 import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgNewsSource;
-import cn.huan.kindergarten.dto.KgNewstype;
-import cn.huan.kindergarten.service.IKgConfigService;
+import cn.huan.kindergarten.dto.KgType;
 import cn.huan.kindergarten.service.IKgNewsAttributeService;
 import cn.huan.kindergarten.service.IKgNewsService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
-import cn.huan.kindergarten.service.IKgNewstypeService;
+import cn.huan.kindergarten.service.IKgTypeService;
 import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
@@ -30,7 +29,7 @@ public class IndexNewsController extends IndexBaseController{
 	@Autowired
 	private IKgNewsService iKgNewsService;
 	@Autowired
-	private IKgNewstypeService iKgNewstypeService;
+	private IKgTypeService iKgTypeService;
 	@Autowired 
 	private IKgNewsSourceService iKgNewsSourceService;
 	@Autowired
@@ -41,8 +40,11 @@ public class IndexNewsController extends IndexBaseController{
     public ModelAndView news(HttpServletRequest request) {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/news/news");
         IRequest requestContext = createRequestContext(request);
-        List<KgNewstype> typeList = iKgNewstypeService.selectAll(requestContext);
-        for(KgNewstype kn:typeList) {
+        KgType kt = new KgType();
+        kt.setParentid(3L);
+        kt.setRelatetype(2);
+        List<KgType> typeList = iKgTypeService.select(requestContext, kt);
+        for(KgType kn:typeList) {
         	KgNews news = new KgNews();
         	news.setTypeid(kn.getId());
         	int count = iKgNewsService.adminQueryCount(requestContext, news);
@@ -125,9 +127,9 @@ public class IndexNewsController extends IndexBaseController{
 	        int allPageNum = count%limit==0?count/limit:count/limit+1;
 	        if(count==0) allPageNum=1;
 	        List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
-	        KgNewstype newsType = new KgNewstype();
+	        KgType newsType = new KgType();
 	        newsType.setId(typeid);
-	        KgNewstype kgNewstype = iKgNewstypeService.selectByPrimaryKey(requestContext, newsType);
+	        KgType kgNewstype = iKgTypeService.selectByPrimaryKey(requestContext, newsType);
 	        CommonUtil.judgeNewsTitleLength(list,33);
 	        mv.addObject("newsList", list);
 	        mv.addObject("page", page);
@@ -181,9 +183,9 @@ public class IndexNewsController extends IndexBaseController{
         KgNews newsInfo = iKgNewsService.selectByPrimaryKey(requestContext, news);
         mv.addObject("newsInfo", newsInfo);
         
-        KgNewstype newsType = new KgNewstype();
+        KgType newsType = new KgType();
         newsType.setId(newsInfo.getTypeid());
-        KgNewstype kgNewstype = iKgNewstypeService.selectByPrimaryKey(requestContext, newsType);
+        KgType kgNewstype = iKgTypeService.selectByPrimaryKey(requestContext, newsType);
         
         KgNewsSource newsSource = new KgNewsSource();
         newsSource.setId(newsInfo.getSourceid());

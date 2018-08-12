@@ -24,7 +24,7 @@ Ext.extend(History.HistoryPanel, Ext.Panel, {
 		        }
 		    },
 		    autoLoad : true,
-		    fields: ['id', 'title']
+		    fields: ['id', 'historyyear']
 		});
 		
 
@@ -74,12 +74,14 @@ Ext.extend(History.HistoryPanel, Ext.Panel, {
 					}
 				}],
 	        columns: [
-	            {header: "历史沿革时间",  sortable: true,  dataIndex: 'historytime',align:'center'},
-	            {header: "历史沿革名称",  sortable: true,  dataIndex: 'title',align:'center'},
+	        	{header: "历史沿革年份",  sortable: true,  dataIndex: 'historyyear',align:'center'},
+	            {header: "历史沿革日期",  sortable: true,  dataIndex: 'historytime',align:'center'},
+	            {header: "内容",  sortable: true,  dataIndex: 'content',align:'center'}
+	            
 	            
 	        ],
 	        width:'100%',
-	        autoExpandColumn: 'title',
+	        autoExpandColumn: 'content',
 	        viewConfig:{forceFit: true}
 	    });
 		

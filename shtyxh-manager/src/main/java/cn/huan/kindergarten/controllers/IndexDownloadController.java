@@ -1,20 +1,15 @@
 package cn.huan.kindergarten.controllers;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,19 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.huan.HTed.core.IRequest;
-import com.huan.HTed.core.exception.BaseException;
-import com.huan.HTed.system.controllers.BaseController;
 
-import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgDownload;
-import cn.huan.kindergarten.dto.KgNewsSource;
-import cn.huan.kindergarten.dto.KgNewstype;
+import cn.huan.kindergarten.exception.FileReadIOException;
 import cn.huan.kindergarten.exception.KgFileException;
-import cn.huan.kindergarten.service.IKgConfigService;
 import cn.huan.kindergarten.service.IKgDownloadService;
 import cn.huan.kindergarten.service.IKgNewsAttributeService;
-import cn.huan.kindergarten.service.IKgNewsSourceService;
-import cn.huan.kindergarten.service.IKgNewstypeService;
 import cn.huan.kindergarten.utils.CommonUtil;
 
 @Controller
