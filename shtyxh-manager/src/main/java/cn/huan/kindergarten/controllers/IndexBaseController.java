@@ -32,8 +32,10 @@ public class IndexBaseController extends BaseController{
 	public static final String  CH_INDEX = "CH_INDEX";//首页
 	public static final String  CH_XHGK = "CH_XHGK";//协会概况
 	public static final String  CH_ZXZX = "CH_ZXZX";//资讯中心
-	public static final String  CH_XHGZ = "CH_XHGZ";//协会工作
-	public static final String  CH_LXWM = "CH_LXWM";//联系我们
+	public static final String  CH_PXYJD = "CH_PXYJD";//培训与鉴定
+	public static final String  CH_DCYYJ = "CH_DCYYJ";//调查与研究
+	public static final String  CH_XHDT = "CH_XHDT";//协会动态
+	public static final String  CH_DJHD = "CH_DJHD";//党建活动
 	@Autowired
 	private IKgTypeService iKgTypeService;
 	@Autowired
@@ -44,12 +46,16 @@ public class IndexBaseController extends BaseController{
 	private IKgLinkService iKgLinkService;
 	
 	public void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {
-		KgType t = new KgType();
-		t.setParentid(3L);
-	  	  List<KgType> kgNewstypeList = iKgTypeService.select(requestContext,t);
+			KgType t2 = new KgType();
+			t2.setParentid(2L);
+			KgType t3 = new KgType();
+			t3.setParentid(3L);
+			List<KgType> xhgkTypeList = iKgTypeService.select(requestContext,t2);
+	  	  	List<KgType> zxzxTypeList = iKgTypeService.select(requestContext,t3);
 	        List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
 	        List<KgLink> linkList = iKgLinkService.selectAll(requestContext);
-	        mv.addObject("kgNewstypeList", kgNewstypeList);
+	        mv.addObject("xhgkTypeList", xhgkTypeList);
+	        mv.addObject("zxzxTypeList", zxzxTypeList);
 	        mv.addObject("KgNewsSourceList", KgNewsSourceList);
 	        mv.addObject("chanel", chanel);
 	        mv.addObject("linkList",linkList);

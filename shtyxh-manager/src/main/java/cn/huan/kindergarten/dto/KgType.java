@@ -25,7 +25,7 @@ public class KgType extends BaseDTO {
      public static final String FIELD_PARENTID = "parentid";
      public static final String FIELD_RELATETYPE = "relatetype";
      public static final String FIELD_RELATETYPEID = "relatetypeid";
-
+     public static final String FIELD_HIDDEN = "hidden";
 
      @Id
      @GeneratedValue
@@ -47,6 +47,8 @@ public class KgType extends BaseDTO {
      private Integer relatetype;  //0 正常type  1. 单页面内容    2.多列表内容
 
      private Long relatetypeid;
+     
+     private Boolean hidden;
 
      @Transient
      private List<KgType> childType;
@@ -147,6 +149,14 @@ public class KgType extends BaseDTO {
 
 	public void setChildType(List<KgType> childType) {
 		this.childType = childType;
+	}
+
+	public Boolean getHidden() {
+		return hidden;
+	}
+
+	public void setHidden(Boolean hidden) {
+		this.hidden = hidden;
 	}
 
   

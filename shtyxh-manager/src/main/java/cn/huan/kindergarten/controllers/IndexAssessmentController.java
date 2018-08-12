@@ -85,7 +85,7 @@ public class IndexAssessmentController extends IndexBaseController{
         mv.addObject("typeid", typeid);
         
         
-        loadNavigation(mv, requestContext,CH_XHGZ);
+        loadNavigation(mv, requestContext,CH_PXYJD);
         loadSysConfig(mv);
         return mv;
     }
@@ -114,7 +114,7 @@ public class IndexAssessmentController extends IndexBaseController{
         }
       
         mv.addObject("assessmentType", kgNewstype);
-        loadNavigation(mv, requestContext,CH_XHGZ);
+        loadNavigation(mv, requestContext,CH_PXYJD);
         loadAttriteAssessment(mv, requestContext,3);
         loadSysConfig(mv);
         return mv;

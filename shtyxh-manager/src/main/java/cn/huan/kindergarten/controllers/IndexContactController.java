@@ -27,7 +27,7 @@ public class IndexContactController extends IndexBaseController{
     public ModelAndView contact(HttpServletRequest request) {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/contact/contact");
     	 IRequest requestContext = createRequestContext(request);
-    	loadNavigation(mv, requestContext, CH_LXWM);
+    	loadNavigation(mv, requestContext, CH_XHGK);
     	
     	List<KgContact> contactList = iKgContactService.selectAll(requestContext);
     	Map<String ,String > map = new HashMap<String ,String >();

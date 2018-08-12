@@ -96,7 +96,7 @@ $(document).ready(function(){
 				<div class="vT_bidSearch_addon_block" style="margin-left:0;width:350px"><p>咨讯类别</p><select id="newstype" size=1 name="newstype" style="margin-top:8px;height:30px;line-height:24px">
 					<option value="" >全部</option>
 					
-						<#list kgNewstypeList as newstypeList>   
+						<#list typeList as newstypeList>   
 								    <option value="${newstypeList.id}">${newstypeList.typename}</option>
 					    </#list>   
 					

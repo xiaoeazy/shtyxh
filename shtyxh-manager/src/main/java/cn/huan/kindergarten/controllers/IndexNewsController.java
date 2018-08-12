@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,8 +90,8 @@ public class IndexNewsController extends IndexBaseController{
         if(searchparam!=null&&!("").equals(searchparam)) news.setNewstitle(searchparam);
         if(newstype!=null)   news.setTypeid(newstype);
         if(newssource!=null)   news.setSourceid(newssource);
-        if(dateissuestart!=null) news.setStartDate(CommonUtil.stringTodate10(dateissuestart+CommonUtil.STARTTIME));
-        if(dateissueend!=null) news.setEndDate(CommonUtil.stringTodate10(dateissueend+CommonUtil.ENDTIME));
+        if(StringUtils.isNotEmpty(dateissuestart)) news.setStartDate(CommonUtil.stringTodate10(dateissuestart+CommonUtil.STARTTIME));
+        if(StringUtils.isNotEmpty(dateissueend)) news.setEndDate(CommonUtil.stringTodate10(dateissueend+CommonUtil.ENDTIME));
         List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
         int count = iKgNewsService.adminQueryCount(requestContext, news);
         int allPageNum = count%limit==0?count/limit:count/limit+1;
@@ -102,6 +103,11 @@ public class IndexNewsController extends IndexBaseController{
         mv.addObject("page", page);
         mv.addObject("allPageNum",allPageNum);
         
+        KgType kt = new KgType();
+        kt.setParentid(3L);
+        List<KgType> typeList = iKgTypeService.select(requestContext, kt);
+        
+        mv.addObject("typeList", typeList);
         mv.addObject("searchparam",searchparam);
         mv.addObject("dateissuestart",dateissuestart);
         mv.addObject("dateissueend",dateissueend);
