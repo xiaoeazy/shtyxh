@@ -61,7 +61,16 @@ public class KgType extends BaseDTO {
      
      
 
-     public Integer getCount() {
+     public KgType() {
+		super();
+	}
+
+	public KgType(Long id) {
+		super();
+		this.id = id;
+	}
+
+	public Integer getCount() {
 		return count;
 	}
 

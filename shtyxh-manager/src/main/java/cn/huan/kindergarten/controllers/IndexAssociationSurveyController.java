@@ -178,7 +178,7 @@ public class IndexAssociationSurveyController extends IndexBaseController{
          return mv;
     }
 	
-	   //===个人 参与评估页面获取参与活动
+	   //==获取会员单位
     @RequestMapping(value = "/index/associationSurvey/loadHYDW")
     @ResponseBody
     public ExtStore loadHYDW(  KgMemberUnits memberUnits,HttpServletRequest request,

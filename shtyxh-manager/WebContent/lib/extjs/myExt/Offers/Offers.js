@@ -118,6 +118,7 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 				}],
 	        columns: [
 	            {header: "发布单位",  width:50,sortable: true,  dataIndex: 'publishunit',align:'center'},
+	            {header: "标题",  width:50,sortable: true,  dataIndex: 'title',align:'center'},
 	            {header: "联系人",  width:50,sortable: true,  dataIndex: 'contactperson',align:'center'},
 	            {header: "联系电话",  sortable: true,  dataIndex: 'contacttel',align:'center'},
 	            {header: "薪资标准",  width:50,sortable: true,  dataIndex: 'salary',align:'center'},

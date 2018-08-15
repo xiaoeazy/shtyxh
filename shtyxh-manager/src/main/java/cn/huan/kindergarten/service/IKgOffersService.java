@@ -11,6 +11,6 @@ public interface IKgOffersService extends IBaseService<KgOffers>, ProxySelf<IKgO
 
 	int adminQueryCount(IRequest request, KgOffers record);
 
-	List<KgOffers> selectByExample(IRequest request, KgOffers condition, Integer pageNum, Integer pageSize);
+	List<KgOffers> selectWithOtherInfo(IRequest request, KgOffers condition, Integer pageNum, Integer pageSize);
 
 }

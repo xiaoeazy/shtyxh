@@ -53,6 +53,14 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 					            maxLength:45  
 				  			},
 				  			{
+				          		fieldLabel:'标题<font color="red">*</font>',
+								allowBlank:false,
+								name: 'title',
+								blankText:'必须填写',
+								id:mainId+"title",
+					            maxLength:45  
+				  			},
+				  			{
 				          		fieldLabel:'联系人<font color="red">*</font>',
 								allowBlank:false,
 								name: 'contactperson',
@@ -148,10 +156,15 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 					afterRender:function(){
 						if(record!=null){
 				    		var publishunit= record.get("publishunit");
+				    		var title= record.get("title");
+				    		
 				    		var contactperson= record.get("contactperson");
 				    		var contacttel= record.get("contacttel");
 				    		var salary= record.get("salary");
+				    		
 				    		Ext.getCmp(mainId+"publishunit").setValue(publishunit);
+				    		Ext.getCmp(mainId+"title").setValue(title);
+				    		
 				    		Ext.getCmp(mainId+"contactperson").setValue(contactperson);
 				    		Ext.getCmp(mainId+"contacttel").setValue(contacttel);
 				    		Ext.getCmp(mainId+"salary").setValue(salary);
@@ -166,6 +179,7 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 	addorUpdateOffers : function(me,formpanel,mainId,parentStore,id,type,isAdd,tabName) {
 		
 		var publishunit =Ext.getCmp(mainId+"publishunit").getValue().trim();
+		var title =Ext.getCmp(mainId+"title").getValue().trim();
 		var contactperson =Ext.getCmp(mainId+"contactperson").getValue().trim();
 		var contacttel =Ext.getCmp(mainId+"contacttel").getValue().trim();
 		var salary =Ext.getCmp(mainId+"salary").getValue().trim();
@@ -173,6 +187,10 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 		var content = Ext.getCmp(mainId+"content").getEditor().getContent();
 		if(publishunit==""){
 			Ext.getCmp(mainId+"publishunit").markInvalid("发布单位不能为空！");
+			return;
+		}
+		if(title==""){
+			Ext.getCmp(mainId+"title").markInvalid("标题不能为空！");
 			return;
 		}
 		if(contactperson==null){
@@ -200,6 +218,7 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
                   headers: {'Content-Type':'application/json'},
                   params : JSON.stringify([{
                 	  __status : type,
+                	  title:title,
                 	  publishunit:publishunit,
                 	  contactperson:contactperson,
                 	  contacttel:contacttel,

@@ -22,9 +22,22 @@ public class KgOffers extends BaseDTO {
      public static final String FIELD_PUBLISHDATE = "publishdate";
 
 
-     @Id
+     public KgOffers() {
+		super();
+	}
+
+	public KgOffers(Long id) {
+		super();
+		this.id = id;
+	}
+
+	@Id
      @GeneratedValue
-     private String id;
+     private Long id;
+     
+     @NotEmpty
+     @Length(max = 45)
+     private String title;
 
      @NotEmpty
      @Length(max = 45)
@@ -46,15 +59,17 @@ public class KgOffers extends BaseDTO {
      private Date publishdate;
 
 
-     public void setId(String id){
-         this.id = id;
-     }
+   
 
-     public String getId(){
-         return id;
-     }
+     public Long getId() {
+		return id;
+	}
 
-     public void setPublishunit(String publishunit){
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setPublishunit(String publishunit){
          this.publishunit = publishunit;
      }
 
@@ -102,4 +117,14 @@ public class KgOffers extends BaseDTO {
          return publishdate;
      }
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+     
+     
      }

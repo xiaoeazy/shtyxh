@@ -26,7 +26,7 @@ import cn.huan.kindergarten.utils.CommonUtil;
 @Controller
 public class IndexNewsController extends IndexBaseController{
 	
-	
+	public static final Long offerId = 20L;
 	@Autowired
 	private IKgNewsService iKgNewsService;
 	@Autowired
@@ -62,6 +62,7 @@ public class IndexNewsController extends IndexBaseController{
         	kn.setCount(count);
         }
         
+        KgType offerType = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(20L));
         
         KgNews kn = new KgNews();
     	kn.setAttributeid("4");
@@ -72,6 +73,7 @@ public class IndexNewsController extends IndexBaseController{
     		mv.addObject("newsTop", null);
         mv.addObject("typeList", typeList);
         mv.addObject("sourceList",sourceList);
+        mv.addObject("offerType",offerType);
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,2);
         loadSysConfig(mv);

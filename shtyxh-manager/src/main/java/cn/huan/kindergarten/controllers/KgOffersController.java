@@ -71,7 +71,7 @@ import cn.huan.shtyxh.common.bean.ExtStore;
 //    		 dto.setSortname(map.get("property"));
 //    		 dto.setSortorder(map.get("direction"));
 //    	 }
-    	 List<KgOffers> list = service.selectByExample(requestContext, dto, page, limit);
+    	 List<KgOffers> list = service.selectWithOtherInfo(requestContext, dto, page, limit);
     	 int count = service.adminQueryCount(requestContext, dto);
     	 return new ExtStore(start, limit, count, list);
     }

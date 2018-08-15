@@ -28,7 +28,7 @@ public class KgOffersServiceImpl extends BaseServiceImpl<KgOffers> implements IK
 
 	@Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public List<KgOffers> selectByExample(IRequest request,  KgOffers condition ,Integer pageNum, Integer pageSize) {
+    public List<KgOffers> selectWithOtherInfo(IRequest request,  KgOffers condition ,Integer pageNum, Integer pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 //		Example e = new Example(KgOffers.class);
 //		e.setDistinct(false);

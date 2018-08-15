@@ -8,6 +8,7 @@
 <title>资讯中心_${webname}</title>
 <link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
 <link href="${base.contextPath}/lib/index/css/channel.css" rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/news/news.css" rel="stylesheet" type="text/css" />
 <script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
 <script language="javascript">
 
@@ -138,7 +139,7 @@ $(document).ready(function(){
 	<#if newsTop.thumbnail??>
 	     <div class="vT-cht-section-picnews mt13">
 			<a href="${base.contextPath}/index/newsDetail?id=${newsTop.id}"  target='_blank'  thumb="" alt="" text="">
-			<img src="${base.contextPath}${newsTop.thumbnail}"  border='0' alt='中华人民共和国政府采购法实施条例（中华人民共和国国务院令 第658号）' width="383px" height="237px" /></a>
+			<img src="${base.contextPath}${newsTop.thumbnail}"  border='0' alt='' width="383px" height="237px" /></a>
 		 </div>
 	 </#if>
 </#if>
@@ -173,7 +174,14 @@ $(document).ready(function(){
         </div>
     </div>
 	<!--left newslist end-->
-	
+	<!-- right start -->
+	<div class="main_right_block mt13">
+        <div class="main_right_cbl">
+	         <ul class="jyxtlinks mb15">
+					<li class="jyxtlinks sys0"><p><a href="${base.contextPath}/index/offers" target="_blank" alt="${offerType.typename}" title="${offerType.typename}">${offerType.typename}</a></p></li>
+			</ul>
+		</div>
+	</div>
     <div class="main_right_block mt13">
         <div class="main_right_cbl">
             <h2>分类总览</h2>
@@ -197,7 +205,7 @@ $(document).ready(function(){
                 </div>
         </div>
 
-
+		<!-- right end -->
     </div>
 </div>
 </div>
