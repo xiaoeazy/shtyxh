@@ -17,6 +17,7 @@ import com.huan.HTed.core.IRequest;
 import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgType;
+import cn.huan.kindergarten.exception.E404Excetion;
 import cn.huan.kindergarten.service.IKgNewsAttributeService;
 import cn.huan.kindergarten.service.IKgNewsService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
@@ -126,18 +127,21 @@ public class IndexNewsController extends IndexBaseController{
 	 @RequestMapping(value = "/index/newsTypeList")
 	    @ResponseBody
 	    public ModelAndView newsTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
-	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) {
+	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
 	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/news/newsTypeList");
 	        IRequest requestContext = createRequestContext(request);
+	        if(typeid==null)
+	    		throw new E404Excetion("请查看的网页不存在!"); 
+	        KgType kgNewstype = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(typeid));
+	        if(kgNewstype==null)
+	    		throw new E404Excetion("请查看的网页不存在!"); 
 	        KgNews news = new KgNews();
 	        news.setTypeid(typeid);
 	        int count = iKgNewsService.adminQueryCount(requestContext, news);
 	        int allPageNum = count%limit==0?count/limit:count/limit+1;
 	        if(count==0) allPageNum=1;
 	        List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
-	        KgType newsType = new KgType();
-	        newsType.setId(typeid);
-	        KgType kgNewstype = iKgTypeService.selectByPrimaryKey(requestContext, newsType);
+	      
 	        CommonUtil.judgeNewsTitleLength(list,33);
 	        mv.addObject("newsList", list);
 	        mv.addObject("page", page);
