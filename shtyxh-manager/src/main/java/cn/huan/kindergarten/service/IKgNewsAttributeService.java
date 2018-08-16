@@ -10,5 +10,6 @@ import cn.huan.kindergarten.dto.KgNewsAttribute;
 
 public interface IKgNewsAttributeService extends IBaseService<KgNewsAttribute>, ProxySelf<IKgNewsAttributeService>{
 	public int adminQueryCount(IRequest request,KgNewsAttribute record);
-	public void loadAttriteNews(ModelAndView mv,IRequest requestContext,int attributeSize);
+	public void loadAttriteNews(ModelAndView mv,IRequest requestContext,Long typeid,int attributeSize);
+	public void loadAttriteNews(ModelAndView mv, IRequest requestContext, int attributeSize);
 }

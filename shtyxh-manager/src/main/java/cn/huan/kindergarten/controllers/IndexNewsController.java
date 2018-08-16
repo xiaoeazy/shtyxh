@@ -1,5 +1,6 @@
 package cn.huan.kindergarten.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.huan.HTed.core.IRequest;
 
+import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgType;
@@ -45,8 +47,12 @@ public class IndexNewsController extends IndexBaseController{
         KgType kt = new KgType();
         kt.setParentid(3L);
         kt.setRelatetype(2);
+        //查询列表
+        List<Long> typeidList = new ArrayList<Long>();
+        
         List<KgType> typeList = iKgTypeService.select(requestContext, kt);
         for(KgType kn:typeList) {
+        	typeidList.add(kn.getId());
         	KgNews news = new KgNews();
         	news.setTypeid(kn.getId());
         	int count = iKgNewsService.adminQueryCount(requestContext, news);
@@ -59,29 +65,31 @@ public class IndexNewsController extends IndexBaseController{
         for(KgNewsSource kn:sourceList) {
         	KgNews news = new KgNews();
         	news.setSourceid(kn.getId());
-        	int count = iKgNewsService.adminQueryCount(requestContext, news);
+        	int count = iKgNewsService.adminQueryCount(requestContext, news,typeidList);
         	kn.setCount(count);
         }
         
-        KgType offerType = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(20L));
+        KgType offerType = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(offerId));
         
         KgNews kn = new KgNews();
     	kn.setAttributeid("4");
-    	List<KgNews> newsTop=iKgNewsService.selectWithOtherInfo(requestContext, kn, 1, 1);
-    	if(newsTop.size()!=0)
+    	List<KgNews> newsTop=iKgNewsService.selectByMap(requestContext, kn,typeidList, 1, 1);
+    	if(newsTop.size()!=0) {
+   	   		 if(("").equals(newsTop.get(0).getThumbnail())) {
+   	   			 kn.setThumbnail(SysConfig.nonePic);
+   	   		 }
     		mv.addObject("newsTop", newsTop.get(0));
-    	else
+    	}else
     		mv.addObject("newsTop", null);
         mv.addObject("typeList", typeList);
         mv.addObject("sourceList",sourceList);
         mv.addObject("offerType",offerType);
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
-        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,2);
         loadSysConfig(mv);
         return mv;
     }
 	
-	@RequestMapping(value = "/index/newsSearch")
+	@RequestMapping(value = "/index/news/search")
     @ResponseBody
     public ModelAndView newsSearch(String searchparam,String dateissuestart,String dateissueend , Long newstype,Long newssource,
     		 @RequestParam(defaultValue = DEFAULT_PAGE) int page, @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,
@@ -124,10 +132,10 @@ public class IndexNewsController extends IndexBaseController{
         return mv;
     }
 	
-	 @RequestMapping(value = "/index/newsTypeList")
+	 @RequestMapping(value = "/index/news/typeList")
 	    @ResponseBody
 	    public ModelAndView newsTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
-	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
+	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE_20) int limit,HttpServletRequest request) throws E404Excetion {
 	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/news/newsTypeList");
 	        IRequest requestContext = createRequestContext(request);
 	        if(typeid==null)
@@ -150,17 +158,24 @@ public class IndexNewsController extends IndexBaseController{
 	        mv.addObject("typeid", typeid);
 	        
 	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
-	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;
 	    }
 	 
-	 @RequestMapping(value = "/index/newsSourceList")
+	 @RequestMapping(value = "/index/news/sourceList")
 	    @ResponseBody
 	    public ModelAndView newsSourceList(Long sourceid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
-	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) {
+	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE_20) int limit,HttpServletRequest request) throws E404Excetion {
 	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/news/newsSourceList");
-	        IRequest requestContext = createRequestContext(request);
+	    	IRequest requestContext = createRequestContext(request);
+    	   if(sourceid==null)
+		    		throw new E404Excetion("请查看的网页不存在!"); 
+    	   KgNewsSource kgNewsSource = iKgNewsSourceService.selectByPrimaryKey(requestContext, new KgNewsSource(sourceid));
+    	   if(kgNewsSource==null)
+	    		throw new E404Excetion("请查看的网页不存在!"); 
+    	   
+	      
 	        KgNews news = new KgNews();
 	        news.setSourceid(sourceid);
 	        int count = iKgNewsService.adminQueryCount(requestContext, news);
@@ -168,9 +183,7 @@ public class IndexNewsController extends IndexBaseController{
 	        if(count==0) allPageNum=1;
 	        List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
 	        CommonUtil.judgeNewsTitleLength(list,33);
-	        KgNewsSource newsSource = new KgNewsSource();
-	        newsSource.setId(sourceid);
-	        KgNewsSource kgNewsSource = iKgNewsSourceService.selectByPrimaryKey(requestContext, newsSource);
+	       
 	        mv.addObject("newsList", list);
 	        mv.addObject("page", page);
 	        mv.addObject("allPageNum",allPageNum);
@@ -184,15 +197,17 @@ public class IndexNewsController extends IndexBaseController{
 	    }
 
 
-    @RequestMapping(value = "/index/newsDetail")
+    @RequestMapping(value = "/index/news/newsDetail")
     @ResponseBody
-    public ModelAndView newsDetail(Long id,HttpServletRequest request) {
+    public ModelAndView newsDetail(Long id,HttpServletRequest request) throws E404Excetion {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/news/newsDetail");
         IRequest requestContext = createRequestContext(request);
+        if(id==null)
+    		throw new E404Excetion("请查看的网页不存在!"); 
+        KgNews newsInfo = iKgNewsService.selectByPrimaryKey(requestContext, new KgNews(id));
+        if(newsInfo==null)
+    		throw new E404Excetion("请查看的网页不存在!"); 
         
-        KgNews news = new KgNews();
-        news.setId(id);
-        KgNews newsInfo = iKgNewsService.selectByPrimaryKey(requestContext, news);
         mv.addObject("newsInfo", newsInfo);
         
         KgType newsType = new KgType();
@@ -215,7 +230,7 @@ public class IndexNewsController extends IndexBaseController{
         
         
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
-        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
         loadSysConfig(mv);
         return mv;
     }

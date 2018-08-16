@@ -126,7 +126,7 @@ $(document).ready(function(){
 <#if newsTop??>
 	<div class="vF-cht-section-newsblock mt13">
            <div class="vT-zcfg-cgf-t">
-               <div class="vT-zcfg-cgf-t-pic"><a href="${base.contextPath}/index/newsDetail?id=${newsTop.id}" style="text-decoration:none">
+               <div class="vT-zcfg-cgf-t-pic"><a href="${base.contextPath}/index/news/newsDetail?id=${newsTop.id}" style="text-decoration:none">
                	<font style="font-weight:bold;font-size:30px;color:red">${newsTop.newstitle}</font></a>
                </div>
                 <p class="shuoming">&nbsp;&nbsp;&nbsp;&nbsp;</p> 
@@ -138,7 +138,7 @@ $(document).ready(function(){
       </div>
 	<#if newsTop.thumbnail??>
 	     <div class="vT-cht-section-picnews mt13">
-			<a href="${base.contextPath}/index/newsDetail?id=${newsTop.id}"  target='_blank'  thumb="" alt="" text="">
+			<a href="${base.contextPath}/index/news/newsDetail?id=${newsTop.id}"  target='_blank'  thumb="" alt="" text="">
 			<img src="${base.contextPath}${newsTop.thumbnail}"  border='0' alt='' width="383px" height="237px" /></a>
 		 </div>
 	 </#if>
@@ -157,14 +157,14 @@ $(document).ready(function(){
 			                 <div class="vF_t2_r1">
 			                    <div class="vF_tab unit2">
 			                        <div class="vF_title_bar2">
-			                          <h2 class="ui_til4_tab_u current2 word5"><a href="${base.contextPath}/index/newsTypeList?typeid=${typeList.id}" >${typeList.typename}</a></h2>
+			                          <h2 class="ui_til4_tab_u current2 word5"><a href="${base.contextPath}/index/news/typeList?typeid=${typeList.id}" >${typeList.typename}</a></h2>
 			                        </div>
 			                    </div>
 			                 </div>
 			
 			                 <ul class="c_list mt10 mb10 tab-con split" style="display:block">
 			                 	<#list typeList.newsList as newsList>   
-									<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a></li>
+									<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a></li>
 								</#list>
 		                	 </ul>
 			            </div>
@@ -188,7 +188,7 @@ $(document).ready(function(){
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list">
                 		<#list typeList as typeList> 
-							<li class="sorthead1"><a href="${base.contextPath}/index/newsTypeList?typeid=${typeList.id}"  target="_blank" title="${typeList.typename}">${typeList.typename}</a>(${typeList.count})</li>
+							<li class="sorthead1"><a href="${base.contextPath}/index/news/typeList?typeid=${typeList.id}"  target="_blank" title="${typeList.typename}">${typeList.typename}</a>(${typeList.count})</li>
 						</#list> 
                 </ul>
                 </div>
@@ -199,7 +199,7 @@ $(document).ready(function(){
             <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list">
 						<#list sourceList as sourceList> 
-							<li class="sorthead1"><a href="${base.contextPath}/index/newsSourceList?sourceid=${sourceList.id}"  target="_blank" title="sourceList.soucename">${sourceList.sourcename}</a>(${sourceList.count})</li>
+							<li class="sorthead1"><a href="${base.contextPath}/index/news/sourceList?sourceid=${sourceList.id}"  target="_blank" title="sourceList.soucename">${sourceList.sourcename}</a>(${sourceList.count})</li>
 						</#list> 
                 </ul>
                 </div>

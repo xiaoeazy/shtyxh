@@ -46,7 +46,7 @@ public class IndexOffersController extends IndexBaseController{
 	        KgType  kt = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(offerId));
 	        mv.addObject("kgType", kt);
 	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
-	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kt.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;
 	    }
@@ -65,9 +65,9 @@ public class IndexOffersController extends IndexBaseController{
 	        return new ExtStore(page, pageSize, size, list);
 	    }
 
-    @RequestMapping(value = "/index/offersDetail")
+    @RequestMapping(value = "/index/offers/Detail")
     @ResponseBody
-    public ModelAndView newsDetail(Long id,HttpServletRequest request) {
+    public ModelAndView offersDetail(Long id,HttpServletRequest request) {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/offers/offersDetail");
         IRequest requestContext = createRequestContext(request);
         
@@ -77,7 +77,9 @@ public class IndexOffersController extends IndexBaseController{
         mv.addObject("offersInfo", offersInfo);
         
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
-        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+        
+        KgType  kt = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(offerId));
+        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kt.getId(),3);
         loadSysConfig(mv);
         return mv;
     }

@@ -92,7 +92,7 @@
 						              valign: 'middle',
 						              formatter:function(value,row,index) {
 						            	  var path ="${base.contextPath}";
-						            	  return ['<a href="'+path+'/index/offersDetail?id='+row.id+'">'+value+'</a>'];
+						            	  return ['<a href="'+path+'/index/offers/offersDetail?id='+row.id+'">'+value+'</a>'];
 						              }
 						          }, {
 						              field: 'salary',
@@ -136,7 +136,7 @@
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
                 	<#list rightAttributeList.newsList as newsList>
-                		<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+                		<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
                 	</#list>
 				 </ul>
                 </div>
@@ -147,7 +147,7 @@
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
 					<#list rightAttributeList.newsList as newsList>
-						<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+						<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
 					</#list>
                 </ul>
                 </div>

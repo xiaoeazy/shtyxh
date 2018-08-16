@@ -370,7 +370,7 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 });
 
 function yulanNews(id){
-	var url =appName+"/index/newsDetail?id="+id;
+	var url =appName+"/index/news/newsDetail?id="+id;
 	window.open(url);
 }
 

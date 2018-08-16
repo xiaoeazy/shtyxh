@@ -224,7 +224,7 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 });
 
 function yulanOffers(id){
-	var url =appName+"/index/newsDetail?id="+id;
+	var url =appName+"/index/offers/newsDetail?id="+id;
 	window.open(url);
 }
 

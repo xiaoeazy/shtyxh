@@ -77,12 +77,30 @@
     </select>
     
     
-       <select id="selectByTypeId" resultMap="OtherResultMap"  parameterType="java.util.List">
-        	select a.* from kg_news a where typeid in 
-            <foreach collection="list" item="typeId" index="index"
-	            open="(" close=")" separator=",">
-	            #{typeId}
-	        </foreach>
+       <select id="selectByMap" resultMap="OtherResultMap"  parameterType="java.util.Map">
+        	select a.* from kg_news a
+        	<where>
+       			<if test="typeids != null">
+		        	a.typeid in
+		        	 <foreach collection="typeids" item="typeId" index="index"
+			            open="(" close=")" separator=",">
+			            #{typeId}
+			       	 </foreach>
+			     </if>
+		       	 <if test ="news!=null">
+			       	 <if test="news.sourceid!=null and news.sourceid !=''">
+	           			AND a.sourceId = #{news.sourceid}
+	           		</if>
+	           		<if test="news.indexshow!=null  and news.indexshow !='' ">
+	           			AND a.indexshow = #{news.indexshow}
+	           		</if>
+	           		<if test="news.sourceid!=null and news.sourceid !=''">
+	           			AND a.sourceId = #{news.sourceid}
+	           		</if>
+		       	 </if>
+       	 		
+        	</where> 
+           
           	ORDER BY a.sequence DESC, a.createDate DESC
     </select>
     
@@ -111,6 +129,42 @@
            		<if test="endDate!=null">
            		 	<![CDATA[ AND createdate <= #{endDate} ]]>
            		</if>
+           		
+           </where>
+    </select>
+    
+      <select id="adminQueryCountByMap" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from kg_news 
+           <where>
+           		<if test="news.newstitle != null and news.newstitle !=''">
+           			AND newsTitle  like CONCAT('%',#{news.newstitle},'%') 
+           		</if>
+           		<if test="typeid != null and typeid !=''">
+           			AND typeId = #{typeid}
+           		</if>
+           		<if test="news.attributeid != null and news.attributeid !='' ">
+           		 	AND FIND_IN_SET(#{news.attributeid},attributeId) 
+           		</if>
+           		<if test="news.indexshow!=null  and news.indexshow !='' ">
+           			AND indexshow = #{news.indexshow}
+           		</if>
+           		<if test="news.sourceid!=null and news.sourceid !=''">
+           			AND sourceId = #{news.sourceid}
+           		</if>
+           		<if test="news.startDate!=null">
+           			<![CDATA[AND createdate >= #{news.startDate} ]]>
+           		</if>
+           		<if test="news.endDate!=null">
+           		 	<![CDATA[ AND createdate <= #{news.endDate} ]]>
+           		</if>
+           		
+           		<if test="typeids!=null">
+		            and typeId in
+		            <foreach collection="typeids" item="item" separator=","
+		                open="(" close=")">
+		                #{item}
+		            </foreach>
+		        </if>
            		
            </where>
     </select>

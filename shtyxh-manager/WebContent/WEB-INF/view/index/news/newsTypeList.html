@@ -34,7 +34,7 @@
 		
 		
 			<#list newsList as news>   
-		               <li><a href="${base.contextPath}/index/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newsSimpleTitle}</a>
+		               <li><a href="${base.contextPath}/index/news/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newsSimpleTitle}</a>
 		     				 <span> ${news.createdate?string('yyyy-MM-dd HH:mm:ss')} </span>
 					    </li> 
 		    </#list>   
@@ -57,7 +57,7 @@
 	        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',  
 	        onPageChange: function (num, type) {
 	        	if(type=="change"){
-	 	            var path ="newsTypeList?typeid=${typeid}&page="+num;
+	 	            var path ="typeList?typeid=${typeid}&page="+num;
 	 	            window.location.href=path;
 	        	}
 	        }
@@ -77,7 +77,7 @@
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
                 	<#list rightAttributeList.newsList as newsList>
-                		<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+                		<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
                 	</#list>
 				 </ul>
                 </div>
@@ -88,7 +88,7 @@
                 <div class="vT-chs-section-content-con">
                 <ul class="vT-chs-section-content-list mb10">
 					<#list rightAttributeList.newsList as newsList>
-						<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+						<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
 					</#list>
                 </ul>
                 </div>

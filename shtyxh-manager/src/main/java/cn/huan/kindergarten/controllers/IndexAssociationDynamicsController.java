@@ -30,7 +30,7 @@ import cn.huan.kindergarten.utils.CommonUtil;
  *
  */
 @Controller
-public class IndexAssociationController extends IndexBaseController{
+public class IndexAssociationDynamicsController extends IndexBaseController{
 	public static final Long xhdtId = 6L ;//协会动态id;
 	
 	@Autowired
@@ -51,6 +51,7 @@ public class IndexAssociationController extends IndexBaseController{
         kt.setParentid(xhdtId);
         kt.setRelatetype(2);
         List<KgType> typeList = iKgTypeService.select(requestContext, kt);
+        //查询列表
         List<Long> typeidList = new ArrayList<Long>();
         for(KgType kn:typeList) {
         	typeidList.add(kn.getId());
@@ -63,10 +64,13 @@ public class IndexAssociationController extends IndexBaseController{
         }
         
          //查询头部9条文章
-	   	 List<KgNews> topNewsList =iKgNewsService.selectByTypeId(requestContext, typeidList, 1, 9);
+	   	 List<KgNews> topNewsList =iKgNewsService.selectByMap(requestContext, null,typeidList, 1, 9);
     	 CommonUtil.judgeNewsTitleLength(topNewsList,17);
     	 
-         List<KgNews> newsThumbNailList =iKgNewsService.select(requestContext, null, 1, 5);
+    	 KgNews ThumbNews= new KgNews();
+    	 ThumbNews.setIndexshow("Y");
+    	 //查询缩略图
+         List<KgNews> newsThumbNailList =iKgNewsService.selectByMap(requestContext, ThumbNews,typeidList, 1, 5);
 	   	 for(KgNews kn:newsThumbNailList) {
 	   		 if(("").equals(kn.getThumbnail())) {
 	   			 kn.setThumbnail(SysConfig.nonePic);
@@ -79,7 +83,6 @@ public class IndexAssociationController extends IndexBaseController{
         
         mv.addObject("topNewsList",topNewsList);
         loadNavigation(mv, requestContext,IndexController.CH_XHDT);
-        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,2);
         loadSysConfig(mv);
         return mv;
     }
@@ -87,7 +90,7 @@ public class IndexAssociationController extends IndexBaseController{
 	 @RequestMapping(value = {"/index/xhdt/typeList"})
 	    @ResponseBody
 	    public ModelAndView associationDynamicsTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
-	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
+	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE_20) int limit,HttpServletRequest request) throws E404Excetion {
 	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/associationDynamics/associationDynamicsTypeList");
 	    	IRequest requestContext = createRequestContext(request);
 	    	if(typeid==null)
@@ -109,7 +112,7 @@ public class IndexAssociationController extends IndexBaseController{
 	        mv.addObject("kgtype", kgtype);
 	        
 	        loadNavigation(mv, requestContext,IndexController.CH_XHDT);
-	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgtype.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;
 	    }
@@ -144,7 +147,7 @@ public class IndexAssociationController extends IndexBaseController{
 	        
 	        
 	        loadNavigation(mv, requestContext,IndexController.CH_XHDT);
-	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;
 	    }

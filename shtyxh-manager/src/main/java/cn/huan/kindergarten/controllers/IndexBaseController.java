@@ -28,6 +28,8 @@ public class IndexBaseController extends BaseController{
 	// 默认的登录页
     public static final String VIEW_LOGIN = "/index/loginPage";
     
+    protected static final String DEFAULT_PAGE_SIZE_20 = "20";
+    
     public static final String  CH_NULL = "NULL";//无
 	public static final String  CH_INDEX = "CH_INDEX";//首页
 	public static final String  CH_XHGK = "CH_XHGK";//协会概况
