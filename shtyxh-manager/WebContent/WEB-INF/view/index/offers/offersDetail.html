@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>${offersInfo.title!}_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/detail.css"
+	rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/offers/offers.js"></script>
+</head>
+<body id="detail">
+	<#include "../../include/navigation.html">
+
+
+	<div class="main">
+		<div class="main_container">
+
+			<div class="vF_deail_currentloc mt10">
+		        <p>当前位置：
+		                <a href="${base.contextPath}/index/news" title="资讯中心" class="CurrChnlCls">资讯中心</a>&nbsp;&raquo;&nbsp;
+		                <a href="../" title="中标公告" class="CurrChnlCls">中标公告</a></p>
+		    </div>
+
+			<div class="vF_deail_maincontent">
+
+				<div class="vF_detail_main">
+						
+						   <div class="vF_detail_header"><h2 class="tc">${offersInfo.title!}</h2>
+           						 <p class="tc"><span id="pubTime"></span> <span id="shareTo"></span></p>
+           				   </div>
+							<!--contentTable-->
+							<div class='table'>
+								<table width='600' border='0' cellspacing='1' bgcolor='#bfbfbf' style='text-align:left;'>
+									<tr>
+										<td colspan='4'><b>招聘信息：</b></td>
+									</tr>
+									<tr>
+										<td class='title' width='128'>招聘名称</td><td colspan='3' width='430'>${offersInfo.title!}</td>
+									</tr>
+									<tr>
+										<td class='title'>薪资</td><td colspan='3'>${offersInfo.salary!}</td>
+									</tr>
+									<tr>
+										<td class='title'>发布单位</td><td width='168'>${offersInfo.publishunit!}</td>
+										<td class='title' width='128'>公告时间</td><td width='168'>${offersInfo.publishdate?string('yyyy-MM-dd HH:mm:ss')}</td>
+									</tr>
+									
+								
+									<tr>
+										<td colspan="4"><b>联系人及联系方式：</b></td></tr>
+									<tr>
+										<td class='title'>联系人</td><td colspan='3'>${offersInfo.contactperson!}</td>
+									</tr>
+									<tr>
+										<td class='title'>联系电话</td><td colspan='3'>${offersInfo.contacttel!}</td>
+									</tr>
+								</table>
+							</div>
+<!--contentTable-->
+							
+							
+							<div class="vF_detail_content_container">
+				            <div class="vF_detail_content">
+				               	${offersInfo.content!}
+				            </div>
+				        </div><!--vF_detail_content_container-->
+				</div>
+				
+				
+				
+				
+				
+				
+				
+			</div>
+		</div>
+	</div>
+	<#include "../../include/footer.html">
+</body>
+</html>

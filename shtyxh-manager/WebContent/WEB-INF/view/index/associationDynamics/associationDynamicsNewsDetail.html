@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>${newsInfo.newstitle}_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
+<script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+</head>
+<body id="detail">
+<#include "../../include/navigation.html">
+
+
+<div class="main">
+<div class="main_container">
+
+
+
+<div class="main_left_block mt13">
+<div class="wz_block">
+    <div class="vF_deail_currentloc">
+         <p>当前位置：<a href="${base.contextPath}/index/xhdt" title="协会活动" class="CurrChnlCls">协会动态</a>
+          &nbsp;&raquo;&nbsp;<a href="${base.contextPath}/index/xhdt/typeList?typeid=${kgNewstype.id}" title="${kgNewstype.typename}" class="CurrChnlCls">${kgNewstype.typename}</a>
+           &nbsp;&raquo;&nbsp;${newsInfo.newstitle}
+        </p>
+    </div>
+    <div class="vF_deail_maincontent">
+
+<div class="vF_detail_main">
+            <div class="vF_detail_header">
+            <h2 class="tc">${newsInfo.newstitle}&nbsp;</h2>
+            <p class="tc">
+            	<span id="pubTime">${newsInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 
+            	<#if kgNewsSource.id!=1>来源：<span id="sourceName">${kgNewsSource.sourcename}</span> </#if>
+            	</p>
+            </div>
+            <div class="vF_detail_content">
+                ${newsInfo.content}&nbsp;
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="vF_detail_relcontent mt13">
+    <h2><p>相关文章</p></h2>
+    <div class="vF_detail_relcontent_lst">
+        <ul class="c_list_tat">
+					<#list linkNewsList as linkNewsList>
+						<li><a href="${base.contextPath}/index/newsDetail?id=${linkNewsList.id}" target="_blank" title="${linkNewsList.newstitle}">${linkNewsList.newsSimpleTitle}</a></li>
+					</#list>
+        </ul>
+    </div>
+</div>
+
+</div>
+</div>
+
+    <div class="main_right_block" style="margin-top:43px">
+
+
+
+
+<!--OTsidebar-->
+	<#list rightAttributeList as rightAttributeList>
+		<#if rightAttributeList_index = 0>
+			<div class="main_right_cbl " style="margin-top:4px">
+            	<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+                	<#list rightAttributeList.newsList as newsList>
+                		<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+                	</#list>
+				 </ul>
+                </div>
+       		 </div>
+		<#else>
+			<div class="main_right_cbl mt13">
+          		<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+					<#list rightAttributeList.newsList as newsList>
+						<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+					</#list>
+                </ul>
+                </div>
+        	</div>
+		</#if>
+	</#list>
+        
+
+        
+<!--OTsidebar-->
+        </div>
+    </div>
+</div>
+</div>
+<#include "../../include/footer.html">
+</body>
+</html>

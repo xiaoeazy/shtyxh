@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>资讯中心_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/channel.css"
+	rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+</head>
+<body id="zcfg">
+	<#include "../../include/navigation.html">
+
+	<div class="main">
+		<div class="main_container">
+
+
+			<div class="main_topic_block mt13">
+				<div class="picnews">
+					<div class="vT_t1 picnews flexslider" id="demo02">
+						<ul class="slides">
+							<#list newsThumbNailList as newsThumbNailList> 
+								<#if newsThumbNailList_index==0>
+									<li>
+										<div class="word_bg">
+											<p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newsSimpleTitle}</p>
+										</div>
+										<div class="img">
+											<a
+												href="${base.contextPath}/index/xhdt/newsDetail?id=${newsThumbNailList.id}"
+												target='_blank' thumb="" alt="" text=""><img
+												src="${base.contextPath}${newsThumbNailList.thumbnail}"
+												border='0' width="390px" height="285px"
+												alt='${newsThumbNailList.newstitle}'
+												title='${newsThumbNailList.newstitle}' /></a>
+										</div>
+									</li>
+								<#else>
+									<li style="display: none">
+										<div class="word_bg">
+											<p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newsSimpleTitle}</p>
+										</div>
+										<div class="img">
+											<a
+												href="${base.contextPath}/index/xhdt/newsDetail?id=${newsThumbNailList.id}"
+												target='_blank' thumb="" alt="" text=""><img
+												src="${base.contextPath}${newsThumbNailList.thumbnail}"
+												border='0' width="390px" height="285px"
+												alt='${newsThumbNailList.newstitle}'
+												title='${newsThumbNailList.newstitle}' /></a>
+										</div>
+									</li>
+								</#if> 
+							</#list>
+						</ul>
+					</div>
+				</div>
+				<div class="txtnews">
+
+					<div class="vT-cht-section-newsblock">
+						<!--top block content-->
+						<div class="vT-cht-xw">
+							<div class="vT-cht-xw-topic">
+									<#list topNewsList as topNewsList> 
+										<#if topNewsList_index==0>
+											<h1>
+												<a href="${base.contextPath}/index/xhdt/newsDetail?id=${topNewsList.id}" target="_blank"
+													title="${topNewsList.newstitle}">${topNewsList.newstitle}</a>
+											</h1>
+											<p>
+												${topNewsList.summary}
+												<a href="${base.contextPath}/index/xhdt/newsDetail?id=${topNewsList.id}" target="_blank"
+													title='${topNewsList.newstitle}'>[详细内容]</a>
+											</p>
+											<#break>
+										</#if>
+									</#list>
+							</div>
+							<div class="vT-cht-xw-more">
+								<div class="vT-cht-xw-more-con">
+									<ul class="xw-more-list">
+										<#list topNewsList as topNewsList> 
+											<#if  (topNewsList_index>0&& topNewsList_index<5) >
+											<li><a href="${base.contextPath}/index/xhdt/newsDetail?id=${topNewsList.id}"
+												target="_blank" title="${topNewsList.newstitle}">${topNewsList.newsSimpleTitle}</a></li>
+											</#if>
+										</#list>
+
+									</ul>
+								</div>
+								<div class="vT-cht-xw-more-con ml15">
+									<ul class="xw-more-list">
+										<#list topNewsList as topNewsList> 
+											<#if  (topNewsList_index>=5) >
+										<li><a href="${base.contextPath}/index/xhdt/newsDetail?id=${topNewsList.id}"
+											target="_blank" title="${topNewsList.newstitle}">${topNewsList.newsSimpleTitle}</a></li>
+										</#if>
+										</#list>
+
+									</ul>
+
+								</div>
+							</div>
+						</div>
+						<!--top block content-->
+					</div>
+				</div>
+			</div>
+			<!--left newslist start-->
+			<div class="main_left_block mt13">
+				<div class="wz_block">
+
+					<#list typeList as typeList>
+					<div class="newslist_bl_nor">
+						<div class="newslist">
+							<div class="vF_t2">
+								<div class="vF_t2_r1">
+									<div class="vF_tab unit2">
+										<div class="vF_title_bar2">
+											<h2 class="ui_til4_tab_u current2 word5">
+												<a
+													href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}">${typeList.typename}</a>
+											</h2>
+										</div>
+									</div>
+								</div>
+
+								<ul class="c_list mt10 mb10 tab-con split"
+									style="display: block">
+									<#list typeList.newsList as newsList>
+									<li><a
+										href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}"
+										target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a></li>
+									</#list>
+								</ul>
+							</div>
+						</div>
+					</div>
+					</#list>
+				</div>
+			</div>
+			<!--left newslist end-->
+			<!-- right start -->
+			
+			<div class="main_right_block mt13">
+				<div class="main_right_cbl">
+					<h2>分类总览</h2>
+					<div class="vT-chs-section-content-con">
+						<ul class="vT-chs-section-content-list">
+							<#list typeList as typeList>
+							<li class="sorthead1"><a
+								href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}"
+								target="_blank" title="${typeList.typename}">${typeList.typename}</a>(${typeList.count})</li>
+							</#list>
+						</ul>
+					</div>
+				</div>
+
+				<!-- right end -->
+			</div>
+		</div>
+	</div>
+	<#include "../../include/footer.html">
+</body>
+<script language="javascript"
+	src="${base.contextPath}/lib/index/js/channel.js"></script>
+</html>
