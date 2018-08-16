@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.huan.HTed.core.IRequest;
+import com.huan.HTed.core.exception.Base404Exception;
 import com.huan.HTed.core.exception.BaseException;
 import com.huan.HTed.core.exception.TokenException;
 import com.huan.HTed.core.impl.RequestHelper;
@@ -177,6 +178,11 @@ public class BaseController {
             return res;
         } else {
             ModelAndView view = new ModelAndView("error");
+            if (thr instanceof Base404Exception) {
+            	view = new ModelAndView("404");
+                view.addObject("message", thr.getMessage());
+                return view;
+            }
             if (thr instanceof BaseException) {
                 BaseException be = (BaseException) thr;
                 Locale locale = RequestContextUtils.getLocale(request);

@@ -31,6 +31,11 @@ public class KgNewsServiceImpl extends BaseServiceImpl<KgNews> implements IKgNew
 		PageHelper.startPage(pageNum, pageSize);
         return kgNewsMapper.selectWithOtherInfo( condition);
     }
+	@Override
+	public List<KgNews> selectByTypeId(IRequest request,  List<Long> typeids ,Integer pageNum, Integer pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+        return kgNewsMapper.selectByTypeId( typeids);
+    }
 	
 	public int adminQueryCount(IRequest request,KgNews record) {
 		return  kgNewsMapper.adminQueryCount(record);

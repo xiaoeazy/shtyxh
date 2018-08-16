@@ -131,28 +131,34 @@
 				<div class="txtnews">
 					<div class="txtnews_topic">
 						<p>
-							<#list newsList as newsList> <#if newsList_index==0>
-							<a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
-								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
-							</#if> </#list>
+							<#list newsList as newsList> 
+								<#if newsList_index==0>
+									<a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
+										target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+									<#break>
+								</#if> 
+							</#list>
 						</p>
 					</div>
 					<div class="txtnews_list_contianer">
 						<ul class="txtnews_list">
-							<#list newsList as newsList> <#if (newsList_index>0
-							&& newsList_index<8) >
+							<#list newsList as newsList> 
+							<#if (newsList_index>0&& newsList_index<8) >
 							<li><a
 								href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
 								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
-							</#if> </#list>
+							</#if> 
+							</#list>
 						</ul>
 						<ul class="txtnews_list">
-							<#list newsList as newsList> <#if (newsList_index>=8)
-							>
-							<li><a
-								href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
-								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
-							</#if> </#list>
+							<#list newsList as newsList> 
+								<#if (newsList_index>=8)>
+									<li><a
+									href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
+									target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+									</li>
+								</#if> 
+							</#list>
 						</ul>
 					</div>
 				</div>

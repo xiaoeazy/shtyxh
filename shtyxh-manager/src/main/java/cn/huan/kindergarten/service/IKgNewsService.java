@@ -14,4 +14,6 @@ public interface IKgNewsService extends IBaseService<KgNews>, ProxySelf<IKgNewsS
 	 public int adminQueryCount(IRequest request,KgNews record);
 	 
 	 public void adminDelete(IRequest request, String webPath , List<KgNews> dto) ;
+
+	 public List<KgNews> selectByTypeId(IRequest request, List<Long> typeids, Integer pageNum, Integer pageSize);
 }

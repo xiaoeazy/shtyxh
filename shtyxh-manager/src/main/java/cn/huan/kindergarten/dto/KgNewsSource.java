@@ -33,7 +33,18 @@ public class KgNewsSource extends BaseDTO {
      private Integer count ;
 
 
-     public void setId(Long id){
+     public KgNewsSource() {
+		super();
+	}
+     
+
+	public KgNewsSource(Long id) {
+		super();
+		this.id = id;
+	}
+
+
+	public void setId(Long id){
          this.id = id;
      }
 

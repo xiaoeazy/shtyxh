@@ -76,6 +76,17 @@
            
     </select>
     
+    
+       <select id="selectByTypeId" resultMap="OtherResultMap"  parameterType="java.util.List">
+        	select a.* from kg_news a where typeid in 
+            <foreach collection="list" item="typeId" index="index"
+	            open="(" close=")" separator=",">
+	            #{typeId}
+	        </foreach>
+          	ORDER BY a.sequence DESC, a.createDate DESC
+    </select>
+    
+    
    <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="cn.huan.kindergarten.dto.KgNews">
         select count(1) from kg_news 
            <where>

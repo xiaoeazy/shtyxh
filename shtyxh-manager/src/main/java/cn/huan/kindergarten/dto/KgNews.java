@@ -78,7 +78,20 @@ public class KgNews extends BaseDTO {
 
      
 
-     public String getNewsSimpleTitle() {
+     public KgNews() {
+		super();
+	}
+     
+     
+
+	public KgNews(Long id) {
+		super();
+		this.id = id;
+	}
+
+
+
+	public String getNewsSimpleTitle() {
 		return newsSimpleTitle;
 	}
 
