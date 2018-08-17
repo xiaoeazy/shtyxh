@@ -69,50 +69,52 @@ public class IndexController extends IndexBaseController{
     	 List<KgDownload> downloadList = iKgDownloadService.select(requestContext, kl, 1, 4);
     	 List<KgCarousel> carouselList =iKgCarouselService.select(requestContext, kc, 1, 5);
     	
-    	 //查询13条文章
-    	 KgNews KgNews = new KgNews();
-    	 KgNews.setSortname("sequence");
-    	 KgNews.setSortorder("desc");
-    	 List<KgNews> newsList =iKgNewsService.select(requestContext, KgNews, 1, 13);
-    	 CommonUtil.judgeNewsTitleLength(newsList,17);
-    	 
-//    	 List<KgNews> newsList2 =iKgNewsService.select(requestContext, null, 2, 6);
-//    	 CommonUtil.judgeNewsTitleLength(newsList2,17);
-    	 //查询小轮播图
-    	 KgNews.setIndexshow("Y");
-    	 List<KgNews> newsThumbNailList =iKgNewsService.select(requestContext, KgNews, 1, 5);
-    	 for(KgNews kn:newsThumbNailList) {
-    		 if(("").equals(kn.getThumbnail())) {
-    			 kn.setThumbnail(SysConfig.nonePic);
-    		 }
-    	 }
-    	 CommonUtil.judgeNewsTitleLength(newsThumbNailList,17);
-    	 
     	 mv.addObject("downloadList",downloadList);
     	 mv.addObject("carouselList",carouselList);
-    	 mv.addObject("newsList",newsList);
-    	 mv.addObject("newsThumbNailList",newsThumbNailList);
     	 
-//    	 List<KgAssessmentActivity> assessmentList = iKgAssessmentActivityService.select(requestContext, null, 1, 10);
-//    	 CommonUtil.judgeAssessmentActivityTitleLength(assessmentList,22);
-//    	 mv.addObject("assessmentList",assessmentList);
     	 //类型入口
     	 KgType kne = new KgType();
     	 kne.setShowentrance(true);
     	 KgType knea = iKgTypeService.selectOne(requestContext, kne);
     	 mv.addObject("typeEntranceShow",knea);
-    	 //公告通知
+    	 //协会动态
     	 KgType kn = new KgType();
-    	 kn.setShowindex(true);
-    	 KgType knt = iKgTypeService.selectOne(requestContext, kn);
-    	 if(knt!=null) {
-    		 KgNews kns = new KgNews();
-    		 kns.setTypeid(knt.getId());
-    		 List<KgNews> indexShowTypeNews =iKgNewsService.select(requestContext, kns, 1, 5);
-    		 knt.setNewsList(indexShowTypeNews);
+    	 kn.setParentid(XHDT_ID);
+    	 List<KgType> kntList = iKgTypeService.select(requestContext, kn);
+		 for(KgType kt :kntList){
+			 KgNews kns = new KgNews();
+    		 kns.setTypeid(kt.getId());
+    		 List<KgNews> indexShowTypeNews =iKgNewsService.selectWithOtherInfo(requestContext, kns, 1, 5);
+    		 kt.setNewsList(indexShowTypeNews);
     		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,17);
-    	 }
-    	 mv.addObject("typeNewsShow",knt);
+		 }
+    	 
+    	 //资讯中心
+    	 KgType kn3 = new KgType();
+    	 kn3.setParentid(ZXZX_ID);
+    	 List<KgType> knt3list = iKgTypeService.select(requestContext, kn3,1,3);
+		 for(KgType kt:knt3list) {
+			 KgNews kns = new KgNews();
+    		 kns.setTypeid(kt.getId());
+    		 List<KgNews> indexShowTypeNews =iKgNewsService.selectWithOtherInfo(requestContext, kns, 1, 2);
+    		 kt.setNewsList(indexShowTypeNews);
+    		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,10);
+		 }
+    	 mv.addObject("typeZxzxShowList",knt3list);
+    	 mv.addObject("typeXHDTShowList",kntList);
+    	 
+    	 //培训与鉴定
+    	 KgType kn4 = new KgType();
+    	 kn4.setParentid(PXYJD_ID);
+    	 List<KgType> knt4list = iKgTypeService.select(requestContext, kn4);
+    	 for(KgType kt:knt4list) {
+    		 KgType childKt = new KgType();
+    		 childKt.setParentid(kt.getId());
+    		 List<KgType> childTypeList = iKgTypeService.select(requestContext, childKt);
+    		 kt.setChildType(childTypeList);
+		 }
+    	 mv.addObject("typePxyjdShowList",knt4list);
+    	 
     	 loadNavigation(mv, requestContext, CH_INDEX);
     	 loadSysConfig(mv);
          return mv;

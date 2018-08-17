@@ -38,6 +38,16 @@ public class IndexBaseController extends BaseController{
 	public static final String  CH_DCYYJ = "CH_DCYYJ";//调查与研究
 	public static final String  CH_XHDT = "CH_XHDT";//协会动态
 	public static final String  CH_DJHD = "CH_DJHD";//党建活动
+	
+	public static final Long INDEX_ID = 1L;
+	public static final Long XHGK_ID = 2L;
+	public static final Long ZXZX_ID = 3L;
+	public static final Long PXYJD_ID = 4L;
+	public static final Long DCYYJ_ID = 5L;
+	public static final Long XHDT_ID = 6L;
+	public static final Long DJHD_ID = 7L;
+	public static final Long OFFER_ID = 20L;
+	
 	@Autowired
 	private IKgTypeService iKgTypeService;
 	@Autowired

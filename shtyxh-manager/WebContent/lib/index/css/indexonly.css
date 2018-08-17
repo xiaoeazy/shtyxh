@@ -180,7 +180,7 @@ body{background:#f0f0f0;}
 
 
 .vF_banner{width:698px;height:98px;background:red}
-.bx_log{background:url(../img/sys_gg_bg.gif) no-repeat top left #2b7ecc;height:60px}
+.bx_log{background:url(../img/index/sys_gg_bg.gif) no-repeat top left #2b7ecc;height:60px}
 
 
 /*检索*/
@@ -207,6 +207,9 @@ body{background:#f0f0f0;}
 .vF_t3{width:628px;margin:0 auto;}
 .vF_title_bar3 { height:45px;position:relative;background:#fff;border-bottom:1px solid #e1e1e1}
 .vF_title_bar3 h2 {color:#005495;float:left; line-height:45px;  text-align:center; font-size:18px;font-weight:bolder;width:120px;}
+
+.vF_title_bar3 .titleright {float:right;}
+
 .vF_title_bar3 h2 a{color:#333;text-decoration:none;font-size:18px;line-height:45px;}
 .vF_title_bar3 p{line-height:45px;margin-left:15px;float:left}
 .vF_title_bar3 ul{float:left;width:310px;}
@@ -273,6 +276,29 @@ body{background:#f0f0f0;}
 .main_right_cbl ul.zjsdlinks li a,.main_right_cbl ul.zjsdpic li p a{text-decoration:none;color:#333}
 .main_right_cbl ul.zjsdlinks li a:hover,.main_right_cbl ul.zjsdpic li p a:hover{text-decoration:underline;color:#ba2636}
 .main_right_cbl ul.zjsdlinks li{height:30px;line-height:30px;overflow:hidden;background:url(../img/spr.gif) no-repeat; background-position: 0 2px;padding-left:10px;}
+
+/*调查与研究*/
+.main_right_cbl_dcyj{width:100%;background:#fff;float:left}
+.main_right_cbl_dcyj_leftText{width:95px;height:120px;float:left}
+.main_right_cbl_dcyj_rightText{width:187px;height:120px;float:right;}
+.main_right_cbl_dcyj_rightText h2{width:100%;text-align:center;margin-top:10px;}
+.main_right_cbl_dcyj_rightText h2 a{width:100%;text-align:center;color: #2b7ecc;font-size: 18px;font-weight: 500;}
+.main_right_cbl_dcyj_rightText ul{text-align:center;}
+.main_right_cbl_dcyj_rightText ul li{}
+/*培训与鉴定*/
+.main_right_cbl_pxyjd{width:100%;background:#fff;float:left}
+.main_right_cbl_pxyjd h2{height:60px;background: url(../img/index/righttitle.png) no-repeat top left #2b7ecc;}
+.main_right_cbl_pxyjd h2 a{margin-left: 18px;font-size: 18px;font-weight: 500; color: white;line-height: 60px; margin-top: 8px;text-decoration: none;}
+.main_right_cbl_pxyjd h2 a:hover{text-decoration: underline;}
+
+
+.main_right_cbl_pxyjd .dldiv {width:269px;text-align:center;float:left;margin:10px;border-bottom:1px solid #1180b8; ;}
+.main_right_cbl_pxyjd dl {width:130px;text-align:center;float:left;}
+.main_right_cbl_pxyjd dl dt{text-align:center;font-size:14px;color:#1180b8;font-weight:bold;background: url(../img/blue_arrow_left.gif) no-repeat;background-position: right  }
+.main_right_cbl_pxyjd dl dd{width:90px;float:right;padding-left:10px;line-height:30px;height:30px;background: url(../img/spr.gif) no-repeat;background-position: 0 2px;}
+.main_right_cbl_pxyjd dl dd p{font-size:14px;line-height:18px;color:#02396f;margin-top:18px;float:left;margin-left:10px}
+
+
 
 
 /*-首页小轮播图start*/

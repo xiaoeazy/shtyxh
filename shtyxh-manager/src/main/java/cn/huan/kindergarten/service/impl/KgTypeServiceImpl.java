@@ -30,13 +30,13 @@ public class KgTypeServiceImpl extends BaseServiceImpl<KgType> implements IKgTyp
 	@Override
 	public void updateDto(IRequest request,List<KgType> dto) {
 		List<KgType> dto2 = self().selectAll(request); 
-		if(dto.get(0).getShowindex()==true) {
-			for(KgType t:dto2) {
-				t.setShowindex(false);
-				t.set__status("update");
-			}
-			self().batchUpdate(request, dto2);
-		}
+//		if(dto.get(0).getShowindex()==true) {
+//			for(KgType t:dto2) {
+//				t.setShowindex(false);
+//				t.set__status("update");
+//			}
+//			self().batchUpdate(request, dto2);
+//		}
 		if(dto.get(0).getShowentrance()==true) {
 			for(KgType t:dto2) {
 				t.setShowentrance(false);

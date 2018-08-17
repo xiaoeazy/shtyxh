@@ -13,15 +13,35 @@
 .banner .js-next{right: 6%;background-position: 0px -44px;}
 */
 
-.banner{position: relative;width: 1000px;height: 475px;overflow: hidden;    margin: 0 auto;}
-.banner .js-sCont{position: absolute;top: 0;margin: 0 auto;width: 1000px;height: 475px;overflow: hidden;}
-.banner .js-sCont li{width: 1000px;height: 470px;text-align: center;}
+
+.banner{float:left;position: relative;width: 698px;height: 375px;overflow: hidden;   }
+.banner .js-sCont{position: absolute;top: 0;margin: 0 auto;width: 698px;height: 375px;overflow: hidden;}
+.banner .js-sCont li{width: 698px;height: 470px;text-align: center;}
 .banner .js-sDot{position: absolute;bottom: 20px;left: 50%;z-index: 2;margin-left: -150px;width: 300px;height: 14px;text-align: center;}
 .banner .js-sDot li{width: 14px;height: 14px;border-radius: 50%;text-indent: -100%;cursor: pointer;background-color: #DECAC1;margin: 0 6px;overflow: hidden;display: inline-block;*display: inline;*zoom: 1;border: 3px solid #fff;}
 .banner .js-sDot li.cur{background-color: #231815;}
 .banner .bannerBnt{position: absolute;top: 240px;width: 44px;height: 44px;background-image: url("../img/index/bannerBnt.png");background-repeat: no-repeat;top: 45%;}
 .banner .js-prev{left: 6%;background-position: 0 0;}
 .banner .js-next{right: 6%;background-position: 0px -44px;}
+
+
+.zxzxChild{float:left;width:292px;height:375px;background: url("../img/index/zxzx.png") no-repeat;}
+
+.zxzxdiv{padding:0px 30px 0 40px;}
+.zxzxdiv .zxtitle{margin-top:20px;margin-left:-15px;}
+.zxzxdiv .zxtitle a{text-decoration:none;font-size:14px;color:#1180b8;font-weight:bold;}
+.zxzxdiv .zxtitle a:hover{cursor:pointer;text-decoration:underline}
+.zxzxdiv dl {margin-top:10px;}
+.zxzxdiv dl dt{margin-left:-15px;font-size:17px;color:#000000}
+.zxzxdiv dl dd {padding:3px; }
+.zxzxdiv dl dd a{color:#000000;text-decoration:none}
+.zxzxdiv dl dd a:hover{color:#ba2636;text-decoration:underline}
+.zxzxdiv dl.sys1{border-bottom:3px dashed #ddd }
+.zxzxdiv dl dt a{text-decoration: none}
+.zxzxdiv dl dt a:hover{text-decoration: underline;color:red}
+.zxzxdiv dl dt.dt1 {background: url("../img/index/line1.png") no-repeat right; background-size:170px 18px;}
+.zxzxdiv dl dt.dt2 {background: url("../img/index/line2.png") no-repeat right; background-size:170px 18px;}
+.zxzxdiv dl dt.dt3 {background: url("../img/index/line3.png") no-repeat right; background-size:170px 18px;}
 /*
 ---------------------
 | bannerTools style |
@@ -34,7 +54,7 @@
 .bannerTools a b,.footerTools a b{font: 12px/18px "Microsoft YaHei";color: #8bc9c3;display: block;} 
 
 /*
-	轮播图下面的标题
+	杞挱鍥句笅闈㈢殑鏍囬
 */
 .index_tit {
 	background: url(../img/index/index_hd_title.png) no-repeat center bottom;

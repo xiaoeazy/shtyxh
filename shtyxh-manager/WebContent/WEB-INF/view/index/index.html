@@ -55,162 +55,54 @@
 	</div>
 	<!--固定菜单 end-->
 	<#include "../include/navigation.html"> <!-- banner start -->
-	<div class="banner">
-		<div class="js-sCont">
-			<ul>
-
-
-				<#list carouselList as carouselList>
-				<li>
-					<#if carouselList.urltype==0> 
-						<a href="${carouselList.webUrl}" title="" target="_blank"> 
-					<#elseif carouselList.urltype==1> 
-						<a href="${base.contextPath}/index/newsDetail?id=${carouselList.newsId}" title="" target="_blank"> 
-					<#else> 
-						<a href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}" title="" target="_blank">
-					</#if> 
-				<img src="${base.contextPath}${carouselList.filePath}" alt="" width="1000" height="475" title="" /></a>
-				</li>
-				</#list>
-			</ul>
-		</div>
-		<div class="js-sDot">
-			<ul></ul>
-		</div>
-		<a href="javascript:;" class="js-prev bannerBnt"></a> <a
-			href="javascript:;" class="js-next bannerBnt"></a>
-	</div>
-
-	<!-- banner end -->
-
+	
 
 
 
 	<div class="main">
 		<div class="main_container">
-
-			<h3 class="index_tit" style="">
-				<a href="javascript:;" target="_blank"></a>
-			</h3>
-
-
-			<div class="main_topic_block mt13">
-				<div class="picnews">
-					<div class="vT_t1 picnews flexslider" id="demo02">
-						<ul class="slides">
-							<#list newsThumbNailList as newsThumbNailList> <#if
-								newsThumbNailList_index==0>
-							<li><div class="word_bg">
-									<p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newstitle}</p>
-								</div>
-								<div class="img">
-									<a
-										href="${base.contextPath}/index/newsDetail?id=${newsThumbNailList.id}"
-										target='_blank' thumb="" alt="" text=""><img
-										src="${base.contextPath}${newsThumbNailList.thumbnail}"
-										border='0' width="390px" height="285px"
-										alt='${newsThumbNailList.newstitle}'
-										title='${newsThumbNailList.newstitle}' /></a>
-								</div></li>
-							<#else>
-							<li style="display: none"><div class="word_bg">
-									<p title="${newsThumbNailList.newstitle}">${newsThumbNailList.newstitle}</p>
-								</div>
-								<div class="img">
-									<a
-										href="${base.contextPath}/index/newsDetail?id=${newsThumbNailList.id}"
-										target='_blank' thumb="" alt="" text=""><img
-										src="${base.contextPath}${newsThumbNailList.thumbnail}"
-										border='0' width="390px" height="285px"
-										alt='${newsThumbNailList.newstitle}'
-										title='${newsThumbNailList.newstitle}' /></a>
-								</div></li></#if> </#list>
-						</ul>
+			<div class="main_left_block mt13">
+					<!-- banner start -->
+					<div class="banner">
+						<div class="js-sCont">
+							<ul>
+								<#list carouselList as carouselList>
+								<li>
+									<#if carouselList.urltype==0> 
+										<a href="${carouselList.webUrl}" title="" target="_blank"> 
+									<#elseif carouselList.urltype==1> 
+										<a href="${base.contextPath}/index/newsDetail?id=${carouselList.newsId}" title="" target="_blank"> 
+									<#else> 
+										<a href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}" title="" target="_blank">
+									</#if> 
+								<img src="${base.contextPath}${carouselList.filePath}" alt="" width="698" height="475" title="" /></a>
+								</li>
+								</#list>
+							</ul>
+						</div>
+						<div class="js-sDot">
+							<ul></ul>
+						</div>
+						<a href="javascript:;" class="js-prev bannerBnt"></a> 
+						<a href="javascript:;" class="js-next bannerBnt"></a>
 					</div>
-				</div>
-				<div class="txtnews">
-					<div class="txtnews_topic">
-						<p>
-							<#list newsList as newsList> 
-								<#if newsList_index==0>
-									<a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
-										target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
-									<#break>
-								</#if> 
-							</#list>
-						</p>
-					</div>
-					<div class="txtnews_list_contianer">
-						<ul class="txtnews_list">
-							<#list newsList as newsList> 
-							<#if (newsList_index>0&& newsList_index<8) >
-							<li><a
-								href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
-								target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
-							</#if> 
-							</#list>
-						</ul>
-						<ul class="txtnews_list">
-							<#list newsList as newsList> 
-								<#if (newsList_index>=8)>
-									<li><a
-									href="${base.contextPath}/index/newsDetail?id=${newsList.id}"
-									target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
-									</li>
-								</#if> 
-							</#list>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="main_left_block mt13">
-					<!-- 内容检索start -->
-					<div class="banner_block ">
+					<!-- banner end -->
+					
+	
+					<!-- 协会动态 -->
+					<div class="banner_block mt13">
 						<div class="vF_banner bx_log">
 							<p class="ml92 dlzc">
-								<a href="${base.contextPath}/index/news/search">内容检索</a>
+								<a href="${base.contextPath}/index/xhdt">协会动态</a>
 							</p>
 							<p class="ml67 dlzc"></p>
 							<p class="ml92 dlzc"></p>
 						</div>
 					</div>
-					<!-- 内容检索end  -->
-
-					<!-- 评估入口start -->
-					<div class="wz_block mt10" style="height: 120px; overflow: hidden;">
-						<div class="newslist_bl_gsgg" style="">
-							<div style="">
-								<div style=" float:left; width:25%;  height:120px;">
-									<a href="${base.contextPath}/index/assessmentTypeList" target="_blank">
-										<img src="${base.contextPath}/resources/images/assessment/assessmentEntrance.jpg" height="120" width="170" alt="图片" style="vertical-align:middle;" />
-									</a>
-								</div>
-								<div style=" float:left; width:25%;  height:120px;line-height: 120px;vertical-align:middle;text-align:center">
-									<a href="${base.contextPath}/index/assessmentTypeList" target="_blank" style="text-decoration:none">
-										<font size="5px">评估入口</font>
-									</a>
-								</div>
-								<#if typeEntranceShow??>
-									<div style=" float:left; width:25%;  height:120px;">
-										<img src="${base.contextPath}${typeEntranceShow.entranceimagepath}" height="120" width="170" alt="图片" style="vertical-align:middle;" />
-									</div>
-									<div style=" float:left; width:25%;  height:120px;line-height: 120px;vertical-align:middle;text-align:center">
-										<a href="${base.contextPath}/index/newsTypeList?typeid=${typeEntranceShow.id}" target="_blank" style="text-decoration:none">
-											<font size="5px">${typeEntranceShow.typename}</font>
-										</a>
-									</div>
-								</#if>
-							</div>
-								
-						</div>
-					</div>
-					<!-- 评估入口end -->
-
-					<!-- 公告公示 -->
-					<#if typeNewsShow??>
-					
-					
+					<!-- 协会动态end  -->
+					<!-- 公告公示  start-->
+					<#if typeXHDTShowList??>
+						<#list typeXHDTShowList as typeList>
 						<div class="wz_block">
 								<div class="newslist_bl_gsgg mt13">
 								<div class="newslist">
@@ -218,14 +110,20 @@
 										<div class="vF_t2_r1" style="">
 											<div class="vF_tab unit2">
 												<div class="vF_title_bar3">
-													<h2 class="ui_til4_tab_u current2 word8">
-														<a href="${base.contextPath}/index/assessmentTypeList">${typeNewsShow.typename}</a>
-													</h2>
+													<#if typeList_index==0>
+														<h2 class="ui_til4_tab_u current2 word8 titleright">
+															<a href="${base.contextPath}/index/assessmentTypeList">${typeList.typename}</a>
+														</h2>
+													<#else>
+														<h2 class="ui_til4_tab_u current2 word8 titleleft">
+															<a href="${base.contextPath}/index/assessmentTypeList">${typeList.typename}</a>
+														</h2>
+													</#if>
 												</div>
 											</div>
 										</div>
 										<ul class="c_list mt10 mb10 split" id="area3_con1">
-											<#list typeNewsShow.newsList as newsList>
+											<#list typeList.newsList as newsList>
 											<li style="width:628px"><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank"
 												title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
 												<font style="float:right">${newsList.createdate?string('yyyy-MM-dd')}</font>
@@ -246,13 +144,40 @@
 								</div>
 							</div>
 						</div>
+						</#list>
 					</#if>
 					<!-- 公告公示 end-->
 				</div>
-
+				
+				
+					
 				<div class="main_right_block mt13">
+					<!--资讯中心start-->
+					<div class="zxzxChild">
+							<div class="zxzxdiv">
+							<div class="zxtitle"><a href="${base.contextPath}/index/news" >资讯中心</a></div>
+							<#list typeZxzxShowList as zxzxShow> 
+								<dl class="sys1">
+									<#if zxzxShow_index==0>
+											<dt class="dt1">
+									<#elseif zxzxShow_index==1>
+											<dt class="dt2">
+									<#elseif zxzxShow_index==2>
+											<dt class="dt3">
+									</#if>
+										<a href="${base.contextPath}/index/news/typeList?typeid=${zxzxShow.id}" target="_blank">${zxzxShow.typename}</a></dt>
+										<#list zxzxShow.newsList as newsList>
+											<dd>
+												<a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+											</dd>
+										</#list>
+									</dl>
+							</#list>
+							</div>
+					</div>
+					<!--咨询中心end-->
 					<!-- 资料下载start -->
-					<div class="main_right_cbl ">
+					<div class="main_right_cbl mt13">
 						<h2>
 							<a href="${base.contextPath}/index/admin/download"
 								target="_blank">资料下载</a>
@@ -270,6 +195,7 @@
 						</ul>
 					</div>
 					<!-- 资料下载end -->
+				
 					<!--预留广告位start-->
 					<#if 1!=1>
 					<div class="main_right_cbl mt13">
@@ -282,9 +208,49 @@
 					</div>
 					</#if>
 					<!-- 预留广告位end -->
-
 				</div>
-			</div>
+				
+				<!-- 调查与研究start -->
+				<div class="main_right_block mt13">
+					<div class="main_right_cbl_dcyj">
+							<div class="main_right_cbl_dcyj_leftText"><image src="${base.contextPath}/lib/index/img/index/dcyj.png" /></div>
+							<div class="main_right_cbl_dcyj_rightText">
+									<h2><a>调查与研究</a></h2>
+									<ul>
+										<li>萌芽杯课题</li>
+										<li>萌芽杯课题</li>
+									</ul>
+							</div>
+					</div>
+				</div>
+				<!-- 调查与研究end -->
+				
+				<!-- 培训与鉴定start -->
+				<div class="main_right_block mt13">
+						<div class="main_right_cbl_pxyjd mt13">
+							<h2>
+								<a href="${base.contextPath}/index/admin/download"
+									target="_blank">培训与鉴定</a>
+							</h2>
+							<#list typePxyjdShowList as typePxyjdShowList>
+									<#if typePxyjdShowList_index%2==0>
+										<div class="dldiv">
+									</#if>
+										<dl>
+											<dt>${typePxyjdShowList.typename!}</dt>
+											<#list typePxyjdShowList.childType as childType>
+												<dd>${childType.typename!}</dd>
+											</#list>
+										</dl>
+									<#if typePxyjdShowList_index%2==1>
+										</div>
+									</#if>
+							</#list>
+							
+							
+						</div>
+				</div>
+				<!-- 培训与鉴定end -->
 		</div>
 	</div>
 
