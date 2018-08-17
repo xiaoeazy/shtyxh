@@ -71,7 +71,7 @@
 									<#if carouselList.urltype==0> 
 										<a href="${carouselList.webUrl}" title="" target="_blank"> 
 									<#elseif carouselList.urltype==1> 
-										<a href="${base.contextPath}/index/newsDetail?id=${carouselList.newsId}" title="" target="_blank"> 
+										<a href="${base.contextPath}/index/news/newsDetail?id=${carouselList.newsId}" title="" target="_blank"> 
 									<#else> 
 										<a href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}" title="" target="_blank">
 									</#if> 
@@ -112,11 +112,11 @@
 												<div class="vF_title_bar3">
 													<#if typeList_index==0>
 														<h2 class="ui_til4_tab_u current2 word8 titleright">
-															<a href="${base.contextPath}/index/assessmentTypeList">${typeList.typename}</a>
+															<a href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}">${typeList.typename}</a>
 														</h2>
 													<#else>
 														<h2 class="ui_til4_tab_u current2 word8 titleleft">
-															<a href="${base.contextPath}/index/assessmentTypeList">${typeList.typename}</a>
+															<a href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}">${typeList.typename}</a>
 														</h2>
 													</#if>
 												</div>
@@ -124,7 +124,7 @@
 										</div>
 										<ul class="c_list mt10 mb10 split" id="area3_con1">
 											<#list typeList.newsList as newsList>
-											<li style="width:628px"><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank"
+											<li style="width:628px"><a href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}" target="_blank"
 												title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
 												<font style="float:right">${newsList.createdate?string('yyyy-MM-dd')}</font>
 											</li>

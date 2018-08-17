@@ -5,7 +5,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
 table{border-collapse:collapse;border-spacing:0;}
 caption,th{font-weight:normal;text-align:left;}
 fieldset,img{border:0;}
-ul li{list-style:none;}
+/* ul li{list-style:none;} */
 h1,h2,h3,h4,h5,h6{font-size:100%;}
 h5{font-size:18px;margin-bottom:20px;color:#666;}
 h5 span{font-size:12px;color:#ccc;font-weight:normal;}
