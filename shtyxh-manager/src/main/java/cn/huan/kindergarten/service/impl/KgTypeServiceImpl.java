@@ -24,6 +24,11 @@ public class KgTypeServiceImpl extends BaseServiceImpl<KgType> implements IKgTyp
 	}
 	
 	@Override
+	public KgType findParentType(Long typeid) {
+		return kgTypeMapper.findParentType(typeid);
+	}
+	
+	@Override
 	public int adminQueryCount(IRequest request,KgType record) {
 		return  mapper.selectCount(record);
 	}

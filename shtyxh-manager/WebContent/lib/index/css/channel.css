@@ -215,6 +215,14 @@ body{background:#f0f0f0;}
 .c_list li{font-size:14px;line-height:30px;height:30px;overflow:hidden;background:url(../img/spr.gif) no-repeat; background-position: 0 2px;padding-left:10px;}
 .c_list li a{color:#333;text-decoration:none}
 .c_list li a:hover{text-decoration:underline;color:#ba2636;}
+.c_list li  span {
+/*     position: absolute; */
+float:right;
+    right: 10px;
+    line-height: 30px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 11px;
+}
 
 .c_list_bidtype{margin-left:3px;float:left;margin-top:3px;height:30px;width:100%}
 .c_list_bidtype li{font-size:14px;float:left;line-height:15px;margin-left:5px;}
@@ -240,7 +248,9 @@ body{background:#f0f0f0;}
 
 .newslist_bl_nor{width:349px;background:#fff;float:left;height:250px}
 .newslist_bl_nor2{width:333px;background:#fff;float:left;}/*nnneeewww*/
+.newslist_bl_nor_all{width:100%;background:#fff;float:left;}
 .vF_t2{width:314px;margin:0 auto;}
+.vF_t2_all{width:95%;margin:0 auto;}
 .vF_t8{width:292px;overflow:hidden;float:left}
 .vF_t2 ul{float:left}
 .vF_t2 p{float:left;}

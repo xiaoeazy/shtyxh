@@ -115,7 +115,7 @@ public class IndexNewsController extends IndexBaseController{
         mv.addObject("allPageNum",allPageNum);
         
         KgType kt = new KgType();
-        kt.setParentid(3L);
+        kt.setRelatetype(2);
         List<KgType> typeList = iKgTypeService.select(requestContext, kt);
         
         mv.addObject("typeList", typeList);
@@ -126,7 +126,7 @@ public class IndexNewsController extends IndexBaseController{
         mv.addObject("newssource",newssource==null?"":newssource);
         
         
-        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
+        loadNavigation(mv, requestContext,IndexController.CH_NULL);
         loadSysConfig(mv);
        
         return mv;
@@ -163,7 +163,7 @@ public class IndexNewsController extends IndexBaseController{
 	        return mv;
 	    }
 	 
-	 @RequestMapping(value = "/index/news/sourceList")
+	 @RequestMapping(value = "/index/news/sourceList")  //这边固定死加载父类是ZXZX_ID
 	    @ResponseBody
 	    public ModelAndView newsSourceList(Long sourceid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
 	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE_20) int limit,HttpServletRequest request) throws E404Excetion {
@@ -191,7 +191,7 @@ public class IndexNewsController extends IndexBaseController{
 	        mv.addObject("sourceid", sourceid);
 	        
 	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
-	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,3);
+	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,ZXZX_ID,3);
 	        loadSysConfig(mv);
 	        return mv;
 	    }

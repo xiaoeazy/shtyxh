@@ -80,13 +80,18 @@
        <select id="selectByMap" resultMap="OtherResultMap"  parameterType="java.util.Map">
         	select a.* from kg_news a
         	<where>
-       			<if test="typeids != null">
-		        	a.typeid in
-		        	 <foreach collection="typeids" item="typeId" index="index"
-			            open="(" close=")" separator=",">
-			            #{typeId}
-			       	 </foreach>
-			     </if>
+        		<choose>
+				    <when  test="typeids != null and typeids.size()>0">
+				       and a.typeid in
+			        	 <foreach collection="typeids" item="typeId" index="index"
+				            open="(" close=")" separator=",">
+				            #{typeId}
+				       	 </foreach>
+				    </when>
+				    <otherwise>
+				        and a.typeid = -1 
+				    </otherwise>
+				</choose>
 		       	 <if test ="news!=null">
 			       	 <if test="news.sourceid!=null and news.sourceid !=''">
 	           			AND a.sourceId = #{news.sourceid}
@@ -158,13 +163,18 @@
            		 	<![CDATA[ AND createdate <= #{news.endDate} ]]>
            		</if>
            		
-           		<if test="typeids!=null">
-		            and typeId in
-		            <foreach collection="typeids" item="item" separator=","
+		        <choose>
+				    <when  test="typeids != null and typeids.size()>0">
+				        and typeId in
+			        	<foreach collection="typeids" item="item" separator=","
 		                open="(" close=")">
 		                #{item}
 		            </foreach>
-		        </if>
+				    </when>
+				    <otherwise>
+				         and typeid = -1 
+				    </otherwise>
+				</choose>
            		
            </where>
     </select>

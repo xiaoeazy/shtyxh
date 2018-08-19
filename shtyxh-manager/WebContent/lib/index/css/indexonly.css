@@ -246,7 +246,7 @@ body{background:#f0f0f0;}
 
 .main_right_cbl h2{font-size:18px;font-weight:500;color:#005495;line-height:34px;margin-left:18px;margin-top:8px;}
 .main_right_cbl h2 a{font-size:18px;font-weight:500;color:#005495;line-height:34px;margin-top:8px;text-decoration:none}
-.main_right_cbl h2 a:hover{font-size:18px;font-weight:500;color:#ba2636;line-height:34px;margin-top:8px;text-decoration:underline}
+.main_right_cbl h2 a:hover{font-size:18px;font-weight:500;line-height:34px;margin-top:8px;text-decoration:underline}
 
 /*下载专区*/
 .main_right_cbl ul li.xzzqlinks{width:263px;height:53px;margin: 0 auto;margin-top:11px;border-radius:5px}
@@ -283,9 +283,11 @@ body{background:#f0f0f0;}
 .main_right_cbl_dcyj_leftText{width:95px;height:120px;float:left}
 .main_right_cbl_dcyj_rightText{width:187px;height:120px;float:right;}
 .main_right_cbl_dcyj_rightText h2{width:100%;text-align:center;margin-top:10px;}
-.main_right_cbl_dcyj_rightText h2 a{width:100%;text-align:center;color: #2b7ecc;font-size: 18px;font-weight: 500;}
+.main_right_cbl_dcyj_rightText h2 a{width:100%;text-align:center;color: #2b7ecc;font-size: 18px;font-weight: 500;text-decoration:none;}
+.main_right_cbl_dcyj_rightText h2 a:hover{text-decoration:underline;}
 .main_right_cbl_dcyj_rightText ul{text-align:center;}
-.main_right_cbl_dcyj_rightText ul li{}
+.main_right_cbl_dcyj_rightText ul li a{text-decoration:none;}
+.main_right_cbl_dcyj_rightText ul li a:hover{text-decoration:underline;}
 /*培训与鉴定*/
 .main_right_cbl_pxyjd{width:100%;background:#fff;float:left}
 .main_right_cbl_pxyjd h2{height:60px;background: url(../img/index/righttitle.png) no-repeat top left #2b7ecc;}

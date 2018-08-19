@@ -19,6 +19,12 @@
 <script src="${base.contextPath}/lib/bootstrap-table/js/bootstrap-table.min.js"></script>
 <script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
+<style type="text/css">
+.table-striped > tbody > tr:nth-child(2n+1) > td, 
+.table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: rgb(242, 245, 247);
+ }
+</style>
 </head>
 <body id="detail">
 <#include "../../include/navigation.html">
@@ -79,6 +85,8 @@
 						      sortOrder: 'desc', // 排序规则
 						      columns: [{  
 				                      title: '序号',//标题  可不加  
+				                      width:50,
+				                      align: 'center',
 				                      formatter: function (value, row, index) {  
 			//	                           return index+1;  
 				  							 var pageSize=$('#table').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
@@ -91,12 +99,14 @@
 						              align: 'center',
 						              valign: 'middle',
 						              formatter:function(value,row,index) {
-						            	  var path ="${base.contextPath}";
-						            	  return ['<a href="'+path+'/index/offers/offersDetail?id='+row.id+'">'+value+'</a>'];
+// 						            	  var path ="${base.contextPath}";
+// 						            	  return ['<a href="'+path+'/index/offers/Detail?id='+row.id+'">'+value+'</a>'];
+										  return value;
 						              }
 						          }, {
 						              field: 'salary',
 						              title: '薪资',
+						              width:150,
 						              align: 'center',
 						              valign: 'middle'
 						          }, {
@@ -111,7 +121,11 @@
 						      },
 						      onLoadError: function(){  //加载失败时执行
 						            console.info("加载数据失败");
-						      }
+						      },
+						      onClickRow: function (row) { 
+						    	  var path ="${base.contextPath}/index/offers/Detail?id="+row.id;
+						    	  window.location.href=path;
+				              }
 						})
 						
 						

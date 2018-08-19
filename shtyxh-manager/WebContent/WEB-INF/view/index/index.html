@@ -215,10 +215,11 @@
 					<div class="main_right_cbl_dcyj">
 							<div class="main_right_cbl_dcyj_leftText"><image src="${base.contextPath}/lib/index/img/index/dcyj.png" /></div>
 							<div class="main_right_cbl_dcyj_rightText">
-									<h2><a>调查与研究</a></h2>
+									<h2><a href="${base.contextPath}/index/dcyyj">调查与研究</a></h2>
 									<ul>
-										<li>萌芽杯课题</li>
-										<li>萌芽杯课题</li>
+										<#list typeDcyyjShowList as typeDcyyjShowList>
+											<li><a href="${base.contextPath}/index/dcyyj/typeList?typeid=${typeDcyyjShowList.id}">${typeDcyyjShowList.typename}</a></li>
+										</#list>
 									</ul>
 							</div>
 					</div>

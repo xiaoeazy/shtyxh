@@ -76,17 +76,21 @@
         <div class="v4incheadertop_nav">
             <ul class="v4incheadertop_nav_ls">
               	<li  id="ch_index" <#if chanel =='CH_INDEX'> class="actv" </#if>><a href="${base.contextPath}" >首页</a></li> <!-- class="fst"-->
-                <li id="ch_xhgk" <#if chanel =='CH_XHGK'> class="actv" </#if>><a href="${base.contextPath}/index/associationSurvey/associationSurveyTypeList" >协会概况</a>
+                <li id="ch_xhgk" <#if chanel =='CH_XHGK'> class="actv" </#if>><a href="${base.contextPath}/index/xhgk" >协会概况</a>
                   <ul>
                 	<#list xhgkTypeList as typeList>   
-							<li><a href="${base.contextPath}/index/associationSurvey/associationSurveyTypeList?typeid=${typeList.id}">${typeList.typename}</a></li> 
+							<li><a href="${base.contextPath}/index/xhgk/typeList?typeid=${typeList.id}">${typeList.typename}</a></li> 
 					</#list>
                   </ul>
                 </li>
                 <li id="ch_zxzx" <#if chanel =='CH_ZXZX'> class="actv" </#if>><a href="${base.contextPath}/index/news" >资讯中心</a>
                 <ul>
                 	<#list zxzxTypeList as typeList>   
-							<li><a href="${base.contextPath}/index/news/typeList?typeid=${typeList.id}">${typeList.typename}</a></li> 
+                		<#if typeList.id == 20>
+							 <li><a href="${base.contextPath}/index/offers">${typeList.typename}</a></li>
+						<#else>
+							<li><a href="${base.contextPath}/index/news/typeList?typeid=${typeList.id}">${typeList.typename}</a></li>
+						</#if>
 					</#list>
 					
                 </ul>
@@ -96,9 +100,9 @@
 <!--                		 <li><a href="${base.contextPath}/index/assessmentTypeList">评选评估</a></li>  -->
 <!--                 </ul> -->
                 </li>
-                <li id="ch_dcyyj" <#if chanel =='CH_DCYYJ'> class="actv" </#if>><a href="#" >调查与研究</a></li>
+                <li id="ch_dcyyj" <#if chanel =='CH_DCYYJ'> class="actv" </#if>><a href="${base.contextPath}/index/dcyyj" >调查与研究</a></li>
                  <li id="ch_xhdt" <#if chanel =='CH_XHDT'> class="actv" </#if>><a href="${base.contextPath}/index/xhdt" >协会动态</a></li>
-<!--                   <li id="ch_djhd" <#if chanel =='CH_DJHD'> class="actv" </#if>><a href="#" >党建活动</a></li> -->
+                  <li id="ch_djhd" <#if chanel =='CH_DJHD'> class="actv" </#if>><a href="${base.contextPath}/index/djhd" >党建活动</a></li>
             </ul>
         </div>
     </div>

@@ -22,8 +22,8 @@ a{text-decoration:none}
 .br_box_list ul{margin:10px 10px 10px 20px;}
 .br_box_list .c_list_tat{overflow: hidden; position: relative;}
 
-.br_box_list .c_list_tat li{font-size:14px;line-height:30px;height:30px;overflow:hidden;background:url(../../img/spr.gif) no-repeat; background-position: 0 2px;padding-left:10px;}}
-.br_box_list .c_list_tat li a{color:#333;text-decoration:none;overflow:hidden;line-height:30px}/*width:580px;*/
+.br_box_list .c_list_tat li{font-size:14px;line-height:30px;height:30px;overflow:hidden;background:url(../../img/spr.gif) no-repeat; background-position: 0 2px;padding-left:10px;}
+.br_box_list .c_list_tat li a{color:#333;text-decoration:none;overflow:hidden;line-height:30px}
 .br_box_list .c_list_tat li a:hover{text-decoration:underline;color:#ba2636;}
 .br_box_list .c_list_tat li span{position:absolute;right:10px;line-height:30px;font-family:Verdana, Geneva, sans-serif;font-size:11px}
 

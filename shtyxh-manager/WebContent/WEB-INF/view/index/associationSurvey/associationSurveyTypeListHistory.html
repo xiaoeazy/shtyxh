@@ -23,32 +23,7 @@
 
 	<div class="main">
 		<div class="main_container">
-			<div class="mainLeft_left_block mt13">
-
-				<!--OTsidebar-->
-				<div class="left_box ">
-					<strong>
-					<span>协会概况</span>
-					<samp></samp>
-					</strong>
-					
-					<ul>
-					<#list leftList as leftList>   
-					              <li id="cid${leftList.id}"><a href="${base.contextPath}/index/associationSurvey/associationSurveyTypeList?typeid=${leftList.id}">${leftList.typename}</a></li>
-				    </#list>  
-					<script>
-						var changeclass=window.document.getElementById('cid${nowType.id}');
-						changeclass.className='on';
-					</script>
-					
-					</ul>
-					
-					
-					</div>
-					
-
-				</div>
-
+				<#include "./include/associationLeftPage.html">
 				<div class="mainLeft_right_block mt13">
 					<div class="right_box">
 							<strong class="title">

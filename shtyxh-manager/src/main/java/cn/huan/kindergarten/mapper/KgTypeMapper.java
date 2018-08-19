@@ -8,4 +8,5 @@ import cn.huan.kindergarten.dto.KgType;
 
 public interface KgTypeMapper extends Mapper<KgType>{
 	List<KgType>   findChildType(Long typeid);
+	KgType   findParentType (Long typeid);
 }

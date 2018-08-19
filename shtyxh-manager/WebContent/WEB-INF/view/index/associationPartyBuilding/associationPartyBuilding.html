@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>党建活动_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/channel.css"
+	rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+</head>
+<body id="zcfg">
+	<#include "../../include/navigation.html">
+
+	<div class="main">
+		<div class="main_container">
+			<div class="main_topic_block mt13">
+				<img src="${base.contextPath}/lib/index/img/djhd/djhd.jpg"/ width="100%" height="123px"/>
+			</div>
+			<!--left newslist start-->
+			<div class="main_left_block mt13">
+				<div class="wz_block">
+
+					<#list typeList as typeList>
+						<div class="newslist_bl_nor_all">
+							<div class="newslist">
+								<div class="vF_t2_all">
+									<div class="vF_t2_r1">
+										<div class="vF_tab unit2">
+											<div class="vF_title_bar2">
+												<h2 class="ui_til4_tab_u current2 word5">
+													<a
+														href="${base.contextPath}/index/djhd/typeList?typeid=${typeList.id}">${typeList.typename}</a>
+												</h2>
+											</div>
+										</div>
+									</div>
+	
+									<ul class="c_list mt10 mb10 tab-con split"
+										style="display: block">
+										<#list typeList.newsList as newsList>
+										<li><a
+											href="${base.contextPath}/index/djhd/newsDetail?id=${newsList.id}"
+											target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a>
+											 <span> ${newsList.createdate?string('yyyy-MM-dd HH:mm:ss')} </span>
+											</li>
+										</#list>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</#list>
+				</div>
+			</div>
+			<!--left newslist end-->
+			<!-- right start -->
+			<#if (typeList?size>0)>
+				<div class="main_right_block mt13">
+					<div class="main_right_cbl">
+						<h2>分类总览</h2>
+						<div class="vT-chs-section-content-con">
+							<ul class="vT-chs-section-content-list">
+								<#list typeList as typeList>
+								<li class="sorthead1"><a
+									href="${base.contextPath}/index/djhd/typeList?typeid=${typeList.id}"
+									target="_blank" title="${typeList.typename}">${typeList.typename}</a>(${typeList.count})</li>
+								</#list>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</#if>
+			<!-- right end -->
+		</div>
+	</div>
+	<#include "../../include/footer.html">
+</body>
+<script language="javascript"
+	src="${base.contextPath}/lib/index/js/channel.js"></script>
+</html>

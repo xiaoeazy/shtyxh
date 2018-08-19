@@ -28,31 +28,7 @@
 	<div class="main">
 		<div class="main_container">
 			<!-- 内容  start-->	
-			<div class="mainLeft_left_block mt13">
-				
-				<!--OTsidebar-->
-				<div class="left_box ">
-					<strong>
-					<span>协会概况</span>
-					<samp></samp>
-					</strong>
-					
-					<ul>
-					<#list leftList as leftList>   
-					              <li id="cid${leftList.id}"><a href="${base.contextPath}/index/associationSurvey/associationSurveyTypeList?typeid=${leftList.id}">${leftList.typename}</a></li>
-				    </#list>  
-					<script>
-						var changeclass=window.document.getElementById('cid${nowType.id}');
-						changeclass.className='on';
-					</script>
-					
-					</ul>
-					
-					
-					</div>
-					
-
-				</div>
+				<#include "./include/associationLeftPage.html">
 
 				<div class="mainLeft_right_block mt13">
 					<div class="right_box">
@@ -63,18 +39,27 @@
 								<div class="panel panel-default">
 						            <div class="panel-heading">搜索</div>
 						            <div class="panel-body">
-						                <form role="form" id="searchForm" class="form-inline">
+						                <form role="form" id="searchForm" class="form-horizontal">
 						                    <div class="form-group">
-						                        <label for="memberno">编　　号</label> 
-						                       	 	<input type="text" class="form-control" id="memberno" name="memberno" placeholder="请输入编号">
-					                            <label for="kindergartenname">园所名称</label> 
-					                            	<input type="text" class="form-control" id="kindergartenname" name="kindergartenname" placeholder="请输入园所名称"><br/>
-						                        <label for="kindergartensite">园所地址</label> 
-						                        	<input type="text"
-						                            class="form-control" id="kindergartensite" name="kindergartensite" placeholder="请输入园所地址">
+						                        	<label class="col-sm-2 control-label" for="memberno">编　　号</label> 
+						                       	 	<div class="col-md-4"> 
+						                       	 		<input type="text" class="form-control" id="memberno" name="memberno" placeholder="请输入编号">
+						                       	 	</div>
+					                           		<label class="col-sm-2 control-label" for="kindergartenname">园所名称</label> 
+					                            	<div class="col-md-4">
+					                            		<input type="text" class="form-control" id="kindergartenname" name="kindergartenname" placeholder="请输入园所名称">
+					                            	</div>
+						                       
 						                    </div>
 						                    <div class="form-group">
-						                        <button type="button" id="searchBtn" class="btn btn-default">开始搜索</button>
+						                     		<label class="col-sm-2 control-label" for="kindergartensite">园所地址</label> 
+						                        	<div class="col-md-4">
+						                        		<input type="text"  class="form-control" id="kindergartensite" name="kindergartensite" placeholder="请输入园所地址">
+						                        	</div>
+						                        	
+						                    </div>
+						                     <div class="form-group" >
+						                        	 <div class="col-md-12"> <button type="button" id="searchBtn" class="btn btn-default pull-right">开始搜索</button></div>
 						                    </div>
 						                </form>
 						            </div>
@@ -110,7 +95,7 @@
 		            });
 					$(function () {
 						$("#table").bootstrapTable({ // 对应table标签的id
-						      url: "${base.contextPath}/index/associationSurvey/loadHYDW", // 获取表格数据的url
+						      url: "${base.contextPath}/index/xhgk/loadHYDW", // 获取表格数据的url
 						      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
 						      striped: true,  //表格显示条纹，默认为false
 						      pagination: true, // 在表格底部显示分页组件，默认false

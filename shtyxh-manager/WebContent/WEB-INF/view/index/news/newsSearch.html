@@ -69,8 +69,8 @@
 				var value2 = $("#dateissueend").val();
 				if((value1!=="" && value2=="")||(value1=="" && value2!==""))
 				{
-					if(value1==""){alert("请选择颁布日期的起始时间。");}
-					if(value2==""){alert("请选择颁布日期的结束时间。");}
+					if(value1==""){alert("请选择发布日期的起始时间。");}
+					if(value2==""){alert("请选择发布日期的结束时间。");}
 					return false;
 				}
 				if(CompareDate(value1,value2)){
@@ -108,7 +108,7 @@
 
 
 <!--主导航-->
-<form name="searchForm" id="searchForm" action="newsSearch" method="post">
+<form name="searchForm" id="searchForm" action="search" method="post">
 
 	<input type="hidden" name="page" id="page" value="1">
 	<style>

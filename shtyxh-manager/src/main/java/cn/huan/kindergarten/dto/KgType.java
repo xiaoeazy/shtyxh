@@ -59,7 +59,8 @@ public class KgType extends BaseDTO {
      @Transient
      private List<KgNews> newsList;
      
-     
+     @Transient
+     private KgType parentType;
 
      public KgType() {
 		super();
@@ -166,6 +167,14 @@ public class KgType extends BaseDTO {
 
 	public void setHidden(Boolean hidden) {
 		this.hidden = hidden;
+	}
+
+	public KgType getParentType() {
+		return parentType;
+	}
+
+	public void setParentType(KgType parentType) {
+		this.parentType = parentType;
 	}
 
   

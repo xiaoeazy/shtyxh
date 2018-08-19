@@ -93,7 +93,7 @@ public class IndexController extends IndexBaseController{
     	 KgType kn3 = new KgType();
     	 kn3.setParentid(ZXZX_ID);
     	 List<KgType> knt3list = iKgTypeService.select(requestContext, kn3,1,3);
-		 for(KgType kt:knt3list) {
+		 for(KgType kt:knt3list) {	
 			 KgNews kns = new KgNews();
     		 kns.setTypeid(kt.getId());
     		 List<KgNews> indexShowTypeNews =iKgNewsService.selectWithOtherInfo(requestContext, kns, 1, 2);
@@ -102,6 +102,13 @@ public class IndexController extends IndexBaseController{
 		 }
     	 mv.addObject("typeZxzxShowList",knt3list);
     	 mv.addObject("typeXHDTShowList",kntList);
+    	 
+    	 //调查与研究
+    	 KgType kn5 = new KgType();
+    	 kn5.setParentid(DCYYJ_ID);
+    	 kn5.setRelatetype(2);
+    	 List<KgType> knt5list = iKgTypeService.select(requestContext, kn5,1,3);
+    	 mv.addObject("typeDcyyjShowList",knt5list);
     	 
     	 //培训与鉴定
     	 KgType kn4 = new KgType();

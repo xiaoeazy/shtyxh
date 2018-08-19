@@ -12,7 +12,11 @@ import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 
 import cn.huan.kindergarten.dto.KgQuestionsurvey;
-
+/**
+ * 报名
+ * @author huanghuan
+ *
+ */
 @Controller
 public class IndexSignUpController extends BaseController {
 	// 默认的登录页

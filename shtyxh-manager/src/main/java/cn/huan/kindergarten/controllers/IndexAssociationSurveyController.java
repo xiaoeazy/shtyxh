@@ -38,9 +38,7 @@ import cn.huan.shtyxh.common.bean.ExtStore;
  */
 @Controller
 public class IndexAssociationSurveyController extends IndexBaseController{
-	private static final  Long LSYG =12L; //历史沿革
-	private static final  Long HYDW =15L;	//会员单位
-	private static final  Long LXFS =16L;	//联系方式
+	
 	@Autowired
 	private IKgTypeService kgTypeService;
 	@Autowired
@@ -54,13 +52,13 @@ public class IndexAssociationSurveyController extends IndexBaseController{
 	@Autowired
 	private IKgContactService kgContactService;
 	
-	@RequestMapping(value = "/index/associationSurvey/associationSurveyTypeList")
+	@RequestMapping(value = {"/index/xhgk","/index/xhgk/typeList"})
     @ResponseBody
     public ModelAndView associationSurveyTypeList(Long typeid,@RequestParam(defaultValue = DEFAULT_PAGE) int page,
             @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
     	 ModelAndView mv = new ModelAndView(getViewPath() + "/index/associationSurvey/associationSurveyTypeList");
     	 IRequest requestContext = createRequestContext(request);
-    	 Long parentId = 2L;
+    	 Long parentId = XHGK_ID;
     	 List<KgType> leftNavList = kgTypeService.findChildType(parentId);
     	 KgType nowType = null;
     	 for(KgType type :leftNavList) {
@@ -72,7 +70,7 @@ public class IndexAssociationSurveyController extends IndexBaseController{
     		 nowType = leftNavList.get(0);
     	 }
     	 
-    	 if(typeid==LSYG) {
+    	 if(typeid==LSYG_ID) {
     		 Map<String,List<KgHistory>> map =new HashMap<String,List<KgHistory>>();
     		 mv = new ModelAndView(getViewPath() + "/index/associationSurvey/associationSurveyTypeListHistory");
     		 List<KgHistory> kgHistoryList =  kgHistoryService.selectAll(requestContext);
@@ -94,7 +92,7 @@ public class IndexAssociationSurveyController extends IndexBaseController{
              return mv;
     	 }
     	 
-    	 if(typeid==HYDW) {
+    	 if(typeid==HYDW_ID) {
     		 mv = new ModelAndView(getViewPath() + "/index/associationSurvey/associationSurveyTypeListHYDW");
     		 loadNavigation(mv, requestContext, CH_XHGK);
     		 mv.addObject("leftList",leftNavList);
@@ -103,7 +101,7 @@ public class IndexAssociationSurveyController extends IndexBaseController{
              return mv;
     	 }
     	 
-    	 if(typeid==LXFS) {
+    	 if(typeid==LXFS_ID) {
     		mv = new ModelAndView(getViewPath() + "/index/associationSurvey/associationSurveyTypeListContact");
     		loadNavigation(mv, requestContext, CH_XHGK);
     		mv.addObject("leftList",leftNavList);
@@ -146,7 +144,7 @@ public class IndexAssociationSurveyController extends IndexBaseController{
          return mv;
     }
 
-	@RequestMapping(value = "/index/associationSurvey/associationSurveyDetail")
+	@RequestMapping(value = "/index/xhgk/newsDetail")
     @ResponseBody
     public ModelAndView associationSurveyTypeDetail(Long typeid,Long newsid,@RequestParam(defaultValue = DEFAULT_PAGE) int page,
             @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
@@ -179,7 +177,7 @@ public class IndexAssociationSurveyController extends IndexBaseController{
     }
 	
 	   //==获取会员单位
-    @RequestMapping(value = "/index/associationSurvey/loadHYDW")
+    @RequestMapping(value = "/index/xhgk/loadHYDW")
     @ResponseBody
     public ExtStore loadHYDW(  KgMemberUnits memberUnits,HttpServletRequest request,
     		@RequestParam(defaultValue = DEFAULT_PAGE) int offset,

@@ -16,6 +16,7 @@ import com.huan.HTed.core.IRequest;
 import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgOffers;
 import cn.huan.kindergarten.dto.KgType;
+import cn.huan.kindergarten.exception.E404Excetion;
 import cn.huan.kindergarten.service.IKgNewsAttributeService;
 import cn.huan.kindergarten.service.IKgOffersService;
 import cn.huan.kindergarten.service.IKgTypeService;
@@ -25,7 +26,6 @@ import cn.huan.shtyxh.common.bean.ExtStore;
 @Controller
 public class IndexOffersController extends IndexBaseController{
 	
-	public static final Long offerId = 20L;
 	@Autowired
 	private IKgTypeService iKgTypeService;
 	
@@ -41,9 +41,9 @@ public class IndexOffersController extends IndexBaseController{
 	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/offers/offers");
 	        IRequest requestContext = createRequestContext(request);
 	        KgNews news = new KgNews();
-	        news.setTypeid(offerId);
+	        news.setTypeid(OFFER_ID);
 
-	        KgType  kt = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(offerId));
+	        KgType  kt = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(OFFER_ID));
 	        mv.addObject("kgType", kt);
 	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
 	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kt.getParentid(),3);
@@ -67,18 +67,18 @@ public class IndexOffersController extends IndexBaseController{
 
     @RequestMapping(value = "/index/offers/Detail")
     @ResponseBody
-    public ModelAndView offersDetail(Long id,HttpServletRequest request) {
+    public ModelAndView offersDetail(Long id,HttpServletRequest request) throws E404Excetion {
+    	IRequest requestContext = createRequestContext(request);
+    	if(id==null)
+    		throw new E404Excetion("请查看的网页不存在!"); 
+       KgOffers offersInfo = iKgOffersService.selectByPrimaryKey(requestContext, new KgOffers(id));
+       if(offersInfo==null)
+   			throw new E404Excetion("请查看的网页不存在!"); 
+       
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/offers/offersDetail");
-        IRequest requestContext = createRequestContext(request);
-        
-        KgNews news = new KgNews();
-        news.setId(id);
-        KgOffers offersInfo = iKgOffersService.selectByPrimaryKey(requestContext, new KgOffers(id));
         mv.addObject("offersInfo", offersInfo);
-        
         loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
-        
-        KgType  kt = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(offerId));
+        KgType  kt = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(OFFER_ID));
         iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kt.getId(),3);
         loadSysConfig(mv);
         return mv;

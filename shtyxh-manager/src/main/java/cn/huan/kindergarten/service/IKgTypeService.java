@@ -11,6 +11,8 @@ import cn.huan.kindergarten.dto.KgType;
 public interface IKgTypeService extends IBaseService<KgType>, ProxySelf<IKgTypeService>{
 
 	public List<KgType> findChildType(Long typeid);
+	
+	public KgType findParentType(Long typeid);
 
 	public int adminQueryCount(IRequest request, KgType record);
 

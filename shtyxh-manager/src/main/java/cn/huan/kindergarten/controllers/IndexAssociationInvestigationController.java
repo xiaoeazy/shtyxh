@@ -25,12 +25,12 @@ import cn.huan.kindergarten.service.IKgNewsSourceService;
 import cn.huan.kindergarten.service.IKgTypeService;
 import cn.huan.kindergarten.utils.CommonUtil;
 /**
- * 协会动态
+ * 调查与研究
  * @author huan
  *
  */
 @Controller
-public class IndexAssociationDynamicsController extends IndexBaseController{
+public class IndexAssociationInvestigationController extends IndexBaseController{
 	
 	@Autowired
 	private IKgNewsService iKgNewsService;
@@ -41,13 +41,13 @@ public class IndexAssociationDynamicsController extends IndexBaseController{
 	@Autowired
 	private IKgNewsSourceService iKgNewsSourceService;
 	
-	@RequestMapping(value = {"/index/xhdt"})
+	@RequestMapping(value = {"/index/dcyyj"})
     @ResponseBody
-    public ModelAndView associationDynamics(HttpServletRequest request) {
-    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/associationDynamics/associationDynamics");
+    public ModelAndView associationPartyBuilding(HttpServletRequest request) {
+    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/associationInvestigation/associationInvestigation");
         IRequest requestContext = createRequestContext(request);
         KgType kt = new KgType();
-        kt.setParentid(XHDT_ID);
+        kt.setParentid(DCYYJ_ID);
         kt.setRelatetype(2);
         List<KgType> typeList = iKgTypeService.select(requestContext, kt);
         //查询列表
@@ -62,35 +62,20 @@ public class IndexAssociationDynamicsController extends IndexBaseController{
         	kn.setNewsList(newsList);
         }
         
-         //查询头部9条文章
-	   	 List<KgNews> topNewsList =iKgNewsService.selectByMap(requestContext, null,typeidList, 1, 9);
-    	 CommonUtil.judgeNewsTitleLength(topNewsList,17);
-    	 
-    	 KgNews ThumbNews= new KgNews();
-    	 ThumbNews.setIndexshow("Y");
-    	 //查询缩略图
-         List<KgNews> newsThumbNailList =iKgNewsService.selectByMap(requestContext, ThumbNews,typeidList, 1, 5);
-	   	 for(KgNews kn:newsThumbNailList) {
-	   		 if(("").equals(kn.getThumbnail())) {
-	   			 kn.setThumbnail(SysConfig.nonePic);
-	   		 }
-	   	 }
-	   	 CommonUtil.judgeNewsTitleLength(newsThumbNailList,17);
+        
         
         mv.addObject("typeList", typeList);
-        mv.addObject("newsThumbNailList",newsThumbNailList);
         
-        mv.addObject("topNewsList",topNewsList);
-        loadNavigation(mv, requestContext,IndexController.CH_XHDT);
+        loadNavigation(mv, requestContext,IndexController.CH_DCYYJ);
         loadSysConfig(mv);
         return mv;
     }
 	
-	 @RequestMapping(value = {"/index/xhdt/typeList"})
+	 @RequestMapping(value = {"/index/dcyyj/typeList"})
 	    @ResponseBody
-	    public ModelAndView associationDynamicsTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
+	    public ModelAndView associationPartyBuildingTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
 	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE_20) int limit,HttpServletRequest request) throws E404Excetion {
-	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/associationDynamics/associationDynamicsTypeList");
+	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/associationInvestigation/associationInvestigationTypeList");
 	    	IRequest requestContext = createRequestContext(request);
 	    	if(typeid==null)
 	    		throw new E404Excetion("请查看的网页不存在!"); 
@@ -110,17 +95,17 @@ public class IndexAssociationDynamicsController extends IndexBaseController{
 	        mv.addObject("allPageNum",allPageNum);
 	        mv.addObject("kgtype", kgtype);
 	        
-	        loadNavigation(mv, requestContext,IndexController.CH_XHDT);
+	        loadNavigation(mv, requestContext,IndexController.CH_DCYYJ);
 	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgtype.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;
 	    }
 	 
 	
-	    @RequestMapping(value = "/index/xhdt/newsDetail")
+	    @RequestMapping(value = "/index/dcyyj/newsDetail")
 	    @ResponseBody
 	    public ModelAndView associationDynamicsDetail(Long id,HttpServletRequest request) throws E404Excetion {
-	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/associationDynamics/associationDynamicsNewsDetail");
+	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/associationInvestigation/associationInvestigationNewsDetail");
 	        IRequest requestContext = createRequestContext(request);
 	        
 	        if(id==null)
@@ -145,7 +130,7 @@ public class IndexAssociationDynamicsController extends IndexBaseController{
 	        mv.addObject("linkNewsList", linkNewsList);
 	        
 	        
-	        loadNavigation(mv, requestContext,IndexController.CH_XHDT);
+	        loadNavigation(mv, requestContext,IndexController.CH_DCYYJ);
 	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;

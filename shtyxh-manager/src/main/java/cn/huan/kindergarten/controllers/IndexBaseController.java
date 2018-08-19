@@ -46,7 +46,11 @@ public class IndexBaseController extends BaseController{
 	public static final Long DCYYJ_ID = 5L;
 	public static final Long XHDT_ID = 6L;
 	public static final Long DJHD_ID = 7L;
-	public static final Long OFFER_ID = 20L;
+	public static final Long OFFER_ID = 20L;  //招聘
+	
+	public static final  Long LSYG_ID =12L; //历史沿革
+	public static final  Long HYDW_ID =15L;	//会员单位
+	public static final  Long LXFS_ID =16L;	//联系方式
 	
 	@Autowired
 	private IKgTypeService iKgTypeService;
