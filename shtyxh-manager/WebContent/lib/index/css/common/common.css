@@ -1,5 +1,6 @@
 /*main*/
 /* .main{width:100%;background:#f0f0f0;} */
+ul li {list-style-type: none;}
 .main{width:100%;float: left;background:url("../../img/background.png")}
 .main_container{width:1000px;margin:0 auto;}
 
