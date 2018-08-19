@@ -84,7 +84,8 @@ body{background:#f0f0f0;}
 .top_nav_ls a{color:#fff;line-height:48px;font-size:16px;font-weight:bolder;text-decoration: none;}
 
 /*main*/
-.main{width:100%;background:#f0f0f0;}
+/* .main{width:100%;background:#f0f0f0;} */
+.main{width:100%;background:url("../img/background.png")}
 .main_container{width:1000px;margin:0 auto;}
 
 .main_left_block{width:698px;float:left;}
@@ -109,7 +110,8 @@ body{background:#f0f0f0;}
 .vF_detail_relcontent h2{width:100%;background:#fff;}
 .vF_detail_relcontent h2 p{margin-left:20px;color:#4d4d4d;line-height:38px;font-size:16px;font-weight:500px;}
 
-.vF_detail_relcontent_lst{width:100%;background:#f8f8f8;float:left}
+/* .vF_detail_relcontent_lst{width:100%;background:#f8f8f8;float:left} */
+.vF_detail_relcontent_lst{width:100%;background:#eee;float:left}
 .vF_detail_relcontent_lst ul{margin:10px 10px 10px 20px}
 
 

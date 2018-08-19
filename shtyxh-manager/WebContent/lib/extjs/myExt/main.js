@@ -8,6 +8,7 @@ var newsAssessmentNum=0;
 var newsOtherNum=0;
 var newsQuestionNum=0;
 var newsSysNum=0;
+var newsXHGKNum = 0;
 
 Ext.onReady(function() {
 		Ext.QuickTips.init();//QuickTips的作用是读取标签中的ext:qtip属性，并为它赋予显示提示的动作。
@@ -126,6 +127,8 @@ Ext.onReady(function() {
 						Ext.getCmp("main_dcwj").hide();
 					if(newsSysNum==0)
 						Ext.getCmp("main_xt").hide();
+					if(newsXHGKNum==0)
+						Ext.getCmp("main_xhgk").hide();
 				}
 			}
 		});
@@ -163,7 +166,6 @@ function addFuncStr(func){
 
 function getQuestion(funcs) {
 	var str = "";
-	
 	if(isHaveFunc(funcs,16))
 		str +=addFunc('questionSurvey1.png','questionSurvey2.png','questionSurvey');
 	if(str!="")
@@ -173,28 +175,35 @@ function getQuestion(funcs) {
 
 function getXHGK(funcs){
 	var str = "";
-	str +=addFunc('news1.png','news2.png','news');
-	str +=addFunc('type1.png','type2.png','newsType');
-	str +=addFunc('introduction1.png','introduction2.png','introduction');
-	str +=addFunc('companyFramework1.png','companyFramework2.png','companyFramework');
-	str +=addFunc('companyDirector1.png','companyDirector2.png','companyDirector');
-	str +=addFunc('history1.png','history2.png','history');
-
-	str +=addFunc('member1.png','member2.png','memberUnits');
-	str +=addFunc('contact1.png','contact2.png','contact');
+	if(isHaveFunc(funcs,1))
+		str +=addFunc('introduction1.png','introduction2.png','introduction');
+	if(isHaveFunc(funcs,5))
+		str +=addFunc('companyFramework1.png','companyFramework2.png','companyFramework');
+	if(isHaveFunc(funcs,6))
+		str +=addFunc('companyDirector1.png','companyDirector2.png','companyDirector');
+	if(isHaveFunc(funcs,7))
+		str +=addFunc('history1.png','history2.png','history');
+	if(isHaveFunc(funcs,8))
+		str +=addFunc('member1.png','member2.png','memberUnits');
+	if(isHaveFunc(funcs,9))
+		str +=addFunc('contact1.png','contact2.png','contact');
+	if(str!="")
+		newsXHGKNum=1;
 	return addFuncStr(str);
 }
 function getNews(funcs){
 	var str = "";
-	if(isHaveFunc(funcs,6))
+	if(isHaveFunc(funcs,10))
 		str +=addFunc('news1.png','news2.png','news');
-	if(isHaveFunc(funcs,7))
+	if(isHaveFunc(funcs,11))
 		str +=addFunc('type1.png','type2.png','newsType');
-	if(isHaveFunc(funcs,8))
+	if(isHaveFunc(funcs,12))
 		str +=addFunc('source1.png','source2.png','newsSource');
+	if(isHaveFunc(funcs,13))
+		str +=addFunc('offers1.png','offers2.png','offers');
 	if(str!="")
 		newsRoleNum = 1;
-	str +=addFunc('offers1.png','offers2.png','offers');
+	
 	return addFuncStr(str);
 }
 
@@ -216,9 +225,9 @@ function getAssessment(funcs){
 
 function getOthers(funcs){
 	var str = "";
-	if(isHaveFunc(funcs,5))
-		str +=addFunc('download1.png','download2.png','download');
 	if(isHaveFunc(funcs,14))
+		str +=addFunc('download1.png','download2.png','download');
+	if(isHaveFunc(funcs,15))
 		str +=addFunc('carousel1.png','carousel2.png','carousel');
 	if(str!="")
 		newsOtherNum=1;
@@ -229,15 +238,15 @@ function getOthers(funcs){
 
 function getConfig(funcs){
 	var str = "";
-	if(isHaveFunc(funcs,9))
+	if(isHaveFunc(funcs,18))
 		str +=addFunc('link1.png','link2.png','link');
-	if(isHaveFunc(funcs,10))
+	if(isHaveFunc(funcs,19))
 		str +=addFunc('config1.png','config2.png','config');
-	if(isHaveFunc(funcs,11))
+	if(isHaveFunc(funcs,20))
 		str +=addFunc('attribute1.png','attribute2.png','newsAttribute');
-	if(isHaveFunc(funcs,12))
+	if(isHaveFunc(funcs,21))
 		str +=addFunc('user1.png','user2.png','user');
-	if(isHaveFunc(funcs,13))
+	if(isHaveFunc(funcs,22))
 		str +=addFunc('role1.png','role2.png','role');
 	if(str!="")
 		newsSysNum=1;

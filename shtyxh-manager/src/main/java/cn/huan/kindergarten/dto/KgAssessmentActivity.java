@@ -34,7 +34,18 @@ public class KgAssessmentActivity extends BaseDTO {
      
      private String attributeid;
 
-     @NotEmpty
+     public KgAssessmentActivity() {
+		super();
+	}
+     
+
+	public KgAssessmentActivity(Long id) {
+		super();
+		this.id = id;
+	}
+
+
+	@NotEmpty
      @Length(max = 45)
      private String assessmentActivityName;
 

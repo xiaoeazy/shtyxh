@@ -11,10 +11,14 @@ import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 
 import cn.huan.kindergarten.bean.SysConfig;
+import cn.huan.kindergarten.dto.KgAssessmentActivity;
+import cn.huan.kindergarten.dto.KgAssessmentType;
 import cn.huan.kindergarten.dto.KgConfig;
 import cn.huan.kindergarten.dto.KgLink;
 import cn.huan.kindergarten.dto.KgNewsSource;
 import cn.huan.kindergarten.dto.KgType;
+import cn.huan.kindergarten.service.IKgAssessmentActivityService;
+import cn.huan.kindergarten.service.IKgAssessmentTypeService;
 import cn.huan.kindergarten.service.IKgConfigService;
 import cn.huan.kindergarten.service.IKgLinkService;
 import cn.huan.kindergarten.service.IKgNewsSourceService;
@@ -60,19 +64,36 @@ public class IndexBaseController extends BaseController{
 	private IKgNewsSourceService iKgNewsSourceService;
 	@Autowired
 	private IKgLinkService iKgLinkService;
+	@Autowired
+	private IKgAssessmentTypeService iKgAssessmentTypeService;
 	
 	public void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {
 			KgType t2 = new KgType();
-			t2.setParentid(2L);
+			t2.setParentid(XHGK_ID);
 			KgType t3 = new KgType();
-			t3.setParentid(3L);
+			t3.setParentid(ZXZX_ID);
+			KgType t5 = new KgType();
+			t5.setParentid(DCYYJ_ID);
+			KgType t6 = new KgType();
+			t6.setParentid(XHDT_ID);
+			KgType t7 = new KgType();
+			t7.setParentid(DJHD_ID);
+			
 			List<KgType> xhgkTypeList = iKgTypeService.select(requestContext,t2);
 	  	  	List<KgType> zxzxTypeList = iKgTypeService.select(requestContext,t3);
+	  	  	List<KgType> dcyyjTypeList = iKgTypeService.select(requestContext,t5);
+  	  		List<KgType> xhdtTypeList = iKgTypeService.select(requestContext,t6);
+  	  		List<KgType> djhdTypeList = iKgTypeService.select(requestContext,t7);
+  	  		List<KgAssessmentType> zzjdList = iKgAssessmentTypeService.select(requestContext, null); //资质鉴定
 	        List<KgNewsSource> KgNewsSourceList = iKgNewsSourceService.selectAll(requestContext);
 	        List<KgLink> linkList = iKgLinkService.selectAll(requestContext);
 	        mv.addObject("xhgkTypeList", xhgkTypeList);
 	        mv.addObject("zxzxTypeList", zxzxTypeList);
+	        mv.addObject("dcyyjTypeList", dcyyjTypeList);
+	        mv.addObject("xhdtTypeList", xhdtTypeList);
+	        mv.addObject("djhdTypeList", djhdTypeList);
 	        mv.addObject("KgNewsSourceList", KgNewsSourceList);
+	        mv.addObject("zzjdList", zzjdList);			//资质鉴定
 	        mv.addObject("chanel", chanel);
 	        mv.addObject("linkList",linkList);
 	        

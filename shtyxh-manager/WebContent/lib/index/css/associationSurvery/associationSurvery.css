@@ -1,6 +1,6 @@
 a{text-decoration:none}
 /*协会简介*/
-.left_box{ width:100%; height:auto; overflow:hidden;float:left;background: #fff}
+.left_box{ width:100%; height:auto; overflow:hidden;float:left;background: #fff;box-shadow: 0px 0px 8px #ccc;}
 .left_box strong{ display:block; width:100%; height:100px; background:url(../img/about.png) no-repeat 40px 40px #005496; color:#FFF;}
 .left_box strong span{ display:block; font-family:"Microsoft YaHei"; font-size:22px; font-weight:normal; padding-top:34px; padding-left:102px;}
 .left_box strong samp{ color:#b2dcff; font-family:"Microsoft YaHei"; font-size:12px; text-transform:uppercase; font-weight:normal;padding-left:102px;}
@@ -13,7 +13,7 @@ a{text-decoration:none}
 .left_box ul li:hover a{ color:#FFF; text-decoration:none;}
 .left_box ul li:hover a:hover{ color:#FFF; text-decoration:underline;}
 
-.right_box{ width:100%; height:auto; overflow:hidden;background: #f8f8f8;}
+.right_box{ width:100%; height:auto; overflow:hidden;    background: #fff;box-shadow: 0px 0px 8px #ccc;}
 .right_box strong.title{ display:block; height:47px;margin-left:10px; line-height:47px; border-bottom:1px solid #CCC;}
 .right_box strong.title span{ color:#666666; font-family:"Microsoft YaHei"; font-size:20px; display:inline-block;}
 .nr_box{ color:#666666; font-family:"Microsoft YaHei"; font-size:14px; line-height:24px; padding:10px 30px 0 10px;}

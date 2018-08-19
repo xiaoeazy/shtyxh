@@ -149,7 +149,20 @@
 					<!-- 公告公示 end-->
 				</div>
 				
-				
+				<div class="main_right_block mt13">
+					<div class="search-bd">
+					  <form action="${base.contextPath}/index/news/search" id="search-form" class="form" method="GET">
+	                	<div class="form-group">
+		                    <input type="text" id="home-searchInput" name="searchparam" value="" class="form-control"
+		                           autocomplete="off"
+		                           placeholder="" />
+	                    <button type="submit" id="" name="" class="btn btn-primary">
+	                        <i class="iconfont icon-sousuo"></i>搜索
+	                    </button>
+	                    </div>
+	                    </form>
+                    </div>
+				</div>
 					
 				<div class="main_right_block mt13">
 					<!--资讯中心start-->
@@ -230,7 +243,7 @@
 				<div class="main_right_block mt13">
 						<div class="main_right_cbl_pxyjd mt13">
 							<h2>
-								<a href="${base.contextPath}/index/admin/download"
+								<a href="${base.contextPath}/index/assessmentTypeList"
 									target="_blank">培训与鉴定</a>
 							</h2>
 							<#list typePxyjdShowList as typePxyjdShowList>
@@ -239,9 +252,15 @@
 									</#if>
 										<dl>
 											<dt>${typePxyjdShowList.typename!}</dt>
-											<#list typePxyjdShowList.childType as childType>
-												<dd>${childType.typename!}</dd>
-											</#list>
+											<#if typePxyjdShowList.id == 25>
+												<#list zzjdList as zzjdList>
+													<dd><a href="${base.contextPath}/index/assessmentTypeList?typeid=${zzjdList.id}">${zzjdList.assessmentTypeName}</a></dd>
+												</#list>
+											<#else>
+												<#list typePxyjdShowList.childType as childType>
+													<dd>${childType.typename!}</dd>
+												</#list>
+											</#if>
 										</dl>
 									<#if typePxyjdShowList_index%2==1>
 										</div>

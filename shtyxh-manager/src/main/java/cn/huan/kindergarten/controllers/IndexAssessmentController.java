@@ -27,6 +27,7 @@ import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
 import cn.huan.kindergarten.dto.KgAssessmentType;
 import cn.huan.kindergarten.dto.KgNewsAttribute;
+import cn.huan.kindergarten.exception.E404Excetion;
 import cn.huan.kindergarten.service.IIndexAssessmentService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityUserProgressService;
@@ -54,7 +55,7 @@ public class IndexAssessmentController extends IndexBaseController{
     //======================================评估========================================
     @RequestMapping(value = "/index/assessmentTypeList")
     public ModelAndView assessmentTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
-            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) {
+            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/assessmentTypeList");
         IRequest requestContext = createRequestContext(request);
         
@@ -64,6 +65,8 @@ public class IndexAssessmentController extends IndexBaseController{
         	if(typeList.size()!=0)
         		typeid=typeList.get(0).getId();
         }
+        if(typeid==null)
+    		throw new E404Excetion("请查看的网页不存在!"); 
         	
         KgAssessmentActivity kaa = new KgAssessmentActivity();
         kaa.setAssessmentTypeId(typeid);
@@ -93,14 +96,15 @@ public class IndexAssessmentController extends IndexBaseController{
     
     @RequestMapping(value = "/index/assessmentDetail")
     public ModelAndView assessmentDetail(Long id, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
-            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) {
+            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
+    	 IRequest requestContext = createRequestContext(request);
+    	 KgAssessmentActivity kaa = iKgAssessmentActivityService.selectByPrimaryKey(requestContext, new KgAssessmentActivity(id));
+	    if(id==null)
+	    		throw new E404Excetion("请查看的网页不存在!"); 
+	    if(kaa==null)
+	    		throw new E404Excetion("请查看的网页不存在!"); 
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/assessmentDetail");
-        IRequest requestContext = createRequestContext(request);
-        KgAssessmentActivity k = new KgAssessmentActivity();
-        k.setId(id);
-        KgAssessmentActivity kaa = iKgAssessmentActivityService.selectByPrimaryKey(requestContext, k);
         mv.addObject("assessmentInfo", kaa);
-        
         KgAssessmentType requestKT = new KgAssessmentType();
         requestKT.setId(kaa.getAssessmentTypeId());
         KgAssessmentType kgNewstype = iKgAssessmentTypeService.selectByPrimaryKey(requestContext, requestKT);
