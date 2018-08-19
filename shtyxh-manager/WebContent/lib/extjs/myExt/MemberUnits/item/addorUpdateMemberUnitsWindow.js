@@ -127,6 +127,14 @@ Ext.extend(addorUpdateMemberUnits.addorUpdateMemberUnitsWindowWindow, Ext.Window
 								name: 'nature',
 								id:mainId+"nature",
 					            maxLength:200  
+				  			},{
+				  			   xtype: "datefield",
+				  			   name: "date",
+				  			   id:mainId+'admissiontime',
+				  			   fieldLabel: "入会时间",
+				  			   editable: false,
+				  			   emptyText: "--请选择--",
+				  			   format: "Y-m-d",//日期的格式
 				  			}
 				  			],
 				  buttonAlign : "center",
@@ -174,7 +182,8 @@ Ext.extend(addorUpdateMemberUnits.addorUpdateMemberUnitsWindowWindow, Ext.Window
 							var telphone=record.get("telphone");
 							var level=record.get("level");
 							var nature=record.get("nature");
-							
+							var admissiontime = record.get("admissiontime");
+							var date  =convertDateFromString(admissiontime);
 				    		Ext.getCmp(mainId+"memberno").setValue(memberno);
 				    		cantonCombo.setValue(cantonid);
 				    		Ext.getCmp(mainId+"kindergartenname").setValue(kindergartenname);
@@ -183,6 +192,7 @@ Ext.extend(addorUpdateMemberUnits.addorUpdateMemberUnitsWindowWindow, Ext.Window
 				    		Ext.getCmp(mainId+"telphone").setValue(telphone);
 				    		Ext.getCmp(mainId+"level").setValue(level);
 				    		Ext.getCmp(mainId+"nature").setValue(nature);
+				    		Ext.getCmp(mainId+"admissiontime").setValue(date);
 				    	}
 					}
 				}
@@ -201,6 +211,7 @@ Ext.extend(addorUpdateMemberUnits.addorUpdateMemberUnitsWindowWindow, Ext.Window
 		var telphone=Ext.getCmp(mainId+"telphone").getValue().trim();
 		var level=Ext.getCmp(mainId+"level").getValue().trim();
 		var nature=Ext.getCmp(mainId+"nature").getValue().trim();
+		var admissiontime = Ext.util.Format.date(Ext.getCmp(mainId+"admissiontime").getValue(), 'Y-m-d');
 		
 		if(memberno==""){
 			Ext.getCmp(mainId+"memberno").markInvalid("编号不能为空！");
@@ -234,6 +245,10 @@ Ext.extend(addorUpdateMemberUnits.addorUpdateMemberUnitsWindowWindow, Ext.Window
 			Ext.getCmp(mainId+"nature").markInvalid("性质不能为空！");
 			return;
 		}
+		if(admissiontime==""){
+			Ext.getCmp(mainId+"admissiontime").markInvalid("日期不能为空！");
+			return;
+		}
 	
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
@@ -251,6 +266,7 @@ Ext.extend(addorUpdateMemberUnits.addorUpdateMemberUnitsWindowWindow, Ext.Window
                 	  telphone : telphone,
                 	  level : level,
                 	  nature : nature,
+                	  admissiontime:admissiontime,
                 	  id : id
                   }]),
                   success : function(response, options) {
@@ -274,6 +290,16 @@ Ext.extend(addorUpdateMemberUnits.addorUpdateMemberUnitsWindowWindow, Ext.Window
 	}
 	
 });
+
+
+function convertDateFromString(dateString) { 
+	if (dateString) { 
+		var arr1 = dateString.split(" "); 
+		var sdate = arr1[0].split('-'); 
+		var date = new Date(sdate[0], sdate[1]-1, sdate[2]); 
+		return date;
+	} 
+}
 
 
 
