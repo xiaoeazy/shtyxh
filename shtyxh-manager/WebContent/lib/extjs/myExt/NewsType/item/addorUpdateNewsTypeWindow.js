@@ -296,6 +296,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
                 	  typename : typename,
                 	  parentid:parentid,
                 	  showindex:showindex,
+                	  relatetype:2,
                 	  showentrance:showentrance,
                 	  entranceimagepath:entranceimagepath,
                 	  id : id

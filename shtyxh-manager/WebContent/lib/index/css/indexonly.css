@@ -304,38 +304,44 @@ body{background:#f0f0f0;}
 .main_right_cbl_pxyjd dl dd a:hover{text-decoration: underline;}
 
 /*搜索框*/
-.search-bd .form input {
-    width: 202px;
-    height: 48px;
-    line-height: 48px;
-    color: #222;
-/*     position: absolute; */
-/*     top: 1px; */
-/*     left: 0px; */
+
+.bar6 form {
+	position:relative;
+	width:292px;
+	margin:0 auto;
+}
+.bar6 input {
+	border:2px solid #2b7ecc;
+	border-radius:5px;
+	background:transparent;
+	top:0;
+	right:0;
+	width: 100%;
+    height: 42px;
+    padding-left: 13px;
     outline: none;
-    border: none;
-    padding: 4px 0 0px 20px;
+    box-sizing: border-box;
 }
-.search-bd .form-group {
-    border: 2px solid #0082df;
-    position: relative;
-    height: 52px;
-    z-index: 3;
-}
-.search-bd .form .btn {
+.bar6 button {
+	background:#2b7ecc;
+	border-radius:0 5px 5px 0;
+	width:60px;
+	top:0;
+	right:0;
+	
+	cursor: pointer;
+    position: absolute;
+    height: 42px;
+    
     border: none;
-    background: #0082df;
-    color: #fff;
-    font-size: 18px;
-    height: 48px;
-    line-height: 48px;
-    overflow: hidden;
-/*     position: absolute; */
-/*     right: 0; */
-    text-align: center;
-/*     top: 0; */
-    width: 50px;
-    cursor: pointer;
+    outline: none;
+   
+    box-sizing: border-box;
+}
+.bar6 button:before {
+	content:"搜索";
+	font-size:13px;
+	color:#F9F0DA;
 }
 
 

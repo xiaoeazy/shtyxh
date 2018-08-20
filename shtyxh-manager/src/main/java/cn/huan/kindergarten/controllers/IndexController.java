@@ -113,7 +113,7 @@ public class IndexController extends IndexBaseController{
     	 //培训与鉴定
     	 KgType kn4 = new KgType();
     	 kn4.setParentid(PXYJD_ID);
-    	 kn4.setHidden(false);
+//    	 kn4.setHidden(false);
     	 List<KgType> knt4list = iKgTypeService.select(requestContext, kn4);
     	 for(KgType kt:knt4list) {
     		 KgType childKt = new KgType();
