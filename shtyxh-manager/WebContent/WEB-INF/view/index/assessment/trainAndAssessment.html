@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>培训与鉴定_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/channel.css" rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/news/news.css" rel="stylesheet" type="text/css" />
+<script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+
+</head>
+<body id="zcfg">
+<#include "../../include/navigation.html">
+
+<div class="main">
+<div class="main_container">
+
+<#if newsTop??>
+	<div class="vF-cht-section-newsblock mt13">
+           <div class="vT-zcfg-cgf-t">
+               <div class="vT-zcfg-cgf-t-pic"><a href="${base.contextPath}/index/news/newsDetail?id=${newsTop.id}" style="text-decoration:none">
+               	<font style="font-weight:bold;font-size:30px;color:red">${newsTop.newstitle}</font></a>
+               </div>
+                <p class="shuoming">&nbsp;&nbsp;&nbsp;&nbsp;</p> 
+           </div>
+           <div class="vT-zcfg-cgf-con">
+               ${newsTop.content}
+              
+           </div>
+      </div>
+	<#if newsTop.thumbnail??>
+	     <div class="vT-cht-section-picnews mt13">
+			<a href="${base.contextPath}/index/jdypx/newsDetail?id=${newsTop.id}"  target='_blank'  thumb="" alt="" text="">
+			<img src="${base.contextPath}${newsTop.thumbnail}"  border='0' alt='' width="383px" height="237px" /></a>
+		 </div>
+	 </#if>
+</#if>
+
+
+
+	<!--left newslist start-->
+    <div class="main_left_block mt13">
+        <div class="wz_block" style="background: #fff;">
+        	<#list typeList as typeList>   
+			    <div class="newslist_bl_nor">
+	                <div class="newslist">
+			               <div class="vF_t2">
+			                 <div class="vF_t2_r1">
+			                    <div class="vF_tab unit2">
+			                        <div class="vF_title_bar2">
+			                          <h2 class="ui_til4_tab_u current2 word5"><a href="${base.contextPath}/index/jdypx/typeList?typeid=${typeList.id}" >${typeList.typename}</a></h2>
+			                        </div>
+			                    </div>
+			                 </div>
+			
+			                 <ul class="c_list mt10 mb10 tab-con split" style="display:block">
+			                 	<#list typeList.newsList as newsList>   
+									<li><a href="${base.contextPath}/index/jdypx/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a></li>
+								</#list>
+		                	 </ul>
+			            </div>
+	                </div>
+            	</div>
+    		</#list> 
+        </div>
+        
+         <div class="wz_block" style="background: #fff;margin-top:10px;">
+        	<#list typeAssessmentList as typeAssessmentList>   
+			    <div class="newslist_bl_nor">
+	                <div class="newslist">
+			               <div class="vF_t2">
+			                 <div class="vF_t2_r1">
+			                    <div class="vF_tab unit2">
+			                        <div class="vF_title_bar2">
+			                          <h2 class="ui_til4_tab_u current2 word5"><a href="${base.contextPath}/index/assessmentTypeList?typeid=${typeAssessmentList.id}" >${typeAssessmentList.assessmentTypeName}</a></h2>
+			                        </div>
+			                    </div>
+			                 </div>
+			
+			                 <ul class="c_list mt10 mb10 tab-con split" style="display:block">
+			                 	<#list typeAssessmentList.assessmentActivityList as assessmentActivityList>   
+									<li><a href="${base.contextPath}/index/assessmentDetail?id=${assessmentActivityList.id}" target="_blank" title="${assessmentActivityList.assessmentActivityName}">${assessmentActivityList.assessmentActivityName}</a></li>
+								</#list>
+		                	 </ul>
+			            </div>
+	                </div>
+            	</div>
+    		</#list> 
+        </div>
+    </div>
+	<!--left newslist end-->
+	
+	
+	<!-- right start -->
+	<div class="main_right_block mt13">
+        <div class="main_right_cbl">
+	         <ul class="jyxtlinks mb15">
+					<li class="jyxtlinks sys0"><p><a href="${base.contextPath}/index/jdypx/gwpx" target="_blank" alt="岗位培训" title="岗位培训">岗位培训</a></p></li>
+					<li class="jyxtlinks sys1 singleln"><p><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22" target="_blank" alt="幼教上岗证" title="幼教上岗证">幼教上岗证</a></p></li>
+					<li class="jyxtlinks sys4 singleln"><p><a href="${base.contextPath}/index/jdypx/gwpx?typeid=23" target="_blank" alt="致力培训" title="致力培训">致力培训</a></p></li>
+			</ul>
+		</div>
+	</div>
+	
+    <div class="main_right_block mt13">
+        <div class="main_right_cbl">
+            <h2>分类总览</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list">
+                		<#list typeList as typeList> 
+							<li class="sorthead1"><a href="${base.contextPath}/index/news/typeList?typeid=${typeList.id}"  target="_blank" title="${typeList.typename}">${typeList.typename}</a>(${typeList.count})</li>
+						</#list> 
+						<#list typeAssessmentList as typeAssessmentList> 
+							<li class="sorthead1"><a href="${base.contextPath}/index/assessmentTypeList?typeid=${typeAssessmentList.id}"  target="_blank" title="${typeAssessmentList.assessmentTypeName}">${typeAssessmentList.assessmentTypeName}</a>(${typeAssessmentList.count})</li>
+						</#list> 
+                </ul>
+                </div>
+        </div>
+
+      </div>
+		<!-- right end -->
+	
+	<!--left newslist start-->
+    <div class="main_left_block mt13">
+       
+    </div>
+	<!--left newslist end-->
+	
+	
+   
+</div>
+</div>
+<#include "../../include/footer.html">
+</body>
+<script language="javascript">
+function showd(n)
+{
+var uom = new Date(new Date()-0+n*86400000);
+uom = uom.getFullYear() + "," + (uom.getMonth()+1) + "," + uom.getDate();
+return uom;
+}
+var dayLT=showd(0);
+var gEndT = dayLT.split(",");
+var gEnd=gEndT[0]-0 + "-" + gEndT[1] + "-" +gEndT[2];
+
+laydate({
+  elem: '#dateissuestart',
+  format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+  festival: false, //显示节日
+  max:gEnd,
+  choose: function(datas){ //选择日期完毕的回调
+    //alert('得到：'+datas);
+  }
+});
+laydate({
+      elem: '#dateissueend',
+      format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+      festival: false, //显示节日
+      max:gEnd,
+      choose: function(datas){ //选择日期完毕的回调
+        //alert('得到：'+datas);
+      }
+    });
+
+/*
+laydate({
+  elem: '#hello3',
+  min: laydate.now(-1), //-1代表昨天，-2代表前天，以此类推
+  max: laydate.now(+1) //+1代表明天，+2代表后天，以此类推
+});
+*/
+</script>
+<script language="javascript" src="${base.contextPath}/lib/index/js/channel.js"></script>
+</html>

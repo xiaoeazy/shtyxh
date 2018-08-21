@@ -250,7 +250,7 @@
 				<div class="main_right_block mt13">
 						<div class="main_right_cbl_pxyjd mt13">
 							<h2>
-								<a href="${base.contextPath}/index/assessmentTypeList"
+								<a href="${base.contextPath}/index/jdypx"
 									target="_blank">培训与鉴定</a>
 							</h2>
 							<#list typePxyjdShowList as typePxyjdShowList>
@@ -258,15 +258,21 @@
 										<div class="dldiv">
 									</#if>
 										<dl>
-											<dt>${typePxyjdShowList.typename!}</dt>
+											
 											<#if typePxyjdShowList.id == 25>
+												<dt><a href="${base.contextPath}/index/assessmentTypeList"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
 												<#list zzjdList as zzjdList>
-													<dd><a href="${base.contextPath}/index/assessmentTypeList?typeid=${zzjdList.id}">${zzjdList.assessmentTypeName}</a></dd>
+													<dd><a href="${base.contextPath}/index/assessmentTypeList?typeid=${zzjdList.id}"  target="_blank">${zzjdList.assessmentTypeName}</a></dd>
 												</#list>
+											<#elseif typePxyjdShowList.id == 21>
+												<dt><a href="${base.contextPath}/index/jdypx/gwpx"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
+												<dd><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22"  target="_blank">幼教上岗证</a></dd>
+												<dd><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22"  target="_blank">致力培训</a></dd>
 											<#else>
-												<#list typePxyjdShowList.childType as childType>
-													<dd>${childType.typename!}</dd>
-												</#list>
+												<dt><a href="${base.contextPath}/index/jdypx/typeList?typeid=${typePxyjdShowList.id}"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
+<!-- 												<#list typePxyjdShowList.childType as childType> -->
+<!-- 													<dd>${childType.typename!}</dd> -->
+<!-- 												</#list> -->
 											</#if>
 										</dl>
 									<#if typePxyjdShowList_index%2==1>

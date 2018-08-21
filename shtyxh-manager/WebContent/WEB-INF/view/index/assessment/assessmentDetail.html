@@ -119,7 +119,7 @@ function uploadState(flag,message){
 <div class="main_left_block mt13">
 <div class="wz_block">
     <div class="vF_deail_currentloc">
-        <p>当前位置：<a href="${base.contextPath}/index/assessmentTypeList" title="" class="CurrChnlCls">培训与鉴定</a>&nbsp;&raquo;&nbsp;
+         <p>当前位置：<a href="${base.contextPath}/index/jdypx" title="" class="CurrChnlCls">培训与鉴定</a>&nbsp;&raquo;&nbsp;
         <a href="${base.contextPath}/index/assessmentTypeList" title="" class="CurrChnlCls">资质鉴定</a>&nbsp;&raquo;&nbsp;
         <a href="${base.contextPath}/index/assessmentTypeList?typeid=${assessmentType.id}" title="${assessmentType.assessmentTypeName}" class="CurrChnlCls">${assessmentType.assessmentTypeName}</a>
            &nbsp;&raquo;&nbsp;${assessmentInfo.assessmentActivityName}
@@ -128,11 +128,11 @@ function uploadState(flag,message){
     <div class="vF_deail_maincontent">
 
 		<div class="vF_detail_main">
-            <div class="vF_detail_header"><h2 class="tc">${assessmentInfo.assessmentActivityName};</h2>
+            <div class="vF_detail_header"><h2 class="tc">${assessmentInfo.assessmentActivityName}</h2>
             <p class="tc"><span id="pubTime">${assessmentInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span></p>
             </div>
             <div class="vF_detail_content">
-                ${assessmentInfo.assessmentActivityContent};
+                ${assessmentInfo.assessmentActivityContent}
             </div>
         </div>
 

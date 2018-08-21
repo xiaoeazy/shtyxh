@@ -97,14 +97,22 @@
 					</#list>
                 </ul>
                 </li>
-                <li id="ch_pxyjd" <#if chanel =='CH_PXYJD'> class="actv" </#if>><a href="${base.contextPath}/index/assessmentTypeList" >培训与鉴定</a><img src="${base.contextPath}/lib/index/img/banner/rightline.png" style="float:right;margin-top:10px;" height="24px" width="3px;"/>
+                <li id="ch_pxyjd" <#if chanel =='CH_PXYJD'> class="actv" </#if>><a href="${base.contextPath}/index/jdypx" >培训与鉴定</a><img src="${base.contextPath}/lib/index/img/banner/rightline.png" style="float:right;margin-top:10px;" height="24px" width="3px;"/>
 	                <ul>
+	               		 <li><a href="${base.contextPath}/index/jdypx/gwpx">岗位培训</a>
+	               		 		<ul>
+	               		 				<li><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22">幼教上岗证</a></li>
+	               		 				<li><a href="${base.contextPath}/index/jdypx/gwpx?typeid=23">致力培训</a></li>
+	               		 		</ul>
+	               		 </li> 
 	               		 <li><a href="${base.contextPath}/index/assessmentTypeList">资质鉴定</a>
 	               		 		<ul>
 	               		 			<#list zzjdList as zzjdList>
 	               		 				<li><a href="${base.contextPath}/index/assessmentTypeList?typeid=${zzjdList.id}">${zzjdList.assessmentTypeName}</a></li>
 	               		 			</#list>
 	               		 		</ul>
+	               		 </li> 
+	               		 <li><a href="${base.contextPath}/index/jdypx/typeList?typeid=24">其他培训</a>
 	               		 </li> 
 	                </ul>
                 </li>

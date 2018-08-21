@@ -99,8 +99,8 @@
 	           		<if test="news.indexshow!=null  and news.indexshow !='' ">
 	           			AND a.indexshow = #{news.indexshow}
 	           		</if>
-	           		<if test="news.sourceid!=null and news.sourceid !=''">
-	           			AND a.sourceId = #{news.sourceid}
+	           		<if test="news.attributeid != null and news.attributeid !=''">
+	           		 	AND FIND_IN_SET(#{news.attributeid},a.attributeId) 
 	           		</if>
 		       	 </if>
        	 		

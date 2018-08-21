@@ -1,17 +1,15 @@
-.main_right_cbl ul li.sys0 {
-    background: url(../../img/news/rightsys_0.gif) no-repeat top left #00b8ee;
-    border: none;
-    padding-top: 8px;
-}
+.main_right_cbl ul li.jyxtlinks{width:259px;height:55px;background:#fff;border:1px solid #e0e0e0;margin: 0 auto;margin-top:11px;}
+.main_right_cbl ul li.jyxtlinks p{font-size:14px;line-height:18px;color:#333;}
+/* .main_right_cbl ul li.jyxtlinks p a{font-size:14px;line-height:18px;color:#333;text-decoration: none} */
+/* .main_right_cbl ul li.jyxtlinks p a:hover{color:#fff;text-decoration:underline} */
 
-.main_right_cbl ul li.sys0 p a {
-    font-size: 20px;
-    font-weight: bolder;
-    line-height: 24px;
-    color: #fff;
-    text-decoration: none;
-}
+.main_right_cbl ul li.singleln p {margin-left: 70px;margin-top: 18px;}
+.main_right_cbl ul li.sys0{background:url(../../img/news/rightsys_0.gif) no-repeat top left #00b8ee;border:none;padding-top:8px}
+.main_right_cbl ul li.sys1{background:url(../../img/news/rightsys_1.gif) no-repeat top left #fff;background-position:21px 15px}
+.main_right_cbl ul li.sys4{background:url(../../img/news/rightsys_4.gif) no-repeat top left #fff;background-position:21px 15px}
 
-.main_right_cbl ul li.sys0 p a:hover {
-    text-decoration: underline;
-}
+.main_right_cbl ul li p a {font-size: 14px; font-weight: bolder;line-height: 18px;color: #333;text-decoration: none;}
+.main_right_cbl ul li p a:hover {text-decoration: underline;color: #ba2636;}
+
+.main_right_cbl ul li.sys0 p a {font-size: 20px; font-weight: bolder;line-height: 24px;color: #fff;text-decoration: none;}
+.main_right_cbl ul li.sys0 p a:hover {text-decoration: underline;}

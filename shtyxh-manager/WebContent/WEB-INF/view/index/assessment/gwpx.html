@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>岗位培训_${webname}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/common/common.css" rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/associationSurvery/associationSurvery.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
+</head>
+<body >
+<#include "../../include/navigation.html">
+
+<div class="main">
+<div class="main_container">
+
+	<div class="mainLeft_left_block mt13">
+		<div class="left_box ">
+			<strong> <span>岗位培训</span> 
+			</strong>
+	
+			<ul>
+				<#list typeList as typeList>
+					<li  id="cid${typeList.id}"><a href="${base.contextPath}/index/jdypx/gwpx?typeid=${typeList.id}" target="_blank" title="${typeList.typename}">${typeList.typename}</a></li>
+				</#list>
+				<script>
+							var changeclass=window.document.getElementById('cid${currentType.id!}');
+							changeclass.className='on';
+				</script>
+	
+			</ul>
+		</div>
+	</div>
+
+    <div class="mainLeft_right_block mt13" >
+				<div class="right_box">
+							<strong class="title">
+								<span>${currentType.typename!}</span>
+							</strong>
+						<div class="nr_box">
+							<div style="height:500px;">
+								内容开发中...
+							</div>
+						</div>
+						
+					</div>
+
+        </div>
+    </div>
+</div>
+</div>
+<#include "../../include/footer.html">
+</body>
+</html>

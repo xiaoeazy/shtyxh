@@ -1,6 +1,7 @@
 package cn.huan.kindergarten.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +23,15 @@ import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.dto.ResponseData;
 
 import cn.huan.kindergarten.bean.FileInfo;
+import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgAssessmentActivity;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserProgress;
 import cn.huan.kindergarten.dto.KgAssessmentActivityUserUpload;
 import cn.huan.kindergarten.dto.KgAssessmentType;
+import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.dto.KgNewsAttribute;
+import cn.huan.kindergarten.dto.KgNewsSource;
+import cn.huan.kindergarten.dto.KgType;
 import cn.huan.kindergarten.exception.E404Excetion;
 import cn.huan.kindergarten.service.IIndexAssessmentService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityService;
@@ -34,6 +39,10 @@ import cn.huan.kindergarten.service.IKgAssessmentActivityUserProgressService;
 import cn.huan.kindergarten.service.IKgAssessmentActivityUserUploadService;
 import cn.huan.kindergarten.service.IKgAssessmentTypeService;
 import cn.huan.kindergarten.service.IKgNewsAttributeService;
+import cn.huan.kindergarten.service.IKgNewsService;
+import cn.huan.kindergarten.service.IKgNewsSourceService;
+import cn.huan.kindergarten.service.IKgTypeService;
+import cn.huan.kindergarten.utils.CommonUtil;
 import cn.huan.shtyxh.common.bean.ExtStore;
 
 @Controller
@@ -52,6 +61,12 @@ public class IndexAssessmentController extends IndexBaseController{
     private IKgAssessmentActivityUserProgressService iKgAssessmentActivityUserProgressService;
     @Autowired
     private IKgAssessmentActivityUserUploadService iKgAssessmentActivityUserUploadService;
+    @Autowired
+    private IKgNewsService iKgNewsService;
+    @Autowired 
+    private IKgTypeService iKgTypeService;
+    @Autowired
+    private IKgNewsSourceService iKgNewsSourceService;
     //======================================评估========================================
     @RequestMapping(value = "/index/assessmentTypeList")
     public ModelAndView assessmentTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
@@ -295,5 +310,158 @@ public class IndexAssessmentController extends IndexBaseController{
         }
         mv.addObject("rightAttributeList",rightAttributeList);
 }
+    
+    //=====================岗位培训====================================================
+    
+	@RequestMapping(value = "/index/jdypx")
+    @ResponseBody
+    public ModelAndView news(HttpServletRequest request) {
+    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/trainAndAssessment");
+        IRequest requestContext = createRequestContext(request);
+        KgType kt = new KgType();
+        kt.setParentid(PXYJD_ID);
+        kt.setRelatetype(2);
+        //查询列表
+        List<Long> typeidList = new ArrayList<Long>();
+        List<KgType> typeList = iKgTypeService.select(requestContext, kt);
+        for(KgType kn:typeList) {
+        	typeidList.add(kn.getId());
+        	KgNews news = new KgNews();
+        	news.setTypeid(kn.getId());
+        	int count = iKgNewsService.adminQueryCount(requestContext, news);
+        	kn.setCount(count);
+        	List<KgNews> newsList = iKgNewsService.selectWithOtherInfo(requestContext, news, 1, 6);
+        	kn.setNewsList(newsList);
+        }
+        
+        
+      //===================================================================================================
+        KgNews kn = new KgNews();
+    	kn.setAttributeid("4");
+    	List<KgNews> newsTop=iKgNewsService.selectByMap(requestContext, kn,typeidList, 1, 1);
+    	if(newsTop.size()!=0) {
+   	   		 if(("").equals(newsTop.get(0).getThumbnail())) {
+   	   			 kn.setThumbnail(SysConfig.nonePic);
+   	   		 }
+    		mv.addObject("newsTop", newsTop.get(0));
+    	}else
+    		mv.addObject("newsTop", null);
+    	//===================================================================================================
+    	List<KgAssessmentType> typeAssessmentList = iKgAssessmentTypeService.selectAll(requestContext);
+    	for(KgAssessmentType kat:typeAssessmentList) {
+    		KgAssessmentActivity activitys = new KgAssessmentActivity();
+    		activitys.setAssessmentTypeId(kat.getId());
+         	int count = iKgAssessmentActivityService.adminQueryCount(requestContext, activitys);
+         	kat.setCount(count);
+         	List<KgAssessmentActivity> activityList = iKgAssessmentActivityService.selectWithOtherInfo(requestContext, activitys, 1, 6);
+         	kat.setAssessmentActivityList(activityList);
+         }
+    	
+    	 mv.addObject("typeList", typeList);
+    	 mv.addObject("typeAssessmentList", typeAssessmentList);
+    	
+        
+        loadNavigation(mv, requestContext,IndexController.CH_PXYJD);
+        loadSysConfig(mv);
+        return mv;
+    }
+    
+    
+    @RequestMapping(value = "/index/jdypx/gwpx")
+    public ModelAndView gwpx(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
+            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
+    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/gwpx");
+        IRequest requestContext = createRequestContext(request);
+        KgType currentType = null;
+        if(typeid!=null) {
+        	currentType = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(typeid));
+        	if(currentType==null)
+        		throw new E404Excetion("请查看的网页不存在!"); 
+        }
+        	
+        KgType kt = new KgType();
+        kt.setParentid(GWPX_ID);
+        List<KgType> typeList = iKgTypeService.select(requestContext, kt);
+        mv.addObject("typeList", typeList);
+        
+        if(typeid==null) {
+        	if(typeList.size()!=0)
+        		currentType=typeList.get(0);
+        }
+        
+        mv.addObject("currentType",currentType);
+        loadNavigation(mv, requestContext,CH_PXYJD);
+        loadSysConfig(mv);
+        return mv;
+    }
+    
+	 @RequestMapping(value = "/index/jdypx/typeList")
+	    @ResponseBody
+	    public ModelAndView newsTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
+	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE_20) int limit,HttpServletRequest request) throws E404Excetion {
+	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/trainList");
+	        IRequest requestContext = createRequestContext(request);
+	        if(typeid==null)
+	    		throw new E404Excetion("请查看的网页不存在!"); 
+	        KgType kgNewstype = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(typeid));
+	        if(kgNewstype==null)
+	    		throw new E404Excetion("请查看的网页不存在!"); 
+	        KgNews news = new KgNews();
+	        news.setTypeid(typeid);
+	        int count = iKgNewsService.adminQueryCount(requestContext, news);
+	        int allPageNum = count%limit==0?count/limit:count/limit+1;
+	        if(count==0) allPageNum=1;
+	        List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
+	      
+	        CommonUtil.judgeNewsTitleLength(list,33);
+	        mv.addObject("newsList", list);
+	        mv.addObject("page", page);
+	        mv.addObject("allPageNum",allPageNum);
+	        mv.addObject("kgNewstype", kgNewstype);
+	        mv.addObject("typeid", typeid);
+	        
+	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
+	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
+	        loadSysConfig(mv);
+	        return mv;
+	    }
+	 
+	   @RequestMapping(value = "/index/jdypx/newsDetail")
+	    @ResponseBody
+	    public ModelAndView newsDetail(Long id,HttpServletRequest request) throws E404Excetion {
+	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/trainNewsDetail");
+	        IRequest requestContext = createRequestContext(request);
+	        if(id==null)
+	    		throw new E404Excetion("请查看的网页不存在!"); 
+	        KgNews newsInfo = iKgNewsService.selectByPrimaryKey(requestContext, new KgNews(id));
+	        if(newsInfo==null)
+	    		throw new E404Excetion("请查看的网页不存在!"); 
+	        
+	        mv.addObject("newsInfo", newsInfo);
+	        
+	        KgType newsType = new KgType();
+	        newsType.setId(newsInfo.getTypeid());
+	        KgType kgNewstype = iKgTypeService.selectByPrimaryKey(requestContext, newsType);
+	        
+	        KgNewsSource newsSource = new KgNewsSource();
+	        newsSource.setId(newsInfo.getSourceid());
+	        KgNewsSource kgNewsSource = iKgNewsSourceService.selectByPrimaryKey(requestContext, newsSource);
+	        
+	      
+	        KgNews linkNews = new KgNews();
+	        linkNews.setTypeid(newsInfo.getTypeid());
+	        List<KgNews> linkNewsList = iKgNewsService.select(requestContext, linkNews, 1, 2);
+	        CommonUtil.judgeNewsTitleLength(linkNewsList,17);
+	        
+	        mv.addObject("kgNewstype", kgNewstype);
+	        mv.addObject("kgNewsSource", kgNewsSource);
+	        mv.addObject("linkNewsList", linkNewsList);
+	        
+	        
+	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
+	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
+	        loadSysConfig(mv);
+	        return mv;
+	    }
    
 }
