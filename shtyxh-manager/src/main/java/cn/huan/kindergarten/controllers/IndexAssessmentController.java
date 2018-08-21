@@ -420,7 +420,7 @@ public class IndexAssessmentController extends IndexBaseController{
 	        mv.addObject("kgNewstype", kgNewstype);
 	        mv.addObject("typeid", typeid);
 	        
-	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
+	        loadNavigation(mv, requestContext,IndexController.CH_PXYJD);
 	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;
@@ -458,7 +458,7 @@ public class IndexAssessmentController extends IndexBaseController{
 	        mv.addObject("linkNewsList", linkNewsList);
 	        
 	        
-	        loadNavigation(mv, requestContext,IndexController.CH_ZXZX);
+	        loadNavigation(mv, requestContext,IndexController.CH_PXYJD);
 	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;
