@@ -186,6 +186,7 @@
                <filtering>false</filtering>  
            </resource>  
 		</resources>
+		<finalName>shtyxh</finalName>
 	</build>
   
   <packaging>war</packaging>

@@ -2,13 +2,17 @@ package cn.huan.kindergarten.utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.URLEncoder;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +27,12 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import cn.huan.kindergarten.bean.SortBean;
@@ -33,6 +42,7 @@ import cn.huan.kindergarten.dto.KgNews;
 import cn.huan.kindergarten.exception.KgFileException;
 
 public class CommonUtil {
+    private static Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 	/**
 	 * 文件下载默认编码.
 	 */
@@ -252,6 +262,117 @@ public class CommonUtil {
 			;
 		}
 
+	}
+	
+	
+	
+	public static void sendFileInputStream (String webUrl ,File file,String fileNameWithPath) throws Exception{
+		 OutputStream oStream =null;
+		 String BOUNDARY = "letv"; // 边界标识 随机生成
+		 String PREFIX = "--", LINE_END = "\r\n";
+		 String CONTENT_TYPE = "multipart/form-data"; // 内容类型
+		 BufferedReader reader = null;
+		 DataOutputStream dos = null;
+		 HttpURLConnection conn = null;
+		 BufferedInputStream bis  = null;
+		 try{ 
+				bis = new BufferedInputStream(new FileInputStream(file));
+			 	int TIME_OUT = 600 * 1000; // 超时时间
+			 	String CHARSET = "utf-8"; // 设置编码
+			    String urlStr  =webUrl+"/fileUpload";
+			 	URL  url = new URL(urlStr);
+			 	conn = (HttpURLConnection) url.openConnection();
+	            conn.setReadTimeout(TIME_OUT);
+	            conn.setConnectTimeout(TIME_OUT);
+	            conn.setDoInput(true); // 允许输入流
+	            conn.setDoOutput(true); // 允许输出流
+	            conn.setUseCaches(false); // 不允许使用缓存
+	            conn.setRequestMethod("POST"); // 请求方式
+	            conn.setRequestProperty("Charset", CHARSET); // 设置编码
+	            conn.setRequestProperty("connection", "keep-alive");
+	            conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary="
+	                    + BOUNDARY);
+
+				
+	            dos = new DataOutputStream(
+                      conn.getOutputStream());
+	            
+	            StringBuffer sb1 = new StringBuffer();
+	            sb1.append(LINE_END);
+              sb1.append(PREFIX);
+              sb1.append(BOUNDARY);
+              sb1.append(LINE_END);
+              sb1.append("Content-Disposition: form-data; name=\"theRealName\" "+ LINE_END);
+              sb1.append(LINE_END);
+              sb1.append(fileNameWithPath);
+              dos.write(sb1.toString().getBytes("utf-8"));
+	            //===============里面是文件=================
+              StringBuffer sb = new StringBuffer();
+              sb.append(LINE_END);
+              sb.append(PREFIX);
+              sb.append(BOUNDARY);
+              sb.append(LINE_END);
+              /**
+               * 这里重点注意： name里面的值为服务器端需要key 只有这个key 才可以得到对应的文件
+               * filename是文件的名字，包含后缀名的 比如:abc.png
+               */
+              sb.append("Content-Disposition: form-data; name=\"file\"; filename=\""
+                      + fileNameWithPath + "\"" + LINE_END);
+              sb.append("Content-Type: application/ctet-stream" + LINE_END);
+              sb.append(LINE_END);
+              dos.write(sb.toString().getBytes("utf-8"));
+              
+              byte[] bytes = new byte[1024 * 1024];
+              int len = 0;
+              while ((len = bis.read(bytes)) != -1) {
+                  dos.write(bytes, 0, len);
+                  logger.error("发送长度:"+len);
+              }
+              dos.write(LINE_END.getBytes());
+              
+              byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END).getBytes();
+              dos.write(end_data);
+              dos.flush();
+              
+              int res = conn.getResponseCode();
+              logger.info("response code:" + res);
+              logger.info( "request success");
+              
+		         StringBuffer resultBuffer = new StringBuffer();
+		         String tempLine = null;
+		
+		         reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		         while ((tempLine = reader.readLine()) != null) {
+		             resultBuffer.append(tempLine);
+		         }
+		         String resultStr = resultBuffer.toString();
+		         System.out.println(resultStr);
+		         Gson gson = new Gson();
+		         JsonObject json = new JsonParser().parse(resultStr).getAsJsonObject();
+		         Boolean success = json.get("success").getAsBoolean();
+		        if(!success){
+		        	throw new Exception("同步上传文件失败："+json.get("msg").getAsString());
+		        }
+	     } catch (Exception e) {
+	    	 logger.error("error in sendFileInputStream:",e);
+	         throw new Exception(e);
+	     }finally{
+	    	 try {
+		    	 if(oStream!=null)
+					oStream.close();
+		    	 if(bis!=null)
+		    		 bis.close();
+		    	 if(reader!=null)
+		    		 reader.close();
+		    	 if(dos!=null)
+		    		 dos.close();
+		    	 if(conn!=null)
+		    		 conn.disconnect();
+	    	 } catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			 }
+	     }
 	}
 
 }

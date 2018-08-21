@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.huan</groupId>
+    <artifactId>shtyxh-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>shtyxh-filesystem</artifactId>
+  
+  
+   <dependencies>
+   		<dependency>
+			<groupId>cn.huan</groupId>
+			<artifactId>shtyxh-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+   		<!-- logback -->
+		<dependency>
+			    <groupId>ch.qos.logback</groupId>
+			    <artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			    <groupId>ch.qos.logback</groupId>
+			    <artifactId>logback-access</artifactId>
+			</dependency>
+   		<!-- thumbnailator -->
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		</dependency>
+   
+		<!-- spring需要 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context</artifactId>
+		</dependency>
+			<!-- httpservlet -->
+	  		<dependency> 
+				   <groupId>javax.servlet</groupId> 
+				   <artifactId>javax.servlet-api</artifactId> 
+				   <scope>provided</scope>
+			</dependency> 
+			<dependency>
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-api</artifactId>
+			</dependency>
+			<dependency>
+				    <groupId>commons-fileupload</groupId>
+				    <artifactId>commons-fileupload</artifactId>
+			</dependency>
+			<dependency>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>commons-lang3</artifactId>
+			</dependency>
+			<dependency>
+				    <groupId>commons-lang</groupId>
+				    <artifactId>commons-lang</artifactId>
+			</dependency>
+	</dependencies>	
+  
+  
+    <build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			
+			 <resource>  
+               <directory>src/main/resources/</directory>  
+               <includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+               <filtering>false</filtering>  
+           </resource>  
+		</resources>
+		<finalName>filesystem</finalName>
+	</build>
+	
+  <packaging>war</packaging>
+</project>
