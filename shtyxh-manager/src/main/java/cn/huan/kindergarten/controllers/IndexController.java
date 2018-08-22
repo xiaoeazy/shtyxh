@@ -86,7 +86,7 @@ public class IndexController extends IndexBaseController{
     		 kns.setTypeid(kt.getId());
     		 List<KgNews> indexShowTypeNews =iKgNewsService.selectWithOtherInfo(requestContext, kns, 1, 5);
     		 kt.setNewsList(indexShowTypeNews);
-    		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,45);
+    		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,40);
 		 }
     	 
     	 //资讯中心
