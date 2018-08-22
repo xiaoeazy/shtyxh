@@ -86,7 +86,7 @@ public class IndexController extends IndexBaseController{
     		 kns.setTypeid(kt.getId());
     		 List<KgNews> indexShowTypeNews =iKgNewsService.selectWithOtherInfo(requestContext, kns, 1, 5);
     		 kt.setNewsList(indexShowTypeNews);
-    		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,17);
+    		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,45);
 		 }
     	 
     	 //资讯中心
@@ -98,7 +98,7 @@ public class IndexController extends IndexBaseController{
     		 kns.setTypeid(kt.getId());
     		 List<KgNews> indexShowTypeNews =iKgNewsService.selectWithOtherInfo(requestContext, kns, 1, 2);
     		 kt.setNewsList(indexShowTypeNews);
-    		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,10);
+    		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,14);
 		 }
     	 mv.addObject("typeZxzxShowList",knt3list);
     	 mv.addObject("typeXHDTShowList",kntList);
