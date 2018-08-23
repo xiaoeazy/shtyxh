@@ -13,9 +13,6 @@
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
-<!-- 主要内容轮播 -->
-<script type="text/javascript"
-	src="${base.contextPath}/lib/index/js/responsiveslides.min.js"></script>
 <script type="text/javascript"
 	src="${base.contextPath}/lib/index/js/index/common.js"></script>
 <!-- 导航下轮播 -->
@@ -96,13 +93,10 @@
 								<p class="ml92 dlzc">
 									<a href="${base.contextPath}/index/xhdt">协会动态</a>
 								</p>
-								<p class="ml67 dlzc"></p>
-								<p class="ml92 dlzc"></p>
 							</div>
 						</div>
 						<div class="wz_block_line1"></div>
-						<!-- 协会动态end  -->
-						<!-- 公告公示  start-->
+						
 						<#if typeXHDTShowList??>
 							<#list typeXHDTShowList as typeList>
 							<div class="wz_block">
@@ -145,22 +139,10 @@
 							</#list>
 						</#if>
 					</div>
-					<!-- 公告公示 end-->
+					<!-- 协会动态 end-->
 				</div>
 				
 				<div class="main_right_block mt13">
-<!-- 					<div class="search-bd"> -->
-<!-- 					  <form action="${base.contextPath}/index/news/search" id="search-form" class="form" method="GET"> -->
-<!-- 	                	<div class="form-group"> -->
-<!-- 		                    <input type="text" id="home-searchInput" name="searchparam" value="" class="form-control" -->
-<!-- 		                           autocomplete="off" -->
-<!-- 		                           placeholder="" /> -->
-<!-- 	                    <button type="submit" id="" name="" class="btn btn-primary"> -->
-<!-- 	                        <i class="iconfont icon-sousuo"></i>搜索 -->
-<!-- 	                    </button> -->
-<!-- 	                    </div> -->
-<!-- 	                    </form> -->
-<!--                     </div> -->
 
 						 <div class="search-bd bar6">
 					        <form action="${base.contextPath}/index/news/search" id="search-form" class="form" method="GET">
@@ -267,10 +249,12 @@
 				<!-- 培训与鉴定start -->
 				<div class="main_right_block_pxyjd mt13">
 						<div class="main_right_cbl_pxyjd ">
-							<h2>
-								<a href="${base.contextPath}/index/jdypx"
-									target="_blank">培训与鉴定</a>
-							</h2>
+							<div class="main_right_cbl_pxyjd_title">
+								<h2>
+									<a href="${base.contextPath}/index/jdypx"
+										target="_blank">培训与鉴定</a>
+								</h2>
+							</div>
 							<div class="main_right_cbl_pxyjd_line"></div>
 							<#list typePxyjdShowList as typePxyjdShowList>
 									<#if typePxyjdShowList_index%2==0>
@@ -314,13 +298,6 @@
 <!-- <script type="text/javascript" src="${base.contextPath}/lib/index/js/indexonly.js" ></script> -->
 <script type="text/javascript">
 $(function(){
-	$('#demo02').flexslider({
-	    animation: "fade",
-	    direction:"horizontal",
-	    easing:"swing",
-	    slideshowSpeed: 10000
-	})
-	
 	$(".dianh").mouseover(function(){
 		$(".phone").show();	
 	    $(".phone").stop(true,true).animate({right:'25px'});

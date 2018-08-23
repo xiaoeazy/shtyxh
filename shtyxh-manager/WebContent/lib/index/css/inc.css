@@ -6,7 +6,7 @@ body,a{line-height:24px;font-size:14px;font-family:"Microsoft YaHei","微软雅�
 .v4incheadertop{font-size:14px;float:left;font-family:"Microsoft YaHei","微软雅黑","黑体";>font-family:"simhei","黑体";color:#02396F;}
 .v4incheadertop{width:100%}
 .v4incheadertop_tel_block,.v4incheadertop_logosearch_block2,.v4incheadertop_nav_block{width:100%;min-width:1000px;}
-.v4incheadertop_tel,.v4incheadertop_logosearch,.v4incheadertop_nav{width:1000px;margin:0 auto}
+.v4incheadertop_tel,.v4incheadertop_logosearch{width:1000px;margin:0 auto}
 .v4incheadertop_tel_block{background:#0082d4;height:34px;}
 .v4incheadertop_tel p.cl,.v4incheadertop_tel p.cr{line-height:34px;color:#fff}
 .v4incheadertop_tel p.cl{width:500px;text-align: left;float:left}
@@ -40,14 +40,15 @@ body,a{line-height:24px;font-size:14px;font-family:"Microsoft YaHei","微软雅�
 /* .v4incheadertop_nav_ls  li ul li { float:none;} */
 /* .v4incheadertop_nav_ls  li ul li a { color:#fff;line-height:48px;font-size:16px;font-weight:bolder;text-decoration: none;} */
 /* .v4incheadertop_nav_ls  li:hover ul{ display:block; } */
-.v4incheadertop_nav_block{ background:url(../img/banner/banner.png);height:48px;box-shadow:0px 0px 8px #006baf;}
-
-.v4incheadertop_nav_ls{width:100%;list-style:none;}
-.v4incheadertop_nav_ls li{width:128px;height:48px;float:left;text-align:center;}
+/*导航*/
+.v4incheadertop_nav_block{background:url(../img/banner/banner_background.png) no-repeat top center; height:62px;}
+.v4incheadertop_nav{background:url(../img/banner/banner.png); height:54px;}
+.v4incheadertop_nav_ls{width:1000px;list-style:none;margin:0 auto}
+.v4incheadertop_nav_ls li{width:128px;height:52px;float:left;text-align:center;}
 
 .v4incheadertop_nav_ls li.fst{width:112px;}
 .v4incheadertop_nav_ls li.actv{background:#3d87d1}
-.v4incheadertop_nav_ls a{color:#fff;line-height:48px;font-size:16px;font-weight:bolder;text-decoration: none;}
+.v4incheadertop_nav_ls a{color:#fff;line-height:52px;font-size:16px;font-weight:bolder;text-decoration: none;}
 
 .v4incheadertop_nav_ls  li ul { position:absolute; display:none;z-index:99}
 .v4incheadertop_nav_ls  li ul li { float:none;background:#005495;}
