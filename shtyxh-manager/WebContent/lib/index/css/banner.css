@@ -29,10 +29,10 @@
 .zxzxChild .zxtitle span{position:absolute;bottom:0;padding:0 0 5px 25px;}
 .zxzxChild .zxtitle span a{ text-decoration:none;font-size:14px;color:#1180b8;font-weight:bold;}
 .zxzxChild .zxtitle span a:hover{cursor:pointer;text-decoration:underline} 
-.zxzxChild .zxcontent{width:100%;height:90px;background: url("../img/index/zxzx_02.gif") repeat-y ;}
+.zxzxChild .zxcontent{width:100%;background: url("../img/index/zxzx_02.gif") repeat-y ;}
 .zxzxChild .zxcontent dl {padding:0 25px 0 25px;} 
 .zxzxChild .zxcontent dl dt{font-size:17px;color:#000000;}
-.zxzxChild .zxcontent dl dd {    background: url(../img/spr.gif) no-repeat;margin:0 25px 5px 25px; }
+.zxzxChild .zxcontent dl dd {    background: url(../img/spr.gif) no-repeat;margin:0 25px 0px 25px; }
 .zxzxChild .zxcontent dl dd a{margin-left:10px;color:#000000;text-decoration:none}
 .zxzxChild .zxcontent dl dd a:hover{color:#ba2636;text-decoration:underline}
 .zxzxChild .zxcontent dl.sys1{border-bottom:2px dashed #ddd }
