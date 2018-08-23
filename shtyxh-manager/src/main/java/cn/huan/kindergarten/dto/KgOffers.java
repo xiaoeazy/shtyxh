@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import com.huan.HTed.mybatis.annotation.ExtensionAttribute;
 import org.hibernate.validator.constraints.Length;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.huan.HTed.system.dto.BaseDTO;
 import java.util.Date;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -57,11 +59,20 @@ public class KgOffers extends BaseDTO {
      private String content;
 
      private Date publishdate;
-
+     @Transient
+     private String newsSimpleTitle;
 
    
 
-     public Long getId() {
+     public String getNewsSimpleTitle() {
+		return newsSimpleTitle;
+	}
+
+	public void setNewsSimpleTitle(String newsSimpleTitle) {
+		this.newsSimpleTitle = newsSimpleTitle;
+	}
+
+	public Long getId() {
 		return id;
 	}
 

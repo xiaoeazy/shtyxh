@@ -22,15 +22,16 @@ import com.huan.HTed.account.service.IUserService;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.core.impl.RequestHelper;
 
-import cn.huan.kindergarten.bean.SysConfig;
 import cn.huan.kindergarten.dto.KgCarousel;
 import cn.huan.kindergarten.dto.KgDownload;
 import cn.huan.kindergarten.dto.KgNews;
+import cn.huan.kindergarten.dto.KgOffers;
 import cn.huan.kindergarten.dto.KgType;
 import cn.huan.kindergarten.service.IKgAssessmentActivityService;
 import cn.huan.kindergarten.service.IKgCarouselService;
 import cn.huan.kindergarten.service.IKgDownloadService;
 import cn.huan.kindergarten.service.IKgNewsService;
+import cn.huan.kindergarten.service.IKgOffersService;
 import cn.huan.kindergarten.service.IKgTypeService;
 import cn.huan.kindergarten.utils.CommonUtil;
 
@@ -52,6 +53,8 @@ public class IndexController extends IndexBaseController{
 	private IRoleService roleService;
 	@Autowired
 	private IKgAssessmentActivityService iKgAssessmentActivityService;
+	@Autowired
+	private IKgOffersService iKgOffersService;
 	
 	@RequestMapping(value = "/")
     @ResponseBody
@@ -92,13 +95,20 @@ public class IndexController extends IndexBaseController{
     	 //资讯中心
     	 KgType kn3 = new KgType();
     	 kn3.setParentid(ZXZX_ID);
-    	 List<KgType> knt3list = iKgTypeService.select(requestContext, kn3,1,3);
+    	 List<KgType> knt3list = iKgTypeService.select(requestContext, kn3,1,4);
 		 for(KgType kt:knt3list) {	
+			 if(kt.getId()==OFFER_ID){
+				 List<KgOffers> list = iKgOffersService.selectWithOtherInfo(requestContext, null, 1, 2);
+				 CommonUtil.judgeOffersTitleLength(list,12);
+				 kt.setOffersList(list);
+				 continue;
+			 }
+			 
 			 KgNews kns = new KgNews();
     		 kns.setTypeid(kt.getId());
     		 List<KgNews> indexShowTypeNews =iKgNewsService.selectWithOtherInfo(requestContext, kns, 1, 2);
     		 kt.setNewsList(indexShowTypeNews);
-    		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,14);
+    		 CommonUtil.judgeNewsTitleLength(indexShowTypeNews,12);
 		 }
     	 mv.addObject("typeZxzxShowList",knt3list);
     	 mv.addObject("typeXHDTShowList",kntList);

@@ -63,16 +63,16 @@ body{background:#f0f0f0;}
 
 .top_logosearch_block{background:#008ae1;height:157px}
 .top_logosearch_block2{background:#008ae1;height:114px;min-width:1000px;}
-.logo{width:388px;height:76px;float:left;background:url("../img/logo.gif")/*tpa=http://www.ccgp.gov.cn/img/logo.gif*/ no-repeat left top}
-.logo_gh{width:388px;height:80px;float:left;background:url("../img/logo_new.gif")/*tpa=http://www.ccgp.gov.cn/img/logo_new.gif*/ no-repeat left top}
+.logo{width:388px;height:76px;float:left;background:url("../img/logo.gif") no-repeat left top}
+.logo_gh{width:388px;height:80px;float:left;background:url("../img/logo_new.gif") no-repeat left top}
 .logo a.ccgp{display:block;width:388px;height:28px;float:left}
 .logo a.ccgp2{display:block;width:60px;height:28px;float:left}
 .logo a.gmfw{display:block;width:328px;height:28px;float:right}
 .logo a.ccgp3{display:block;width:328px;height:28px;float:right}
 
-.searcharea{width:612px;height:157px;float:left;background:url(../img/cloud.gif)/*tpa=http://www.ccgp.gov.cn/img/cloud.gif*/ no-repeat right bottom;}
-.searcharea2{width:612px;height:114px;float:left;background:url(../img/cloud.gif)/*tpa=http://www.ccgp.gov.cn/img/cloud.gif*/ no-repeat right bottom;}
-.sangong_bl{width:420px;height:33px;float:left;background:url(../img/sangong.gif)/*tpa=http://www.ccgp.gov.cn/img/sangong.gif*/ no-repeat top center;margin-left:134px;margin-top:50px;display:none}
+.searcharea{width:612px;height:157px;float:left;background:url(../img/cloud.gif) no-repeat right bottom;}
+.searcharea2{width:612px;height:114px;float:left;background:url(../img/cloud.gif) no-repeat right bottom;}
+.sangong_bl{width:420px;height:33px;float:left;background:url(../img/sangong.gif) no-repeat top center;margin-left:134px;margin-top:50px;display:none}
 .search_bl{width:420px;height:40px;float:left;margin-left:134px}
 
 .top_nav_block{background:#005496;height:48px;box-shadow:0px 0px 8px #006baf;}
@@ -275,13 +275,6 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 .main_right_cbl h2 a:hover{color:#005495;text-decoration:underline}
 
 
-.main_right_cbl ul li.xzzqlinks{width:263px;height:53px;margin: 0 auto;margin-top:11px;border-radius:5px}
-.main_right_cbl ul li.xzzqlinks p{font-size:14px;line-height:18px;color:#02396f;margin-top:18px;float:left;margin-left:10px}
-
-.main_right_cbl ul.xzzqlinks li.sys1{background:url(../img/download_1.gif)/*tpa=http://www.ccgp.gov.cn/img/download_1.gif*/ no-repeat top right #d5eef5;background-position:222px 13px}
-.main_right_cbl ul.xzzqlinks li.sys2{background:url(../img/download_2.gif)/*tpa=http://www.ccgp.gov.cn/img/download_2.gif*/ no-repeat top right #d5eef5;background-position:222px 13px}
-.main_right_cbl ul.xzzqlinks li.sys3{background:url(../img/download_3.gif)/*tpa=http://www.ccgp.gov.cn/img/download_3.gif*/ no-repeat top right #d5eef5;background-position:222px 13px}
-.main_right_cbl ul.xzzqlinks li.sys2 p{margin-top:10px}
 
 .dzzwlinks img{margin-left:10px}
 .main_right_cbl ul.dffwlinks{margin-left:7px;margin-top:8px;margin-bottom:10px;float:left}
@@ -296,12 +289,6 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 .main_right_cbl h2.tpjj{float:left;width:100px;}
 .tpjj_btn{margin-left:120px;margin-top:15px}
 .tpjj_btn{float:left}
-
-.main_right_cbl ul.zjsdpic,.main_right_cbl ul.zjsdlinks {width:251px;margin-left:15px;float:left}
-.main_right_cbl ul.zjsdpic li{width:251px;height:77px;margin-bottom:8px}
-.main_right_cbl ul.zjsdpic li img{width:119px;height:77px;float:left}
-.main_right_cbl ul.zjsdpic li p{line-height:18px;float:left;width:126px;margin-left:5px}
-.main_right_cbl ul.zjsdlinks li{height:24px;overflow:hidden}
 
 
 

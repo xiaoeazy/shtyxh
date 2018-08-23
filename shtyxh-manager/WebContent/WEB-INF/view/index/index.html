@@ -90,62 +90,61 @@
 					
 	
 					<!-- 协会动态 -->
-					<div class="banner_block mt13">
-						<div class="vF_banner bx_log">
-							<p class="ml92 dlzc">
-								<a href="${base.contextPath}/index/xhdt">协会动态</a>
-							</p>
-							<p class="ml67 dlzc"></p>
-							<p class="ml92 dlzc"></p>
+					<div class="main_left_block_xhdt mt13">
+						<div class="banner_block ">
+							<div class="vF_banner bx_log">
+								<p class="ml92 dlzc">
+									<a href="${base.contextPath}/index/xhdt">协会动态</a>
+								</p>
+								<p class="ml67 dlzc"></p>
+								<p class="ml92 dlzc"></p>
+							</div>
 						</div>
-					</div>
-					<!-- 协会动态end  -->
-					<!-- 公告公示  start-->
-					<#if typeXHDTShowList??>
-						<#list typeXHDTShowList as typeList>
-						<div class="wz_block">
-								<div class="newslist_bl_gsgg mt13">
-								<div class="newslist">
-									<div class="vF_t3">
-										<div class="vF_t2_r1" style="">
-											<div class="vF_tab unit2">
-												<div class="vF_title_bar3">
-													<#if typeList_index==0>
-														<h2 class="ui_til4_tab_u current2 word8 titleright">
-															<a href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}">${typeList.typename}</a>
-														</h2>
-													<#else>
-														<h2 class="ui_til4_tab_u current2 word8 titleleft">
-															<a href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}">${typeList.typename}</a>
-														</h2>
-													</#if>
+						<div class="wz_block_line1"></div>
+						<!-- 协会动态end  -->
+						<!-- 公告公示  start-->
+						<#if typeXHDTShowList??>
+							<#list typeXHDTShowList as typeList>
+							<div class="wz_block">
+									<div class="newslist_bl_gsgg ">
+									<div class="newslist">
+										<div class="vF_t3">
+											<div class="vF_t2_r1" style="">
+												<div class="vF_tab unit2">
+													<div class="vF_title_bar3">
+														<#if typeList_index==0>
+															<h2 class="ui_til4_tab_u current2 word8 titleright">
+																<a href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}">${typeList.typename}</a>
+															</h2>
+														<#else>
+															<h2 class="ui_til4_tab_u current2 word8 titleleft">
+																<a href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}">${typeList.typename}</a>
+															</h2>
+														</#if>
+													</div>
 												</div>
 											</div>
+											<ul class="c_list mt10 mb10 split" id="area3_con1">
+												<#list typeList.newsList as newsList>
+												<li style="width:628px"><a href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}" target="_blank"
+													title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+													<font style="float:right">${newsList.createdate?string('yyyy-MM-dd')}</font>
+												</li>
+												</#list>
+											</ul>
 										</div>
-										<ul class="c_list mt10 mb10 split" id="area3_con1">
-											<#list typeList.newsList as newsList>
-											<li style="width:628px"><a href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}" target="_blank"
-												title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
-												<font style="float:right">${newsList.createdate?string('yyyy-MM-dd')}</font>
-											</li>
-											</#list>
-										</ul>
-	
-	
-										<div class="vT_t3_r3">
-											<div class="vT_pg">
-												<div id="area3_sel_1"></div>
-												<div id="area3_sel_2"></div>
-												<div id="area3_sel_3"></div>
-											</div>
-										</div>
-	
 									</div>
 								</div>
 							</div>
-						</div>
-						</#list>
-					</#if>
+							<#if typeList_index==0>
+								<div class="wz_block_line2"></div>
+							</#if>
+							<#if typeList_index!=0 && !typeList_has_next>
+								<div class="wz_block_line3"></div>
+							</#if>
+							</#list>
+						</#if>
+					</div>
 					<!-- 公告公示 end-->
 				</div>
 				
@@ -172,30 +171,49 @@
 				</div>
 					
 				<div class="main_right_block mt13">
-					<!--资讯中心start-->
+					<!--右上资讯中心start-->
 					<div class="zxzxChild">
-							<div class="zxzxdiv">
-							<div class="zxtitle"><a href="${base.contextPath}/index/news" >资讯中心</a></div>
-							<#list typeZxzxShowList as zxzxShow> 
-								<dl class="sys1">
-									<#if zxzxShow_index==0>
-											<dt class="dt1">
-									<#elseif zxzxShow_index==1>
-											<dt class="dt2">
-									<#elseif zxzxShow_index==2>
-											<dt class="dt3">
-									</#if>
-										<a href="${base.contextPath}/index/news/typeList?typeid=${zxzxShow.id}" target="_blank">${zxzxShow.typename}</a></dt>
-										<#list zxzxShow.newsList as newsList>
-											<dd>
-												<a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
-											</dd>
-										</#list>
-									</dl>
-							</#list>
-							</div>
+								<div class="zxtitle">
+									<span><a href="${base.contextPath}/index/news" >资讯中心</a></span>
+								</div>
+								<#list typeZxzxShowList as zxzxShow> 
+									<div class="zxcontent">
+										<#if zxzxShow_has_next>
+											<dl class="sys1">
+										<#else>
+											<dl >
+										</#if>
+											<#if zxzxShow_index%4==0>
+													<dt class="dt1">
+											<#elseif zxzxShow_index%4==1>
+													<dt class="dt2">
+											<#elseif zxzxShow_index%4==2>
+													<dt class="dt3">
+											<#elseif zxzxShow_index%4==3>
+													<dt class="dt4">
+											</#if>
+												
+												<#if zxzxShow.id==20>
+													<a href="${base.contextPath}/index/offers" target="_blank">${zxzxShow.typename}</a></dt>
+													<#list zxzxShow.offersList as offersList>
+														<dd>
+															<a href="${base.contextPath}/index/offers/Detail?id=${offersList.id}" target="_blank" title="${offersList.title}">${offersList.newsSimpleTitle}</a>
+														</dd>
+													</#list>
+												<#else>
+													<a href="${base.contextPath}/index/news/typeList?typeid=${zxzxShow.id}" target="_blank">${zxzxShow.typename}</a></dt>
+													<#list zxzxShow.newsList as newsList>
+														<dd>
+															<a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+														</dd>
+													</#list>
+												</#if>
+											</dl>
+									</div>
+								</#list>
+								<div class="zxfooter"></div>
 					</div>
-					<!--咨询中心end-->
+					<!--右上资讯end-->
 					<!-- 资料下载start -->
 					<div class="main_right_cbl mt13">
 						<h2>
@@ -233,7 +251,7 @@
 				<!-- 调查与研究start -->
 				<div class="main_right_block mt13">
 					<div class="main_right_cbl_dcyj">
-							<div class="main_right_cbl_dcyj_leftText"><image src="${base.contextPath}/lib/index/img/index/dcyj.png" /></div>
+							<div class="main_right_cbl_dcyj_leftText"><image src="${base.contextPath}/lib/index/img/index/dcyj.png" style="margin-left:20px"/></div>
 							<div class="main_right_cbl_dcyj_rightText">
 									<h2><a href="${base.contextPath}/index/dcyyj">调查与研究</a></h2>
 									<ul>
@@ -247,12 +265,13 @@
 				<!-- 调查与研究end -->
 				
 				<!-- 培训与鉴定start -->
-				<div class="main_right_block mt13">
-						<div class="main_right_cbl_pxyjd mt13">
+				<div class="main_right_block_pxyjd mt13">
+						<div class="main_right_cbl_pxyjd ">
 							<h2>
 								<a href="${base.contextPath}/index/jdypx"
 									target="_blank">培训与鉴定</a>
 							</h2>
+							<div class="main_right_cbl_pxyjd_line"></div>
 							<#list typePxyjdShowList as typePxyjdShowList>
 									<#if typePxyjdShowList_index%2==0>
 										<div class="dldiv">

@@ -24,24 +24,41 @@
 .banner .js-prev{left: 6%;background-position: 0 0;}
 .banner .js-next{right: 6%;background-position: 0px -44px;}
 
+.zxzxChild{float:left;width:292px;}
+.zxzxChild .zxtitle{position:relative;width:100%;height:49px;background: url("../img/index/zxzx_01.gif") no-repeat;}
+.zxzxChild .zxtitle span{position:absolute;bottom:0;padding:0 0 5px 25px;}
+.zxzxChild .zxtitle span a{ text-decoration:none;font-size:14px;color:#1180b8;font-weight:bold;}
+.zxzxChild .zxtitle span a:hover{cursor:pointer;text-decoration:underline} 
+.zxzxChild .zxcontent{width:100%;height:90px;background: url("../img/index/zxzx_02.gif") repeat-y ;}
+.zxzxChild .zxcontent dl {padding:0 25px 0 25px;} 
+.zxzxChild .zxcontent dl dt{font-size:17px;color:#000000;}
+.zxzxChild .zxcontent dl dd {    background: url(../img/spr.gif) no-repeat;margin:0 25px 5px 25px; }
+.zxzxChild .zxcontent dl dd a{margin-left:10px;color:#000000;text-decoration:none}
+.zxzxChild .zxcontent dl dd a:hover{color:#ba2636;text-decoration:underline}
+.zxzxChild .zxcontent dl.sys1{border-bottom:2px dashed #ddd }
+.zxzxChild .zxcontent dl dt a{text-decoration: none}
+.zxzxChild .zxcontent dl dt a:hover{text-decoration: underline;color:red}
+.zxzxChild .zxcontent dl dt.dt1 {background: url("../img/index/line1.png") no-repeat right; background-size:170px 18px;}
+.zxzxChild .zxcontent dl dt.dt2 {background: url("../img/index/line2.png") no-repeat right; background-size:170px 18px;}
+.zxzxChild .zxcontent dl dt.dt3 {background: url("../img/index/line3.png") no-repeat right; background-size:170px 18px;}
+.zxzxChild .zxcontent dl dt.dt4 {background: url("../img/index/line4.png") no-repeat right; background-size:170px 18px;}
+.zxzxChild .zxfooter{width:100%;height:35px;background: url("../img/index/zxzx_04.gif") no-repeat;}
 
-.zxzxChild{float:left;width:292px;height:375px;background: url("../img/index/zxzx.png") no-repeat;}
-
-.zxzxdiv{padding:0px 30px 0 40px;}
-.zxzxdiv .zxtitle{margin-top:20px;margin-left:-15px;}
-.zxzxdiv .zxtitle a{text-decoration:none;font-size:14px;color:#1180b8;font-weight:bold;}
-.zxzxdiv .zxtitle a:hover{cursor:pointer;text-decoration:underline}
-.zxzxdiv dl {margin-top:10px;}
-.zxzxdiv dl dt{margin-left:-15px;font-size:17px;color:#000000}
-.zxzxdiv dl dd {padding:3px; }
-.zxzxdiv dl dd a{color:#000000;text-decoration:none}
-.zxzxdiv dl dd a:hover{color:#ba2636;text-decoration:underline}
-.zxzxdiv dl.sys1{border-bottom:3px dashed #ddd }
-.zxzxdiv dl dt a{text-decoration: none}
-.zxzxdiv dl dt a:hover{text-decoration: underline;color:red}
-.zxzxdiv dl dt.dt1 {background: url("../img/index/line1.png") no-repeat right; background-size:170px 18px;}
-.zxzxdiv dl dt.dt2 {background: url("../img/index/line2.png") no-repeat right; background-size:170px 18px;}
-.zxzxdiv dl dt.dt3 {background: url("../img/index/line3.png") no-repeat right; background-size:170px 18px;}
+/* .zxzxChild{float:left;width:292px;height:375px;background: url("../img/index/zxzx.png") no-repeat;} */
+/* .zxzxdiv{padding:0px 30px 0 40px;} */
+/* .zxzxdiv .zxtitle a{text-decoration:none;font-size:14px;color:#1180b8;font-weight:bold;} */
+/* .zxzxdiv .zxtitle a:hover{cursor:pointer;text-decoration:underline} */
+/* .zxzxdiv dl {margin-top:10px;} */
+/* .zxzxdiv dl dt{margin-left:-15px;font-size:17px;color:#000000} */
+/* .zxzxdiv dl dd {padding:3px; } */
+/* .zxzxdiv dl dd a{color:#000000;text-decoration:none} */
+/* .zxzxdiv dl dd a:hover{color:#ba2636;text-decoration:underline} */
+/* .zxzxdiv dl.sys1{border-bottom:3px dashed #ddd } */
+/* .zxzxdiv dl dt a{text-decoration: none} */
+/* .zxzxdiv dl dt a:hover{text-decoration: underline;color:red} */
+/* .zxzxdiv dl dt.dt1 {background: url("../img/index/line1.png") no-repeat right; background-size:170px 18px;} */
+/* .zxzxdiv dl dt.dt2 {background: url("../img/index/line2.png") no-repeat right; background-size:170px 18px;} */
+/* .zxzxdiv dl dt.dt3 {background: url("../img/index/line3.png") no-repeat right; background-size:170px 18px;} */
 /*
 ---------------------
 | bannerTools style |

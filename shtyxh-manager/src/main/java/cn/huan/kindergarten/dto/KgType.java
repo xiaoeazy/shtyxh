@@ -61,8 +61,19 @@ public class KgType extends BaseDTO {
      
      @Transient
      private KgType parentType;
+     
+     @Transient
+     private  List<KgOffers> offersList;
 
-     public KgType() {
+     public List<KgOffers> getOffersList() {
+		return offersList;
+	}
+
+	public void setOffersList(List<KgOffers> offersList) {
+		this.offersList = offersList;
+	}
+
+	public KgType() {
 		super();
 	}
 

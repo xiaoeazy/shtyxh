@@ -11,6 +11,9 @@
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<!-- 主要内容轮播 -->
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/responsiveslides.min.js"></script>
 </head>
 <body id="zcfg">
 	<#include "../../include/navigation.html">
@@ -167,6 +170,20 @@
 	</div>
 	<#include "../../include/footer.html">
 </body>
+
+<script type="text/javascript">
+$(function(){
+	$('#demo02').flexslider({
+	    animation: "fade",
+	    direction:"horizontal",
+	    easing:"swing",
+	    slideshowSpeed: 10000
+	})
+});
+</script>
+
 <script language="javascript"
 	src="${base.contextPath}/lib/index/js/channel.js"></script>
+<script type="text/javascript"
+	src="${base.contextPath}/lib/index/js/slider.js"></script>
 </html>

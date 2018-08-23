@@ -39,6 +39,7 @@ import cn.huan.kindergarten.bean.SortBean;
 import cn.huan.kindergarten.bean.ZipFile;
 import cn.huan.kindergarten.dto.KgAssessmentActivity;
 import cn.huan.kindergarten.dto.KgNews;
+import cn.huan.kindergarten.dto.KgOffers;
 import cn.huan.kindergarten.exception.KgFileException;
 
 public class CommonUtil {
@@ -62,6 +63,18 @@ public class CommonUtil {
 			String title = kg.getNewstitle();
 			if (title.length() > size) {
 				title = kg.getNewstitle().substring(0, size) + SUSPENSION_POINTS;
+				kg.setNewsSimpleTitle(title);
+			} else {
+				kg.setNewsSimpleTitle(title);
+			}
+		}
+	}
+	
+	public static void judgeOffersTitleLength(List<KgOffers> news, int size) {
+		for (KgOffers kg : news) {
+			String title = kg.getTitle();
+			if (title.length() > size) {
+				title = kg.getTitle().substring(0, size) + SUSPENSION_POINTS;
 				kg.setNewsSimpleTitle(title);
 			} else {
 				kg.setNewsSimpleTitle(title);
