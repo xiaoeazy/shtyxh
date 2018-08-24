@@ -37,8 +37,8 @@
 
 <style>
 /* .logo_gh{width:388px;height:80px;float:left;background:url("${base.contextPath}/resources/upload/logo/logo.png") no-repeat left top;} */
-.logo_gh_parent{width:102px;height:102px;float:left;background:url("${base.contextPath}/lib/index/img/index/tuoyuan.png") no-repeat left top;}
-.logo_gh{width:102px;height:102px;background:url("${base.contextPath}/resources/upload/logo/logo.png") no-repeat left top;}
+.logo_gh_parent{width:95px;height:95px;float:left;background:url("${base.contextPath}/lib/index/img/index/tuoyuan.png") no-repeat left top;}
+.logo_gh{width:93px;height:93px;margin-top:1px; margin-left:1px;background:url("${base.contextPath}/resources/upload/logo/logo.png") no-repeat left top;}
 .logo_title{width:600px;height:80px;float:left;}
 </style>
 <div class="v4incheadertop">
@@ -78,15 +78,19 @@
     <div class="v4incheadertop_nav_block">
         <div class="v4incheadertop_nav">
             <ul class="v4incheadertop_nav_ls">
-              	<li   id="ch_index" <#if chanel =='CH_INDEX'> class="actv" </#if>><a href="${base.contextPath}" >首页</a><img src="${base.contextPath}/lib/index/img/banner/rightline.png" style="float:right;margin-top:10px;" height="24px" width="3px;"/></li> <!-- class="fst"-->
-                <li  id="ch_xhgk" <#if chanel =='CH_XHGK'> class="actv" </#if>><a href="${base.contextPath}/index/xhgk" >协会概况<img src="${base.contextPath}/lib/index/img/banner/rightline.png" style="float:right;margin-top:10px;" height="24px" width="3px;"/></a>
+              	<li   id="ch_index" <#if chanel =='CH_INDEX'> class="actv" </#if>>
+              		<div class="fst">
+	              		<a href="${base.contextPath}" >首页</a>
+              		</div>
+              	</li> <!-- class="fst"-->
+                <li  id="ch_xhgk" <#if chanel =='CH_XHGK'> class="actv" </#if>><a href="${base.contextPath}/index/xhgk" >协会概况</a>
                   <ul>
                 	<#list xhgkTypeList as typeList>   
 							<li  ><a href="${base.contextPath}/index/xhgk/typeList?typeid=${typeList.id}">${typeList.typename}</a></li> 
 					</#list>
                   </ul>
                 </li>
-                <li id="ch_zxzx" <#if chanel =='CH_ZXZX'> class="actv" </#if>><a href="${base.contextPath}/index/news" >资讯中心<img src="${base.contextPath}/lib/index/img/banner/rightline.png" style="float:right;margin-top:10px;" height="24px" width="3px;"/></a>
+                <li id="ch_zxzx" <#if chanel =='CH_ZXZX'> class="actv" </#if>><a href="${base.contextPath}/index/news" >资讯中心</a>
                 <ul>
                 	<#list zxzxTypeList as typeList>   
                 		<#if typeList.id == 20>
@@ -97,7 +101,7 @@
 					</#list>
                 </ul>
                 </li>
-                <li id="ch_pxyjd" <#if chanel =='CH_PXYJD'> class="actv" </#if>><a href="${base.contextPath}/index/jdypx" >培训与鉴定</a><img src="${base.contextPath}/lib/index/img/banner/rightline.png" style="float:right;margin-top:10px;" height="24px" width="3px;"/>
+                <li id="ch_pxyjd" <#if chanel =='CH_PXYJD'> class="actv" </#if>><a href="${base.contextPath}/index/jdypx" >培训与鉴定</a>
 	                <ul>
 	               		 <li><a href="${base.contextPath}/index/jdypx/gwpx">岗位培训</a>
 	               		 		<ul>
@@ -116,21 +120,21 @@
 	               		 </li> 
 	                </ul>
                 </li>
-                <li id="ch_dcyyj" <#if chanel =='CH_DCYYJ'> class="actv" </#if>><a href="${base.contextPath}/index/dcyyj" >调查与研究</a><img src="${base.contextPath}/lib/index/img/banner/rightline.png" style="float:right;margin-top:10px;" height="24px" width="3px;"/>
+                <li id="ch_dcyyj" <#if chanel =='CH_DCYYJ'> class="actv" </#if>><a href="${base.contextPath}/index/dcyyj" >调查与研究</a>
                  		<ul>
 		                	<#list dcyyjTypeList as typeList>   
 									<li><a href="${base.contextPath}/index/dcyyj/typeList?typeid=${typeList.id}">${typeList.typename}</a></li>
 							</#list>
 	                	</ul>
                  </li>
-                 <li id="ch_xhdt" <#if chanel =='CH_XHDT'> class="actv" </#if>><a href="${base.contextPath}/index/xhdt" >协会动态</a><img src="${base.contextPath}/lib/index/img/banner/rightline.png" style="float:right;margin-top:10px;" height="24px" width="3px;"/>
+                 <li id="ch_xhdt" <#if chanel =='CH_XHDT'> class="actv" </#if>><a href="${base.contextPath}/index/xhdt" >协会动态</a>
                   		<ul>
 		                	<#list xhdtTypeList as typeList>   
 									<li><a href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}">${typeList.typename}</a></li>
 							</#list>
 	                	</ul>
                   </li>
-                  <li id="ch_djhd" <#if chanel =='CH_DJHD'> class="actv" </#if>><a href="${base.contextPath}/index/djhd" >党建活动</a>
+                  <li id="ch_djhd"<#if chanel =='CH_DJHD'> class="actvend nav_end" <#else> class="nav_end"  </#if>><a href="${base.contextPath}/index/djhd" >党建活动</a>
 	                    <ul>
 		                	<#list djhdTypeList as typeList>   
 									<li><a href="${base.contextPath}/index/djhd/typeList?typeid=${typeList.id}">${typeList.typename}</a></li>

@@ -176,7 +176,7 @@ body{background:#f0f0f0;}
 .c_list_bidtype li a{color:#6c6c6c;text-decoration:none;line-height:18px}
 .c_list_bidtype li a:hover{color:#fff;text-decoration:none;background:#cc0000;line-height:18px}
 .vF_banner{width:698px;height:98px;background:red}
-.bx_log{background:url(../img/index/sys_gg_bg.gif) no-repeat top left #2b7ecc;height:60px}
+.bx_log{background:url(../img/index/sys_gg_bg.gif) no-repeat top left #0155d4;height:60px}/*2b7ecc*/
 
 
 /*检索*/
@@ -287,7 +287,7 @@ body{background:#f0f0f0;}
 /*培训与鉴定*/
 .main_right_block_pxyjd{width:290px;margin-left:10px;float:left;border : 1px solid #7bb9ec}
 .main_right_cbl_pxyjd{width:100%;background:#fff;float:left}
-.main_right_cbl_pxyjd_title{height:60px;background: url(../img/index/righttitle.png) no-repeat top left #2b7ecc;}
+.main_right_cbl_pxyjd_title{height:60px;background: url(../img/index/righttitle.png) no-repeat top left #0155d4;}
 .main_right_cbl_pxyjd h2{height:60px;margin-left:10px;background: url(../img/index/pxyjd_img.png) no-repeat center left;}
 .main_right_cbl_pxyjd h2 a{margin-left: 35px;font-size: 18px;font-weight: 500; color: white;line-height: 60px; margin-top: 8px;text-decoration: none;}
 .main_right_cbl_pxyjd h2 a:hover{text-decoration: underline;}
