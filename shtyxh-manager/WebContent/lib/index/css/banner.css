@@ -26,8 +26,8 @@
 
 .zxzxChild{float:left;width:292px;}
 .zxzxChild .zxtitle{position:relative;width:100%;height:49px;background: url("../img/index/zxzx_01.gif") no-repeat;}
-.zxzxChild .zxtitle span{position:absolute;bottom:0;padding:0 0 5px 25px;}
-.zxzxChild .zxtitle span a{ text-decoration:none;font-size:14px;color:#1180b8;font-weight:bold;}
+.zxzxChild .zxtitle span{position:absolute;bottom:0;padding:0 0 5px 23px;}
+.zxzxChild .zxtitle span a{ text-decoration:none;font-size:13px;color:#1180b8;font-weight:bold;}
 .zxzxChild .zxtitle span a:hover{cursor:pointer;text-decoration:underline} 
 .zxzxChild .zxcontent{width:100%;background: url("../img/index/zxzx_02.gif") repeat-y ;}
 .zxzxChild .zxcontent dl {padding:0 25px 0 25px;} 

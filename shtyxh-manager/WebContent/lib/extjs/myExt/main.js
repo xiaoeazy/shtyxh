@@ -79,7 +79,7 @@ Ext.onReady(function() {
 					iconCls : 'nav',
 					html : getXHGK(funcs)
 				}, {
-					title : '资讯中心',
+					title : '法规与资讯',
 					xtype:'panel',
 					id:'main_zxzx',
 					border : false,
