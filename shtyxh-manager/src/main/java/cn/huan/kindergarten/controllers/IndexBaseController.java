@@ -72,6 +72,7 @@ public class IndexBaseController extends BaseController{
 	public void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {
 			KgType t2 = new KgType();
 			t2.setParentid(XHGK_ID);
+			t2.setHidden(false);
 			KgType t3 = new KgType();
 			t3.setParentid(ZXZX_ID);
 			KgType t5 = new KgType();

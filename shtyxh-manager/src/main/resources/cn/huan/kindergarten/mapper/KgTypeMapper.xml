@@ -43,7 +43,7 @@
     </resultMap>
     
     <select id="findChildType" resultMap="RecursionResultMap" >
-    	select * from kg_type where parentId = #{typeid}
+    	select * from kg_type where parentId = #{typeid} and hidden =0
     </select>
     
     
