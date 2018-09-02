@@ -258,7 +258,13 @@
 							<div class="main_right_cbl_pxyjd_line"></div>
 							<#list typePxyjdShowList as typePxyjdShowList>
 									<#if typePxyjdShowList_index%2==0>
-										<div class="dldiv">
+										<#if typePxyjdShowList_index==2>
+												<div class="bottomdldiv">
+										<#else>
+												<div class="dldiv">
+										</#if>
+										
+									
 									</#if>
 										<dl>
 											
@@ -279,6 +285,7 @@
 											</#if>
 										</dl>
 									<#if typePxyjdShowList_index%2==1>
+										<div class="dldiv_line">&nbsp;</div>
 										</div>
 									</#if>
 							</#list>

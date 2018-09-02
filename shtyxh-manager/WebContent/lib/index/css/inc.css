@@ -7,7 +7,8 @@ body,a{line-height:24px;font-size:14px;font-family:"Microsoft YaHei","微软雅�
 .v4incheadertop{width:100%}
 .v4incheadertop_tel_block,.v4incheadertop_logosearch_block2,.v4incheadertop_nav_block{width:100%;min-width:1000px;}
 .v4incheadertop_tel,.v4incheadertop_logosearch{width:1000px;margin:0 auto}
-.v4incheadertop_tel_block{background:#0082d4;height:34px;}
+/* .v4incheadertop_tel_block{background:#0082d4;height:34px;} */
+.v4incheadertop_tel_block{background:#0340e4;height:34px;}
 .v4incheadertop_tel p.cl,.v4incheadertop_tel p.cr{line-height:34px;color:#fff}
 .v4incheadertop_tel p.cl{width:500px;text-align: left;float:left}
 .v4incheadertop_tel p.cr{width:500px;text-align: right;float:left}
