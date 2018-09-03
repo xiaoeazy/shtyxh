@@ -26,6 +26,7 @@ public class KgType extends BaseDTO {
      public static final String FIELD_RELATETYPE = "relatetype";
      public static final String FIELD_RELATETYPEID = "relatetypeid";
      public static final String FIELD_HIDDEN = "hidden";
+     public static final String FIELD_SEQUENCE = "sequence";
 
      @Id
      @GeneratedValue
@@ -49,6 +50,8 @@ public class KgType extends BaseDTO {
      private Long relatetypeid;
      
      private Boolean hidden;
+     
+     private Long sequence;
 
      @Transient
      private List<KgType> childType;
@@ -65,7 +68,17 @@ public class KgType extends BaseDTO {
      @Transient
      private  List<KgOffers> offersList;
 
-     public List<KgOffers> getOffersList() {
+     
+     
+     public Long getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(Long sequence) {
+		this.sequence = sequence;
+	}
+
+	public List<KgOffers> getOffersList() {
 		return offersList;
 	}
 

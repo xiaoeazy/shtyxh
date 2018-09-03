@@ -83,6 +83,8 @@ public class IndexController extends IndexBaseController{
     	 //协会动态
     	 KgType kn = new KgType();
     	 kn.setParentid(XHDT_ID);
+    	 kn.setSortname("sequence");
+    	 kn.setSortorder("desc");
     	 List<KgType> kntList = iKgTypeService.select(requestContext, kn);
 		 for(KgType kt :kntList){
 			 KgNews kns = new KgNews();

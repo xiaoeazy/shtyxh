@@ -12,6 +12,7 @@
         <result column="relateType" property="relatetype" jdbcType="INTEGER" />
         <result column="relateTypeId" property="relatetypeid" jdbcType="DECIMAL" />
         <result column="hidden" property="hidden" jdbcType="TINYINT" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
     </resultMap>
     
     <resultMap id="RecursionResultMap" type="cn.huan.kindergarten.dto.KgType">
@@ -24,6 +25,7 @@
         <result column="relateType" property="relatetype" jdbcType="INTEGER" />
         <result column="relateTypeId" property="relatetypeid" jdbcType="DECIMAL" />
         <result column="hidden" property="hidden" jdbcType="TINYINT" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
         <collection property ="childType" ofType="cn.huan.kindergarten.dto.KgType" column="id" select="findChildType">
         </collection>
     </resultMap>
@@ -38,6 +40,7 @@
         <result column="relateType" property="relatetype" jdbcType="INTEGER" />
         <result column="relateTypeId" property="relatetypeid" jdbcType="DECIMAL" />
         <result column="hidden" property="hidden" jdbcType="TINYINT" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
         <collection property ="parentType" ofType="cn.huan.kindergarten.dto.KgType" column="parentId" select="findParentType">
         </collection>
     </resultMap>
