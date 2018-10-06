@@ -1,22 +1,18 @@
 package com.shtyxh.manager.index.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.huan.HTed.core.IRequest;
-import com.shtyxh.manager.account.dto.User;
-import com.shtyxh.manager.account.service.ISSOService;
-import com.shtyxh.manager.account.service.IUserService;
 import com.shtyxh.manager.dto.KgCarousel;
 import com.shtyxh.manager.dto.KgDownload;
 import com.shtyxh.manager.dto.KgNews;
@@ -45,10 +41,18 @@ public class IndexController extends IndexBaseController {
 		// IRequest requestContext = createRequestContext(request);
 		// 查询大轮播图和下载资料
 		List<KgDownload> downloadList = iJedisService.loadDownload();
-		downloadList = CommonFuncUtil.listToList(downloadList, 4);
+		List<KgDownload> noPasswordDownloadList = new ArrayList<KgDownload>();
+		for(KgDownload kl:downloadList) {
+			if(StringUtils.isEmpty(kl.getPassword())) {
+				noPasswordDownloadList.add(kl);
+				if(noPasswordDownloadList.size()==4)
+					break;
+			}
+		}
+//		downloadList = CommonFuncUtil.listToList(downloadList, 4);
 		List<KgCarousel> carouselList = iJedisService.loadCarousel();
 		carouselList = CommonFuncUtil.listToList(carouselList, 5);
-		mv.addObject("downloadList", downloadList);
+		mv.addObject("downloadList", noPasswordDownloadList);
 		mv.addObject("carouselList", carouselList);
 
 		// 协会动态

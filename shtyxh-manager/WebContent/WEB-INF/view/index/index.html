@@ -18,6 +18,12 @@
 <!-- 导航下轮播 -->
 <script type="text/javascript"
 	src="${base.contextPath}/lib/index/js/index/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript">
+	function downloadFile(path){
+		var filePath = encodeURI(encodeURI(path));
+		window.location="${fileserver}/fileDownload?filePath="+filePath; 
+	}
+</script>
 </head>
 <body id="index">
 
@@ -208,9 +214,7 @@
 							<li class="xzzqlinks sys1"><p>${downloadList.fileTitle}</p></li>
 							<#else>
 							<li class="xzzqlinks sys1"><p>
-									<a
-										href="${base.contextPath}/index/file/download?fileId=${downloadList.id}"
-										target="_blank">${downloadList.fileTitle}</a>
+									 <a href="javascript:void(0);"  title="${downloadList.fileTitle}" onclick="downloadFile('${downloadList.filePath}')">${downloadList.fileTitle}</a>
 								</p></li></#if> </#list>
 						</ul>
 					</div>

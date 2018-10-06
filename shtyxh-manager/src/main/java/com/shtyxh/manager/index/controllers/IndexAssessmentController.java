@@ -208,21 +208,7 @@ public class IndexAssessmentController extends IndexBaseController{
 		}
     	return rd;
     }
-    
-    @RequestMapping(value = "/index/admin/user/join/assessment/delete")
-    @ResponseBody
-    public ResponseData userJoinAssessmentDelete(HttpServletRequest request,@RequestBody List<KgAssessmentActivityUserProgress> dto) {
-    	ResponseData rd = null;
-    	try {
-			IRequest requestCtx = createRequestContext(request);
-			iIndexAssessmentService.userJoinAssessmentDelete(requestCtx, dto);
-			rd = new ResponseData(true);
-		} catch (Exception e) {
-			rd = new ResponseData(false);
-			rd.setMessage(e.getMessage());
-		}
-    	return rd;
-    }
+
     
     //===================================other======================================
    

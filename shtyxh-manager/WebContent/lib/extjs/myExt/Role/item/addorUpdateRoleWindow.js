@@ -187,14 +187,21 @@ Ext.extend(addorUpdateRole.addorUpdateRoleWindow, Ext.Window, {
 	
 	addorUpdateRole : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
 		var roleFuncList = [];
-		var itemselector = Ext.getCmp(mainId+"itemselector");
-		var allFunc = itemselector.getValue();
-		allFunc.forEach(function(ele,index){  
-			roleFuncList.push({
-            	 funcId:allFunc[index]
-             })
-         });  
 		
+//		var itemselector = Ext.getCmp(mainId+"itemselector");
+//		var allFunc = itemselector.getValue();
+//		allFunc.forEach(function(ele,index){  
+//			roleFuncList.push({
+//            	 funcId:allFunc[index]
+//             })
+//         });  
+		var list = Ext.getCmp(mainId+"itemselector").toField.boundList;
+        var rightstore = list.getStore();
+		for(var i =0;i<rightstore.getCount();i++){
+			roleFuncList.push({
+				funcId:rightstore.getAt(i).get("id")
+            })
+		}
 		var roleCode =Ext.getCmp(mainId+"roleCode").getValue().trim();
 		if(roleCode==""){
 			Ext.getCmp(mainId+"roleCode").markInvalid("角色编码不能为空！");

@@ -43,9 +43,6 @@
 
 	<mvc:resources mapping="/lib/**" location="/lib/" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	<mvc:resources mapping="/uploadFile/**" location="/uploadFile/" />
-	<mvc:resources mapping="/ueditor/**" location="/ueditor/" />
-	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
 	<!-- 配置视图解析器 如何把handler 方法返回值解析为实际的物理视图 根据控制器返回的字符串拼接成jsp路径：/WEB-INF/jsp/xx.jsp -->
 	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
 	<!-- <property name = "prefix" value="/WEB-INF/jsp/"></property> -->
@@ -132,6 +129,8 @@
 	    <mvc:interceptor>
 	        <mvc:mapping path="/**" />
 	        <mvc:exclude-mapping path="/index/admin/**" />
+	        <mvc:exclude-mapping path="/lib/**"/>
+	        <mvc:exclude-mapping path="/resources/**"/>
 	        <bean class="com.shtyxh.manager.interceptor.UserInfoInterceptor"></bean>
 	    </mvc:interceptor>
 	</mvc:interceptors>

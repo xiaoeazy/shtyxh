@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.huan.HTed.core.IRequest;
+import com.huan.HTed.system.dto.ResponseData;
 import com.shtyxh.common.bean.ExtAjax;
 import com.shtyxh.common.bean.ExtStore;
 import com.shtyxh.common.exception.GlobalException;
@@ -112,20 +113,24 @@ public class IndexUserController extends IndexBaseController{
 			int size = iKgAssessmentActivityUserProgressService.adminQueryCount(requestCtx,userProgress);
 			return new ExtStore(page, pageSize, size, list);
 		}
+		
+	    
+	    @RequestMapping(value = "/index/admin/user/join/assessment/delete")
+	    @ResponseBody
+	    public ResponseData userJoinAssessmentDelete(HttpServletRequest request,@RequestBody List<KgAssessmentActivityUserProgress> dto) {
+	    	ResponseData rd = null;
+	    	try {
+				IRequest requestCtx = createRequestContext(request);
+				iIndexAssessmentService.userJoinAssessmentDelete(requestCtx, dto);
+				rd = new ResponseData(true);
+			} catch (Exception e) {
+				rd = new ResponseData(false);
+				rd.setMessage(e.getMessage());
+			}
+	    	return rd;
+	    }
 	   
-//		@RequestMapping(value = "/index/admin/user/join/assessment/delete")
-//		@ResponseBody
-//		public HTedResult userJoinAssessmentDelete(@RequestBody List<KgAssessmentActivityUserProgress> dto) {
-//			HTedResult rd = null;
-//			try {
-//				iIndexAssessmentService.userJoinAssessmentDelete(dto);
-//				rd = new HTedResult(true);
-//			} catch (Exception e) {
-//				rd = new HTedResult(false);
-//				rd.setMessage(e.getMessage());
-//			}
-//			return rd;
-//		}
+
 
 	   //==========================登录===================================
 		@RequestMapping(value = "/index/logout")
