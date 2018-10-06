@@ -1,0 +1,150 @@
+<strong class="title">
+	<span>${nowType.typename}</span>
+</strong>
+<div class="nr_box">
+		<div class="panel panel-default">
+            <div class="panel-heading">搜索</div>
+            <div class="panel-body">
+                <form role="form" id="searchForm" class="form-horizontal">
+                    <div class="form-group">
+                        	<label class="col-sm-2 control-label" for="memberno">编　　号</label> 
+                       	 	<div class="col-md-4"> 
+                       	 		<input type="text" class="form-control" id="memberno" name="memberno" placeholder="请输入编号">
+                       	 	</div>
+                          		<label class="col-sm-2 control-label" for="kindergartenname">园所名称</label> 
+                           	<div class="col-md-4">
+                           		<input type="text" class="form-control" id="kindergartenname" name="kindergartenname" placeholder="请输入园所名称">
+                           	</div>
+                       
+                    </div>
+                    <div class="form-group">
+                     		<label class="col-sm-2 control-label" for="kindergartensite">园所地址</label> 
+                        	<div class="col-md-4">
+                        		<input type="text"  class="form-control" id="kindergartensite" name="kindergartensite" placeholder="请输入园所地址">
+                        	</div>
+                        	
+                    </div>
+                     <div class="form-group" >
+                        	 <div class="col-md-12"> <button type="button" id="searchBtn" class="btn btn-default pull-right">开始搜索</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+		<table id="table"></table>
+</div>
+					
+
+<script>
+			  //得到查询的参数
+				   function queryParams(params) {
+				        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+		        		    pageSize: params.limit, // 每页要显示的数据条数
+			                offset: params.offset, // 每页显示数据的开始行号
+			                sort: params.sort, // 要排序的字段
+			                sortOrder: params.order, // 排序规则
+				            memberno: $("#memberno").val(),
+				            kindergartenname: $("#kindergartenname").val(),
+				            kindergartensite: $("#kindergartensite").val()
+				        };
+				        return temp;
+				    };
+					$("#searchBtn").click(function() {
+		                var memberno = $("#memberno").val();
+		                var kindergartenname = $("#kindergartenname").val();
+		                var kindergartensite = $("#kindergartensite").val();
+		                var obj =  {memberno : memberno,kindergartenname:kindergartenname,kindergartensite:kindergartensite};
+		                $('#table').bootstrapTable('refresh');
+		
+		            });
+					$(function () {
+						$("#table").bootstrapTable({ // 对应table标签的id
+						      url: "${base.contextPath}/index/xhgk/loadHYDW", // 获取表格数据的url
+						      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+						      striped: true,  //表格显示条纹，默认为false
+						      pagination: true, // 在表格底部显示分页组件，默认false
+						      pageList: [10, 20], // 设置页面可以显示的数据条数
+						      pageSize: 10, // 页面数据条数
+						      pageNumber: 1, // 首页页码
+						      sidePagination: 'server', // 设置为服务器端分页
+// 						      queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+// 						          return {
+// 						              pageSize: params.limit, // 每页要显示的数据条数
+// 						              offset: params.offset, // 每页显示数据的开始行号
+// 						              sort: params.sort, // 要排序的字段
+// 						              sortOrder: params.order, // 排序规则
+// 						          }
+// 						      },
+							  queryParams:queryParams,
+						      responseHandler: function(res) {
+					                return {
+					                    "total": res.totalProperty,//总页数
+					                    "rows": res.results   //数据
+					                 };
+					          },
+						      sortName: 'id', // 要排序的字段
+						      sortOrder: 'desc', // 排序规则
+						      columns: [{  
+				                      title: '序号',//标题  可不加  
+				                      formatter: function (value, row, index) {  
+			//	                           return index+1;  
+				  							 var pageSize=$('#table').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
+				               				 var pageNumber=$('#table').bootstrapTable('getOptions').pageNumber;//通过表的#id 可以得到当前第几页
+				               				 return pageSize * (pageNumber - 1) + index + 1;    //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+				                      }  
+				                  }, {
+						              field: 'memberno',
+						              title: '编号',
+						              align: 'center',
+						              valign: 'middle'
+						          }, {
+						              field: 'kgcanton.cantonname',
+						              title: '行政区',
+						              align: 'center',
+						              valign: 'middle'
+						          }, {
+						              field: 'kindergartenname',
+						              title: '园所名称',
+						              align: 'center',
+						              valign: 'middle'
+						          }, {
+						              field: 'kindergartensite',
+						              title: '地址',
+						              align: 'center',
+						              valign: 'middle'
+						          }, {
+						              field: 'zipcode',
+						              title: '邮编',
+						              align: 'center',
+						              valign: 'middle'
+						          }, {
+						              field: 'telphone',
+						              title: '联系电话',
+						              align: 'center',
+						              valign: 'middle'
+						          }, {
+						              field: 'level',
+						              title: '等级',
+						              align: 'center',
+						              valign: 'middle'
+						          }, {
+						              field: 'nature',
+						              title: '性质',
+						              align: 'center',
+						              valign: 'middle'
+						          }, {
+						              field: 'admissiontime',
+						              title: '入会时间',
+						              align: 'center',
+						              valign: 'middle'
+						          }
+						      ],
+						      onLoadSuccess: function(){  //加载成功时执行
+						            console.info("加载成功");
+						      },
+						      onLoadError: function(){  //加载失败时执行
+						            console.info("加载数据失败");
+						      }
+						})
+					})
+					</script>
+		

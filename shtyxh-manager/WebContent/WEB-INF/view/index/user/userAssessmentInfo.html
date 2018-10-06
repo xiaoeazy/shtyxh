@@ -1,0 +1,84 @@
+
+<!--参与评估  开始 -->
+<div class="cus01">
+	<h3 title="参与评估">参与评估</h3>
+	<div id="toolbar" class="btn-group">
+		<button id="btn_delete" type="button" class="btn btn-default"
+			onclick="btn_delete()">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+		</button>
+		<button id="btn_fresh" type="button" class="btn btn-default"
+			onclick="btn_fresh()">
+			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+		</button>
+	</div>
+	<br />
+	<table id="table"></table>
+</div>
+<!--参与评估  结束 -->
+
+
+
+<script>
+		$(function () {
+			$("#table").bootstrapTable({ // 对应table标签的id
+			      url: "${base.contextPath}/index/admin/user/joinAssessment", // 获取表格数据的url
+			      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+			      striped: true,  //表格显示条纹，默认为false
+			      pagination: true, // 在表格底部显示分页组件，默认false
+			      pageList: [10, 20], // 设置页面可以显示的数据条数
+			      pageSize: 10, // 页面数据条数
+			      pageNumber: 1, // 首页页码
+			      sidePagination: 'server', // 设置为服务器端分页
+			      queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+			          return {
+			              pageSize: params.limit, // 每页要显示的数据条数
+			              offset: params.offset, // 每页显示数据的开始行号
+			              sort: params.sort, // 要排序的字段
+			              sortOrder: params.order, // 排序规则
+			          }
+			      },
+			      responseHandler: function(res) {
+		                return {
+		                    "total": res.totalProperty,//总页数
+		                    "rows": res.results   //数据
+		                 };
+		          },
+			      sortName: 'id', // 要排序的字段
+			      sortOrder: 'desc', // 排序规则
+			      columns: [
+			          {
+			              checkbox: true, // 显示一个勾选框
+			              align: 'center' // 居中显示
+			          },{  
+	                      title: '序号',//标题  可不加  
+	                      formatter: function (value, row, index) {  
+//	                           return index+1;  
+	  							 var pageSize=$('#table').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
+	               				 var pageNumber=$('#table').bootstrapTable('getOptions').pageNumber;//通过表的#id 可以得到当前第几页
+	               				 return pageSize * (pageNumber - 1) + index + 1;    //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+	                      }  
+	                  }, {
+			              field: 'kgAssessmentActivity.assessmentActivityName',
+			              title: '评估活动名称',
+			              align: 'center',
+			              valign: 'middle'
+			          }, {
+			              title: "操作",
+			              align: 'center',
+			              valign: 'middle',
+			              width: 160, // 定义列的宽度，单位为像素px
+			              formatter: function (value, row, index) {
+			                  return '<button class="btn btn-primary btn-sm" onclick="toUserAssessmentPage(\'' + row.assessmentActivityId + '\')">查看</button>';
+			              }
+			          }
+			      ],
+			      onLoadSuccess: function(){  //加载成功时执行
+			            console.info("加载成功");
+			      },
+			      onLoadError: function(){  //加载失败时执行
+			            console.info("加载数据失败");
+			      }
+			})
+		})
+		</script>

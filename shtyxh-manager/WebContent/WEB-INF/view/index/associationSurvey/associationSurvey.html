@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>${nowType.typename!}</title>
+<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/common/common.css" rel="stylesheet" type="text/css" />
+<link href="${base.contextPath}/lib/index/css/associationSurvery/associationSurvery.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+
+<!-- 时间轴控件-->
+<script type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${base.contextPath}/lib/index/jquery-time-05/css/about.css">
+
+<!-- bootstrap插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<!-- 分页插件 -->
+<script language="javascript" src="${base.contextPath}/lib/jqPaginator/jqpaginator.min.js" ></script>
+
+<!-- bootstraptable插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-table/css/bootstrap-table.min.css" />
+<script src="${base.contextPath}/lib/bootstrap-table/js/bootstrap-table.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- 百度地图 -->
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+
+<style type="text/css" media="screen">
+ .cont{height:275px;font-size:16px;position:relative;}
+ .cont ul{margin:10px 0 10px 0px;padding-top:10px;}
+ .cont p{position:absolute;font-size:12px;bottom:0;right:475px;}
+</style>
+
+<script>
+	function left_click(id,name){
+		$(document).attr("title",name);
+		
+		$(".left_box ul li ").removeClass("on");
+		var changeclass=window.document.getElementById('cid'+id);
+		changeclass.className='on';
+		 $.ajax({
+             url: "${base.contextPath}/index/xhgk/typeList?typeid="+id,
+             type: "POST",
+             datatype:"JSON",
+             data: {},
+             success: function (data) {
+            	 $(".right_box").html(data);
+             },
+             error: function () {
+                 alert("获取信息失败!");
+             }
+         });
+	}
+	
+	function page_click(id,num){
+		 $.ajax({
+             url: "${base.contextPath}/index/xhgk/typeList?typeid="+id+"&page="+num,
+             type: "POST",
+             datatype:"JSON",
+             data: {},
+             success: function (data) {
+            	 $(".right_box").html(data);
+             },
+             error: function () {
+                 alert("获取信息失败!");
+             }
+         });
+	}
+	
+	function detail_click(typeid,newsid){
+		 $.ajax({
+            url: "${base.contextPath}/index/xhgk/newsDetail?typeid="+typeid+"&newsid="+newsid,
+            type: "POST",
+            datatype:"JSON",
+            data: {},
+            success: function (data) {
+           	 $(".right_box").html(data);
+            },
+            error: function () {
+                alert("获取信息失败!");
+            }
+        });
+	}
+
+</script>
+
+</head>
+<body>
+	<#include "../../include/navigation.html">
+	<div class="main">
+		<div class="main_container">
+				<#include "./include/associationLeftPage.html">
+
+				<div class="mainLeft_right_block mt13">
+					<div class="right_box">
+							
+					
+					</div>
+				</div>
+
+
+		</div>
+	</div>
+	<script>
+	$(document).ready(function(){
+		 $.ajax({
+	         url: "${base.contextPath}/index/xhgk/typeList?typeid=${nowType.id!}",
+	         type: "POST",
+	         datatype:"JSON",
+	         data: {},
+	         success: function (data) {
+	        	 $(".right_box").html(data);
+	         },
+	         error: function () {
+	             alert("获取信息失败!");
+	         }
+	     });
+	});
+	</script>
+	<#include "../../include/footer.html">
+</body>
+
+
+</html>

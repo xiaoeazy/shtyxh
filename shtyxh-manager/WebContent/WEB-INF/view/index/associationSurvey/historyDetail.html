@@ -1,0 +1,21 @@
+<strong class="title">
+		<span>${nowType.typename}</span>
+</strong>
+<div class="box">
+	<ul class="event_list">
+	
+		<#list rightMap?keys as key>
+	  <div>
+		<h3 id="${key}">${key}</h3>
+		<#assign item = rightMap[key]>  
+		<#list item as value>
+			<li>
+				<span>${value.historytime}</span>
+				<p><span>${value.content}</span></p>
+			</li>
+		</#list>	
+	</div>
+	</#list>
+</ul>
+</div>
+<div class="clearfix"></div>

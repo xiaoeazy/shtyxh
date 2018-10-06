@@ -1,0 +1,21 @@
+		<strong class="title">
+								<span>${nowType.typename}</span>
+							</strong>
+						<div class="nr_box">
+								<div class="vF_deail_currentloc">
+							         <p>当前位置：<a href="javascript:void(0)"  onclick="left_click('${nowType.id!}','${nowType.typename!}')" title="${nowType.typename!}" class="CurrChnlCls">${nowType.typename!}</a>
+							          &nbsp;&raquo;&nbsp;${newsInfo.newstitle!}
+       								 </p>
+							    </div>
+						
+								<div class="vF_detail_header">
+					            <h2 class="tc">${newsInfo.newstitle!}&nbsp;</h2>
+					            <p class="tc">
+					            	<span id="pubTime">${newsInfo.createdate?string('yyyy-MM-dd HH:mm:ss')}</span> 
+					            	</p>
+					            </div>
+					            <div class="vF_detail_content">
+					                ${newsInfo.content!}&nbsp;
+					            </div>
+							
+						</div>
