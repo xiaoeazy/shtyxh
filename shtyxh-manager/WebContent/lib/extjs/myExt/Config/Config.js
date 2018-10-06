@@ -28,19 +28,17 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 		    listeners:{
 		    	  load: function(records, options, success){  
 		    		    var webname = store.getAt(0).get('sysvalue');
-						var uploadpath = store.getAt(1).get('sysvalue');
-						var copyright = store.getAt(2).get('sysvalue');
-						var keyword = store.getAt(3).get('sysvalue');
-						var webdesc = store.getAt(4).get('sysvalue');
-						var ICPlicense = store.getAt(5).get('sysvalue');
-						var webLogo = store.getAt(6).get('sysvalue');
-						var webIco = store.getAt(7).get('sysvalue');
-						var ICPlicensePath = store.getAt(8).get('sysvalue');
-						var webIp = store.getAt(9).get('sysvalue');
-						var wx = store.getAt(10).get('sysvalue');
-						var wb = store.getAt(11).get('sysvalue');
+						var copyright = store.getAt(1).get('sysvalue');
+						var keyword = store.getAt(2).get('sysvalue');
+						var webdesc = store.getAt(3).get('sysvalue');
+						var ICPlicense = store.getAt(4).get('sysvalue');
+						var webLogo = store.getAt(5).get('sysvalue');
+						var webIco = store.getAt(6).get('sysvalue');
+						var ICPlicensePath = store.getAt(7).get('sysvalue');
+						var webIp = store.getAt(8).get('sysvalue');
+						var wx = store.getAt(9).get('sysvalue');
+						var wb = store.getAt(10).get('sysvalue');
 						Ext.getCmp(mainId+"webname").setValue(webname);
-			    		Ext.getCmp(mainId+"uploadpath").setValue(uploadpath);
 			    		Ext.getCmp(mainId+"copyright").setValue(copyright);
 			    		Ext.getCmp(mainId+"keyword").setValue(keyword);
 			    		Ext.getCmp(mainId+"webdesc").setValue(webdesc);
@@ -52,16 +50,16 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 			    		Ext.getCmp(mainId+"wx").setValue(wx);
 			    		Ext.getCmp(mainId+"wb").setValue(wb);
 			    		if(webLogo!=null&&webLogo!=""){
-			    			Ext.getCmp(mainId+"showWebLogoPict").getEl().dom.src=appName+webLogo;
+			    			Ext.getCmp(mainId+"showWebLogoPict").getEl().dom.src=fileAppName+webLogo;
 			    		}
 			    		if(webIco!=null&&webIco!=""){
-			    			Ext.getCmp(mainId+"showWebIcoPict").getEl().dom.src=appName+webIco;
+			    			Ext.getCmp(mainId+"showWebIcoPict").getEl().dom.src=fileAppName+webIco;
 			    		}
 			    		if(wx!=null&&wx!=""){
-			    			Ext.getCmp(mainId+"showWXPict").getEl().dom.src=appName+wx;
+			    			Ext.getCmp(mainId+"showWXPict").getEl().dom.src=fileAppName+wx;
 			    		}
 			    		if(wb!=null&&wb!=""){
-			    			Ext.getCmp(mainId+"showWBPict").getEl().dom.src=appName+wb;
+			    			Ext.getCmp(mainId+"showWBPict").getEl().dom.src=fileAppName+wb;
 			    		}
 		          }  
 		    }
@@ -92,14 +90,6 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 							name: 'webname',
 							blankText:'必须填写',
 							id:mainId+"webname",
-				            maxLength:200  
-			  			},
-			  			{
-			          		fieldLabel:'图片上传默认路径',
-							allowBlank:false,
-							name: 'uploadpath',
-							blankText:'必须填写',
-							id:mainId+"uploadpath",
 				            maxLength:200  
 			  			},
 			  			{
@@ -333,7 +323,6 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 	},
 	submit:function(me,mainId){
 		var webname = Ext.getCmp(mainId+"webname").getValue();
-		var uploadpath = Ext.getCmp(mainId+"uploadpath").getValue();
 		var copyright = Ext.getCmp(mainId+"copyright").getValue();
 		var keyword = Ext.getCmp(mainId+"keyword").getValue();
 		var webdesc = Ext.getCmp(mainId+"webdesc").getValue();
@@ -350,27 +339,25 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 		var jsonArray = [];   
     	var obj1 = me.madeObj(1,webname)
         jsonArray.push(obj1); 
-    	var obj2 = me.madeObj(2,uploadpath)
-        jsonArray.push(obj2); 
-    	var obj3 = me.madeObj(3,copyright)
+    	var obj3 = me.madeObj(2,copyright)
         jsonArray.push(obj3); 
-    	var obj4 = me.madeObj(4,keyword)
+    	var obj4 = me.madeObj(3,keyword)
         jsonArray.push(obj4); 
-    	var obj5 = me.madeObj(5,webdesc)
+    	var obj5 = me.madeObj(4,webdesc)
         jsonArray.push(obj5); 
-    	var obj6 = me.madeObj(6,ICPlicense)
+    	var obj6 = me.madeObj(5,ICPlicense)
         jsonArray.push(obj6); 
-    	var obj7 = me.madeObj(7,webLogo)
+    	var obj7 = me.madeObj(6,webLogo)
         jsonArray.push(obj7); 
-    	var obj8 = me.madeObj(8,webIco)
+    	var obj8 = me.madeObj(7,webIco)
         jsonArray.push(obj8); 
-    	var obj9 = me.madeObj(9,ICPlicensePath)
+    	var obj9 = me.madeObj(8,ICPlicensePath)
         jsonArray.push(obj9); 
-    	var obj10 = me.madeObj(10,webIp)
+    	var obj10 = me.madeObj(9,webIp)
         jsonArray.push(obj10); 
-    	var obj11 = me.madeObj(11,wx)
+    	var obj11 = me.madeObj(10,wx)
         jsonArray.push(obj11); 
-    	var obj12 = me.madeObj(12,wb)
+    	var obj12 = me.madeObj(11,wb)
         jsonArray.push(obj12); 
     	
         Ext.Ajax.request({

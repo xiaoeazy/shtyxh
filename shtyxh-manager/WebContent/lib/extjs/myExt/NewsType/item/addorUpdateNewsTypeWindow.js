@@ -42,7 +42,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 			});
 	    	
 	       var parentTypeCombo = new Ext.form.ComboBox({
-	    	   		fieldLabel:'类型<font color="red">*</font>',
+	    	   		fieldLabel:'父类型<font color="red">*</font>',
 		    	    id:mainId+"typeid",
 		            store : typeid_Combo_Store,  
 		            valueField : "id",  
@@ -71,23 +71,23 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 		            }
 		        }); 
 	    	 //=====================是否前台显示=========================================
-		       var showIndex_Combo_Store = new Ext.data.Store({
+		       var hidden_Combo_Store = new Ext.data.Store({
 		    	   fields: [  
 		    	         {name: 'key', type: 'string'},  
 		    	         {name: 'value',  type: 'string'}
 		    	     ],  
 		    	     data : [  
-		    	         {key: 'true',    value: '显示'},
-		    	         {key: 'false',    value: '不显示'}
+		    	         {key: 'true',    value: '隐藏'},
+		    	         {key: 'false',    value: '显示'}
 		    	     ]  
 		    	});
 		       
-		       var showIndexCombo = new Ext.form.ComboBox({
+		       var showHiddenCombo = new Ext.form.ComboBox({
 		    	    style:'padding:5px',
 		    	    columnWidth: .33  ,   
-		      		fieldLabel:'是否前台显示<font color="red">*</font>',
-		    	    id:mainId+"showindex",
-		            store : showIndex_Combo_Store,  
+		      		fieldLabel:'是否导航栏显示<font color="red">*</font>',
+		    	    id:mainId+"hidden",
+		            store : hidden_Combo_Store,  
 		            valueField : "key",  
 		            mode : 'remote',  
 		            displayField : "value",  
@@ -98,7 +98,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 		            hiddenName : "value",  
 		            autoShow : true,  
 		            selectOnFocus : true,  
-		            name : "showindex",
+		            name : "showhidden",
 		            listeners:{
 		           	afterrender:function(comb){
 		           	},
@@ -107,42 +107,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 		           }
 		       }); 
 		       
-		       //=====================是否显示入口=========================================
-		       var showentrance_Combo_Store = new Ext.data.Store({
-		    	   fields: [  
-		    	         {name: 'key', type: 'string'},  
-		    	         {name: 'value',  type: 'string'}
-		    	     ],  
-		    	     data : [  
-		    	         {key: 'true',    value: '显示'},
-		    	         {key: 'false',    value: '不显示'}
-		    	     ]  
-		    	});
-		       
-		       var showEntranceCombo = new Ext.form.ComboBox({
-		    	    style:'padding:5px',
-		    	    columnWidth: .33  ,   
-		      		fieldLabel:'是否前台显示<font color="red">*</font>',
-		    	    id:mainId+"showentrance",
-		            store : showentrance_Combo_Store,  
-		            valueField : "key",  
-		            mode : 'remote',  
-		            displayField : "value",  
-		            forceSelection : true,  
-		            emptyText : '请选择',  
-		            editable : false,  
-		            triggerAction : 'all',  
-		            hiddenName : "value",  
-		            autoShow : true,  
-		            selectOnFocus : true,  
-		            name : "showentrance",
-		            listeners:{
-		           	afterrender:function(comb){
-		           	},
-		           	select:function(combo, record, index){
-		           	}
-		           }
-		       }); 
+		    
 	    	
 	    	var formpanel = new Ext.FormPanel({
 	    		  labelAlign: "right",
@@ -168,43 +133,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 					            maxLength:45  
 				  			},
 				  			parentTypeCombo,
-				  			showIndexCombo,
-				  			showEntranceCombo,
-				  			{
-								xtype:'container',
-								fieldLabel : '上传logo',
-								style:'padding:20px 0 5px 0px',
-								items:[{
-								 	width:170,
-								 	height:120,
-								 	fieldLabel : '显示',
-									xtype : 'box',
-									id :mainId+"showEntranceImagePathPict",
-									autoEl : {
-										width:170,
-									 	height:120,
-										tag : 'img',
-										src :nonePic,
-										style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',
-										complete : 'off'
-									}
-								},{
-									xtype : 'button',
-									width : 150,
-									style : 'margin-left:10px',
-									//name : 'imgupload',
-									text : '上传入口图标（170*120）',
-									handler:function(){
-										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"entranceimagepath",the_image_show:mainId+"showEntranceImagePathPict",type:'entranceimage'});
-										win.show();
-									}
-							 	},{ 
-					             	id:mainId+"entranceimagepath",
-					                xtype:"textfield",  
-									fieldLabel : 'entranceimagepath',
-					                hidden:true
-				                }]
-							}
+				  			showHiddenCombo
 				  			],
 				  buttonAlign : "center",
 				  buttons:[{
@@ -245,20 +174,13 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 						if(record!=null){
 				    		var typename= record.get("typename");
 				    		Ext.getCmp(mainId+"typename").setValue(typename);
-				    		var showindex =  record.get("showindex");
+				    		var hidden =  record.get("hidden");
 				    		var showentrance =  record.get("showentrance");
 				    		var parentid =  record.get("parentid");
-				    		showIndexCombo.setValue(showindex);
-				    		showEntranceCombo.setValue(showentrance);
+				    		showHiddenCombo.setValue(hidden);
 				    		parentTypeCombo.setValue(parentid);
-				    		var entranceimagepath= record.get("entranceimagepath");
-				    		Ext.getCmp(mainId+"entranceimagepath").setValue(entranceimagepath);
-				    		if(entranceimagepath!=null&&entranceimagepath!=""){
-				    			Ext.getCmp(mainId+"showEntranceImagePathPict").getEl().dom.src=appName+entranceimagepath;
-				    		}
 				    	}else{
-				    		showIndexCombo.setValue(false);
-				    		showEntranceCombo.setValue(false);
+				    		showHiddenCombo.setValue(false);
 				    	}
 					}
 				}
@@ -274,8 +196,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 			Ext.getCmp(mainId+"typename").markInvalid("类型名不能为空！");
 			return;
 		}
-		var showindex =Ext.getCmp(mainId+"showindex").getValue();
-		var showentrance =Ext.getCmp(mainId+"showentrance").getValue();
+		var hidden =Ext.getCmp(mainId+"hidden").getValue();
 		var parentid =  Ext.getCmp(mainId+"typeid").getValue();
 		
 		if(parentid==null){
@@ -283,7 +204,6 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 			return;
 		}
 		
-		var entranceimagepath = Ext.getCmp(mainId+"entranceimagepath").getValue();
 		
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
@@ -295,10 +215,8 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
                 	  __status : type,
                 	  typename : typename,
                 	  parentid:parentid,
-                	  showindex:showindex,
+                	  hidden:hidden,
                 	  relatetype:2,
-                	  showentrance:showentrance,
-                	  entranceimagepath:entranceimagepath,
                 	  id : id
                   }]),
                   success : function(response, options) {

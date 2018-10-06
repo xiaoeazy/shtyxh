@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shtyxh.manager.mapper.KgNewsMapper">
+    <resultMap id="BaseResultMap" type="com.shtyxh.manager.dto.KgNews">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="typeId" property="typeid" jdbcType="DECIMAL" />
+        <result column="sourceId" property="sourceid" jdbcType="DECIMAL" />
+        <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
+        <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />
+        <result column="summary" property="summary" jdbcType="VARCHAR" />
+        <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="indexshow" property="indexshow" jdbcType="VARCHAR" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
+        <result column="createDate" property="createdate" jdbcType="DATE" />
+        <result column="viewsCount" property="viewscount" jdbcType="DECIMAL" />
+    </resultMap>
+
+	 <resultMap  id="OtherResultMap" type="com.shtyxh.manager.dto.KgNews">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="typeId" property="typeid" jdbcType="DECIMAL" />
+        <result column="sourceId" property="sourceid" jdbcType="DECIMAL" />
+        <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
+        <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />
+        <result column="summary" property="summary" jdbcType="VARCHAR" />
+        <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="indexshow" property="indexshow" jdbcType="VARCHAR" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
+        <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+        <result column="viewsCount" property="viewscount" jdbcType="DECIMAL" />
+        <association property="kgNewstype" javaType="com.shtyxh.manager.dto.KgType">
+            <id column="typeid" property="id"></id>
+            <result column="typename" property="typename"/>
+        </association>
+    </resultMap>
+
+   <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="com.shtyxh.manager.dto.KgNews">
+        select a.*,b.typename from kg_news a left join kg_type b
+            on a.typeid=b.id 
+           <where>
+           		<if test="newstitle != null">
+           			AND a.newsTitle  like CONCAT('%',#{newstitle},'%') 
+           		</if>
+           		<if test="typeid != null">
+           			AND a.typeId = #{typeid}
+           		</if>
+           		<if test="attributeid != null and attributeid !=''">
+           		 	AND FIND_IN_SET(#{attributeid},a.attributeId) 
+           		</if>
+           		<if test="indexshow!=null and indexshow !=''">
+           			AND a.indexshow = #{indexshow}
+           		</if>
+           		<if test="sourceid!=null and sourceid !=''">
+           			AND a.sourceId = #{sourceid}
+           		</if>
+           		<if test="startDate!=null">
+           			<![CDATA[AND createdate >= #{startDate} ]]>
+           		</if>
+           		<if test="endDate!=null">
+           		 	<![CDATA[ AND createdate <= #{endDate} ]]>
+           		</if>
+           </where>
+           
+           <choose>
+			    <when test="sortname!=null and sortname !=''">
+			         ORDER BY #{sortname} #{sortorder}
+			    </when>
+			    <otherwise>
+			        ORDER BY a.sequence DESC, a.createDate DESC
+			    </otherwise>
+			</choose>
+           
+    </select>
+      
+     <select id="selectLinkNews" resultMap="BaseResultMap" parameterType="java.util.Map">
+     	<![CDATA[   
+        	select * from kg_news where id in (select id from (select id from  kg_news where id < ${news.id} and typeid =${news.typeid} order by id desc limit  ${size}) as t)
+			union
+			select * from kg_news where id in (select id from (select id from kg_news where id > ${news.id} and typeid =${news.typeid} order by id asc limit  ${size}) as t)
+        ]]>  
+    </select>
+    
+       <select id="selectByMap" resultMap="OtherResultMap"  parameterType="java.util.Map">
+        	select a.* from kg_news a
+        	<where>
+        		<choose>
+				    <when  test="typeids != null and typeids.size()>0">
+				       and a.typeid in
+			        	 <foreach collection="typeids" item="typeId" index="index"
+				            open="(" close=")" separator=",">
+				            #{typeId}
+				       	 </foreach>
+				    </when>
+				    <otherwise>
+				        and a.typeid = -1 
+				    </otherwise>
+				</choose>
+		       	 <if test ="news!=null">
+			       	 <if test="news.sourceid!=null and news.sourceid !=''">
+	           			AND a.sourceId = #{news.sourceid}
+	           		</if>
+	           		<if test="news.indexshow!=null  and news.indexshow !='' ">
+	           			AND a.indexshow = #{news.indexshow}
+	           		</if>
+	           		<if test="news.attributeid != null and news.attributeid !=''">
+	           		 	AND FIND_IN_SET(#{news.attributeid},a.attributeId) 
+	           		</if>
+		       	 </if>
+       	 		
+        	</where> 
+           
+          	ORDER BY a.sequence DESC, a.createDate DESC
+    </select>
+    
+        
+         <select id="selectCountByMap" resultType="java.lang.Integer" parameterType="java.util.Map">
+        	select count(1) from kg_news a
+        	<where>
+        		<choose>
+				    <when  test="typeids != null and typeids.size()>0">
+				       and a.typeid in
+			        	 <foreach collection="typeids" item="typeId" index="index"
+				            open="(" close=")" separator=",">
+				            #{typeId}
+				       	 </foreach>
+				    </when>
+				    <otherwise>
+				        and a.typeid = -1 
+				    </otherwise>
+				</choose>
+		       	 <if test ="news!=null">
+			       	 <if test="news.sourceid!=null and news.sourceid !=''">
+	           			AND a.sourceId = #{news.sourceid}
+	           		</if>
+	           		<if test="news.indexshow!=null  and news.indexshow !='' ">
+	           			AND a.indexshow = #{news.indexshow}
+	           		</if>
+	           		<if test="news.attributeid != null and news.attributeid !=''">
+	           		 	AND FIND_IN_SET(#{news.attributeid},a.attributeId) 
+	           		</if>
+		       	 </if>
+       	 		
+        	</where> 
+           
+          	ORDER BY a.sequence DESC, a.createDate DESC
+    </select>
+    
+    
+   <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="com.shtyxh.manager.dto.KgNews">
+        select count(1) from kg_news 
+           <where>
+           		<if test="newstitle != null and newstitle !=''">
+           			AND newsTitle  like CONCAT('%',#{newstitle},'%') 
+           		</if>
+           		<if test="typeid != null and typeid !=''">
+           			AND typeId = #{typeid}
+           		</if>
+           		<if test="attributeid != null and attributeid !='' ">
+           		 	AND FIND_IN_SET(#{attributeid},attributeId) 
+           		</if>
+           		<if test="indexshow!=null  and indexshow !='' ">
+           			AND indexshow = #{indexshow}
+           		</if>
+           		<if test="sourceid!=null and sourceid !=''">
+           			AND sourceId = #{sourceid}
+           		</if>
+           		<if test="startDate!=null">
+           			<![CDATA[AND createdate >= #{startDate} ]]>
+           		</if>
+           		<if test="endDate!=null">
+           		 	<![CDATA[ AND createdate <= #{endDate} ]]>
+           		</if>
+           		
+           </where>
+    </select>
+    
+      <select id="adminQueryCountByMap" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from kg_news 
+           <where>
+           		<if test="news.newstitle != null and news.newstitle !=''">
+           			AND newsTitle  like CONCAT('%',#{news.newstitle},'%') 
+           		</if>
+           		<if test="typeid != null and typeid !=''">
+           			AND typeId = #{typeid}
+           		</if>
+           		<if test="news.attributeid != null and news.attributeid !='' ">
+           		 	AND FIND_IN_SET(#{news.attributeid},attributeId) 
+           		</if>
+           		<if test="news.indexshow!=null  and news.indexshow !='' ">
+           			AND indexshow = #{news.indexshow}
+           		</if>
+           		<if test="news.sourceid!=null and news.sourceid !=''">
+           			AND sourceId = #{news.sourceid}
+           		</if>
+           		<if test="news.startDate!=null">
+           			<![CDATA[AND createdate >= #{news.startDate} ]]>
+           		</if>
+           		<if test="news.endDate!=null">
+           		 	<![CDATA[ AND createdate <= #{news.endDate} ]]>
+           		</if>
+           		
+		        <choose>
+				    <when  test="typeids != null and typeids.size()>0">
+				        and typeId in
+			        	<foreach collection="typeids" item="item" separator=","
+		                open="(" close=")">
+		                #{item}
+		            </foreach>
+				    </when>
+				    <otherwise>
+				         and typeid = -1 
+				    </otherwise>
+				</choose>
+           		
+           </where>
+    </select>
+</mapper>

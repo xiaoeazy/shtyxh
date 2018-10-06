@@ -11,7 +11,7 @@
                            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
 
-  
+  	<context:property-placeholder location="classpath:*.properties"/>
     <context:component-scan base-package="**.*.service"/>
     <context:component-scan base-package="**.*.components"/>
 

@@ -16,10 +16,33 @@
 <body id="bid_lst">
 <#include "../../include/navigation.html">
 <script type="text/javascript">
-	function download(fileId,itemId){
+	function downloadWithPassword(fileId,itemId){
 		var password = $("#download_"+itemId).val();
-		window.location="${base.contextPath}/index/admin/file/download?fileId="+fileId+"&password="+password; 
-		$("#download_"+itemId).val("");
+// 		window.location="${base.contextPath}/index/file/download?fileId="+fileId+"&password="+password; 
+// 		$("#download_"+itemId).val("");
+
+		$.ajax({
+            type: "get",
+            async: false,
+            dataType: "json",
+            contentType: 'application/json',
+            url:  "${base.contextPath}/index/file/download?fileId="+fileId+"&password="+password,
+            data: '',
+            success: function (data) {
+                if (data.success) {
+                	var filePath = encodeURI(encodeURI(data.message));
+            		window.location="${fileserver}/fileDownload?filePath="+filePath; 
+            		$("#download_"+itemId).val("");
+                }else{
+                	alert(data.message);
+                }
+            }
+    	 });
+	}
+	
+	function downloadFile(path){
+		var filePath = encodeURI(encodeURI(path));
+		window.location="${fileserver}/fileDownload?filePath="+filePath; 
 	}
 </script>
 <div class="main">
@@ -40,9 +63,9 @@
 									<#if downloadList.password!="">
 								    	 <a href="#"  title="${downloadList.fileTitle}">${downloadList.fileTitle}</a>
 								    	  发布时间：<em>${downloadList.createdate?string('yyyy-MM-dd HH:mm:ss')}</em> 
-							    	 	   密码：<em><input type="text" id="download_${downloadList_index}" value=''/>&nbsp;&nbsp;<button onclick="download('${downloadList.id}','${downloadList_index}')">下载</button></em> 
+							    	 	   密码：<em><input type="text" id="download_${downloadList_index}" value=''/>&nbsp;&nbsp;<button onclick="downloadWithPassword('${downloadList.id}','${downloadList_index}')">下载</button></em> 
 							    	 <#else>
-							    	 	 <a href="${base.contextPath}/index/admin/file/download?fileId=${downloadList.id}" target="_blank" title="${downloadList.fileTitle}">${downloadList.fileTitle}</a>
+							    	 	 <a href="javascript:void(0);"  title="${downloadList.fileTitle}" onclick="downloadFile('${downloadList.filePath}')">${downloadList.fileTitle}</a>
 								    	  发布时间：<em>${downloadList.createdate?string('yyyy-MM-dd HH:mm:ss')}</em> 
 							    	 </#if>
 						    	</li>
@@ -84,7 +107,7 @@
 				                <div class="vT-chs-section-content-con">
 				                <ul class="vT-chs-section-content-list mb10">
 				                	<#list rightAttributeList.newsList as newsList>
-				                		<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+				                		<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
 				                	</#list>
 								 </ul>
 				                </div>
@@ -95,7 +118,7 @@
 				                <div class="vT-chs-section-content-con">
 				                <ul class="vT-chs-section-content-list mb10">
 									<#list rightAttributeList.newsList as newsList>
-										<li><a href="${base.contextPath}/index/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+										<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
 									</#list>
 				                </ul>
 				                </div>

@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>cn.huan</groupId>
+  <groupId>com.shtyxh</groupId>
   <artifactId>shtyxh-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -8,7 +8,8 @@
   	<module>shtyxh-manager</module>
   	<module>shtyxh-HTed</module>
   	<module>shtyxh-common</module>
-  	<module>shtyxh-filesystem</module>
+  	<module>shtyxh-fileserver</module>
+  	<module>shtyxh-redis</module>
   </modules>
   
   	<!-- 集中定义依赖版本号 -->
@@ -254,12 +255,6 @@
 			    <artifactId>logback-access</artifactId>
 			    <version>1.1.3</version>
 			</dependency>
-			<!-- gson -->
-			<dependency>
-			    <groupId>com.google.code.gson</groupId>
-			    <artifactId>gson</artifactId>
-			    <version>2.0</version>
-			</dependency>
 			<!-- thumbnailator -->
 			<dependency>
 			    <groupId>net.coobird</groupId>
@@ -288,6 +283,12 @@
 			    <artifactId>ueditorjson</artifactId>
 			    <version>1.0</version>
 			</dependency>
+			<!-- alibaba Json处理工具包 -->
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			     <artifactId>fastjson</artifactId>
+			     <version>1.2.49</version>
+			 </dependency>
 			
 		</dependencies>
 	</dependencyManagement>

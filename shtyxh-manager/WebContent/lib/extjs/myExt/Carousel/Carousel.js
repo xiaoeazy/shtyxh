@@ -163,6 +163,6 @@ Ext.extend(Carousel.CarouselPanel, Ext.Panel, {
 });
 
 function showCarousel(path){
-        return '<img  width="640" height="256" src='+appName+path+'/>';
+        return '<img  width="640" height="256" src='+fileAppName+path+'/>';
 }
 

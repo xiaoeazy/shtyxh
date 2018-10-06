@@ -1,21 +1,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>cn.huan</groupId>
+    <groupId>com.shtyxh</groupId>
     <artifactId>shtyxh-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>shtyxh-manager</artifactId>
+  <packaging>war</packaging>
   
   <dependencies>
   		<dependency>
-			<groupId>cn.huan</groupId>
+			<groupId>com.shtyxh</groupId>
 			<artifactId>shtyxh-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.huan</groupId>
+			<groupId>com.shtyxh</groupId>
 			<artifactId>shtyxh-HTed</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.shtyxh</groupId>
+			<artifactId>shtyxh-redis</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
@@ -28,11 +34,6 @@
 			    <groupId>ch.qos.logback</groupId>
 			    <artifactId>logback-access</artifactId>
 			</dependency>
-		<!-- gson -->
-		<dependency>
-		    <groupId>com.google.code.gson</groupId>
-		    <artifactId>gson</artifactId>
-		</dependency>
 		<!-- thumbnailator -->
 		<dependency>
 		    <groupId>net.coobird</groupId>
@@ -189,5 +190,5 @@
 		<finalName>shtyxh</finalName>
 	</build>
   
-  <packaging>war</packaging>
+  
 </project>

@@ -28,7 +28,7 @@
 				<li>
 					<a class="web" href='javascript:void(0);'><img src="${base.contextPath}/lib/index/img/theme/default/wb.png" /></a>
 					<div class="ewm_co2">
-						<img src="${base.contextPath}${wb}" />
+						<img src="${fileserver}${wb}" />
 					</div>
 				</li>
 			</#if>
@@ -36,7 +36,7 @@
 				<li class="ewm">
 					<a href='javascript:void(0);'><img src="${base.contextPath}/lib/index/img/theme/default/wx.png" /></a>
 					<div class="ewm_co">
-						<img src="${base.contextPath}${wx}" />
+						<img src="${fileserver}${wx}" />
 					</div>
 				</li>
 			</#if>
@@ -72,7 +72,7 @@
 									<#else> 
 										<a href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}" title="" target="_blank">
 									</#if> 
-								<img src="${base.contextPath}${carouselList.filePath}" alt="" width="698" height="475" title="" /></a>
+								<img src="${fileserver}${carouselList.filePath}" alt="" width="698" height="475" title="" /></a>
 								</li>
 								</#list>
 							</ul>
@@ -199,7 +199,7 @@
 					<!-- 资料下载start -->
 					<div class="main_right_cbl mt13">
 						<h2>
-							<a href="${base.contextPath}/index/admin/download"
+							<a href="${base.contextPath}/index/download"
 								target="_blank">资料下载</a>
 						</h2>
 						<ul class="xzzqlinks mb15">
@@ -209,7 +209,7 @@
 							<#else>
 							<li class="xzzqlinks sys1"><p>
 									<a
-										href="${base.contextPath}/index/admin/file/download?fileId=${downloadList.id}"
+										href="${base.contextPath}/index/file/download?fileId=${downloadList.id}"
 										target="_blank">${downloadList.fileTitle}</a>
 								</p></li></#if> </#list>
 						</ul>
@@ -276,7 +276,7 @@
 											<#elseif typePxyjdShowList.id == 21>
 												<dt><a href="${base.contextPath}/index/jdypx/gwpx"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
 												<dd><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22"  target="_blank">幼教上岗证</a></dd>
-												<dd><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22"  target="_blank">致力培训</a></dd>
+												<dd><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22"  target="_blank">致立培训</a></dd>
 											<#else>
 												<dt><a href="${base.contextPath}/index/jdypx/typeList?typeid=${typePxyjdShowList.id}"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
 <!-- 												<#list typePxyjdShowList.childType as childType> -->

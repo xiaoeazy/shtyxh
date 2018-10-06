@@ -76,7 +76,7 @@ Ext.extend(Download.DownloadPanel, Ext.Panel, {
 	        columns: [
 	            {header: "下载文档名称",  sortable: true,  dataIndex: 'fileTitle',align:'center'},
 	            {header: "密码",  sortable: true,  dataIndex: 'password',align:'center'},
-	            {header: "查看文件",  width:50,sortable: true,  dataIndex: 'filePath',align:'center',renderer:me.buttonRender}
+	            {header: "下载文件",  width:50,sortable: true,  dataIndex: 'filePath',align:'center',renderer:me.buttonRender}
 	            
 	        ],
 	        width:'100%',
@@ -101,7 +101,7 @@ Ext.extend(Download.DownloadPanel, Ext.Panel, {
 	},
 
 	buttonRender:function(filePath){
-		   return "<button  width=\"50px\" onclick=\"showFile('"+filePath+"')\">查看文件</button>";
+		   return "<button  width=\"50px\" onclick=\"downloadFile('"+filePath+"')\">下载文件</button>";
 	},
 	addDownload:function(store,mainId){
 		var win = new addorUpdateDownload.addorUpdateDownloadWindow ({
@@ -165,7 +165,10 @@ Ext.extend(Download.DownloadPanel, Ext.Panel, {
 	
 	
 });
-function showFile(value){
-	var url =appName+value;
-	window.open(url);
+function downloadFile(value){
+//	var url =appName+value;
+//	window.open(url);
+	
+	var filePath = encodeURI(encodeURI(value));
+	window.location=fileAppName+"/fileDownload?filePath="+filePath; 
 }

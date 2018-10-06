@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-
+	<context:property-placeholder location="classpath:config.properties"/>
 	<bean id="jacksonObjectMapper" class="com.huan.HTed.core.json.JacksonMapper" ></bean>
 
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
@@ -115,16 +115,27 @@
 	
 	
 	<mvc:interceptors>
-	    <mvc:interceptor>
+	       
+	        
+        <mvc:interceptor>
 	        <mvc:mapping path="/admin/**"/>
-	        <mvc:mapping path="/index/admin/**"/>
-	        <mvc:exclude-mapping path="/admin/login.html"/>    <!-- 不拦截登录请求 -->
+	        <mvc:exclude-mapping path="/admin/loginPage"/> 
 	        <mvc:exclude-mapping path="/admin/login"/> 
+	         <mvc:exclude-mapping path="/admin"/> 
 	        <mvc:exclude-mapping path="/admin/logout"/>    <!-- 不拦截注销请求 -->
-	        <bean class="cn.huan.kindergarten.interceptor.SessionInterceptor"></bean>
+	        <bean class="com.shtyxh.manager.interceptor.SessionInterceptor"></bean>
+	    </mvc:interceptor>
+        <mvc:interceptor>
+	        <mvc:mapping path="/index/admin/**"/>
+	        <bean class="com.shtyxh.manager.interceptor.LoginInterceptor"></bean>
+	    </mvc:interceptor>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/**" />
+	        <mvc:exclude-mapping path="/index/admin/**" />
+	        <bean class="com.shtyxh.manager.interceptor.UserInfoInterceptor"></bean>
 	    </mvc:interceptor>
 	</mvc:interceptors>
 	
-	<bean id="springContext" class="cn.huan.kindergarten.linstener.InitDataListener" lazy-init="false"/> 
+	<bean id="springContext" class="com.shtyxh.manager.listener.InitDataListener" lazy-init="false"/> 
 	
 </beans>

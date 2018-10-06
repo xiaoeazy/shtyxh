@@ -149,7 +149,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 									width : 150,
 									//name : 'imgupload',
 //									text : '上传(1920*765)',
-									text : '上传(1000*475)',
+									text : '上传(700*475)',
 									handler:function(){
 										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'carousel'});
 										win.show();
@@ -261,7 +261,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 				    		var newsId= record.get("newsId");
 				    		var sequence = record.get("sequence");
 				    		Ext.getCmp(mainId+"imageUrl").setValue(filePath);
-				    		Ext.getCmp(mainId+"showPict").getEl().dom.src=appName+filePath;
+				    		Ext.getCmp(mainId+"showPict").getEl().dom.src=fileAppName+filePath;
 				    		
 				    		var urltype= record.get("urltype");
 				    		 var obj = Ext.getCmp(mainId+'activeds').items.items;
@@ -337,6 +337,18 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 	    			   }
 	    		   }
   	     }
+         if(urltype==1){
+        	 if(newsId==-1){
+        		 ExtError("请选择关联资讯");
+     			return;
+        	 }
+         }else if(urltype==2){
+        	 if(activityId==-1){
+        		 ExtError("请选择关联评估任务");
+     			return;
+        	 }
+         }
+         
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
 			  Ext.Ajax.request({

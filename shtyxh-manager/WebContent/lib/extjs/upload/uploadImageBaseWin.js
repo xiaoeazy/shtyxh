@@ -52,11 +52,16 @@ Ext.extend(uploadImageBase.uploadImageBaseWin, Ext.Window, {
 		        text: '保存',
 		        handler: function(){
 		            if(fp.getForm().isValid()){
-		            	var url = appName+"/sys/config/upload?type="+type;
+//		            	var url = appName+"/sys/config/upload?type="+type;
+//		            	if(type=="download")
+//		            		url=  appName+"/sys/config/file/upload?type="+type;
+//		            	if(type=="logo"||type =="ico"||type =="wx"||type =="wb"||type=="entranceimage")
+//		            		url=  appName+"/sys/config/uploadImagePath?type="+type;
+		            	var url = fileAppName+"/uploadImage?type="+type;
 		            	if(type=="download")
-		            		url=  appName+"/sys/config/file/upload?type="+type;
+		            		url=  fileAppName+"/uploadFile?type="+type;
 		            	if(type=="logo"||type =="ico"||type =="wx"||type =="wb"||type=="entranceimage")
-		            		url=  appName+"/sys/config/uploadImagePath?type="+type;
+		            		url=  fileAppName+"/uploadOther?type="+type;
 		                fp.getForm().submit({
 		                    url: url,
 		                    waitMsg: '文件上传中,请耐心等待......',
@@ -65,13 +70,15 @@ Ext.extend(uploadImageBase.uploadImageBaseWin, Ext.Window, {
 		                    	if(o.result.pass==true){
 		                    		Ext.getCmp(the_hidden_image_url).setValue(o.result.file);
 		                    		   if(the_image_show!=null){
-		                    			   Ext.getCmp(the_image_show).getEl().dom.src=appName+o.result.file;
+		                    			   Ext.getCmp(the_image_show).getEl().dom.src=fileAppName+o.result.file;
 		                    		   }
 						        	   winThis.close();
 		                    	}else{
 		                    		ExtError(o.result.message)
 		                    	}
 	                    		   
+		                     },
+		                     failure:function(){
 		                     }
 		                });
 		            }

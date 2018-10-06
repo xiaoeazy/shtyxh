@@ -25,7 +25,7 @@ Ext.onReady(function() {
 		        	sessiontimeout = true;
 		    		Ext.Msg.alert('提示', '会话超时，请重新登录!', function(btn, text){     
 		                if (btn == 'ok'){    
-		                    var redirect = appName+'/admin/login';     
+		                    var redirect = appName+'/admin';     
 		                    window.location = redirect;     
 		                }     
 		            });	

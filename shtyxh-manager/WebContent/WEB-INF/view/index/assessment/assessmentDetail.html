@@ -29,8 +29,10 @@
 <script src="${base.contextPath}/lib/bootstrap-fileupload/js/locales/zh.js"></script>
 
 <script>
-function dowload(filePath){
-	window.open("${base.contextPath}"+filePath);
+function dowload(path,name){
+	var filePath = encodeURI(encodeURI(path));
+	var fileName = encodeURI(encodeURI(name));
+	window.location="${fileserver}/fileDownload?filePath="+filePath+"&fileName="+fileName; 
 }
 function btn_fresh(){
 	$("#table").bootstrapTable('refresh');
@@ -83,7 +85,7 @@ function toDelete(){
         type: "post",
         dataType: "json",
         contentType: 'application/json',
-        url:  '${base.contextPath}/index/admin/assessment/delete',
+        url:  '${base.contextPath}/index/admin/assessment/delete?assessmentActivityId=${assessmentInfo.id}',
         data: JSON.stringify(jsonArray),
         success: function (data) {
             if (data.success) {
@@ -140,7 +142,7 @@ function uploadState(flag,message){
 
 
     </div>
-    <#if Session["userId"]?exists>
+    <#if Request.user?exists>
     	<!-- 弹出框 -->
     	<form>
 		    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -258,11 +260,24 @@ var FileInput = function () {
 	
 	    //导入文件上传完成之后的事件
 	    $("#"+ctrlName).on("fileuploaded", function (event, data, previewId, index) {
-	       
 	        var success = data.response.success;
-	        if (success == false) {
-	            alert(data.response.message);
-	            return;
+	        if (success == true) {
+	        	var dataList =data.response.list;
+	        	$.ajax({
+	                type: "post",
+	                async: false,
+	                dataType: "json",
+	                contentType: 'application/json',
+	                url:  '${base.contextPath}/index/admin/assessment/upload?assessmentActivityId=${assessmentInfo.id}',
+	                data: JSON.stringify(dataList),
+	                success: function (data) {
+	                    if (!data.success) {
+	                    	alert(data.message);
+	                    }
+	                }
+	        	 });
+	        }else{
+	        	alert(data.response.message);
 	        }
 	        $("#myModal").modal("hide");
 	        btn_fresh();
@@ -275,8 +290,8 @@ var FileInput = function () {
 
 $(function () {
 	 	var oFileInput = new FileInput();
-	    oFileInput.Init("txt_file", "${base.contextPath}/index/admin/assessment/upload?assessmentActivityId="+${assessmentInfo.id});
-	    
+// 	    oFileInput.Init("txt_file", "${base.contextPath}/index/admin/assessment/upload?assessmentActivityId="+${assessmentInfo.id});
+	    oFileInput.Init("txt_file", "http://localhost:8080/fileserver/uploadAssessment?userid=${userid}&assessmentActivityId=${assessmentInfo.id}");
 	    
 		$("#table").bootstrapTable({ // 对应table标签的id
 		      url: "${base.contextPath}/index/admin/assessmentDetail/uploadList?activityId="+${assessmentInfo.id}, // 获取表格数据的url
@@ -327,7 +342,7 @@ $(function () {
 		              valign: 'middle',
 		              width: 160, // 定义列的宽度，单位为像素px
 		              formatter: function (value, row, index) {
-		                  return '<button class="btn btn-primary btn-sm" onclick="dowload(\'' + row.filePath + '\')">下载</button>';
+		                  return '<button class="btn btn-primary btn-sm" onclick="dowload(\'' + row.filePath + '\',\''+row.fileName+'\')">下载</button>';
 		              }
 		          }
 		      ],

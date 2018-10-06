@@ -36,9 +36,8 @@
 </script>
 
 <style>
-/* .logo_gh{width:388px;height:80px;float:left;background:url("${base.contextPath}/resources/upload/logo/logo.png") no-repeat left top;} */
 .logo_gh_parent{width:95px;height:95px;float:left;background:url("${base.contextPath}/lib/index/img/index/tuoyuan.png") no-repeat left top;}
-.logo_gh{width:93px;height:93px;margin-top:1px; margin-left:1px;background:url("${base.contextPath}/resources/upload/logo/logo.png") no-repeat left top;}
+.logo_gh{width:93px;height:93px;margin-top:1px; margin-left:1px;background:url("${fileserver}/uploadFile/logo/logo.png") no-repeat left top;}
 .logo_title{width:600px;height:80px;float:left;}
 </style>
 <div class="v4incheadertop">
@@ -47,8 +46,8 @@
             <p class="cl"></p><p class="cr" style="float:right">
             	<a href="javascript:void(0)" onclick="javascript:SetHomeFoot(this,&#39;${webIp}&#39;)" title="" style="color:#fff"> 设为首页 </a><span class="spe"> | </span> 
 			 	<a href="javascript:void(0)" onclick="javascript:shouCangFoot(&#39;${webIp}&#39;,&#39;${webname}&#39;)" title="" style="color:#fff"> 收藏本站 </a> <span class="spe"> | </span>
-			 <#if Session["userId"]?exists>
-				<a href="${base.contextPath}/index/admin/user"  style="color:#fff">${Session["userRealName"]}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			 <#if Request.user?exists>
+				<a href="${base.contextPath}/index/admin/user"  style="color:#fff">${Request.user.userName}</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="${base.contextPath}/index/logout"  style="color:#fff">退出</a>
 			 <#else>
 			 	<a href="${base.contextPath}/index/loginPage"  style="color:#fff">登录</a>
@@ -60,12 +59,12 @@
         <div class="v4incheadertop_logosearch">
         <div class="searcharea1">
         	<div class="logo_gh_parent" style="margin-top:60px">
-	            <div class="logo_gh" style="">
+	            <a href="${base.contextPath}"><div class="logo_gh" style="">
 	           		
-	            </div>
+	            </div></a>
 	        </div>
             <div class="logo_title"  style="margin:70px 0 0 10px">
-            			<img src="${base.contextPath}/resources/images/header/title.png" height="80"/>
+            			<a href="${base.contextPath}"><img src="${base.contextPath}/resources/images/header/title.png" height="80"/></a>
             </div>
         </div>
 
@@ -86,7 +85,7 @@
                 <li  id="ch_xhgk" <#if chanel =='CH_XHGK'> class="actv" </#if>><a href="${base.contextPath}/index/xhgk" >协会概况</a>
                   <ul>
                 	<#list xhgkTypeList as typeList>   
-							<li  ><a href="${base.contextPath}/index/xhgk/typeList?typeid=${typeList.id}">${typeList.typename}</a></li> 
+							<li  ><a href="${base.contextPath}/index/xhgk?typeid=${typeList.id}">${typeList.typename}</a></li> 
 					</#list>
                   </ul>
                 </li>
@@ -106,7 +105,7 @@
 	               		 <li><a href="${base.contextPath}/index/jdypx/gwpx">岗位培训</a>
 	               		 		<ul>
 	               		 				<li><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22">幼教上岗证</a></li>
-	               		 				<li><a href="${base.contextPath}/index/jdypx/gwpx?typeid=23">致力培训</a></li>
+	               		 				<li><a href="${base.contextPath}/index/jdypx/gwpx?typeid=23">致立培训</a></li>
 	               		 		</ul>
 	               		 </li> 
 	               		 <li><a href="${base.contextPath}/index/assessmentTypeList">资质鉴定</a>

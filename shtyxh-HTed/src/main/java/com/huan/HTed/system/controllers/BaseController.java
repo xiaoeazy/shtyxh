@@ -24,7 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.huan.HTed.core.IRequest;
-import com.huan.HTed.core.exception.Base404Exception;
 import com.huan.HTed.core.exception.BaseException;
 import com.huan.HTed.core.exception.TokenException;
 import com.huan.HTed.core.impl.RequestHelper;
@@ -34,6 +33,9 @@ import com.huan.HTed.security.DefaultConfiguration;
 import com.huan.HTed.security.TokenUtils;
 import com.huan.HTed.system.dto.BaseDTO;
 import com.huan.HTed.system.dto.ResponseData;
+import com.shtyxh.common.bean.CommonPath;
+import com.shtyxh.common.exception.E404Excetion;
+import com.shtyxh.common.exception.ESessionExcetion;
 
 /**
  * BaseController.
@@ -173,13 +175,24 @@ public class BaseController {
                 res.setCode(be.getCode());
                 res.setMessage(message);
             } else {
-                res.setMessage(thr.toString());
+                res.setMessage(thr.getMessage());
             }
             return res;
         } else {
             ModelAndView view = new ModelAndView("error");
-            if (thr instanceof Base404Exception) {
+            if (thr instanceof E404Excetion) {
             	view = new ModelAndView("404");
+                view.addObject("message", thr.getMessage());
+                return view;
+            }
+            if (thr instanceof ESessionExcetion) {
+            	ESessionExcetion e = (ESessionExcetion) thr;
+            	if(("admin").equals(e.getType())){
+            		view = new ModelAndView(REDIRECT + CommonPath.ADMIN_VIEW_LOGIN);
+            	}else{
+            		view = new ModelAndView(CommonPath.INDEX_VIEW_LOGIN);
+            	}
+            	
                 view.addObject("message", thr.getMessage());
                 return view;
             }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shtyxh.manager.mapper.KgAssessmentActivityUserUploadMapper">
+    <resultMap id="BaseResultMap" type="com.shtyxh.manager.dto.KgAssessmentActivityUserUpload">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="upload_user_id" property="uploadUserId" jdbcType="DECIMAL" />
+        <result column="progress_id" property="progressId" jdbcType="DECIMAL" />
+        <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+        <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+         <result column="createDate" property="createdate" jdbcType="DATE" />
+    </resultMap>
+
+   <select id="loadUserUploadList" resultMap="BaseResultMap" parameterType="com.shtyxh.manager.dto.KgAssessmentActivityUserProgress">
+        select a.* from kg_assessment_activity_user_upload a left join kg_assessment_activity_user_progress b
+            on a.progress_id=b.id 
+           <where>
+           		<if test="assessmentActivityId != null">
+           			AND b.assessment_activity_id  =#{assessmentActivityId} 
+           		</if>
+           		<if test="uploadUserId != null">
+           			AND b.upload_user_id = #{uploadUserId}
+           		</if>
+           </where>
+           ORDER BY a.createDate DESC
+    </select>
+    
+     <select id="countUserUploadList" resultType="int" parameterType="com.shtyxh.manager.dto.KgAssessmentActivityUserProgress">
+        select count(1) from kg_assessment_activity_user_upload a left join kg_assessment_activity_user_progress b
+            on a.progress_id=b.id 
+           <where>
+           		<if test="assessmentActivityId != null">
+           			AND b.assessment_activity_id  =#{assessmentActivityId} 
+           		</if>
+           		<if test="uploadUserId != null">
+           			AND b.upload_user_id = #{uploadUserId}
+           		</if>
+           </where>
+           ORDER BY a.createDate DESC
+    </select>
+</mapper>

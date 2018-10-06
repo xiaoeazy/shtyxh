@@ -363,7 +363,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 				    		
 				    		Ext.getCmp(mainId+"imageUrl").setValue(thumbnail);
 				    		if(thumbnail!=null&&thumbnail!=""){
-				    			Ext.getCmp(mainId+"showPict").getEl().dom.src=appName+thumbnail;
+				    			Ext.getCmp(mainId+"showPict").getEl().dom.src=fileAppName+thumbnail;
 				    		}
 				    		Ext.getCmp(mainId+"summary").setValue(summary);
 				    		 Ext.getCmp(mainId+"sequence").setValue(sequence);
@@ -372,6 +372,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 //				    		Ext.getCmp(mainId+"content").getEditor().setContent(content);
 				    	}else{
 				    		sourceCombo.setValue(1);
+				    		indexShowCombo.setValue('N');
 				    	}
 					}
 				}

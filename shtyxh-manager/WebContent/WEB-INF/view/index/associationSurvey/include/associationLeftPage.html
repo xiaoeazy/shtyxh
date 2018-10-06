@@ -3,17 +3,14 @@
 	<div class="left_box ">
 		<strong> <span>协会概况</span> <samp></samp>
 		</strong>
-
 		<ul>
 			<#list leftList as leftList>
-			<li id="cid${leftList.id}"><a
-				href="${base.contextPath}/index/xhgk/typeList?typeid=${leftList.id}">${leftList.typename}</a></li>
+			<li id="cid${leftList.id}"><a href="javascript:void(0)"  onclick="left_click('${leftList.id}','${leftList.typename}')">${leftList.typename}</a></li>
 			</#list>
 			<script>
 						var changeclass=window.document.getElementById('cid${nowType.id}');
 						changeclass.className='on';
-					</script>
-
+			</script>
 		</ul>
 	</div>
 </div>

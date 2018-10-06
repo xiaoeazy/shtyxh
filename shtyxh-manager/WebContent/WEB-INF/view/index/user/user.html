@@ -12,15 +12,38 @@
 
 <script  type="text/javascript" src="${base.contextPath}/lib/index/search/static/js/jquery-1.11.1.min.js"></script>
 
+<!-- bootstrap插件 -->
 <link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap-theme.min.css">
 <script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+<!-- bootstraptable插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-table/css/bootstrap-table.min.css" />
+<script src="${base.contextPath}/lib/bootstrap-table/js/bootstrap-table.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
 
 <style type="text/css" media="screen">
 .fl { float: left;}
 .fr { float: right;}
 </style>
 <script>
+	function left_click(id){
+		$("dl dd p").removeClass("on");
+		var changeclass=window.document.getElementById('cid'+id);
+		changeclass.className='on';
+		 $.ajax({
+	         url: "${base.contextPath}/index/admin/user/typeList?typeid="+id,
+	         type: "POST",
+	         datatype:"JSON",
+	         data: {},
+	         success: function (data) {
+	        	 $(".vip_magRight").html(data);
+	         },
+	         error: function () {
+	             alert("获取信息失败!");
+	         }
+	     });
+	}
 	function toUpdate(){
 		var realName = $("#realName").val();
 		var password = $("#password").val();
@@ -58,6 +81,39 @@
 	            "async":false  
 	        });  
 	}
+	
+	function toUserAssessmentPage(id){
+		window.open("${base.contextPath}/index/assessmentDetail?id="+id)
+	}
+	function btn_fresh(){
+		$("#table").bootstrapTable('refresh');
+	}
+	function btn_delete(){
+		var jsonArray = [];
+		var allTableData = $('#table').bootstrapTable('getSelections');
+	    for(var i = 0; i < allTableData.length; i++) {
+	    	var id =allTableData[i].id;
+	    	var assessmentActivityName =allTableData[i].kgAssessmentActivity.assessmentActivityName;
+	    	jsonArray.push({"id":id,"assessmentActivityName":assessmentActivityName});
+	     }
+	    if(jsonArray.length==0){
+	    	return;
+	    }
+		$.ajax({
+	        type: "post",
+	        dataType: "json",
+	        contentType: 'application/json',
+	        url:  '${base.contextPath}/index/admin/user/join/assessment/delete',
+	        data: JSON.stringify(jsonArray),
+	        success: function (data) {
+	            if (data.success) {
+	            	btn_fresh();
+	            }else{
+	            	alert(data.message);
+	            }
+	        }
+		 });
+	}
 </script>
 </head>
 <body>
@@ -74,13 +130,13 @@
 					<dl>
 						<dt>用户管理</dt>
 						<dd>
-							<p><a href="#">基本信息</a></p>
+							<p id="cid1"><a href="javascript:void(0)"   onclick="left_click('1')">基本信息</a></p>
 						</dd>
 					</dl>
 					<dl>
 						<dt>评选评估</dt>
 						<dd>
-							<p><a href="${base.contextPath}/index/admin/userAssessment" >参与评估</a></p>
+							<p id="cid2"><a href="javascript:void(0)"    onclick="left_click('2')" >参与评估</a></p>
 						</dd>
 					</dl>
 				</div>
@@ -88,53 +144,8 @@
 
 				<!--右边列表内容  开始-->
 				<div class="fr vip_right vip_magRight">
-					<!--用户信息  开始 -->
-					<div class="cus01">
-<!-- 						<div class="cusImg"> -->
-<!-- 							<img src="images/customerImg.png" title="更换头像" /> -->
-<!-- 						</div> 
-						<div class="cusName">
-							<p title="用户名称">基本信息</p>
-								<span title="姓名">姓名:<input type="text" value ="" /></span>
-								<span class="bdTell">密码<i></i><em>187****3765</em></span>
-						</div>-->
-						<h3 title="用户名称">基本信息</h3>
-						<form role="form">
-						    <div class="form-group">
-						        <label for="realName">姓名</label>
-						        <input type="text" class="form-control" id="realName" value="${(user.realName)!}" placeholder="请输入姓名">
-						    </div>
-						    <div class="form-group">
-						        <label for="email">email</label>
-						        <input type="text" class="form-control" id="email" value="${(user.realName)!}" placeholder="请输入email">
-						    </div>
-						    <div class="form-group">
-						        <label for="phone">电话</label>
-						        <input type="text" class="form-control" id="phone"  value="${(user.phone)!}" placeholder="请输入电话">
-						    </div>
-					       <div class="form-group">
-						        <label for="password">密码</label>
-						        <input type="text" class="form-control" id="password" value="${(user.password)!}" placeholder="请输入要修改的密码，填空默认不修改">
-						    </div>
-						
-<!-- 						    <div class="form-group"> -->
-<!-- 						        <label for="inputfile">文件输入</label> -->
-<!-- 						        <input type="file" id="inputfifle"> -->
-<!-- 						        <p class="help-block">这是块级帮助文本的实例</p> -->
-<!-- 						    </div> -->
-						
-						  
-						
-						    <button type="button" onclick="toUpdate()" class="btn btn-default">提交</button>
-						</form>
-					</div>
-				
-					<!-- 用户信息  结束 -->
-					<!-- <div class="cus03">
-						<div class="mess">
-							<a href="#" target="_blank"><i></i>aaaa</a>
-						</div>
-					</div>-->
+					
+					
 				</div>
 				<!--右边列表内容  结束-->
 			</div>
@@ -146,6 +157,11 @@
 
     </div>
 </div>
+<script>
+$(document).ready(function(){
+	left_click(${typeid});
+});
+</script>
 <#include "../../include/footer.html">
 </body>
 </html>
