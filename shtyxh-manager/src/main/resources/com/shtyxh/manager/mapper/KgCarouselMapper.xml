@@ -5,6 +5,7 @@
     <resultMap id="BaseResultMap" type="com.shtyxh.manager.dto.KgCarousel">
         <result column="id" property="id" jdbcType="DECIMAL" />
         <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+        <result column="fileTitle" property="filetitle" jdbcType="VARCHAR" />
         <result column="sequence" property="sequence" jdbcType="DECIMAL" />
         <result column="urltype" property="urltype" jdbcType="DECIMAL" />
         <result column="web_url" property="webUrl" jdbcType="VARCHAR" />

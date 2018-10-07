@@ -71,6 +71,9 @@
 							<ul>
 								<#list carouselList as carouselList>
 								<li>
+									<div class="banner_word_bg">
+												<p title="${carouselList.filetitle}">${carouselList.filetitle}</p>
+									</div>
 									<#if carouselList.urltype==0> 
 										<a href="${carouselList.webUrl}" title="" target="_blank"> 
 									<#elseif carouselList.urltype==1> 
@@ -78,7 +81,7 @@
 									<#else> 
 										<a href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}" title="" target="_blank">
 									</#if> 
-								<img src="${fileserver}${carouselList.filePath}" alt="" width="698" height="475" title="" /></a>
+								<img src="${fileserver}${carouselList.filePath}" alt="${carouselList.filetitle}" width="698" height="475" title="${carouselList.filetitle}" /></a>
 								</li>
 								</#list>
 							</ul>

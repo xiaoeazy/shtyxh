@@ -17,12 +17,28 @@
 .banner{float:left;position: relative;width: 698px;height: 375px;overflow: hidden;   }
 .banner .js-sCont{position: absolute;top: 0;margin: 0 auto;width: 698px;height: 375px;overflow: hidden;}
 .banner .js-sCont li{width: 698px;height: 470px;text-align: center;}
-.banner .js-sDot{position: absolute;bottom: 20px;left: 50%;z-index: 2;margin-left: -150px;width: 300px;height: 14px;text-align: center;}
+.banner .js-sDot{position: absolute;bottom: 20px;left: 50%;z-index: 2;margin-left: -150px;width: 300px;height: 14px;text-align: center;display:none}
 .banner .js-sDot li{width: 14px;height: 14px;border-radius: 50%;text-indent: -100%;cursor: pointer;background-color: #DECAC1;margin: 0 6px;overflow: hidden;display: inline-block;*display: inline;*zoom: 1;border: 3px solid #fff;}
 .banner .js-sDot li.cur{background-color: #231815;}
 .banner .bannerBnt{position: absolute;top: 240px;width: 44px;height: 44px;background-image: url("../img/index/bannerBnt.png");background-repeat: no-repeat;top: 45%;}
 .banner .js-prev{left: 6%;background-position: 0 0;}
 .banner .js-next{right: 6%;background-position: 0px -44px;}
+.banner_word_bg {
+	position: absolute;
+    height: 35px;
+    width: 698px;
+    background: #111;
+    text-align: center;
+    top: 340px;
+    border-top: 1px solid #3b3b3b;
+}
+
+.banner_word_bg p {
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+}
+   
 
 .zxzxChild{float:left;width:292px;}
 .zxzxChild .zxtitle{position:relative;width:100%;height:49px;background: url("../img/index/zxzx_01.gif") no-repeat;}

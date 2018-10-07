@@ -27,6 +27,10 @@ public class KgCarousel extends BaseDTO {
      @Length(max = 200)
      private String filePath;
      
+     @NotEmpty
+     @Length(max = 200)
+     private String filetitle;
+     
      private Long sequence;
      
      private Long urltype; //0:weburl,1 :news , 2:activity 
@@ -93,6 +97,14 @@ public class KgCarousel extends BaseDTO {
 
 	public void setSequence(Long sequence) {
 		this.sequence = sequence;
+	}
+
+	public String getFiletitle() {
+		return filetitle;
+	}
+
+	public void setFiletitle(String filetitle) {
+		this.filetitle = filetitle;
 	}
      
      

@@ -163,7 +163,16 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 							    		Ext.getCmp(mainId+"showPict").getEl().dom.src=nonePic;
 									}
 							 	}]
-							},{ 
+							},
+							{
+				          		fieldLabel:'标题',
+								name: 'filetitle',
+								allowBlank : false,  
+								blankText:'必须填写',
+								id:mainId+"filetitle",
+					            maxLength:200  
+				  			},
+							{ 
 				             	id:mainId+"imageUrl",
 				                xtype:"textfield",  
 								fieldLabel : '缩略图',
@@ -256,6 +265,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 					show:function(){
 						if(record!=null){
 				    		var filePath= record.get("filePath");
+				    		var filetitle = record.get("filetitle");
 				    		var webUrl= record.get("webUrl");
 				    		var activityId= record.get("activityId");
 				    		var newsId= record.get("newsId");
@@ -272,6 +282,9 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 		    	    				   break;
 		    	    			   }
 				      	     }
+				             
+				             Ext.getCmp(mainId+"filetitle").setValue(filetitle);
+				             
 				             me.inputValueToSet(me,mainId,urltype,newsCombo,assessmentCombo);
 				             Ext.getCmp(mainId+"webUrl").setValue(webUrl);
 					    	 newsCombo.setValue(newsId);
@@ -315,8 +328,13 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 	},
 	addorUpdateCarousel : function(me,formpanel,mainId,parentStore,id,type,isAdd) {
 		var filePath =Ext.getCmp(mainId+"imageUrl").getValue().trim();
+		var filetitle =  Ext.getCmp(mainId+"filetitle").getValue();
 		if(filePath==""){
 			ExtError("请上传图片");
+			return;
+		}
+		if(filetitle==""){
+			ExtError("请填写标题");
 			return;
 		}
 		var sequence = Ext.getCmp(mainId+"sequence").getValue();
@@ -324,6 +342,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 		var webUrl = Ext.getCmp(mainId+"webUrl").getValue();
 		var activityId = Ext.getCmp(mainId+"activityId").getValue();
 		var newsId = Ext.getCmp(mainId+"newsId").getValue();
+		
 		 var obj = Ext.getCmp(mainId+'activeds').items.items;
          for(var i in obj){
 	    		   if(obj[i].checked){
@@ -360,6 +379,7 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
                 	  filePath : filePath,
                 	  sequence:sequence,
                 	  urltype:urltype,
+                	  filetitle:filetitle,
                 	  webUrl:webUrl,
                 	  activityId:activityId,
                 	  newsId:newsId,
