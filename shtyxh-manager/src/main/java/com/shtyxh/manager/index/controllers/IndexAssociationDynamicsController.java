@@ -59,8 +59,8 @@ public class IndexAssociationDynamicsController extends IndexBaseController{
         }
         
          //查询头部9条文章
-	   	 List<KgNews> topNewsList =iJedisService.loadNewsDynamicsTopNewsList( null,typeidList, 1, 9);
-    	 CommonFuncUtil.judgeNewsTitleLength(topNewsList,17);
+	   	 List<KgNews> topNewsList =iJedisService.loadNewsDynamicsTopNewsList( null,typeidList, 1, 11);
+    	 CommonFuncUtil.judgeNewsTitleLength(topNewsList,21);
     	 
     	 KgNews ThumbNews= new KgNews();
     	 ThumbNews.setIndexshow("Y");

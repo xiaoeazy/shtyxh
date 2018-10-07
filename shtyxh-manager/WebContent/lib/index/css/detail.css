@@ -54,15 +54,15 @@ body{background:#f0f0f0;}
 /*网站头部*/
 .top,.main,.footer{float:left}
 .top{width:100%;}
-.top_tel_block,.top_logosearch_block,.top_nav_block{width:100%;min-width:1000px;}
-.top_tel,.top_logosearch,.top_nav{width:1000px;margin:0 auto}
+.top_tel_block,.top_logosearch_block,.top_nav_block{width:100%;min-width:1190px;}
+.top_tel,.top_logosearch,.top_nav{width:1190px;margin:0 auto}
 .top_tel_block{background:#0082d4;height:34px;}
 .top_tel p.cl,.top_tel p.cr{line-height:34px;color:#fff}
 .top_tel p.cl{width:500px;text-align: left;float:left}
 .top_tel p.cr{width:500px;text-align: right;float:left}
 
 .top_logosearch_block{background:#008ae1;height:157px}
-.top_logosearch_block2{background:#008ae1;height:114px;min-width:1000px;}
+.top_logosearch_block2{background:#008ae1;height:114px;min-width:1190px;}
 .logo{width:388px;height:76px;float:left;background:url("../img/logo.gif") no-repeat left top}
 .logo_gh{width:388px;height:80px;float:left;background:url("../img/logo_new.gif") no-repeat left top}
 .logo a.ccgp{display:block;width:388px;height:28px;float:left}
@@ -86,13 +86,14 @@ body{background:#f0f0f0;}
 /*main*/
 /* .main{width:100%;background:#f0f0f0;} */
 .main{width:100%;background:url("../img/background.png")}
-.main_container{width:1000px;margin:0 auto;}
+.main_container{width:1190px;margin:0 auto;}
 
-.main_left_block{width:698px;float:left;}
-.main_right_block{width:292px;margin-left:10px;float:left}
+.main_left_block{width:830px;float:left;}
+.main_right_block{width:350px;margin-left:10px;float:left}
 
-.mainLeft_left_block{width:292px;float:left;}
-.mainLeft_right_block{width:698px;margin-left:10px;float:left}
+.mainLeft_right_block{width:830px;margin-left:10px;float:left}
+.mainLeft_left_block{width:350px;float:left;}
+
 
 .wz_block,.banner_block{width:100%;float:left}
 
@@ -224,9 +225,9 @@ h2.tc{margin-top:30px}
 
 /*footer*/
 .footer{width:100%;}
-.footer_links{width:1000px;margin:0 auto;background:#000;height:10px}
-.newslist_bl_links{width:1000px;background:#fff;float:left;}
-.vF_t9{width:1000px;margin:0 auto;}
+.footer_links{width:1190px;margin:0 auto;background:#000;height:10px}
+.newslist_bl_links{width:1190px;background:#fff;float:left;}
+.vF_t9{width:1190px;margin:0 auto;}
 .vF_t9 ul{float:left}
 .vF_t9 p{float:left;}
 
@@ -248,9 +249,9 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 
 .vF_title_bar_links h2.current2 a{font-size:14px;font-weight:bolder;color:#1f376d;text-decoration:none;line-height:37px;}
 .vF_title_bar_nor h2 a{color:#333;text-decoration:none;font-size:18px;line-height:37px;}
-.copyright_bl{width:1000px;margin:0 auto;}
-.vF_cp{width:1000px;margin:0 auto;text-align:center;height:70px;float:left;background:#ccc;color:#333;}
-.vF_cp p{width:1000px;float:left;margin-top:20px;font-size:14px;line-height:24px;}
+.copyright_bl{width:1190px;margin:0 auto;}
+.vF_cp{width:1190px;margin:0 auto;text-align:center;height:70px;float:left;background:#ccc;color:#333;}
+.vF_cp p{width:1190px;float:left;margin-top:20px;font-size:14px;line-height:24px;}
 
 .vT_cp p{color:#333;font-size:12px;line-height:60px;text-align:center}
 .vF_cp span{font-family:Verdana, Geneva, sans-serif;font-size:11px}
@@ -330,7 +331,7 @@ ul.links li{float:left;width:210px; margin-left:30px;text-align:center;}
 
 .vT-chs-section-content-con ul.w100{width:120px;float:left;margin-left:15px}
 
-.vF_channeltitle{width:1000px;margin:0 auto;height:73px;float:left}
+.vF_channeltitle{width:1190px;margin:0 auto;height:73px;float:left}
 
 
 /*--顶部头条公用部分--*/
@@ -353,7 +354,7 @@ img#shows{width:698px;height:193px}
 /*GPA*/
 /************GPA新版*************/
 .wrapper{overflow:hidden}
-.gpacontainer{width:1000px;margin:auto; margin-top:13px}
+.gpacontainer{width:1190px;margin:auto; margin-top:13px}
 .part1{width:996px;border:1px solid #707070;padding:1px}
 .part1top{width:996px;height:78px; background:url(../img/final3_03.gif)/*tpa=http://www.ccgp.gov.cn/img/final3_03.gif*/ no-repeat top left;}
 .part1word{width:995px;border:1px solid #ffffff;background-color:#f9f9f9;text-align:left}

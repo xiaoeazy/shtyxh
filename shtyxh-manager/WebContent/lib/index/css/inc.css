@@ -5,8 +5,8 @@ body,a{line-height:24px;font-size:14px;font-family:"Microsoft YaHei","微软雅�
 /* .v4incheadertop{font-size:14px;float:left;font-family:"Microsoft YaHei","微软雅黑","黑体";>font-family:"simhei","黑体";color:#02396F;margin-bottom:15px;} */
 .v4incheadertop{font-size:14px;float:left;font-family:"Microsoft YaHei","微软雅黑","黑体";>font-family:"simhei","黑体";color:#02396F;}
 .v4incheadertop{width:100%}
-.v4incheadertop_tel_block,.v4incheadertop_logosearch_block2,.v4incheadertop_nav_block{width:100%;min-width:1000px;}
-.v4incheadertop_tel,.v4incheadertop_logosearch{width:1000px;margin:0 auto}
+.v4incheadertop_tel_block,.v4incheadertop_logosearch_block2,.v4incheadertop_nav_block{width:100%;min-width:1190px;}
+.v4incheadertop_tel,.v4incheadertop_logosearch{width:1190px;margin:0 auto}
 /* .v4incheadertop_tel_block{background:#0082d4;height:34px;} */
 .v4incheadertop_tel_block{background:#0340e4;height:34px;}
 .v4incheadertop_tel p.cl,.v4incheadertop_tel p.cr{line-height:34px;color:#fff}
@@ -14,16 +14,16 @@ body,a{line-height:24px;font-size:14px;font-family:"Microsoft YaHei","微软雅�
 .v4incheadertop_tel p.cr{width:500px;text-align: right;float:left}
 
 .v4incheadertop_logosearch{overflow: hidden}
-/* .v4incheadertop_logosearch_block2{background:#008ae1;height:114px;min-width:1000px;} */
-/* .v4incheadertop_logosearch_block2{background:url("../img/bg_07.jpg") no-repeat left top;height:214px;background-size:100%;min-width:1000px;} */
+/* .v4incheadertop_logosearch_block2{background:#008ae1;height:114px;min-width:1190px;} */
+/* .v4incheadertop_logosearch_block2{background:url("../img/bg_07.jpg") no-repeat left top;height:214px;background-size:100%;min-width:1190px;} */
 .v4incheadertop_logosearch_block2{
 	background:url("../img/bg_07.jpg") no-repeat;
 	height:214px; 
 	background-position: center center;
 	background-size:100% 100%;
 	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bg_07.jpg',sizingMethod='scale');
-	min-width:1000px;
-	  _width:expression((document.documentElement.clientWidth||document.body.clientWidth)>1000?"1000px":""); 
+	min-width:1190px;
+	  _width:expression((document.documentElement.clientWidth||document.body.clientWidth)>1190?"1190px":""); 
 	}
 .logo{width:388px;height:76px;float:left;background:url("../img/logo.gif") no-repeat left top}
 /* .logo_gh{width:388px;height:80px;float:left;background:url("../img/logo/logo.png") no-repeat left top} */
@@ -52,7 +52,7 @@ body,a{line-height:24px;font-size:14px;font-family:"Microsoft YaHei","微软雅�
 /*导航*/
 .v4incheadertop_nav_block{background:url(../img/banner/banner_background.png) no-repeat top center; height:62px;}
 .v4incheadertop_nav{background:url(../img/banner/banner.png); height:54px;}
-.v4incheadertop_nav_ls{width:1000px;list-style:none;margin:0 auto}
+.v4incheadertop_nav_ls{width:1190px;list-style:none;margin:0 auto}
 .v4incheadertop_nav_ls li{width:128px;height:52px;float:left;text-align:center; background: url(../img/banner/rightline.png) no-repeat center right;}
 .v4incheadertop_nav_ls li.nav_end{width:128px;height:52px;float:left;text-align:center;background:none;}
 /* .v4incheadertop_nav_ls li .banner_index_img{    background: url(../img/index/star.gif) no-repeat center left;height: 32px;} */

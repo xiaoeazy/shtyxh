@@ -23,8 +23,8 @@
 .vip_left,.vip_right{ min-height: 1350px;background: #FFFFFF;border: 1px solid #ebebeb;}
 .vip_magLeft,.vip_magRight{min-height: 950px!important;}
 .head_photo span{padding-top: 14px;display: block; color:#FF6561}
-.vip_left{width:160px;padding: 5px 0px 35px 0px;}
-.vip_right{width:822px;padding:20px 0px;}
+.vip_left{width:270px;padding: 5px 0px 35px 0px;}
+.vip_right{width:910px;padding:20px 0px;}
 .vip_left dl{margin-bottom: 10px;}
 .vip_left dl dt{font-size: 16px; color:#333333;font-family: "microsoft yahei";font-weight: 600;padding: 15px 0px 5px 26px;}
 .vip_left dl dd p{padding: 5px 26px;line-height: 1.7!important;margin:0;}
@@ -93,7 +93,7 @@
 .infoItem input[type=submit]:hover{background: #ff4540;}
 .infoItem input[type=button]:hover{background: #c1c1c1;}
 /*********濯掍綋璧勬簮********/
-.vip_media{width:1000px;min-height: 1350px;background: #FFFFFF;border: 1px solid #ebebeb;padding:20px 0px;}
+.vip_media{width:1190px;min-height: 1350px;background: #FFFFFF;border: 1px solid #ebebeb;padding:20px 0px;}
 .vip_media h3 {font-size: 16px;color: #333;font-family: "microsoft yahei";position:relative;font-weight: normal;padding: 0px 0 15px 30px;border-bottom: 1px solid #ddd;margin: 0 0 0 0;}
 .vip_media h3 a.goBack{position:absolute;top:0;right:20px;width:50px;height:21px;display:block;padding-left: 30px;font-size: 14px;color: #999;background: url("../images/backLogo.png") no-repeat;}
 .infonf{width:945px!important;}
@@ -130,7 +130,7 @@
 .mediaList li{float:left;margin:0 0 15px 15px;overflow: hidden;}
 .mediaList li .mediaOut{width:375px;height:145px;border:1px solid #ddd;}
 .mediaList li .mediaOut .mediaCon{width:375px;height:110px;border-bottom:1px solid #ddd;}
-.mediaCon .mediaImg{width:160px;height:110px;overflow: hidden;float:left;cursor: pointer;}
+.mediaCon .mediaImg{width:250px;height:110px;overflow: hidden;float:left;cursor: pointer;}
 .mediaCon .mediaImg:hover{opacity: 0.9;-moz-opacity: 0.9;}
 .mediaCon .mediaContant{width:214px;height:110px;padding-top:15px;overflow: hidden;}
 .mediaCon .mediaContant p,.mediaCon .mediaContant a{padding:0px 10px;font-size: 14px;color:#333;font-family: "microsoft yahei";word-wrap: break-word;overflow:hidden;width:194px;}

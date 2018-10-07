@@ -73,15 +73,15 @@ body{background:#f0f0f0;}
 /*页首*/
 .top,.main,.footer,.copyright_bl{float:left}
 .top{width:100%;}
-.top_tel_block,.top_logosearch_block,.top_nav_block{width:100%;min-width:1000px;}
-.top_tel,.top_logosearch,.top_nav{width:1000px;margin:0 auto}
+.top_tel_block,.top_logosearch_block,.top_nav_block{width:100%;min-width:1190px;}
+.top_tel,.top_logosearch,.top_nav{width:1190px;margin:0 auto}
 .top_tel_block{background:#0082d4;height:34px;}
 .top_tel p.cl,.top_tel p.cr{line-height:34px;color:#fff}
 .top_tel p.cl{width:500px;text-align: left;float:left}
 .top_tel p.cr{width:500px;text-align: right;float:left}
 
 .top_logosearch_block{background:#008ae1;height:114px}/*157-114*/
-.top_logosearch_block2{background:#008ae1;height:114px;min-width:1000px;}
+.top_logosearch_block2{background:#008ae1;height:114px;min-width:1190px;}
 .logo{width:388px;height:76px;float:left;background:url("../img/logo.gif") no-repeat left top}
 .logo_gh{width:388px;height:80px;float:left;background:url("../img/logo_new.gif") no-repeat left top}
 .logo a.ccgp{display:block;width:388px;height:28px;float:left}
@@ -106,7 +106,7 @@ body{background:#f0f0f0;}
 /*main*/
 /* .main{width:100%;background:#f0f0f0;} */
 .main{width:100%;background:url("../img/background.png")}
-.main_container{width:1000px;margin:0 auto;}
+.main_container{width:1190px;margin:0 auto;}
 
 /*图片新闻和主题新闻*/
 .main_topic_block{width:100%;float:left;background:#fff;box-shadow:0px 0px 8px #ccc;}
@@ -129,8 +129,8 @@ body{background:#f0f0f0;}
 .txtnews_list li a{text-decoration:none;color:#333;}
 .txtnews_list li a:hover{text-decoration:underline;color:#ba2636}
 
-.main_left_block{width:698px;float:left;}
-.main_right_block{width:292px;margin-left:10px;float:left}
+.main_left_block{width:830px;float:left;}
+.main_right_block{width:350px;margin-left:10px;float:left}
 .wz_block,.banner_block{width:100%;float:left}
 
 .newslist_bl{width:407px;float:left;background:#fff}
@@ -175,7 +175,7 @@ body{background:#f0f0f0;}
 .c_list_bidtype li{font-size:14px;float:left;line-height:18px;margin-left:5px;}
 .c_list_bidtype li a{color:#6c6c6c;text-decoration:none;line-height:18px}
 .c_list_bidtype li a:hover{color:#fff;text-decoration:none;background:#cc0000;line-height:18px}
-.vF_banner{width:698px;height:98px;background:red}
+.vF_banner{width:830px;height:98px;background:red}
 .bx_log{background:url(../img/index/sys_gg_bg.gif) no-repeat top left #0155d4;height:60px}/*2b7ecc*/
 
 
@@ -200,7 +200,7 @@ body{background:#f0f0f0;}
 .vF_title_bar_nor h2.current2 a{font-size:18px;font-weight:bolder;color:#1f376d;text-decoration:none;line-height:45px}
 
 .newslist_bl_gsgg{width:100%;background:#fff;float:left;}
-.vF_t3{width:628px;margin:0 auto;}
+.vF_t3{width:780px;margin:0 auto;}
 .vF_title_bar3 { height:45px;position:relative;background:#fff;border-bottom:1px solid #e1e1e1}
 .vF_title_bar3 h2 {color:#005495;float:left; line-height:45px;  text-align:center; font-size:18px;font-weight:bolder;width:120px;}
 
@@ -244,7 +244,7 @@ body{background:#f0f0f0;}
 .main_right_cbl h2 a:hover{font-size:18px;font-weight:500;line-height:34px;margin-top:8px;text-decoration:underline}
 
 /*下载专区*/
-.main_right_cbl ul li.xzzqlinks{width:263px;height:53px;margin: 0 auto;margin-top:11px;border-radius:5px}
+.main_right_cbl ul li.xzzqlinks{width:320px;height:53px;margin: 0 auto;margin-top:11px;border-radius:5px}
 .main_right_cbl ul li.xzzqlinks p{font-size:14px;line-height:18px;color:#02396f;margin-top:18px;float:left;margin-left:10px}
 .main_right_cbl ul li.xzzqlinks p a{font-size:14px;line-height:18px;color:#02396f;text-decoration: none}
 .main_right_cbl ul li.xzzqlinks p a:hover{color:#ba2636;text-decoration:underline}
@@ -277,7 +277,7 @@ body{background:#f0f0f0;}
 /*调查与研究*/
 .main_right_cbl_dcyj{width:100%;background:#fff;float:left}
 .main_right_cbl_dcyj_leftText{width:130px;height:120px;float:left}
-.main_right_cbl_dcyj_rightText{width:160px;height:120px;float:right;}
+.main_right_cbl_dcyj_rightText{width:220px;height:120px;float:right;}
 .main_right_cbl_dcyj_rightText h2{width:100%;text-align:center;margin-top:30px;}
 .main_right_cbl_dcyj_rightText h2 a{width:100%;text-align:center;color: #2b7ecc;font-size: 20px;font-weight: bold;text-decoration:none;}
 .main_right_cbl_dcyj_rightText h2 a:hover{text-decoration:underline;}
@@ -285,7 +285,7 @@ body{background:#f0f0f0;}
 .main_right_cbl_dcyj_rightText ul li a{text-decoration:none;}
 .main_right_cbl_dcyj_rightText ul li a:hover{text-decoration:underline;}
 /*培训与鉴定*/
-.main_right_block_pxyjd{width:290px;margin-left:10px;float:left;border : 1px solid #7bb9ec}
+.main_right_block_pxyjd{width:348px;margin-left:10px;float:left;border : 1px solid #7bb9ec}
 .main_right_cbl_pxyjd{width:100%;background:#fff;float:left}
 .main_right_cbl_pxyjd_title{height:40px;background: url(../img/index/righttitle.png) no-repeat top left #0155d4;}
 .main_right_cbl_pxyjd h2{height:40px;margin-left:10px;background: url(../img/index/pxyjd_img.png) no-repeat center left;}
@@ -296,8 +296,8 @@ body{background:#f0f0f0;}
 
 .main_right_cbl_pxyjd .dldiv {width:100%;text-align:center;float:left;margin:10px 0 10px 0 ;}
 .main_right_cbl_pxyjd .bottomdldiv {width:100%;text-align:center;float:left;margin:10px 0 0px 0 ;background:url(../img/index/bottombackcolor.png) no-repeat bottom;}
-.main_right_cbl_pxyjd .dldiv_line{width:269px;text-align:center;float:left;margin-left:10px;border-bottom:1px solid #1180b8; }
-.main_right_cbl_pxyjd dl {width:130px;text-align:center;float:left;}
+.main_right_cbl_pxyjd .dldiv_line{width:329px;text-align:center;float:left;margin-left:10px;border-bottom:1px solid #1180b8; }
+.main_right_cbl_pxyjd dl {width:160px;text-align:center;float:left;}
 .main_right_cbl_pxyjd dl dt{text-align:center;font-size:14px;color:#1180b8;font-weight:bold;background: url(../img/blue_arrow_left.gif) no-repeat;background-position: right  }
 .main_right_cbl_pxyjd dl dt a{color: #1180b8;text-decoration: none; }
 .main_right_cbl_pxyjd dl dt a:hover{text-decoration: underline;}
@@ -310,7 +310,7 @@ body{background:#f0f0f0;}
 
 .bar6 form {
 	position:relative;
-	width:292px;
+	width:350px;
 	margin:0 auto;
 }
 .bar6 input {

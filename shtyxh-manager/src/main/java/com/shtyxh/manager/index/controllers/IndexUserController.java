@@ -46,10 +46,12 @@ public class IndexUserController extends IndexBaseController{
 	@RequestMapping(value = "/index/admin/user")
     @ResponseBody
     public ModelAndView user(HttpServletRequest request) {
+		
     	 User user = (User)	request.getAttribute("user");
     	 ModelAndView mv = new ModelAndView("/index/user/user");
+    	
     	 loadNavigation(mv, CH_NULL);
-    	 mv.addObject("userInfo",user);
+    	
     	 mv.addObject("typeid",1);
     	 loadSysConfig(mv);
          return mv;
@@ -59,6 +61,7 @@ public class IndexUserController extends IndexBaseController{
 	@RequestMapping(value = "/index/admin/user/typeList")
     @ResponseBody
     public ModelAndView typeList(HttpServletRequest request,Long typeid) {
+		 IRequest requestCtx = createRequestContext(request);
     	 User user = (User)	request.getAttribute("user");
     	 ModelAndView mv = null;
     	 if(typeid==1)
@@ -67,7 +70,8 @@ public class IndexUserController extends IndexBaseController{
     		 mv = new ModelAndView( "/index/user/userAssessmentInfo");
     	 if(mv==null)
     		 throw new GlobalException("查看的页面不存在");
-    	 mv.addObject("userInfo",user);
+    	 User userInfo = iUserService.selectByPrimaryKey(requestCtx, user);
+    	 mv.addObject("userInfo",userInfo);
          return mv;
     }
 	

@@ -92,9 +92,9 @@ public class FileController {
 			multfile.transferTo(new File(file_all_path));
 
 			if (type.equals(CAROUSEL_PAGE)) {
-				returnPath = genCompressImg(fileResourcesPath, file_path + '/' + randomName, ext, 700, 475);
+				returnPath = genCompressImg(fileResourcesPath, file_path + '/' + randomName, ext, 820, 475);
 			} else if (type.equals(NEWS_PAGE)) {
-				returnPath = genCompressImg(fileResourcesPath, file_path + '/' + randomName, ext, 390, 285);
+				returnPath = genCompressImg(fileResourcesPath, file_path + '/' + randomName, ext, 470, 315);
 			} else {
 				returnPath = fileResourcesPath + '/' + randomName + "." + ext;
 			}

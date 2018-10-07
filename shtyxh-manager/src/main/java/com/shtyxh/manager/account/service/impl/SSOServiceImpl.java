@@ -64,7 +64,8 @@ public class SSOServiceImpl extends BaseServiceImpl<User> implements ISSOService
 	
 	@Override
 	public String updateUser(User user,HttpServletRequest request, HttpServletResponse response) {
-		 user.setPasswordEncrypted( DigestUtils.md5Hex(user.getPasswordEncrypted()));
+		if(!StringUtils.isEmpty(user.getPasswordEncrypted()))
+			user.setPasswordEncrypted( DigestUtils.md5Hex(user.getPasswordEncrypted()));
 		 userMapper.updateByPrimaryKeySelective(user);
 		//生成token
 		 String token = UUID.randomUUID().toString();

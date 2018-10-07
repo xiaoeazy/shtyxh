@@ -6,7 +6,7 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <title>${webname}</title>
-<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link rel="shortcut icon" href="${fileserver}/uploadFile/ico/favicon.ico" />
 <link href="${base.contextPath}/lib/index/css/banner.css"
 	rel="stylesheet" type="text/css" />
 <link href="${base.contextPath}/lib/index/css/indexonly.css"
@@ -81,7 +81,7 @@
 									<#else> 
 										<a href="${base.contextPath}/index/assessmentDetail?id=${carouselList.activityId}" title="" target="_blank">
 									</#if> 
-								<img src="${fileserver}${carouselList.filePath}" alt="${carouselList.filetitle}" width="698" height="475" title="${carouselList.filetitle}" /></a>
+								<img src="${fileserver}${carouselList.filePath}" alt="${carouselList.filetitle}" width="830" height="475" title="${carouselList.filetitle}" /></a>
 								</li>
 								</#list>
 							</ul>
@@ -129,7 +129,7 @@
 											</div>
 											<ul class="c_list mt10 mb10 split" id="area3_con1">
 												<#list typeList.newsList as newsList>
-												<li style="width:628px"><a href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}" target="_blank"
+												<li style="width:760px"><a href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}" target="_blank"
 													title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
 													<font style="float:right">${newsList.createdate?string('yyyy-MM-dd')}</font>
 												</li>

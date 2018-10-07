@@ -6,7 +6,7 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <title>协会动态_${webname}</title>
-<link rel="shortcut icon" href="${base.contextPath}/favicon.ico" />
+<link rel="shortcut icon" href="${fileserver}/uploadFile/ico/favicon.ico" />
 <link href="${base.contextPath}/lib/index/css/channel.css"
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
@@ -36,8 +36,8 @@
 												<a
 													href="${base.contextPath}/index/xhdt/newsDetail?id=${newsThumbNailList.id}"
 													target='_blank' thumb="" alt="" text=""><img
-													src="${base.contextPath}${newsThumbNailList.thumbnail}"
-													border='0' width="390px" height="285px"
+													src="${fileserver}${newsThumbNailList.thumbnail}"
+													border='0' width="470px" height="315px"
 													alt='${newsThumbNailList.newstitle}'
 													title='${newsThumbNailList.newstitle}' /></a>
 											</div>
@@ -51,8 +51,8 @@
 												<a
 													href="${base.contextPath}/index/xhdt/newsDetail?id=${newsThumbNailList.id}"
 													target='_blank' thumb="" alt="" text=""><img
-													src="${base.contextPath}${newsThumbNailList.thumbnail}"
-													border='0' width="390px" height="285px"
+													src="${fileserver}${newsThumbNailList.thumbnail}"
+													border='0' width="470px" height="315px"
 													alt='${newsThumbNailList.newstitle}'
 													title='${newsThumbNailList.newstitle}' /></a>
 											</div>
@@ -87,7 +87,7 @@
 									<div class="vT-cht-xw-more-con">
 										<ul class="xw-more-list">
 											<#list topNewsList as topNewsList> 
-												<#if  (topNewsList_index>0&& topNewsList_index<5) >
+												<#if  (topNewsList_index>0&& topNewsList_index<6) >
 												<li><a href="${base.contextPath}/index/xhdt/newsDetail?id=${topNewsList.id}"
 													target="_blank" title="${topNewsList.newstitle}">${topNewsList.newsSimpleTitle}</a></li>
 												</#if>
@@ -98,7 +98,7 @@
 									<div class="vT-cht-xw-more-con ml15">
 										<ul class="xw-more-list">
 											<#list topNewsList as topNewsList> 
-												<#if  (topNewsList_index>=5) >
+												<#if  (topNewsList_index>=6) >
 											<li><a href="${base.contextPath}/index/xhdt/newsDetail?id=${topNewsList.id}"
 												target="_blank" title="${topNewsList.newstitle}">${topNewsList.newsSimpleTitle}</a></li>
 											</#if>

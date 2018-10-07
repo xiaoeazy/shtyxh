@@ -217,14 +217,14 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 								fieldLabel : '上传',
 								style:'padding:0 0 5px 20px',
 								items:[{
-								 	width:390,
-								 	height:285,
+								 	width:470,
+								 	height:315,
 								 	fieldLabel : '显示',
 									xtype : 'box',
 									id :mainId+"showPict",
 									autoEl : {
-										width:390,
-									 	height:285,
+										width:470,
+									 	height:315,
 										tag : 'img',
 										src :nonePic,
 										style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',
@@ -235,7 +235,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 									width : 150,
 									style : 'margin-left:10px',
 									//name : 'imgupload',
-									text : '上传（390*285）',
+									text : '上传（470*315）',
 									handler:function(){
 										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'news'});
 										win.show();
