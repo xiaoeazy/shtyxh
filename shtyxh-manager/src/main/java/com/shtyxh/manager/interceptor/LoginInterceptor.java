@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,7 +17,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 	
 	@Autowired
 	private ISSOService iSSOService;
-
+	
+	@Value("${SHTYXH_SHTYXHSERVER}")
+	private String SHTYXH_SHTYXHSERVER;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -31,7 +35,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		//取不到用户信息
 		if (null == user) {
 			//跳转到登录页面，把用户请求的url作为参数传递给登录页面。
-			response.sendRedirect( "http://localhost:8080/shtyxh/index/loginPage?redirect=" + request.getRequestURL());
+			response.sendRedirect( SHTYXH_SHTYXHSERVER+"/index/loginPage?redirect=" + request.getRequestURL());
 			//返回false
 			return false;
 		}

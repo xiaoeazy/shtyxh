@@ -190,7 +190,7 @@ public class BaseController {
             	if(("admin").equals(e.getType())){
             		view = new ModelAndView(REDIRECT + CommonPath.ADMIN_VIEW_LOGIN);
             	}else{
-            		view = new ModelAndView(CommonPath.INDEX_VIEW_LOGIN);
+            		view = new ModelAndView(REDIRECT +CommonPath.INDEX_VIEW_LOGIN);
             	}
             	
                 view.addObject("message", thr.getMessage());
