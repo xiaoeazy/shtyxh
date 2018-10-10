@@ -10,7 +10,65 @@
 <link href="${base.contextPath}/lib/index/css/common/common.css" rel="stylesheet" type="text/css" />
 <link href="${base.contextPath}/lib/index/css/associationSurvery/associationSurvery.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
+
+<!-- bootstrap插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<!-- 分页插件 -->
+<script language="javascript" src="${base.contextPath}/lib/jqPaginator/jqpaginator.min.js" ></script>
 </head>
+<script>
+	function left_click(id,name){
+		$(document).attr("title",name);
+		
+		$(".left_box ul li ").removeClass("on");
+		var changeclass=window.document.getElementById('cid'+id);
+		changeclass.className='on';
+		 $.ajax({
+             url: "${base.contextPath}/index/jdypx/gwpx/typeList?typeid="+id,
+             type: "POST",
+             datatype:"JSON",
+             data: {},
+             success: function (data) {
+            	 $(".right_box").html(data);
+             },
+             error: function () {
+                 alert("获取信息失败!");
+             }
+         });
+	}
+	
+	function page_click(id,num){
+		 $.ajax({
+             url: "${base.contextPath}/index/jdypx/gwpx/typeList?typeid="+id+"&page="+num,
+             type: "POST",
+             datatype:"JSON",
+             data: {},
+             success: function (data) {
+            	 $(".right_box").html(data);
+             },
+             error: function () {
+                 alert("获取信息失败!");
+             }
+         });
+	}
+	
+	function detail_click(typeid,newsid){
+		 $.ajax({
+            url: "${base.contextPath}/index/xhgk/newsDetail?typeid="+typeid+"&newsid="+newsid,
+            type: "POST",
+            datatype:"JSON",
+            data: {},
+            success: function (data) {
+           	 $(".right_box").html(data);
+            },
+            error: function () {
+                alert("获取信息失败!");
+            }
+        });
+	}
+
+</script>
 <body >
 <#include "../../include/navigation.html">
 
@@ -24,10 +82,10 @@
 	
 			<ul>
 				<#list typeList as typeList>
-					<li  id="cid${typeList.id}"><a href="${base.contextPath}/index/jdypx/gwpx?typeid=${typeList.id}" target="_blank" title="${typeList.typename}">${typeList.typename}</a></li>
+					<li  id="cid${typeList.id}"><a href="javascript:void(0)"  onclick="left_click('${typeList.id}','${typeList.typename}')">${typeList.typename}</a></li>
 				</#list>
 				<script>
-							var changeclass=window.document.getElementById('cid${currentType.id!}');
+							var changeclass=window.document.getElementById('cid${nowType.id!}');
 							changeclass.className='on';
 				</script>
 	
@@ -37,14 +95,7 @@
 
     <div class="mainLeft_right_block mt13" >
 				<div class="right_box">
-							<strong class="title">
-								<span>${currentType.typename!}</span>
-							</strong>
-						<div class="nr_box">
-							<div style="height:500px;">
-								内容开发中...
-							</div>
-						</div>
+						
 						
 					</div>
 
@@ -52,6 +103,24 @@
     </div>
 </div>
 </div>
+
+	<script>
+	$(document).ready(function(){
+		 $.ajax({
+	         url: "${base.contextPath}/index/jdypx/gwpx/typeList?typeid=${nowType.id!}",
+	         type: "POST",
+	         datatype:"JSON",
+	         data: {},
+	         success: function (data) {
+	        	 $(".right_box").html(data);
+	         },
+	         error: function () {
+	             alert("获取信息失败!");
+	         }
+	     });
+	});
+	</script>
+
 <#include "../../include/footer.html">
 </body>
 </html>

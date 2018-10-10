@@ -1,7 +1,9 @@
 package com.shtyxh.manager.index.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,15 +25,19 @@ import com.shtyxh.common.exception.E404Excetion;
 import com.shtyxh.common.exception.GlobalException;
 import com.shtyxh.manager.account.dto.User;
 import com.shtyxh.manager.bean.SysConfig;
+import com.shtyxh.manager.dto.KgAllonetext;
 import com.shtyxh.manager.dto.KgAssessmentActivity;
 import com.shtyxh.manager.dto.KgAssessmentActivityUserProgress;
 import com.shtyxh.manager.dto.KgAssessmentActivityUserUpload;
 import com.shtyxh.manager.dto.KgAssessmentType;
+import com.shtyxh.manager.dto.KgContact;
+import com.shtyxh.manager.dto.KgHistory;
 import com.shtyxh.manager.dto.KgNews;
 import com.shtyxh.manager.dto.KgNewsAttribute;
 import com.shtyxh.manager.dto.KgNewsSource;
 import com.shtyxh.manager.dto.KgType;
 import com.shtyxh.manager.service.IIndexAssessmentService;
+import com.shtyxh.manager.service.IJedisService;
 import com.shtyxh.manager.service.IKgAssessmentActivityService;
 import com.shtyxh.manager.service.IKgAssessmentActivityUserUploadService;
 import com.shtyxh.manager.service.IKgAssessmentTypeService;
@@ -61,6 +67,8 @@ public class IndexAssessmentController extends IndexBaseController{
     private IKgTypeService iKgTypeService;
     @Autowired
     private IKgNewsSourceService iKgNewsSourceService;
+    @Autowired
+    private IJedisService iJedisService;
     //======================================评估========================================
     @RequestMapping(value = "/index/assessmentTypeList")
     public ModelAndView assessmentTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
@@ -319,11 +327,43 @@ public class IndexAssessmentController extends IndexBaseController{
         		currentType=typeList.get(0);
         }
         
-        mv.addObject("currentType",currentType);
+        mv.addObject("nowType",currentType);
         loadNavigation(mv, CH_PXYJD);
         loadSysConfig(mv);
         return mv;
     }
+    
+	@RequestMapping(value = {"/index/jdypx/gwpx/typeList"})
+    @ResponseBody
+    public ModelAndView typeList(Long typeid,@RequestParam(defaultValue = DEFAULT_PAGE) int page,
+            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
+		 ModelAndView mv = new ModelAndView( "/index/associationSurvey/rightDetail");
+		 
+		 KgType nowType = iJedisService.loadType(new KgType(typeid));
+		 
+		 if(typeid==YJSGZ_ID||typeid==ZLPX_ID){ //这些板块内容开发中
+			 mv = new ModelAndView("/index/assessment/include/pageDesign");
+			 mv.addObject("nowType",nowType);
+			 return mv;
+		 }
+		 
+    	 if(nowType.getRelatetype()==2) {
+    		 KgNews a = new KgNews();
+    		 a.setTypeid(nowType.getId());
+    		 List<KgNews> newList = iJedisService.loadTypeNews(a);
+    		 int count = newList.size();
+    		 newList=CommonFuncUtil.listToPage(newList, page, limit);
+    	     int allPageNum = count%limit==0?count/limit:count/limit+1;
+    	     CommonFuncUtil.judgeNewsTitleLength(newList,45);
+    	     if(count==0) allPageNum=1;
+    	     mv.addObject("page", page);
+    	     mv.addObject("allPageNum",allPageNum);
+    	     mv.addObject("rightList",newList);
+    	 }
+    	 mv.addObject("nowType",nowType);
+		 return mv;
+	}
+	
     
 	 @RequestMapping(value = "/index/jdypx/typeList")
 	    @ResponseBody

@@ -77,6 +77,13 @@ public class IndexAssociationSurveyController extends IndexBaseController{
 		 ModelAndView mv = new ModelAndView( "/index/associationSurvey/rightDetail");
 		 
 		 KgType nowType = iJedisService.loadType(new KgType(typeid));
+		 
+		 if(typeid==LJLS_ID||typeid==LSYG_ID||typeid==HYDW_ID){ //这些板块内容开发中
+			 mv = new ModelAndView("/index/associationSurvey/pageDesign");
+			 mv.addObject("nowType",nowType);
+			 return mv;
+		 }
+		 
 	   	 if(typeid==LSYG_ID) {
     		 Map<String,List<KgHistory>> map =new HashMap<String,List<KgHistory>>();
     		 mv = new ModelAndView("/index/associationSurvey/historyDetail");
@@ -127,8 +134,9 @@ public class IndexAssociationSurveyController extends IndexBaseController{
     		 KgNews a = new KgNews();
     		 a.setTypeid(nowType.getId());
     		 List<KgNews> newList = iJedisService.loadTypeNews(a);
-    		 newList=CommonFuncUtil.listToPage(newList, page, limit);
     		 int count = newList.size();
+    		 newList=CommonFuncUtil.listToPage(newList, page, limit);
+    		
     	     int allPageNum = count%limit==0?count/limit:count/limit+1;
     	     CommonFuncUtil.judgeNewsTitleLength(newList,45);
     	     if(count==0) allPageNum=1;

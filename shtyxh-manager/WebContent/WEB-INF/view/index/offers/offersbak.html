@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>${kgType.typename!}_${webname}</title>
+<link rel="shortcut icon" href="${fileserver}/uploadFile/ico/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
+
+<!-- bootstrap插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+<!-- bootstraptable插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-table/css/bootstrap-table.min.css" />
+<script src="${base.contextPath}/lib/bootstrap-table/js/bootstrap-table.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<style type="text/css">
+.table-striped > tbody > tr:nth-child(2n+1) > td, 
+.table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: rgb(242, 245, 247);
+ }
+</style>
+</head>
+<body id="detail">
+<#include "../../include/navigation.html">
+
+<div class="main">
+<div class="main_container">
+
+
+<div class="main_left_block mt13">
+	<div class="wz_block">
+	    <div class="vF_deail_currentloc">
+	        <p>当前位置：<a href="${base.contextPath}/index/news" title="法规与资讯" class="CurrChnlCls">法规与资讯</a>
+	        &nbsp;&raquo;&nbsp;${kgType.typename} 列表页</p>
+	    </div>
+	
+	    <div class="vF_detail_relcontent mt13">
+		    <h2><p>${kgType.typename}</p></h2>
+		    <div class="vF_detail_relcontent_lst">
+		        <table id="table"></table>
+		    </div>
+		</div>
+			<script>
+			  //得到查询的参数
+				   function queryParams(params) {
+				        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+		        		    pageSize: params.limit, // 每页要显示的数据条数
+			                offset: params.offset, // 每页显示数据的开始行号
+			                sort: params.sort, // 要排序的字段
+			                sortOrder: params.order // 排序规则
+				        };
+				        return temp;
+				    };
+// 					$("#searchBtn").click(function() {
+// 		                var memberno = $("#memberno").val();
+// 		                var kindergartenname = $("#kindergartenname").val();
+// 		                var kindergartensite = $("#kindergartensite").val();
+// 		                var obj =  {memberno : memberno,kindergartenname:kindergartenname,kindergartensite:kindergartensite};
+// 		                $('#table').bootstrapTable('refresh');
+// 		            });
+					$(function () {
+						$("#table").bootstrapTable({ // 对应table标签的id
+						      url: "${base.contextPath}/index/offersList", // 获取表格数据的url
+						      cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+						      striped: true,  //表格显示条纹，默认为false
+						      pagination: true, // 在表格底部显示分页组件，默认false
+						      pageList: [10, 20], // 设置页面可以显示的数据条数
+						      pageSize: 10, // 页面数据条数
+						      pageNumber: 1, // 首页页码
+						      sidePagination: 'server', // 设置为服务器端分页
+							  queryParams:queryParams,
+						      responseHandler: function(res) {
+					                return {
+					                    "total": res.totalProperty,//总页数
+					                    "rows": res.results   //数据
+					                 };
+					          },
+						      sortName: 'id', // 要排序的字段
+						      sortOrder: 'desc', // 排序规则
+						      columns: [{  
+				                      title: '序号',//标题  可不加  
+				                      width:50,
+				                      align: 'center',
+				                      formatter: function (value, row, index) {  
+			//	                           return index+1;  
+				  							 var pageSize=$('#table').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
+				               				 var pageNumber=$('#table').bootstrapTable('getOptions').pageNumber;//通过表的#id 可以得到当前第几页
+				               				 return pageSize * (pageNumber - 1) + index + 1;    //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+				                      }  
+				                  }, {
+						              field: 'title',
+						              title: '标题',
+						              align: 'center',
+						              valign: 'middle',
+						              formatter:function(value,row,index) {
+// 						            	  var path ="${base.contextPath}";
+// 						            	  return ['<a href="'+path+'/index/offers/Detail?id='+row.id+'">'+value+'</a>'];
+										  return value;
+						              }
+						          }, {
+						              field: 'salary',
+						              title: '薪资',
+						              width:150,
+						              align: 'center',
+						              valign: 'middle'
+						          }, {
+						              field: 'publishunit',
+						              title: '发布单位',
+						              align: 'center',
+						              valign: 'middle'
+						          }
+						      ],
+						      onLoadSuccess: function(){  //加载成功时执行
+						            console.info("加载成功");
+						      },
+						      onLoadError: function(){  //加载失败时执行
+						            console.info("加载数据失败");
+						      },
+						      onClickRow: function (row) { 
+						    	  var path ="${base.contextPath}/index/offers/Detail?id="+row.id;
+						    	  window.location.href=path;
+				              }
+						})
+						
+						
+						$('#table').on('click-row.bs.table', function (e, row, element) {
+								//$(element).css({"color":"blue","font-size":"16px;"});
+// 									console.log(row);
+								
+							});
+					})
+					</script>
+	</div>
+</div>
+
+    <div class="main_right_block" style="margin-top:43px">
+
+
+<!--OTsidebar-->
+	<#list rightAttributeList as rightAttributeList>
+		<#if rightAttributeList_index = 0>
+			<div class="main_right_cbl " style="margin-top:4px">
+            	<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+                	<#list rightAttributeList.newsList as newsList>
+                		<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+                	</#list>
+				 </ul>
+                </div>
+       		 </div>
+		<#else>
+			<div class="main_right_cbl mt13">
+          		<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+					<#list rightAttributeList.newsList as newsList>
+						<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+					</#list>
+                </ul>
+                </div>
+        	</div>
+		</#if>
+	</#list>
+        
+
+        
+<!--OTsidebar-->
+        </div>
+    </div>
+</div>
+<#include "../../include/footer.html">
+</body>
+</html>

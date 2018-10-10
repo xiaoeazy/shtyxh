@@ -104,8 +104,9 @@
 	                <ul>
 	               		 <li><a href="${base.contextPath}/index/jdypx/gwpx">岗位培训</a>
 	               		 		<ul>
-	               		 				<li><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22">幼教上岗证</a></li>
-	               		 				<li><a href="${base.contextPath}/index/jdypx/gwpx?typeid=23">致立培训</a></li>
+	               		 			<#list gwpxTypeList as typeList>   
+				                		<li><a href="${base.contextPath}/index/jdypx/gwpx?typeid=${typeList.id}">${typeList.typename}</a></li>
+									</#list>
 	               		 		</ul>
 	               		 </li> 
 	               		 <li><a href="${base.contextPath}/index/assessmentTypeList">资质鉴定</a>

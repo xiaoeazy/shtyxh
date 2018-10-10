@@ -282,8 +282,10 @@
 												</#list>
 											<#elseif typePxyjdShowList.id == 21>
 												<dt><a href="${base.contextPath}/index/jdypx/gwpx"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
-												<dd><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22"  target="_blank">幼教上岗证</a></dd>
-												<dd><a href="${base.contextPath}/index/jdypx/gwpx?typeid=22"  target="_blank">致立培训</a></dd>
+												<#list gwpxTypeList as typeList>   
+													<dd><a href="${base.contextPath}/index/jdypx/gwpx?typeid=${typeList.id}"  target="_blank">${typeList.typename}</a></dd>
+							                	</#list>
+												
 											<#else>
 												<dt><a href="${base.contextPath}/index/jdypx/typeList?typeid=${typePxyjdShowList.id}"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
 <!-- 												<#list typePxyjdShowList.childType as childType> -->

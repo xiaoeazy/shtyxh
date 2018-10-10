@@ -54,12 +54,17 @@ public class IndexBaseController extends BaseController{
 	public static final Long DJHD_ID = 7L;
 	public static final Long OFFER_ID = 20L;  //招聘
 	
+	public static final  Long LJLS_ID =11L; //历届理事
 	public static final  Long LSYG_ID =12L; //历史沿革
 	public static final  Long HYDW_ID =15L;	//会员单位
 	public static final  Long LXFS_ID =16L;	//联系方式
 	
+	public static final  Long YSZP_ID =20L;	//会员单位
+	
 	
 	public static final  Long GWPX_ID =21L;	//岗位培训
+	public static final  Long YJSGZ_ID =22L;	//幼教上岗证
+	public static final  Long ZLPX_ID =23L;	//致立培训
 	@Value("${FILE_FILESERVER}")
 	private String FILE_FILESERVER;
 	
@@ -82,18 +87,22 @@ public class IndexBaseController extends BaseController{
 			KgType t7 = new KgType();
 			t7.setParentid(DJHD_ID);
 			
+			KgType t8 = new KgType();
+			t8.setParentid(GWPX_ID);
+			
 			List<KgType> xhgkTypeList = iJedisService.loadChildType(t2);
 	  	  	List<KgType> zxzxTypeList = iJedisService.loadChildType(t3);
 	  	  	List<KgType> dcyyjTypeList = iJedisService.loadChildType(t5);
   	  		List<KgType> xhdtTypeList = iJedisService.loadChildType(t6);
   	  		List<KgType> djhdTypeList = iJedisService.loadChildType(t7);
+  	  		List<KgType> gwpxTypeList = iJedisService.loadChildType(t8);
   	  		
   	  		List<KgAssessmentType> zzjdList = iJedisService.loadAssessmentTypeAll(); //资质鉴定
 	        List<KgNewsSource> KgNewsSourceList = iJedisService.loadNewsSource();
 	        List<KgLink> linkList = iJedisService.loadLink();
 	        List<KgConfig> kgConfigList= iJedisService.loadConfig();
 	        
-	        
+	        mv.addObject("gwpxTypeList", gwpxTypeList);
 	        mv.addObject("xhgkTypeList", xhgkTypeList);
 	        mv.addObject("zxzxTypeList", zxzxTypeList);
 	        mv.addObject("dcyyjTypeList", dcyyjTypeList);
