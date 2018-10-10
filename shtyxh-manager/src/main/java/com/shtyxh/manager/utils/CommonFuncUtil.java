@@ -60,6 +60,18 @@ public class CommonFuncUtil {
 		}
 	}
 	
+	public static void judgeAssessmentActivityTitleLength(List<KgAssessmentActivity> assessmentActivityList, int size) {
+    	for(KgAssessmentActivity kg :assessmentActivityList) {
+    		String title =kg.getAssessmentActivityName();
+    		if(title.length()>size) {
+    			title=kg.getAssessmentActivityName().substring(0, size)+SUSPENSION_POINTS;
+    			kg.setAssessmentActivityName(title);
+    		}else {
+    			kg.setAssessmentActivityName(title);
+    		}
+    	}
+    }
+	
 	public static void judgeOffersTitleLength(List<KgOffers> news, int size) {
 		for (KgOffers kg : news) {
 			String title = kg.getTitle();
@@ -72,18 +84,6 @@ public class CommonFuncUtil {
 		}
 	}
 
-	public static void judgeAssessmentActivityTitleLength(List<KgAssessmentActivity> assessmentActivityList,
-			int length) {
-		for (KgAssessmentActivity kg : assessmentActivityList) {
-			String title = kg.getAssessmentActivityName();
-			if (title.length() > length) {
-				title = kg.getAssessmentActivityName().substring(0, length) + SUSPENSION_POINTS;
-				kg.setNewsSimpleAssessmentActivityName(title);
-			} else {
-				kg.setNewsSimpleAssessmentActivityName(title);
-			}
-		}
-	}
 
 	public static String loadNowTime14() {
 		Date day = new Date();

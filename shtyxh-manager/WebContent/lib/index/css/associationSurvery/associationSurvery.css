@@ -31,7 +31,7 @@ a{text-decoration:none}
 .vF_detail_header{float:left;margin:0;width:100%}
 .vF_detail_header h2{font-size:26px;line-height:36px;font-weight:bolder;color:#383940;word-wrap:break-word;margin-bottom:20px;margin-top:20px;width:98%;text-align:center;}
 .vF_detail_header p{font-size:12px;line-height:30px;color:#707070;}
-.vF_detail_content {margin:10px 15px 10px 10px;line-height:32px;font-size:16px;color:#383838;border-top:1px solid #ddd;padding-top:22px;float:left}
+.vF_detail_content {width: 100%;margin:10px 15px 10px 10px;line-height:32px;font-size:16px;color:#383838;border-top:1px solid #ddd;padding-top:22px;float:left}
 .vF_detail_content strong{font-weight:bolder;}
 .vF_detail_content p{margin-top:5px;margin-bottom:22px;} /*5px*/
 .vF_detail_content img{max-width:600px;height:auto;}

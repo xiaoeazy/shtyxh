@@ -1,12 +1,9 @@
 package com.shtyxh.manager.index.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,26 +21,17 @@ import com.shtyxh.common.bean.UploadFileInfo;
 import com.shtyxh.common.exception.E404Excetion;
 import com.shtyxh.common.exception.GlobalException;
 import com.shtyxh.manager.account.dto.User;
-import com.shtyxh.manager.bean.SysConfig;
-import com.shtyxh.manager.dto.KgAllonetext;
 import com.shtyxh.manager.dto.KgAssessmentActivity;
 import com.shtyxh.manager.dto.KgAssessmentActivityUserProgress;
 import com.shtyxh.manager.dto.KgAssessmentActivityUserUpload;
 import com.shtyxh.manager.dto.KgAssessmentType;
-import com.shtyxh.manager.dto.KgContact;
-import com.shtyxh.manager.dto.KgHistory;
 import com.shtyxh.manager.dto.KgNews;
-import com.shtyxh.manager.dto.KgNewsAttribute;
 import com.shtyxh.manager.dto.KgNewsSource;
 import com.shtyxh.manager.dto.KgType;
 import com.shtyxh.manager.service.IIndexAssessmentService;
 import com.shtyxh.manager.service.IJedisService;
-import com.shtyxh.manager.service.IKgAssessmentActivityService;
 import com.shtyxh.manager.service.IKgAssessmentActivityUserUploadService;
-import com.shtyxh.manager.service.IKgAssessmentTypeService;
-import com.shtyxh.manager.service.IKgNewsAttributeService;
 import com.shtyxh.manager.service.IKgNewsService;
-import com.shtyxh.manager.service.IKgNewsSourceService;
 import com.shtyxh.manager.service.IKgTypeService;
 import com.shtyxh.manager.utils.CommonFuncUtil;
 
@@ -51,12 +39,6 @@ import com.shtyxh.manager.utils.CommonFuncUtil;
 public class IndexAssessmentController extends IndexBaseController{
 	public static final String  SUSPENSION_POINTS = "...";
 	
-    @Autowired
-    private IKgAssessmentTypeService iKgAssessmentTypeService;
-    @Autowired
-    private IKgAssessmentActivityService iKgAssessmentActivityService;
-    @Autowired
-    private IKgNewsAttributeService iKgNewsAttributeService;
     @Autowired
     private IIndexAssessmentService iIndexAssessmentService;
     @Autowired
@@ -66,43 +48,39 @@ public class IndexAssessmentController extends IndexBaseController{
     @Autowired 
     private IKgTypeService iKgTypeService;
     @Autowired
-    private IKgNewsSourceService iKgNewsSourceService;
-    @Autowired
     private IJedisService iJedisService;
     //======================================评估========================================
     @RequestMapping(value = "/index/assessmentTypeList")
     public ModelAndView assessmentTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
             @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/assessmentTypeList");
-        IRequest requestContext = createRequestContext(request);
-        
-       
-        List<KgAssessmentType> typeList = iKgAssessmentTypeService.selectAll(requestContext);
+        List<KgAssessmentType> typeList = iJedisService.loadAssessmentTypeAll();
         if(typeid==null) {
         	if(typeList.size()!=0)
         		typeid=typeList.get(0).getId();
         }
         if(typeid==null)
     		throw new E404Excetion("请查看的网页不存在!"); 
-        	
-        KgAssessmentActivity kaa = new KgAssessmentActivity();
-        kaa.setAssessmentTypeId(typeid);
         
         KgAssessmentType kat = new KgAssessmentType();
         kat.setId(typeid);
-        KgAssessmentType assessmentType = iKgAssessmentTypeService.selectByPrimaryKey(requestContext, kat);
-        List<KgAssessmentActivity> activityList = iKgAssessmentActivityService.select(requestContext, kaa);
-      
-        int count = iKgAssessmentActivityService.adminQueryCount(requestContext, kaa);
+        KgAssessmentType assessmentType = iJedisService.loadAssessmentType(kat);
+        
+        
+        KgAssessmentActivity kaa = new KgAssessmentActivity();
+        kaa.setAssessmentTypeId(typeid);
+        
+        List<KgAssessmentActivity> activityList = iJedisService.loadAssessmentActivityOfType(kaa);
+        int count = activityList.size();
         int allPageNum = count%limit==0?count/limit:count/limit+1;
         if(count==0) allPageNum=1;
+        activityList=CommonFuncUtil.listToPage(activityList, page, limit);
        
         mv.addObject("typeList", typeList);
         mv.addObject("assessmentType",assessmentType);
         mv.addObject("activityList", activityList);
         mv.addObject("page", page);
         mv.addObject("allPageNum",allPageNum);
-        mv.addObject("typeid", typeid);
         
         
         loadNavigation(mv,CH_PXYJD);
@@ -115,7 +93,8 @@ public class IndexAssessmentController extends IndexBaseController{
     public ModelAndView assessmentDetail(Long id, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
             @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
     	 IRequest requestContext = createRequestContext(request);
-    	 KgAssessmentActivity kaa = iKgAssessmentActivityService.selectByPrimaryKey(requestContext, new KgAssessmentActivity(id));
+    	 User user = (User)	request.getAttribute("user");
+    	 KgAssessmentActivity kaa = iJedisService.loadAssessmentActivity(new KgAssessmentActivity(id));
 	    if(id==null)
 	    		throw new E404Excetion("请查看的网页不存在!"); 
 	    if(kaa==null)
@@ -124,21 +103,20 @@ public class IndexAssessmentController extends IndexBaseController{
         mv.addObject("assessmentInfo", kaa);
         KgAssessmentType requestKT = new KgAssessmentType();
         requestKT.setId(kaa.getAssessmentTypeId());
-        KgAssessmentType kgNewstype = iKgAssessmentTypeService.selectByPrimaryKey(requestContext, requestKT);
+        KgAssessmentType kgNewstype = iJedisService.loadAssessmentType(requestKT);
         
-        HttpSession session = request.getSession(false);
-        if(session!=null) {
-        	  Long userid = (Long)session.getAttribute(IRequest.FIELD_USER_ID);
-              KgAssessmentActivityUserProgress userProgress = new KgAssessmentActivityUserProgress();
-              userProgress.setUploadUserId(userid);
-              userProgress.setAssessmentActivityId(id);
-        }
+//        HttpSession session = request.getSession(false);
+//        if(session!=null) {
+//        	  Long userid = (Long)session.getAttribute(IRequest.FIELD_USER_ID);
+//              KgAssessmentActivityUserProgress userProgress = new KgAssessmentActivityUserProgress();
+//              userProgress.setUploadUserId(userid);
+//              userProgress.setAssessmentActivityId(id);
+//        }
       
         mv.addObject("assessmentType", kgNewstype);
-        User user = (User) request.getAttribute("user");
         mv.addObject("userid", user==null?"":user.getUserId());
         loadNavigation(mv, CH_PXYJD);
-        loadAttriteAssessment(mv, requestContext,3);
+        loadAttriteAssessmentActivity(mv, requestContext,3);
         loadSysConfig(mv);
         return mv;
     }
@@ -218,36 +196,7 @@ public class IndexAssessmentController extends IndexBaseController{
     }
 
     
-    //===================================other======================================
-   
-
  
-    private void judgeTitleLength(List<KgAssessmentActivity> assessmentActivityList) {
-    	for(KgAssessmentActivity kg :assessmentActivityList) {
-    		String title =kg.getAssessmentActivityName();
-    		if(title.length()>17) {
-    			title=kg.getAssessmentActivityName().substring(0, 17)+SUSPENSION_POINTS;
-    			kg.setAssessmentActivityName(title);
-    		}else {
-    			kg.setAssessmentActivityName(title);
-    		}
-    	}
-    }
-    
-    private void loadAttriteAssessment(ModelAndView mv,IRequest requestContext,int attributeSize) {
-	 	List<KgNewsAttribute> rightAttributeList =  iKgNewsAttributeService.select(requestContext, null, 1, attributeSize);
-        for(KgNewsAttribute ka :rightAttributeList){
-        	KgAssessmentActivity kn = new KgAssessmentActivity();
-        	kn.setAttributeid(ka.getId()+"");
-        	kn.setSortname("createdate");
-        	kn.setSortorder("desc");
-        	List<KgAssessmentActivity> assessmentActivityList=iKgAssessmentActivityService.select(requestContext, kn, 1, 5);
-        	judgeTitleLength(assessmentActivityList);
-        	ka.setAssessmentActivityList(assessmentActivityList);
-        	
-        }
-        mv.addObject("rightAttributeList",rightAttributeList);
-}
     
     //=====================岗位培训====================================================
     
@@ -266,9 +215,10 @@ public class IndexAssessmentController extends IndexBaseController{
         	typeidList.add(kn.getId());
         	KgNews news = new KgNews();
         	news.setTypeid(kn.getId());
-        	int count = iKgNewsService.adminQueryCount(requestContext, news);
+        	List<KgNews> newsList = iJedisService.loadTypeNews(news);
+        	int count = newsList.size();
         	kn.setCount(count);
-        	List<KgNews> newsList = iKgNewsService.selectWithOtherInfo(requestContext, news, 1, 6);
+        	newsList= CommonFuncUtil.listToList(newsList, 6);
         	kn.setNewsList(newsList);
         }
         
@@ -276,29 +226,25 @@ public class IndexAssessmentController extends IndexBaseController{
       //===================================================================================================
         KgNews kn = new KgNews();
     	kn.setAttributeid("4");
-    	List<KgNews> newsTop=iKgNewsService.selectByMap(requestContext, kn,typeidList, 1, 1);
-    	if(newsTop.size()!=0) {
-   	   		 if(("").equals(newsTop.get(0).getThumbnail())) {
-   	   			 kn.setThumbnail(SysConfig.nonePic);
-   	   		 }
-    		mv.addObject("newsTop", newsTop.get(0));
-    	}else
-    		mv.addObject("newsTop", null);
+    	
+     	KgNews newsTop = iJedisService.loadJDYPXPage_AttributeId4_News(kn, typeidList, 1, 1);
+    	mv.addObject("newsTop", newsTop);
+    	
     	//===================================================================================================
-    	List<KgAssessmentType> typeAssessmentList = iKgAssessmentTypeService.selectAll(requestContext);
+    	List<KgAssessmentType> typeAssessmentList = iJedisService.loadAssessmentTypeAll();
     	for(KgAssessmentType kat:typeAssessmentList) {
     		KgAssessmentActivity activitys = new KgAssessmentActivity();
     		activitys.setAssessmentTypeId(kat.getId());
-         	int count = iKgAssessmentActivityService.adminQueryCount(requestContext, activitys);
+    		
+    	 	List<KgAssessmentActivity> activityList = iJedisService.loadAssessmentActivityOfType(activitys);
+         	int count =activityList.size();
          	kat.setCount(count);
-         	List<KgAssessmentActivity> activityList = iKgAssessmentActivityService.selectWithOtherInfo(requestContext, activitys, 1, 6);
+         	activityList=CommonFuncUtil.listToList(activityList, 6);
          	kat.setAssessmentActivityList(activityList);
          }
     	
     	 mv.addObject("typeList", typeList);
     	 mv.addObject("typeAssessmentList", typeAssessmentList);
-    	
-        
         loadNavigation(mv, IndexController.CH_PXYJD);
         loadSysConfig(mv);
         return mv;
@@ -309,17 +255,16 @@ public class IndexAssessmentController extends IndexBaseController{
     public ModelAndView gwpx(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
             @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
     	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/gwpx");
-        IRequest requestContext = createRequestContext(request);
         KgType currentType = null;
         if(typeid!=null) {
-        	currentType = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(typeid));
+        	currentType = iJedisService.loadType( new KgType(typeid));
         	if(currentType==null)
         		throw new E404Excetion("请查看的网页不存在!"); 
         }
         	
         KgType kt = new KgType();
         kt.setParentid(GWPX_ID);
-        List<KgType> typeList = iKgTypeService.select(requestContext, kt);
+        List<KgType> typeList = iJedisService.loadChildType(kt);
         mv.addObject("typeList", typeList);
         
         if(typeid==null) {
@@ -340,7 +285,6 @@ public class IndexAssessmentController extends IndexBaseController{
 		 ModelAndView mv = new ModelAndView( "/index/associationSurvey/rightDetail");
 		 
 		 KgType nowType = iJedisService.loadType(new KgType(typeid));
-		 
 		 if(typeid==YJSGZ_ID||typeid==ZLPX_ID){ //这些板块内容开发中
 			 mv = new ModelAndView("/index/assessment/include/pageDesign");
 			 mv.addObject("nowType",nowType);
@@ -370,19 +314,18 @@ public class IndexAssessmentController extends IndexBaseController{
 	    public ModelAndView newsTypeList(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
 	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE_20) int limit,HttpServletRequest request) throws E404Excetion {
 	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/assessment/trainList");
-	        IRequest requestContext = createRequestContext(request);
 	        if(typeid==null)
 	    		throw new E404Excetion("请查看的网页不存在!"); 
-	        KgType kgNewstype = iKgTypeService.selectByPrimaryKey(requestContext, new KgType(typeid));
+	        KgType kgNewstype = iJedisService.loadType(new KgType(typeid));
 	        if(kgNewstype==null)
 	    		throw new E404Excetion("请查看的网页不存在!"); 
 	        KgNews news = new KgNews();
 	        news.setTypeid(typeid);
-	        int count = iKgNewsService.adminQueryCount(requestContext, news);
+	    	List<KgNews> list = iJedisService.loadTypeNews(news);
+	        int count =list.size();
 	        int allPageNum = count%limit==0?count/limit:count/limit+1;
 	        if(count==0) allPageNum=1;
-	        List<KgNews> list = iKgNewsService.selectWithOtherInfo(requestContext, news, page, limit);
-	      
+	        list=CommonFuncUtil.listToPage(list, page, limit);
 	        CommonFuncUtil.judgeNewsTitleLength(list,33);
 	        mv.addObject("newsList", list);
 	        mv.addObject("page", page);
@@ -391,7 +334,7 @@ public class IndexAssessmentController extends IndexBaseController{
 	        mv.addObject("typeid", typeid);
 	        
 	        loadNavigation(mv,IndexController.CH_PXYJD);
-	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
+	        loadAttriteNews(mv, kgNewstype.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;
 	    }
@@ -403,7 +346,7 @@ public class IndexAssessmentController extends IndexBaseController{
 	        IRequest requestContext = createRequestContext(request);
 	        if(id==null)
 	    		throw new E404Excetion("请查看的网页不存在!"); 
-	        KgNews newsInfo = iKgNewsService.selectByPrimaryKey(requestContext, new KgNews(id));
+	        KgNews newsInfo = iJedisService.loadNews(new KgNews(id));
 	        if(newsInfo==null)
 	    		throw new E404Excetion("请查看的网页不存在!"); 
 	        
@@ -411,17 +354,18 @@ public class IndexAssessmentController extends IndexBaseController{
 	        
 	        KgType newsType = new KgType();
 	        newsType.setId(newsInfo.getTypeid());
-	        KgType kgNewstype = iKgTypeService.selectByPrimaryKey(requestContext, newsType);
+	        KgType kgNewstype = iJedisService.loadType(newsType);
 	        
 	        KgNewsSource newsSource = new KgNewsSource();
 	        newsSource.setId(newsInfo.getSourceid());
-	        KgNewsSource kgNewsSource = iKgNewsSourceService.selectByPrimaryKey(requestContext, newsSource);
+	        KgNewsSource kgNewsSource = iJedisService.loadKgNewsSource(newsSource);
 	        
-	      
 	        KgNews linkNews = new KgNews();
 	        linkNews.setTypeid(newsInfo.getTypeid());
-	        List<KgNews> linkNewsList = iKgNewsService.select(requestContext, linkNews, 1, 2);
-	        CommonFuncUtil.judgeNewsTitleLength(linkNewsList,17);
+	        linkNews.setId(id);
+	        List<KgNews> linkNewsList = iKgNewsService.selectLinkNews(requestContext,linkNews, 1);
+	        CommonFuncUtil.judgeNewsTitleLength(linkNewsList,45);
+	        
 	        
 	        mv.addObject("kgNewstype", kgNewstype);
 	        mv.addObject("kgNewsSource", kgNewsSource);
@@ -429,7 +373,7 @@ public class IndexAssessmentController extends IndexBaseController{
 	        
 	        
 	        loadNavigation(mv, IndexController.CH_PXYJD);
-	        iKgNewsAttributeService.loadAttriteNews(mv, requestContext,kgNewstype.getParentid(),3);
+	        loadAttriteNews(mv, kgNewstype.getParentid(),3);
 	        loadSysConfig(mv);
 	        return mv;
 	    }

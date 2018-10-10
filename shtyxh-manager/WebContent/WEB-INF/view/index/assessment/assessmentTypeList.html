@@ -94,7 +94,7 @@
 				        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',  
 				        onPageChange: function (num, type) {
 				        	if(type=="change"){
-				 	            var path ="assessmentTypeList?typeid=${typeid}&page="+num;
+				 	            var path ="assessmentTypeList?typeid=${assessmentType.id}&page="+num;
 				 	            window.location.href=path;
 				        	}
 				        }

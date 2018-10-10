@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 import com.shtyxh.common.bean.CommonPath;
 import com.shtyxh.manager.bean.SysConfig;
+import com.shtyxh.manager.dto.KgAssessmentActivity;
 import com.shtyxh.manager.dto.KgAssessmentType;
 import com.shtyxh.manager.dto.KgConfig;
 import com.shtyxh.manager.dto.KgContact;
@@ -100,7 +102,6 @@ public class IndexBaseController extends BaseController{
   	  		List<KgAssessmentType> zzjdList = iJedisService.loadAssessmentTypeAll(); //资质鉴定
 	        List<KgNewsSource> KgNewsSourceList = iJedisService.loadNewsSource();
 	        List<KgLink> linkList = iJedisService.loadLink();
-	        List<KgConfig> kgConfigList= iJedisService.loadConfig();
 	        
 	        mv.addObject("gwpxTypeList", gwpxTypeList);
 	        mv.addObject("xhgkTypeList", xhgkTypeList);
@@ -226,11 +227,25 @@ public class IndexBaseController extends BaseController{
 		}
         for(KgNewsAttribute ka :rightAttributeList){
         	List<KgNews> newsList=iJedisService.load_NewsPage_Attribute_News( typeids,ka.getId());
-        	CommonFuncUtil.judgeNewsTitleLength(newsList,17);
+        	CommonFuncUtil.judgeNewsTitleLength(newsList,22);
         	ka.setNewsList(newsList);
         }
         mv.addObject("rightAttributeList",rightAttributeList);
 	}
+	
+	   //===================================other======================================
+    
+    
+    public void loadAttriteAssessmentActivity(ModelAndView mv,IRequest requestContext,int attributeSize) {
+	 	List<KgNewsAttribute> rightAttributeList =  iKgNewsAttributeService.select(requestContext, null, 1, attributeSize);
+        for(KgNewsAttribute ka :rightAttributeList){
+        	List<KgAssessmentActivity> assessmentActivityList=iJedisService.load_AssessmentPage_Attribute_News(ka.getId());
+        	CommonFuncUtil.judgeAssessmentActivityTitleLength(assessmentActivityList,22);
+        	ka.setAssessmentActivityList(assessmentActivityList);
+        }
+        mv.addObject("rightAttributeList",rightAttributeList);
+    }
+	
 	
 //	
 //	public void loadNavigation(ModelAndView mv,IRequest requestContext,String chanel  ) {

@@ -102,6 +102,8 @@ public interface IJedisService {
 
 	void delHsetOfAssessmentType();
 
+	List<KgAssessmentActivity> load_AssessmentPage_Attribute_News(Long attributeId);
+
 
 	
 	

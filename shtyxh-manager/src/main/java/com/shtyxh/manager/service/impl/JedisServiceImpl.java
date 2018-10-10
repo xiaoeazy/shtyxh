@@ -105,6 +105,7 @@ public class JedisServiceImpl  implements IJedisService{
 	
 	
 	
+	
 	@Value("${REDIS_NEWS_HSET}")
 	private String REDIS_NEWS_HSET;
 	@Value("${REDIS_NEWS_NEWS}")
@@ -165,6 +166,8 @@ public class JedisServiceImpl  implements IJedisService{
 	private String REDIS_ASSESSMENTTYPE_ASSESSMENTACTIVITY;
 	@Value("${REDIS_ASSESSMENTACTIVITY}")
 	private String REDIS_ASSESSMENTACTIVITY;
+	@Value("${REDIS_ASSESSMENTACTIVITYPAGE_ATTRIBUTEID_NEWS_LIST}")
+	private String REDIS_ASSESSMENTACTIVITYPAGE_ATTRIBUTEID_NEWS_LIST;
 	
 	
 	@Override
@@ -261,6 +264,31 @@ public class JedisServiceImpl  implements IJedisService{
 		}
 		return list;
 	}
+	
+	@Override
+	public   List<KgAssessmentActivity> load_AssessmentPage_Attribute_News(Long attributeId){
+		List<KgAssessmentActivity> list = new ArrayList<KgAssessmentActivity>();
+		try {
+			String json = jedisClient.hget(REDIS_ASSESSMENTACTIVITY_HSET,REDIS_ASSESSMENTACTIVITYPAGE_ATTRIBUTEID_NEWS_LIST+":"+attributeId);
+			//判断是否为空
+			if (StringUtils.isBlank(json)) {
+				KgAssessmentActivity kn = new KgAssessmentActivity();
+	        	kn.setAttributeid( attributeId+"");
+	        	kn.setSortname("createdate");
+	        	kn.setSortorder("desc");
+				list = iKgAssessmentActivityService.selectWithOtherInfo(null, kn, 1, 5);
+				jedisClient.hset(REDIS_ASSESSMENTACTIVITY_HSET,REDIS_ASSESSMENTACTIVITYPAGE_ATTRIBUTEID_NEWS_LIST+":"+attributeId, JsonUtils.objectToJson(list));
+			}else{
+				list = JsonUtils.jsonToList(json, KgAssessmentActivity.class);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("load_AssessmentPage_Attribute_News失败:",e);
+		}
+		return list;
+	}
+	
 	
 	@Override
 	public   List<KgHistory> loadHistory(){
