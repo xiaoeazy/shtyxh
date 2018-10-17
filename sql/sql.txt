@@ -1,0 +1,1 @@
+alter table  kg_assessment_activity add `sequence` bigint(20) unsigned DEFAULT '0' after assessment_activity_content

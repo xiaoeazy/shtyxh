@@ -9,6 +9,7 @@
          <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
         <result column="assessment_activity_name" property="assessmentActivityName" jdbcType="VARCHAR" />
         <result column="assessment_activity_content" property="assessmentActivityContent" jdbcType="VARCHAR" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
           <result column="createDate" property="createdate" jdbcType="DATE" />
     </resultMap>
 
@@ -19,6 +20,7 @@
         <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
         <result column="assessment_activity_name" property="assessmentActivityName" jdbcType="VARCHAR" />
         <result column="assessment_activity_content" property="assessmentActivityContent" jdbcType="VARCHAR" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
           <result column="createDate" property="createdate" jdbcType="DATE" />
         <association property="kgAssessmentType" javaType="com.shtyxh.manager.dto.KgAssessmentType">
             <id column="assessment_type_id" property="id"></id>
@@ -40,7 +42,14 @@
            		 	AND FIND_IN_SET(#{attributeid},a.attributeId) 
            		</if>
            </where>
-           ORDER BY a.createDate DESC
+           <choose>
+			    <when test="sortname!=null and sortname !=''">
+			         ORDER BY #{sortname} #{sortorder}
+			    </when>
+			    <otherwise>
+			        ORDER BY a.sequence DESC, a.createDate DESC
+			    </otherwise>
+			</choose>
     </select>
     
    <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="com.shtyxh.manager.dto.KgAssessmentActivity">

@@ -33,8 +33,22 @@ public class KgAssessmentActivity extends BaseDTO {
      private Long assessmentTypeId;
      
      private String attributeid;
+     
+     private Long sequence;
+     
+     
 
-     public KgAssessmentActivity() {
+     public Long getSequence() {
+		return sequence;
+	}
+
+
+	public void setSequence(Long sequence) {
+		this.sequence = sequence;
+	}
+
+
+	public KgAssessmentActivity() {
 		super();
 	}
      

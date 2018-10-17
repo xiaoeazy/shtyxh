@@ -175,7 +175,16 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 		                            }
 		                        }
 		                    },
-		                    finishedCombo
+		                    finishedCombo,
+				  			{
+				  				width:276,
+				  				xtype:'numberfield',
+				  				fieldLabel:'权重',
+				  				name:'sequence',
+				  				id:mainId+"sequence",
+				  				minValue:0,
+				  				value:0
+				  			}
 				  			]
 		});
 	     
@@ -240,6 +249,8 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 				    		Ext.getCmp(mainId+"assessmentActivityName").setValue(assessmentActivityName);
 				    		typeCombo.setValue(assessmentTypeId);
 				    		finishedCombo.setValue(finished);
+				    		var sequence = record.get("sequence");
+				    		 Ext.getCmp(mainId+"sequence").setValue(sequence);
 				    	}else{
 				    		finishedCombo.setValue(true);
 				    	}
@@ -320,6 +331,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 		}
 		
 		var finished =Ext.getCmp(mainId+"finished").getValue();
+		var sequence = Ext.getCmp(mainId+"sequence").getValue();
 		
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
@@ -334,6 +346,7 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
                 	  assessmentActivityName:assessmentActivityName,
                 	  assessmentTypeId:assessmentTypeId,
                 	  assessmentActivityContent:assessmentActivityContent,
+                	  sequence:sequence,
                 	  id : id
                   }]),
                   success : function(response, options) {

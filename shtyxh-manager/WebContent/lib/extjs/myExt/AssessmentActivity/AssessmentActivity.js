@@ -179,6 +179,7 @@ Ext.extend(AssessmentActivity.AssessmentActivityPanel, Ext.Panel, {
 	            {header: "评估任务名称",  width:50,sortable: true,  dataIndex: 'assessmentActivityName',align:'center'},
 	            {header: "咨讯类别",  width:50,sortable: true,  dataIndex: 'kgAssessmentType',align:'center',renderer:me.showType},
 	            {header: "状态",  width:50,sortable: true,  dataIndex: 'finished',align:'center',renderer:me.isFinished},
+	            {header: "权重",  width:50,sortable: true,  dataIndex: 'sequence',align:'center'},
 	            {header: "预览",  width:50,sortable: true,  dataIndex: 'id',align:'center',renderer:me.buttonRender}
 	        ],
 	        width:'100%',
