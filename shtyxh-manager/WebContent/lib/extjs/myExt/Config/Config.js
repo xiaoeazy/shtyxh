@@ -38,6 +38,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 						var webIp = store.getAt(8).get('sysvalue');
 						var wx = store.getAt(9).get('sysvalue');
 						var wb = store.getAt(10).get('sysvalue');
+						var tj = store.getAt(11).get('sysvalue');
 						Ext.getCmp(mainId+"webname").setValue(webname);
 			    		Ext.getCmp(mainId+"copyright").setValue(copyright);
 			    		Ext.getCmp(mainId+"keyword").setValue(keyword);
@@ -49,6 +50,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 			    		Ext.getCmp(mainId+"webIp").setValue(webIp);
 			    		Ext.getCmp(mainId+"wx").setValue(wx);
 			    		Ext.getCmp(mainId+"wb").setValue(wb);
+			    		Ext.getCmp(mainId+"tj").setValue(tj);
 			    		if(webLogo!=null&&webLogo!=""){
 			    			Ext.getCmp(mainId+"showWebLogoPict").getEl().dom.src=fileAppName+webLogo;
 			    		}
@@ -139,6 +141,16 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 							blankText:'网站地址',
 							id:mainId+"webIp",
 				            maxLength:200  
+			  			},
+			  			{
+			          		fieldLabel:'第三方统计代码',
+			          		xtype:'textarea',
+			          		width : '80%',
+			          		height : 'auto',
+							allowBlank:false,
+							name: 'tj',
+							blankText:'第三方统计代码',
+							id:mainId+"tj"
 			  			},
 			  			{
 							xtype:'container',
@@ -333,6 +345,7 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
 		var webIp = Ext.getCmp(mainId+"webIp").getValue();
 		var wx = Ext.getCmp(mainId+"wx").getValue();
 		var wb = Ext.getCmp(mainId+"wb").getValue();
+		var tj = Ext.getCmp(mainId+"tj").getValue();
 		
 		
 		
@@ -359,6 +372,8 @@ Ext.extend(Config.ConfigPanel, Ext.Panel, {
         jsonArray.push(obj11); 
     	var obj12 = me.madeObj(11,wb)
         jsonArray.push(obj12); 
+    	var obj13 = me.madeObj(12,tj)
+        jsonArray.push(obj13); 
     	
         Ext.Ajax.request({
 			url : appName + '/admin/config/submit',

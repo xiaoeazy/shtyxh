@@ -195,7 +195,10 @@ public class IndexBaseController extends BaseController{
 					mv.addObject("wb",value);
 					break;
 				}
-				
+				case "tj":{
+					mv.addObject("tj",value);
+					break;
+				}
 			}
 		}
 		 

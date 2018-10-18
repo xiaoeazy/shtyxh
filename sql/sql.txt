@@ -1,1 +1,2 @@
-alter table  kg_assessment_activity add `sequence` bigint(20) unsigned DEFAULT '0' after assessment_activity_content
+1.alter table  kg_assessment_activity add `sequence` bigint(20) unsigned DEFAULT '0' after assessment_activity_content
+2.config表添加一个第三方统计  value的类型换成text
