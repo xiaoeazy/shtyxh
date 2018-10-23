@@ -36,40 +36,60 @@ public class KgOffers extends BaseDTO {
 	@Id
      @GeneratedValue
      private Long id;
+	
+	
+	 private Long cantonid;
      
      @NotEmpty
-     @Length(max = 45)
-     private String title;
+     @Length(max = 100)
+     private String unitname;
 
-     @NotEmpty
-     @Length(max = 45)
-     private String publishunit;
+     private Long unittypeid;
+     
+     @Length(max = 100)
+     private String offertitle;
 
-     @NotEmpty
-     @Length(max = 200)
-     private String contactperson;
-
-     @Length(max = 20)
-     private String contacttel;
-
-     @Length(max = 20)
-     private String salary;
-
-     @Length(max = 65535)
+     private Integer offercount;
+     
      private String content;
-
+     
+     private String contactperson;
+     
+     private String contactposition;
+     
+     private String zipcode;
+     
+     private String contacttel;
+     
+     private Long publishuserid;
+     
      private Date publishdate;
      @Transient
      private String newsSimpleTitle;
+     
+     @Transient
+     private KgCanton kgcanton;
 
-   
+     @Transient
+     private KgUnitType kgUnitType;
 
-     public String getNewsSimpleTitle() {
-		return newsSimpleTitle;
+     
+     
+     
+	public KgUnitType getKgUnitType() {
+		return kgUnitType;
 	}
 
-	public void setNewsSimpleTitle(String newsSimpleTitle) {
-		this.newsSimpleTitle = newsSimpleTitle;
+	public void setKgUnitType(KgUnitType kgUnitType) {
+		this.kgUnitType = kgUnitType;
+	}
+
+	public KgCanton getKgcanton() {
+		return kgcanton;
+	}
+
+	public void setKgcanton(KgCanton kgcanton) {
+		this.kgcanton = kgcanton;
 	}
 
 	public Long getId() {
@@ -80,62 +100,110 @@ public class KgOffers extends BaseDTO {
 		this.id = id;
 	}
 
-	public void setPublishunit(String publishunit){
-         this.publishunit = publishunit;
-     }
-
-     public String getPublishunit(){
-         return publishunit;
-     }
-
-     public void setContactperson(String contactperson){
-         this.contactperson = contactperson;
-     }
-
-     public String getContactperson(){
-         return contactperson;
-     }
-
-     public void setContacttel(String contacttel){
-         this.contacttel = contacttel;
-     }
-
-     public String getContacttel(){
-         return contacttel;
-     }
-
-     public void setSalary(String salary){
-         this.salary = salary;
-     }
-
-     public String getSalary(){
-         return salary;
-     }
-
-     public void setContent(String content){
-         this.content = content;
-     }
-
-     public String getContent(){
-         return content;
-     }
-
-     public void setPublishdate(Date publishdate){
-         this.publishdate = publishdate;
-     }
-
-     public Date getPublishdate(){
-         return publishdate;
-     }
-
-	public String getTitle() {
-		return title;
+	public Long getCantonid() {
+		return cantonid;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setCantonid(Long cantonid) {
+		this.cantonid = cantonid;
 	}
 
-     
+	public String getUnitname() {
+		return unitname;
+	}
+
+	public void setUnitname(String unitname) {
+		this.unitname = unitname;
+	}
+
+	public Long getUnittypeid() {
+		return unittypeid;
+	}
+
+	public void setUnittypeid(Long unittypeid) {
+		this.unittypeid = unittypeid;
+	}
+
+	public String getOffertitle() {
+		return offertitle;
+	}
+
+	public void setOffertitle(String offertitle) {
+		this.offertitle = offertitle;
+	}
+
+	public Integer getOffercount() {
+		return offercount;
+	}
+
+	public void setOffercount(Integer offercount) {
+		this.offercount = offercount;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getContactperson() {
+		return contactperson;
+	}
+
+	public void setContactperson(String contactperson) {
+		this.contactperson = contactperson;
+	}
+
+	public String getContactposition() {
+		return contactposition;
+	}
+
+	public void setContactposition(String contactposition) {
+		this.contactposition = contactposition;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getContacttel() {
+		return contacttel;
+	}
+
+	public void setContacttel(String contacttel) {
+		this.contacttel = contacttel;
+	}
+
+	public Date getPublishdate() {
+		return publishdate;
+	}
+
+	public void setPublishdate(Date publishdate) {
+		this.publishdate = publishdate;
+	}
+
+	public String getNewsSimpleTitle() {
+		return newsSimpleTitle;
+	}
+
+	public void setNewsSimpleTitle(String newsSimpleTitle) {
+		this.newsSimpleTitle = newsSimpleTitle;
+	}
+
+	public Long getPublishuserid() {
+		return publishuserid;
+	}
+
+	public void setPublishuserid(Long publishuserid) {
+		this.publishuserid = publishuserid;
+	}
+
+   
      
      }

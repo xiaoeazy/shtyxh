@@ -7,6 +7,9 @@
         <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
         <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
     </resultMap>
-
-
+     <select id="ifAdminRole" resultType="java.lang.Boolean" parameterType="long">
+        select count(1) from sys_user_role a 
+			left join sys_role b on a.role_id=b.role_id 
+			where a.USER_ID = #{userId} and b.role_code='admin'
+    </select>
 </mapper>

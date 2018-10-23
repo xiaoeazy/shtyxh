@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.huan.HTed.core.IRequest;
 import com.shtyxh.common.bean.ExtStore;
 import com.shtyxh.common.exception.E404Excetion;
+import com.shtyxh.manager.account.dto.User;
 import com.shtyxh.manager.dto.KgOffers;
 import com.shtyxh.manager.dto.KgType;
 import com.shtyxh.manager.service.IJedisService;
+import com.shtyxh.manager.service.IKgOffersService;
 import com.shtyxh.manager.utils.CommonFuncUtil;
 
 @Controller
@@ -23,6 +26,8 @@ public class IndexOffersController extends IndexBaseController{
 	
 	@Autowired
 	private IJedisService iJedisService;
+	 @Autowired
+	  private IKgOffersService service;
 
 	@RequestMapping(value = "/index/offers")
 	@ResponseBody
@@ -32,23 +37,27 @@ public class IndexOffersController extends IndexBaseController{
 		KgType kt = iJedisService.loadType(new KgType(OFFER_ID));
 		mv.addObject("kgType", kt);
 		loadNavigation(mv, IndexController.CH_ZXZX);
-		loadAttriteNews(mv, kt.getParentid(), 3);
+//		loadAttriteNews(mv, kt.getParentid(), 3);
 		loadSysConfig(mv);
 		return mv;
 	}
 
 	@RequestMapping(value = "/index/offersList")
 	@ResponseBody
-	public ExtStore loadHYDW( HttpServletRequest request,
+	public ExtStore offersList( HttpServletRequest request,KgOffers KgOffers,
 			@RequestParam(defaultValue = DEFAULT_PAGE) int offset,
 			@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int pageSize) {
 
+//		int page = offset / pageSize + 1;
+//		List<KgOffers> list = iJedisService.loadOffers();
+//		int size = list.size();
+//		
+//		list=CommonFuncUtil.listToPage(list, page, pageSize);
 		int page = offset / pageSize + 1;
-		List<KgOffers> list = iJedisService.loadOffers();
-		int size = list.size();
-		
-		list=CommonFuncUtil.listToPage(list, page, pageSize);
-		return new ExtStore(page, pageSize, size, list);
+		 IRequest requestContext = createRequestContext(request);
+    	 List<KgOffers> list = service.selectWithOtherInfo(requestContext, KgOffers, page, pageSize);
+    	 int count = service.adminQueryCount(requestContext, KgOffers);
+    	 return new ExtStore(page, pageSize, count, list);
 	}
 
 	@RequestMapping(value = "/index/offers/Detail")

@@ -4,21 +4,59 @@
 <mapper namespace="com.shtyxh.manager.mapper.KgOffersMapper">
     <resultMap id="BaseResultMap" type="com.shtyxh.manager.dto.KgOffers">
         <result column="id" property="id" jdbcType="DECIMAL" />
-        <result column="title" property="title" jdbcType="VARCHAR" />
-        <result column="publishUnit" property="publishunit" jdbcType="VARCHAR" />
-        <result column="contactPerson" property="contactperson" jdbcType="VARCHAR" />
-        <result column="contactTel" property="contacttel" jdbcType="VARCHAR" />
-        <result column="salary" property="salary" jdbcType="VARCHAR" />
+        <result column="cantonId" property="cantonid" jdbcType="DECIMAL" />
+        <result column="unitName" property="unitname" jdbcType="VARCHAR" />
+        <result column="unitTypeId" property="unittypeid" jdbcType="DECIMAL" />
+        <result column="offerTitle" property="offertitle" jdbcType="VARCHAR" />
+        <result column="offerCount" property="offercount" jdbcType="INTEGER" />
         <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="contactPerson" property="contactperson" jdbcType="VARCHAR" />
+        <result column="contactposition" property="contactposition" jdbcType="VARCHAR" />
+        <result column="zipCode" property="zipcode" jdbcType="VARCHAR" />
+        <result column="contactTel" property="contacttel" jdbcType="VARCHAR" />
         <result column="publishDate" property="publishdate" jdbcType="TIMESTAMP" />
+        <result column="publishUserId" property="publishuserid" jdbcType="DECIMAL" />
+    </resultMap>
+    
+    <resultMap id="BaseOtherResultMap" type="com.shtyxh.manager.dto.KgOffers">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="cantonId" property="cantonid" jdbcType="DECIMAL" />
+        <result column="unitName" property="unitname" jdbcType="VARCHAR" />
+        <result column="unitTypeId" property="unittypeid" jdbcType="DECIMAL" />
+        <result column="offerTitle" property="offertitle" jdbcType="VARCHAR" />
+        <result column="offerCount" property="offercount" jdbcType="INTEGER" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="contactPerson" property="contactperson" jdbcType="VARCHAR" />
+        <result column="contactposition" property="contactposition" jdbcType="VARCHAR" />
+        
+        <result column="zipCode" property="zipcode" jdbcType="VARCHAR" />
+        <result column="contactTel" property="contacttel" jdbcType="VARCHAR" />
+        <result column="publishDate" property="publishdate" jdbcType="TIMESTAMP" />
+        <result column="publishUserId" property="publishuserid" jdbcType="DECIMAL" />
+         <association property="kgcanton" javaType="com.shtyxh.manager.dto.KgCanton">
+            <id column="cantonId" property="id"></id>
+            <result column="cantonName" property="cantonname"/>
+        </association>
+         <association property="kgUnitType" javaType="com.shtyxh.manager.dto.KgUnitType">
+            <id column="unittypeid" property="id"></id>
+            <result column="unittypename" property="unittypename"/>
+        </association>
     </resultMap>
 
 
- <select id="selectWithOtherInfo" resultMap="BaseResultMap" parameterType="com.shtyxh.manager.dto.KgOffers">
-        select a.* from kg_offers a 
+ <select id="selectWithOtherInfo" resultMap="BaseOtherResultMap" parameterType="com.shtyxh.manager.dto.KgOffers">
+        select a.*,b.cantonname,c.unittypename from kg_offers a   
+        	left join kg_canton b on a.cantonId=b.id 
+        	left join kg_unittype c on a.unittypeid = c.id 
            <where>
-           		<if test="publishunit != null">
-           			AND a.publishUnit  like CONCAT('%',#{publishunit},'%') 
+           		<if test="cantonid != null and cantonid != ''">
+           			AND a.cantonid = #{cantonid}
+           		</if>
+           		<if test="unitname != null and unitname != ''">
+           			AND a.unitname  like CONCAT('%',#{unitname},'%') 
+           		</if>
+           		<if test="publishuserid != null and publishuserid != ''">
+           			AND a.publishuserid  =#{publishuserid}
            		</if>
            </where>
            
@@ -36,8 +74,14 @@
    <select id="adminQueryCount" resultType="java.lang.Integer" parameterType="com.shtyxh.manager.dto.KgOffers">
         select count(1) from kg_offers a 
             <where>
-           		<if test="publishunit != null">
-           			AND a.publishUnit  like CONCAT('%',#{publishunit},'%') 
+            	<if test="cantonid != null and cantonid != ''">
+           			AND a.cantonid = #{cantonid}
+           		</if>
+           		<if test="unitname != null and unitname != ''">
+           			AND a.unitname  like CONCAT('%',#{unitname},'%') 
+           		</if>
+           		<if test="publishuserid != null and publishuserid !=''">
+           			AND a.publishuserid  =#{publishuserid}
            		</if>
            </where>
     </select>

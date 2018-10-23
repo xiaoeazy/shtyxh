@@ -1,0 +1,87 @@
+<#include "../../include/meta.html">
+<title>${kgType.typename!}_${webname}</title>
+<link rel="shortcut icon" href="${fileserver}/uploadFile/ico/favicon.ico" />
+<link href="${base.contextPath}/lib/index/css/detail.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="${base.contextPath}/lib/jquery/jquery.min.js" ></script>
+
+<!-- bootstrap插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<script src="${base.contextPath}/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+<!-- bootstraptable插件 -->
+<link rel="stylesheet" href="${base.contextPath}/lib/bootstrap-table/css/bootstrap-table.min.css" />
+<script src="${base.contextPath}/lib/bootstrap-table/js/bootstrap-table.min.js"></script>
+<script src="${base.contextPath}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<style type="text/css">
+.table-striped > tbody > tr:nth-child(2n+1) > td, 
+.table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: rgb(242, 245, 247);
+ }
+</style>
+</head>
+<body id="detail">
+<#include "../../include/navigation.html">
+
+<div class="main">
+<div class="main_container">
+
+
+<div class="main_left_block mt13">
+	<div class="wz_block">
+	    <div class="vF_deail_currentloc">
+	        <p>当前位置：<a href="${base.contextPath}/index/news" title="法规与资讯" class="CurrChnlCls">法规与资讯</a>
+	        &nbsp;&raquo;&nbsp;${kgType.typename} 列表页</p>
+	    </div>
+	
+	    <div class="vF_detail_relcontent mt13">
+		    <h2><p>${kgType.typename}</p></h2>
+		    <div class="vF_detail_relcontent_lst">
+		      <div style="height:130px">
+				&nbsp;&nbsp;&nbsp;&nbsp;内容开发中...
+				</div>
+		    </div>
+		</div>
+			
+	</div>
+</div>
+
+    <div class="main_right_block" style="margin-top:43px">
+
+
+<!--OTsidebar-->
+	<#list rightAttributeList as rightAttributeList>
+		<#if rightAttributeList_index = 0>
+			<div class="main_right_cbl " style="margin-top:4px">
+            	<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+                	<#list rightAttributeList.newsList as newsList>
+                		<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+                	</#list>
+				 </ul>
+                </div>
+       		 </div>
+		<#else>
+			<div class="main_right_cbl mt13">
+          		<h2 class="mt10 mb10">${rightAttributeList.attributename}</h2>
+                <div class="vT-chs-section-content-con">
+                <ul class="vT-chs-section-content-list mb10">
+					<#list rightAttributeList.newsList as newsList>
+						<li><a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}"  target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a></li>
+					</#list>
+                </ul>
+                </div>
+        	</div>
+		</#if>
+	</#list>
+        
+
+        
+<!--OTsidebar-->
+        </div>
+    </div>
+</div>
+<#include "../../include/footer.html">
+</body>
+</html>

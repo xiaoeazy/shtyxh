@@ -25,9 +25,9 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
           },
 		  items : [
 		  			{
-		          		fieldLabel:'发布单位',
-						name: 'publishunit',
-						id:mainId+"publishunit",
+		          		fieldLabel:'发布单位名称',
+						name: 'unitname',
+						id:mainId+"unitname",
 			            maxLength:45 ,
 			            width:400
 		  			}
@@ -36,14 +36,14 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 			    width:50,
 				text : '查询',
 				handler : function(button, event) {
-					var publishunit = Ext.getCmp(mainId+"publishunit").getValue().trim();
-					if(publishunit=="")
-						publishunit=null;
+					var unitname = Ext.getCmp(mainId+"unitname").getValue().trim();
+					if(unitname=="")
+						unitname=null;
 					store.proxy.url = appName+ '/admin/offers/query';
 					store.proxy.extraParams={
 							page:1,
 							start:0,
-							publishunit:publishunit
+							unitname:unitname
 					};
 					store.load();  
 				}
@@ -66,7 +66,7 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 		        }
 		    },
 		    autoLoad : true,
-		    fields: ['id', 'publishunit']
+		    fields: ['id', 'unitname']
 		});
 		
 
@@ -117,12 +117,17 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 					}
 				}],
 	        columns: [
-	            {header: "发布单位",  width:50,sortable: true,  dataIndex: 'publishunit',align:'center'},
-	            {header: "标题",  width:50,sortable: true,  dataIndex: 'title',align:'center'},
+	            {header: "id号",  width:50,sortable: true,  dataIndex: 'id',align:'center'},
+	            {header: "区县",  width:50,sortable: true,  dataIndex: 'kgcanton',align:'center',renderer:me.cantonRender},
+	            {header: "单位名称",  width:50,sortable: true,  dataIndex: 'unitname',align:'center'},
+	            {header: "办园性质",  width:50,sortable: true,  dataIndex: 'kgUnitType',align:'center',renderer:me.unittypeRender},
+	            {header: "岗位",  sortable: true,  dataIndex: 'offertitle',align:'center'},
+	            {header: "岗位数量",  width:50,sortable: true,  dataIndex: 'offercount',align:'center'},
+	            {header: "招聘人员要求",  width:50,sortable: true,  dataIndex: 'content',align:'center'},
 	            {header: "联系人",  width:50,sortable: true,  dataIndex: 'contactperson',align:'center'},
-	            {header: "联系电话",  sortable: true,  dataIndex: 'contacttel',align:'center'},
-	            {header: "薪资标准",  width:50,sortable: true,  dataIndex: 'salary',align:'center'},
-	            {header: "发布日期",  width:50,sortable: true,  dataIndex: 'publishdate',align:'center'},
+	            {header: "联系地址",  width:50,sortable: true,  dataIndex: 'contactposition',align:'center'},
+	            {header: "邮编",  width:50,sortable: true,  dataIndex: 'zipcode',align:'center'},
+	            {header: "联系电话",  width:50,sortable: true,  dataIndex: 'contacttel',align:'center'},
 	        ],
 	        width:'100%',
 	        autoExpandColumn: 'summary',
@@ -220,6 +225,12 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 				      });
 		        }
 	        })  
+	},
+	cantonRender:function(value){
+		return value.cantonname;
+	},
+	unittypeRender:function(value){
+		return value.unittypename;
 	}
 });
 
@@ -227,4 +238,6 @@ function yulanOffers(id){
 	var url =appName+"/index/offers/newsDetail?id="+id;
 	window.open(url);
 }
+
+
 

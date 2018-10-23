@@ -47,7 +47,8 @@
             	<a href="javascript:void(0)" onclick="javascript:SetHomeFoot(this,&#39;${webIp}&#39;)" title="" style="color:#fff"> 设为首页 </a><span class="spe"> | </span> 
 			 	<a href="javascript:void(0)" onclick="javascript:shouCangFoot(&#39;${webIp}&#39;,&#39;${webname}&#39;)" title="" style="color:#fff"> 收藏本站 </a> <span class="spe"> | </span>
 			 <#if Request.user?exists>
-				<a href="${base.contextPath}/index/admin/user"  style="color:#fff">${Request.user.userName}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="${base.contextPath}/index/admin/user"  style="color:#fff">${Request.user.userName}</a> | </span>
+				<a href="${base.contextPath}/admin"  style="color:#fff">后台</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="${base.contextPath}/index/logout"  style="color:#fff">退出</a>
 			 <#else>
 			 	<a href="${base.contextPath}/index/loginPage"  style="color:#fff">登录</a>

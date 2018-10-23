@@ -74,9 +74,9 @@ public class CommonFuncUtil {
 	
 	public static void judgeOffersTitleLength(List<KgOffers> news, int size) {
 		for (KgOffers kg : news) {
-			String title = kg.getTitle();
+			String title = kg.getOffertitle();
 			if (title.length() > size) {
-				title = kg.getTitle().substring(0, size) + SUSPENSION_POINTS;
+				title = kg.getOffertitle().substring(0, size) + SUSPENSION_POINTS;
 				kg.setNewsSimpleTitle(title);
 			} else {
 				kg.setNewsSimpleTitle(title);

@@ -17,6 +17,9 @@ import com.huan.HTed.system.controllers.BaseController;
 import com.huan.HTed.system.dto.ResponseData;
 import com.shtyxh.common.bean.ExtAjax;
 import com.shtyxh.common.bean.ExtStore;
+import com.shtyxh.manager.account.dto.User;
+import com.shtyxh.manager.account.dto.UserRole;
+import com.shtyxh.manager.account.service.IUserRoleService;
 import com.shtyxh.manager.dto.KgOffers;
 import com.shtyxh.manager.service.IJedisService;
 import com.shtyxh.manager.service.IKgOffersService;
@@ -26,6 +29,8 @@ import com.shtyxh.manager.service.IKgOffersService;
 
     @Autowired
     private IKgOffersService service;
+    @Autowired
+    private IUserRoleService iUserRoleService;
     @Autowired
    	private IJedisService iJedisService;
 
@@ -69,6 +74,11 @@ import com.shtyxh.manager.service.IKgOffersService;
 //    		 dto.setSortname(map.get("property"));
 //    		 dto.setSortorder(map.get("direction"));
 //    	 }
+    	 User user = (User)	request.getAttribute("user");
+ 		 boolean flag = iUserRoleService.ifAdminRole(user.getUserId());
+    	 if(!flag){
+    		 dto.setPublishuserid(user.getUserId());
+    	 }
     	 List<KgOffers> list = service.selectWithOtherInfo(requestContext, dto, page, limit);
     	 int count = service.adminQueryCount(requestContext, dto);
     	 return new ExtStore(start, limit, count, list);
@@ -86,8 +96,13 @@ import com.shtyxh.manager.service.IKgOffersService;
     @RequestMapping(value = "/admin/offers/submit")
     @ResponseBody
 	public ExtAjax adminUpdate(@RequestBody List<KgOffers> dto, BindingResult result, HttpServletRequest request){
-		
+    	 User user = (User)	request.getAttribute("user");
     	 IRequest requestCtx = createRequestContext(request);
+    	 for(KgOffers ko :dto){
+    		 if(ko.get__status().equals("add")){
+    			 ko.setPublishuserid(user.getUserId());
+    		 }
+    	 }
          List<KgOffers> list = service.batchUpdate(requestCtx, dto);
          iJedisService.delHsetOfOffer();
          return new ExtAjax(true, null);
