@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,13 +47,19 @@ public class IndexOffersController extends IndexBaseController{
 	@ResponseBody
 	public ExtStore offersList( HttpServletRequest request,KgOffers KgOffers,
 			@RequestParam(defaultValue = DEFAULT_PAGE) int offset,
-			@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int pageSize) {
+			@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int pageSize,
+			String sort,String sortOrder) {
 
 //		int page = offset / pageSize + 1;
 //		List<KgOffers> list = iJedisService.loadOffers();
 //		int size = list.size();
 //		
 //		list=CommonFuncUtil.listToPage(list, page, pageSize);
+		if(!StringUtils.isEmpty(sort)&&!StringUtils.isEmpty(sortOrder)) {
+			KgOffers.setSortname(sort);
+			KgOffers.setSortorder(sortOrder);
+		}
+		
 		int page = offset / pageSize + 1;
 		 IRequest requestContext = createRequestContext(request);
     	 List<KgOffers> list = service.selectWithOtherInfo(requestContext, KgOffers, page, pageSize);

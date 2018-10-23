@@ -54,7 +54,7 @@
            
            <choose>
 			    <when test="sortname!=null and sortname !=''">
-			         ORDER BY #{sortname} #{sortorder}
+			         ORDER BY ${sortname} ${sortorder}
 			    </when>
 			    <otherwise>
 			        ORDER BY a.id  DESC

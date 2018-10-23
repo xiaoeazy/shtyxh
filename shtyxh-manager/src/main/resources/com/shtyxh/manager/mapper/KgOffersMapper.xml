@@ -62,7 +62,7 @@
            
            <choose>
 			    <when test="sortname!=null and sortname !=''">
-			         ORDER BY #{sortname} #{sortorder}
+			         ORDER BY ${sortname} ${sortorder} , a.publishDate DESC
 			    </when>
 			    <otherwise>
 			        ORDER BY a.publishDate DESC
