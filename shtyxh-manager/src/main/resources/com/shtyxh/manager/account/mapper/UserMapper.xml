@@ -15,6 +15,14 @@
         <result column="STATUS" property="status" jdbcType="VARCHAR" />
     </resultMap>
 
+    <select id="selectWithOutAdmin" resultMap="BaseResultMap" >
+	        select a.* from sys_user a where a.user_id!=10001
+	 </select>
+	 
+	   <select id="adminQueryCountWithOutAdmin" resultType="java.lang.Integer" >
+        select count(1) from sys_user   a where a.user_id!=10001
+    </select>
+
 	  <select id="selectWithRole" resultMap="BaseResultMap" parameterType="com.shtyxh.manager.account.dto.Role">
 	        select a.* from sys_user a left join sys_user_role b
 	            on a.USER_ID=b.USER_ID  

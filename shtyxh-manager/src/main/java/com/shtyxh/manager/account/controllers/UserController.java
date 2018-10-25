@@ -68,16 +68,9 @@ import com.shtyxh.manager.account.service.IUserService;
     public ExtStore adminQuery(User dto, @RequestParam(defaultValue = DEFAULT_PAGE) int page,int start,
         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
-         List<User> list = service.select(requestContext,dto,page,limit);
-         int count  =  service.adminQueryCount(requestContext, null);
-         Iterator<User> it = list.iterator();
-         while(it.hasNext()){
-        	  User user = it.next();
-        	   if(("admin").equals(user.getUserName())) {
-        		   it.remove();
-         	  }
-        	}
-         return new ExtStore(start, limit, count-1, list);
+         List<User> list = service.selectWithOutAdmin(requestContext,page,limit);
+         int count  =  service.adminQueryCountWithOutAdmin(requestContext);
+         return new ExtStore(start, limit, count, list);
     }
     
     @RequestMapping(value = "/admin/user/queryAll")

@@ -19,7 +19,14 @@ public interface IUserService extends IBaseService<User>, ProxySelf<IUserService
 	public int adminQueryCount(IRequest request,User record);
 	public User selectOne(IRequest request, User record);
 	public List<User> selectWithRole(IRequest request, Role dto);
+	
+	
+	
 	public int adminQueryCountWithRole(IRequest request, Role dto);
 	public Map<Long ,String> loadAllUserToMap(IRequest request);
+	
+	
+	public List<User> selectWithOutAdmin(IRequest request, int pageNum, int pageSize);
+	int adminQueryCountWithOutAdmin(IRequest request);
 	
 }

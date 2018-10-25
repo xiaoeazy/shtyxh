@@ -9,4 +9,6 @@ import com.shtyxh.manager.account.dto.User;
 public interface UserMapper extends Mapper<User>{
 	public List<User> selectWithRole(Role dto);
 	public int adminQueryCountWithRole(Role record) ;
+	public List<User> selectWithOutAdmin();
+	public int adminQueryCountWithOutAdmin() ;
 }

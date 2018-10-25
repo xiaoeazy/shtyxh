@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.dto.DTOStatus;
 import com.huan.HTed.system.service.impl.BaseServiceImpl;
@@ -60,6 +61,17 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 		}
 		return map;
 	}
+	
+	@Override
+	public List<User> selectWithOutAdmin(IRequest request, int pageNum, int pageSize){
+		   PageHelper.startPage(pageNum, pageSize);
+	        return userMapper.selectWithOutAdmin();
+	}
+	@Override
+	public int adminQueryCountWithOutAdmin(IRequest request){
+	        return userMapper.adminQueryCountWithOutAdmin();
+	}
+	
 	
 	public void adminUpdate(IRequest request ,User user,List<UserRole> userRole) {
 		 List<User> list = new ArrayList<User>();
