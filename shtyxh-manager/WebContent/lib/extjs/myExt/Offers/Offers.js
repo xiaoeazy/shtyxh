@@ -121,7 +121,7 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 	            {header: "区县",  width:50,sortable: true,  dataIndex: 'kgcanton',align:'center',renderer:me.cantonRender},
 	            {header: "单位名称",  width:50,sortable: true,  dataIndex: 'unitname',align:'center'},
 	            {header: "办园性质",  width:50,sortable: true,  dataIndex: 'kgUnitType',align:'center',renderer:me.unittypeRender},
-	            {header: "岗位",  sortable: true,  dataIndex: 'offertitle',align:'center'},
+	            {header: "岗位",  sortable: true,  dataIndex: 'kgOffersType',align:'center',renderer:me.offerstypeRender},
 	            {header: "岗位数量",  width:50,sortable: true,  dataIndex: 'offercount',align:'center'},
 	            {header: "招聘人员要求",  width:50,sortable: true,  dataIndex: 'content',align:'center'},
 	            {header: "联系人",  width:50,sortable: true,  dataIndex: 'contactperson',align:'center'},
@@ -231,6 +231,9 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 	},
 	unittypeRender:function(value){
 		return value.unittypename;
+	},
+	offerstypeRender:function(value){
+		return value.offertypename;
 	}
 });
 

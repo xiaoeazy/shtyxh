@@ -107,6 +107,46 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 	    	
 	    	
 	    	
+	     	//================岗位==============================
+	    	var offerType_Combo_Store = new Ext.data.Store({
+	    		pageSize:0,
+	    		proxy: {
+			        type: 'ajax',
+			        url : appName+ '/admin/offers/offers/queryAll',
+			        reader: {
+			        	root : "results",
+						totalProperty: "totalProperty",
+						successProperty:'success'
+			        }
+			    },
+			    autoLoad : true,
+			    fields: ['offertypeid', 'unittypename']
+			});
+	    	
+	       var offerTypeCombo = new Ext.form.ComboBox({
+	    	   		fieldLabel:'岗位<font color="red">*</font>',
+		    	    id:mainId+"offertypeid",
+		            store : offerType_Combo_Store,  
+		            valueField : "id",  
+		            mode : 'remote',  
+		            displayField : "offertypename",  
+		            forceSelection : true,  
+		            blankText : '请选择',  
+		            emptyText : '请选择',  
+		            editable : false,  
+		            triggerAction : 'all',  
+		            allowBlank : false,  
+		            hiddenName : "unittypename",  
+		            autoShow : true,  
+		            selectOnFocus : true,  
+		            name : "offertypeid",
+		            listeners:{
+		            	afterrender:function(comb){
+		            	},
+		            	select:function(combo, record, index){
+		            	}
+		            }
+		        }); 
 	    	
 	    
 	       //=====================formpanel=========================================
@@ -134,14 +174,7 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 								id:mainId+"unitname",
 					            maxLength:100  
 				  			},unitTypeCombo,
-				  			{
-				          		fieldLabel:'岗位<font color="red">*</font>',
-								allowBlank:false,
-								name: 'offertitle',
-								blankText:'必须填写',
-								id:mainId+"offertitle",
-					            maxLength:100  
-				  			},
+				  			offerTypeCombo,
 				  			{
 				          		fieldLabel:'岗位数量<font color="red">*</font>',
 								allowBlank:false,
@@ -166,7 +199,8 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 								name: 'content',
 								blankText:'必须填写',
 								id:mainId+"content",
-								xtype:'textarea'
+								xtype:'textarea',
+								maxLength:100  
 				  			},
 				  			{
 				          		fieldLabel:'联系人<font color="red">*</font>',
@@ -274,7 +308,7 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 				    		var cantonid= record.get("cantonid");
 				    		var unitname= record.get("unitname");
 				    		var unittypeid= record.get("unittypeid");
-				    		var offertitle= record.get("offertitle");
+				    		var offertypeid= record.get("offertypeid");
 				    		var offercount= record.get("offercount");
 				    		var content= record.get("content");
 				    		var contactperson= record.get("contactperson");
@@ -285,7 +319,7 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 				    		Ext.getCmp(mainId+"cantonid").setValue(cantonid);
 				    		Ext.getCmp(mainId+"unittypeid").setValue(unittypeid);
 				    		Ext.getCmp(mainId+"unitname").setValue(unitname);
-				    		Ext.getCmp(mainId+"offertitle").setValue(offertitle);
+				    		Ext.getCmp(mainId+"offertypeid").setValue(offertypeid);
 				    		Ext.getCmp(mainId+"offercount").setValue(offercount);
 				    		Ext.getCmp(mainId+"content").setValue(content);
 				    		Ext.getCmp(mainId+"contactperson").setValue(contactperson);
@@ -305,7 +339,7 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 		var cantonid=Ext.getCmp(mainId+"cantonid").getValue();
 		var unitname=Ext.getCmp(mainId+"unitname").getValue();
 		var unittypeid=Ext.getCmp(mainId+"unittypeid").getValue();
-		var offertitle=Ext.getCmp(mainId+"offertitle").getValue();
+		var offertypeid=Ext.getCmp(mainId+"offertypeid").getValue();
 		var offercount=Ext.getCmp(mainId+"offercount").getValue();
 		var content=Ext.getCmp(mainId+"content").getValue();
 		var contactperson=Ext.getCmp(mainId+"contactperson").getValue();
@@ -325,8 +359,8 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 			Ext.getCmp(mainId+"unittypeid").markInvalid("办园性质不能为空！");
 			return;
 		}
-		if(offertitle==""){
-			Ext.getCmp(mainId+"offertitle").markInvalid("岗位不能为空！");
+		if(offertypeid==""){
+			Ext.getCmp(mainId+"offertypeid").markInvalid("岗位不能为空！");
 			return;
 		}
 		if(offercount==""){
@@ -360,7 +394,7 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
                 	  cantonid:cantonid,
                 	  unitname:unitname,
                 	  unittypeid:unittypeid,
-                	  offertitle:offertitle,
+                	  offertypeid:offertypeid,
                 	  offercount : offercount,
                 	  content:content,
                 	  contactperson:contactperson,

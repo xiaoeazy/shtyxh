@@ -18,6 +18,8 @@
 .table-striped > tbody > tr:nth-child(2n+1) > th {
     background-color: rgb(242, 245, 247);
  }
+ 
+table {table-layout: fixed;word-break:break-all; word-wrap:break-all;};
 </style>
 </head>
 <body id="detail">
@@ -108,6 +110,7 @@
 				                      title: '序号',//标题  可不加  
 				                      width:50,
 				                      align: 'center',
+				                      valign: 'middle',
 				                      formatter: function (value, row, index) {  
 			//	                           return index+1;  
 				  							 var pageSize=$('#table').bootstrapTable('getOptions').pageSize;//通过表的#id 可以得到每页多少条
@@ -119,42 +122,47 @@
 						              title: 'ID号',
 						              align: 'center',
 						              valign: 'middle',
+						              width:50,
 						              formatter:function(value,row,index) {
 										  return value;
 						              }
 						          }, {
 						              field: 'kgcanton.cantonname',
 						              title: '区',
-						              width:150,
+						              width:70,
 						              align: 'center',
 						              sortable : true,
 						              sortName : 'cantonid',
 						              valign: 'middle'
 						          }, {
 						              field: 'unitname',
-						              title: '单位名称',
+						              title: '单位<br/>名称',
 						              align: 'center',
 						              valign: 'middle'
 						          }, {
 						              field: 'kgUnitType.unittypename',
-						              title: '办园性质',
+						              title: '办园<br/>性质',
+						              width:50,
 						              sortable : true,
 						              sortName : 'unittypeid',
 						              align: 'center',
 						              valign: 'middle'
 						          }, {
-						              field: 'offertitle',
+						              field: 'kgOffersType.offertypename',
 						              title: '岗位',
+						              width:80,
 						              align: 'center',
 						              valign: 'middle'
 						          }, {
 						              field: 'offercount',
-						              title: '岗位数量',
+						              title: '岗位</br>数量',
+						              width:50,
 						              align: 'center',
 						              valign: 'middle'
 						          }, {
 						              field: 'content',
 						              title: '岗位人员要求',
+						              width:320,
 						              align: 'center',
 						              valign: 'middle'
 						          }, {
@@ -164,22 +172,25 @@
 						              valign: 'middle'
 						          }, {
 						              field: 'contactposition',
-						              title: '联系地址',
+						              title: '联系<br/>地址',
 						              align: 'center',
 						              valign: 'middle'
 						          }, {
 						              field: 'zipcode',
 						              title: '邮编',
+						              width:70,
 						              align: 'center',
 						              valign: 'middle'
 						          }, {
 						              field: 'contacttel',
 						              title: '联系电话',
+						              width: 150,
 						              align: 'center',
 						              valign: 'middle'
 						          }, {
 						              field: 'publishdate',
 						              title: '发布时间',
+						              width:100,
 						              align: 'center',
 						              valign: 'middle'
 						          }

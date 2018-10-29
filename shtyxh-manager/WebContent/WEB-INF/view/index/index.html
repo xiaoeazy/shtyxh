@@ -179,12 +179,6 @@
 											</#if>
 												
 												<#if zxzxShow.id==20>
-													<a href="${base.contextPath}/index/offers" target="_blank">${zxzxShow.typename}</a></dt>
-													<#list zxzxShow.offersList as offersList>
-														<dd>
-															<a href="${base.contextPath}/index/offers/Detail?id=${offersList.id}" target="_blank" title="${offersList.offertitle}">${offersList.newsSimpleTitle}</a>
-														</dd>
-													</#list>
 												<#else>
 													<a href="${base.contextPath}/index/news/typeList?typeid=${zxzxShow.id}" target="_blank">${zxzxShow.typename}</a></dt>
 													<#list zxzxShow.newsList as newsList>

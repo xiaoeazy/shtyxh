@@ -78,7 +78,6 @@ public class IndexController extends IndexBaseController {
 			if (kt.getId() == OFFER_ID) {
 				List<KgOffers> list = iJedisService.loadOffers();
 				list = CommonFuncUtil.listToList(list, 2);
-				CommonFuncUtil.judgeOffersTitleLength(list, 12);
 				kt.setOffersList(list);
 				continue;
 			}

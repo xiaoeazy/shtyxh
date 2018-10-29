@@ -46,11 +46,12 @@ public class KgOffers extends BaseDTO {
 
      private Long unittypeid;
      
-     @Length(max = 100)
-     private String offertitle;
+   
+     private Long offertypeid;
 
      private Integer offercount;
      
+     @Length(max = 100)
      private String content;
      
      private String contactperson;
@@ -74,8 +75,19 @@ public class KgOffers extends BaseDTO {
      private KgUnitType kgUnitType;
 
      
+     @Transient
+     private KgOffersType kgOffersType;
      
      
+     
+	public KgOffersType getKgOffersType() {
+		return kgOffersType;
+	}
+
+	public void setKgOffersType(KgOffersType kgOffersType) {
+		this.kgOffersType = kgOffersType;
+	}
+
 	public KgUnitType getKgUnitType() {
 		return kgUnitType;
 	}
@@ -124,12 +136,14 @@ public class KgOffers extends BaseDTO {
 		this.unittypeid = unittypeid;
 	}
 
-	public String getOffertitle() {
-		return offertitle;
+
+
+	public Long getOffertypeid() {
+		return offertypeid;
 	}
 
-	public void setOffertitle(String offertitle) {
-		this.offertitle = offertitle;
+	public void setOffertypeid(Long offertypeid) {
+		this.offertypeid = offertypeid;
 	}
 
 	public Integer getOffercount() {

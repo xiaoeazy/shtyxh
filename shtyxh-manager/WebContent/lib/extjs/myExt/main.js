@@ -201,6 +201,8 @@ function getNews(funcs){
 		str +=addFunc('source1.png','source2.png','newsSource');
 	if(isHaveFunc(funcs,13))
 		str +=addFunc('offers1.png','offers2.png','offers');
+	if(isHaveFunc(funcs,23))
+		str +=addFunc('offertype1.png','offertype2.png','OffersType');
 	if(str!="")
 		newsRoleNum = 1;
 	
@@ -361,6 +363,11 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'园所招聘');
+	}else if(us == "OffersType"){
+		var panel=  new OffersType.OffersTypePanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'招聘职位类别');
 	}else if(us == "history"){
 		var panel=  new History.HistoryPanel({
 			mainId: us
