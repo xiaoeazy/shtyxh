@@ -76,10 +76,10 @@ public class IndexController extends IndexBaseController {
 		knt3list = CommonFuncUtil.listToList(knt3list, 99);
 		for (KgType kt : knt3list) {
 			if (kt.getId() == OFFER_ID) {
-				List<KgOffers> list = iJedisService.loadOffers();
-				list = CommonFuncUtil.listToList(list, 2);
-				kt.setOffersList(list);
-				continue;
+//				List<KgOffers> list = iJedisService.loadOffers();
+//				list = CommonFuncUtil.listToList(list, 2);
+//				kt.setOffersList(list);
+//				continue;
 			}
 
 			KgNews kns = new KgNews();
@@ -97,21 +97,38 @@ public class IndexController extends IndexBaseController {
 		KgType kn5 = new KgType();
 		kn5.setParentid(DCYYJ_ID);
 		kn5.setRelatetype(2);
-		List<KgType> knt5list = iKgTypeService.select(requestContext, kn5, 1, 3);
+		List<KgType> knt5list = iKgTypeService.select(requestContext, kn5, 1, 2);
 		mv.addObject("typeDcyyjShowList", knt5list);
 
+	
+		//招聘 放到鉴定与培训页面中去
+		KgType kn6 = iJedisService.loadType(new KgType(OFFER_ID));
+		List<KgType> childOfferTypeList = new ArrayList<KgType>();
+		KgType teacherType = new KgType();
+		teacherType.setTypename("幼儿园教师");
+		childOfferTypeList.add(teacherType);
+		KgType threeYuanType = new KgType();
+		threeYuanType.setTypename("三大员");
+		childOfferTypeList.add(threeYuanType);
+		kn6.setChildType(childOfferTypeList);
+		mv.addObject("offerType", kn6);
+		
 		// 培训与鉴定
 		KgType kn4 = new KgType();
 		kn4.setParentid(PXYJD_ID);
 		// kn4.setHidden(false);
 		List<KgType> knt4list = iJedisService.loadChildType(kn4);
+		knt4list.add(0,kn6);
 		for (KgType kt : knt4list) {
+			if(kt.getId()==OFFER_ID) continue;
 			KgType childKt = new KgType();
 			childKt.setParentid(kt.getId());
 			List<KgType> childTypeList = iJedisService.loadChildType(childKt);
 			kt.setChildType(childTypeList);
 		}
 		mv.addObject("typePxyjdShowList", knt4list);
+		
+		
 		//
 		loadNavigation(mv, CH_INDEX);
 		loadSysConfig(mv);

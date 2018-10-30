@@ -61,7 +61,7 @@ public class IndexBaseController extends BaseController{
 	public static final  Long HYDW_ID =15L;	//会员单位
 	public static final  Long LXFS_ID =16L;	//联系方式
 	
-	public static final  Long YSZP_ID =20L;	//会员单位
+	public static final  Long YSZP_ID =20L;	//园所招聘
 	
 	
 	public static final  Long GWPX_ID =21L;	//岗位培训

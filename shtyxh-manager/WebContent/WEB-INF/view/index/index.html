@@ -251,9 +251,10 @@
 								</h2>
 							</div>
 							<div class="main_right_cbl_pxyjd_line"></div>
-							<#list typePxyjdShowList as typePxyjdShowList>
-									<#if typePxyjdShowList_index%2==0>
-										<#if typePxyjdShowList_index==2>
+						  
+							<#list typePxyjdShowList as typePxyjdShowLists>
+									<#if typePxyjdShowLists_index%2==0>
+										<#if typePxyjdShowLists_index==(typePxyjdShowList?size-2)||typePxyjdShowLists_index==(typePxyjdShowList?size-1)>
 												<div class="bottomdldiv">
 										<#else>
 												<div class="dldiv">
@@ -262,26 +263,30 @@
 									
 									</#if>
 										<dl>
-											
-											<#if typePxyjdShowList.id == 25>
-												<dt><a href="${base.contextPath}/index/assessmentTypeList"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
+											<#if typePxyjdShowLists.id == 20>
+												<dt><a href="${base.contextPath}/index/offers"  target="_blank">${typePxyjdShowLists.typename!}</a></dt>
+												<#list typePxyjdShowLists.childType as childType>
+													<dd><a href="${base.contextPath}/index/offers"  target="_blank">${childType.typename}</a></dd>
+												</#list>
+											<#elseif typePxyjdShowLists.id == 25>
+												<dt><a href="${base.contextPath}/index/assessmentTypeList"  target="_blank">${typePxyjdShowLists.typename!}</a></dt>
 												<#list zzjdList as zzjdList>
 													<dd><a href="${base.contextPath}/index/assessmentTypeList?typeid=${zzjdList.id}"  target="_blank">${zzjdList.assessmentTypeName}</a></dd>
 												</#list>
-											<#elseif typePxyjdShowList.id == 21>
-												<dt><a href="${base.contextPath}/index/jdypx/gwpx"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
+											<#elseif typePxyjdShowLists.id == 21>
+												<dt><a href="${base.contextPath}/index/jdypx/gwpx"  target="_blank">${typePxyjdShowLists.typename!}</a></dt>
 												<#list gwpxTypeList as typeList>   
 													<dd><a href="${base.contextPath}/index/jdypx/gwpx?typeid=${typeList.id}"  target="_blank">${typeList.typename}</a></dd>
 							                	</#list>
 												
 											<#else>
-												<dt><a href="${base.contextPath}/index/jdypx/typeList?typeid=${typePxyjdShowList.id}"  target="_blank">${typePxyjdShowList.typename!}</a></dt>
-<!-- 												<#list typePxyjdShowList.childType as childType> -->
+												<dt><a href="${base.contextPath}/index/jdypx/typeList?typeid=${typePxyjdShowLists.id}"  target="_blank">${typePxyjdShowLists.typename!}</a></dt>
+<!-- 												<#list typePxyjdShowLists.childType as childType> -->
 <!-- 													<dd>${childType.typename!}</dd> -->
 <!-- 												</#list> -->
 											</#if>
 										</dl>
-									<#if typePxyjdShowList_index%2==1>
+									<#if typePxyjdShowLists_index%2==1>
 										<div class="dldiv_line">&nbsp;</div>
 										</div>
 									</#if>
