@@ -17,6 +17,7 @@ import com.shtyxh.common.bean.ExtStore;
 import com.shtyxh.common.exception.E404Excetion;
 import com.shtyxh.manager.account.dto.User;
 import com.shtyxh.manager.dto.KgOffers;
+import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
 import com.shtyxh.manager.service.IJedisService;
 import com.shtyxh.manager.service.IKgOffersService;
@@ -33,10 +34,27 @@ public class IndexOffersController extends IndexBaseController{
 	@RequestMapping(value = "/index/offers")
 	@ResponseBody
 	public ModelAndView newsTypeList(@RequestParam(defaultValue = DEFAULT_PAGE) int page,
-			@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) {
+			@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, Long offertypeid,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/index/offers/offers");
 		KgType kt = iJedisService.loadType(new KgType(OFFER_ID));
+		List<KgOffersType> kot = iJedisService.loadAllOffersType();
+		if(offertypeid==null){
+			offertypeid = -1l;
+		}else{
+			boolean flag = false;
+			for(KgOffersType ikt :kot){
+				if(ikt.getId()==offertypeid){
+					flag = true;
+					break;
+				}
+			}
+			if(!flag){
+				offertypeid= -1l;
+			}
+		}
 		mv.addObject("kgType", kt);
+		mv.addObject("kgOffersType",kot);
+		mv.addObject("offertypeid", offertypeid);
 		loadNavigation(mv, IndexController.CH_ZXZX);
 //		loadAttriteNews(mv, kt.getParentid(), 3);
 		loadSysConfig(mv);
@@ -55,6 +73,9 @@ public class IndexOffersController extends IndexBaseController{
 //		int size = list.size();
 //		
 //		list=CommonFuncUtil.listToPage(list, page, pageSize);
+		if(KgOffers.getOffertypeid()!=null&&KgOffers.getOffertypeid()==-1){
+			KgOffers.setOffertypeid(null);
+		}
 		if(!StringUtils.isEmpty(sort)&&!StringUtils.isEmpty(sortOrder)) {
 			KgOffers.setSortname(sort);
 			KgOffers.setSortorder(sortOrder);

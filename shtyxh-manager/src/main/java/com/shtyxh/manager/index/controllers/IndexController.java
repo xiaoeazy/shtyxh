@@ -16,7 +16,7 @@ import com.huan.HTed.core.IRequest;
 import com.shtyxh.manager.dto.KgCarousel;
 import com.shtyxh.manager.dto.KgDownload;
 import com.shtyxh.manager.dto.KgNews;
-import com.shtyxh.manager.dto.KgOffers;
+import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
 import com.shtyxh.manager.service.IJedisService;
 import com.shtyxh.manager.service.IKgTypeService;
@@ -103,14 +103,18 @@ public class IndexController extends IndexBaseController {
 	
 		//招聘 放到鉴定与培训页面中去
 		KgType kn6 = iJedisService.loadType(new KgType(OFFER_ID));
-		List<KgType> childOfferTypeList = new ArrayList<KgType>();
-		KgType teacherType = new KgType();
-		teacherType.setTypename("幼儿园教师");
-		childOfferTypeList.add(teacherType);
-		KgType threeYuanType = new KgType();
-		threeYuanType.setTypename("三大员");
-		childOfferTypeList.add(threeYuanType);
-		kn6.setChildType(childOfferTypeList);
+		List<KgOffersType> childOfferTypeList = iJedisService.loadAllOffersType();
+		kn6.setOfferTypeList(childOfferTypeList);
+//		List<KgType> childOfferTypeList = new ArrayList<KgType>();
+//		KgType teacherType = new KgType();
+//		teacherType.setTypename("幼儿园教师");
+//		teacherType.setId(1l);
+//		childOfferTypeList.add(teacherType);
+//		KgType threeYuanType = new KgType();
+//		threeYuanType.setTypename("三大员");
+//		threeYuanType.setId(-2l);
+//		childOfferTypeList.add(threeYuanType);
+//		kn6.setChildType(childOfferTypeList);
 		mv.addObject("offerType", kn6);
 		
 		// 培训与鉴定
@@ -118,9 +122,7 @@ public class IndexController extends IndexBaseController {
 		kn4.setParentid(PXYJD_ID);
 		// kn4.setHidden(false);
 		List<KgType> knt4list = iJedisService.loadChildType(kn4);
-		knt4list.add(0,kn6);
 		for (KgType kt : knt4list) {
-			if(kt.getId()==OFFER_ID) continue;
 			KgType childKt = new KgType();
 			childKt.setParentid(kt.getId());
 			List<KgType> childTypeList = iJedisService.loadChildType(childKt);

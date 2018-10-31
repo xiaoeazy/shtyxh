@@ -241,6 +241,37 @@
 				</div>
 				<!-- 调查与研究end -->
 				
+				
+				<!-- 招聘 -->
+				<div class="main_right_block_pxyjd mt13">
+						<div class="main_right_cbl_pxyjd ">
+							<div class="main_right_cbl_pxyjd_title">
+								<h2>
+									<a href="${base.contextPath}/index/offers"
+										target="_blank">${offerType.typename}</a>
+								</h2>
+							</div>
+							<div class="main_right_cbl_pxyjd_line"></div>
+						  
+							<#list offerType.offerTypeList as offerTypeLists>
+									<#if offerTypeLists_index%2==0>
+										<#if offerTypeLists_index==(offerType.offerTypeList?size-2)||offerTypeLists_index==(offerType.offerTypeList?size-1)>
+												<div class="bottomdldiv">
+										<#else>
+												<div class="dldivzp">
+										</#if>
+									</#if>
+										<dl>
+											<dd><a href="${base.contextPath}/index/offers?offertypeid=${offerTypeLists.id}"  target="_blank">${offerTypeLists.offertypename}</a></dd>
+										</dl>
+									<#if offerTypeLists_index%2==1>
+										</div>
+									</#if>
+							</#list>
+						</div>
+							
+				</div>
+				
 				<!-- 培训与鉴定start -->
 				<div class="main_right_block_pxyjd mt13">
 						<div class="main_right_cbl_pxyjd ">
@@ -263,12 +294,7 @@
 									
 									</#if>
 										<dl>
-											<#if typePxyjdShowLists.id == 20>
-												<dt><a href="${base.contextPath}/index/offers"  target="_blank">${typePxyjdShowLists.typename!}</a></dt>
-												<#list typePxyjdShowLists.childType as childType>
-													<dd><a href="${base.contextPath}/index/offers"  target="_blank">${childType.typename}</a></dd>
-												</#list>
-											<#elseif typePxyjdShowLists.id == 25>
+											<#if typePxyjdShowLists.id == 25>
 												<dt><a href="${base.contextPath}/index/assessmentTypeList"  target="_blank">${typePxyjdShowLists.typename!}</a></dt>
 												<#list zzjdList as zzjdList>
 													<dd><a href="${base.contextPath}/index/assessmentTypeList?typeid=${zzjdList.id}"  target="_blank">${zzjdList.assessmentTypeName}</a></dd>

@@ -59,10 +59,21 @@ public class KgType extends BaseDTO {
      
      @Transient
      private  List<KgOffers> offersList;
+     
+     @Transient 
+     private List<KgOffersType> offerTypeList;
 
      
      
-     public Long getSequence() {
+     public List<KgOffersType> getOfferTypeList() {
+		return offerTypeList;
+	}
+
+	public void setOfferTypeList(List<KgOffersType> offerTypeList) {
+		this.offerTypeList = offerTypeList;
+	}
+
+	public Long getSequence() {
 		return sequence;
 	}
 

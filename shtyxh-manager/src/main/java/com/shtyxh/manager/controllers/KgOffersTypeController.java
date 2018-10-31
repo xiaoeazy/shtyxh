@@ -1,29 +1,33 @@
 package com.shtyxh.manager.controllers;
 
-import org.springframework.stereotype.Controller;
-import com.huan.HTed.system.controllers.BaseController;
-import com.huan.HTed.core.IRequest;
-import com.huan.HTed.system.dto.ResponseData;
-import com.shtyxh.common.bean.ExtAjax;
-import com.shtyxh.common.bean.ExtStore;
-import com.shtyxh.manager.dto.KgOffers;
-import com.shtyxh.manager.dto.KgOffersType;
-import com.shtyxh.manager.dto.KgType;
-import com.shtyxh.manager.service.IKgOffersTypeService;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.validation.BindingResult;
-import java.util.List;
+
+import com.huan.HTed.core.IRequest;
+import com.huan.HTed.system.controllers.BaseController;
+import com.huan.HTed.system.dto.ResponseData;
+import com.shtyxh.common.bean.ExtAjax;
+import com.shtyxh.common.bean.ExtStore;
+import com.shtyxh.manager.dto.KgOffersType;
+import com.shtyxh.manager.service.IJedisService;
+import com.shtyxh.manager.service.IKgOffersTypeService;
 
     @Controller
     public class KgOffersTypeController extends BaseController{
 
     @Autowired
     private IKgOffersTypeService service;
+    @Autowired
+    private IJedisService iJedisService;
 
 
     @RequestMapping(value = "/kg/offers/type/query")
@@ -81,7 +85,7 @@ import java.util.List;
 	public ExtAjax adminUpdate(@RequestBody List<KgOffersType> dto, BindingResult result, HttpServletRequest request){
     	 IRequest requestCtx = createRequestContext(request);
          service.batchUpdate(requestCtx, dto);
-//         iJedisService.delHSetOfType();
+         iJedisService.delHsetOfOffer();
          return new ExtAjax(true, null);
     }
     
@@ -90,7 +94,7 @@ import java.util.List;
     public ExtAjax adminDelete(HttpServletRequest request,@RequestBody List<KgOffersType> dto){
     	 IRequest requestCtx = createRequestContext(request);
     	 service.batchDelete(dto);
-//    	  iJedisService.delHSetOfType();
+    	  iJedisService.delHsetOfOffer();
           return new ExtAjax(true, null);
     }
     

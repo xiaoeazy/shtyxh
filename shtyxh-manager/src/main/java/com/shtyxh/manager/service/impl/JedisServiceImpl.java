@@ -24,6 +24,7 @@ import com.shtyxh.manager.dto.KgLink;
 import com.shtyxh.manager.dto.KgNews;
 import com.shtyxh.manager.dto.KgNewsSource;
 import com.shtyxh.manager.dto.KgOffers;
+import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
 import com.shtyxh.manager.service.IJedisService;
 import com.shtyxh.manager.service.IKgAllonetextService;
@@ -38,6 +39,7 @@ import com.shtyxh.manager.service.IKgLinkService;
 import com.shtyxh.manager.service.IKgNewsService;
 import com.shtyxh.manager.service.IKgNewsSourceService;
 import com.shtyxh.manager.service.IKgOffersService;
+import com.shtyxh.manager.service.IKgOffersTypeService;
 import com.shtyxh.manager.service.IKgTypeService;
 import com.shtyxh.redis.service.JedisClient;
 
@@ -73,7 +75,8 @@ public class JedisServiceImpl  implements IJedisService{
 	private IKgContactService iKgContactService;
 	@Autowired
 	private IKgHistoryService iKgHistoryService;
-	
+	@Autowired
+	private IKgOffersTypeService iKgOffersTypeService;
 	
 	@Value("${REDIS_NEWSSOURCE_HSET}")
 	private String REDIS_NEWSSOURCE_HSET;
@@ -158,6 +161,9 @@ public class JedisServiceImpl  implements IJedisService{
 	private String REDIS_OFFERS;
 	@Value("${REDIS_OFFERS_ALL_LIST}")
 	private String REDIS_OFFERS_ALL_LIST;
+	@Value("${REDIS_OFFERS_TYPE_ALL_LIST}")
+	private String REDIS_OFFERS_TYPE_ALL_LIST;
+	
 	
 	
 	@Value("${REDIS_ASSESSMENTACTIVITY_HSET}")
@@ -345,6 +351,25 @@ public class JedisServiceImpl  implements IJedisService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.error("loadOffers失败:",e);
+		}
+		return list;
+	}
+	@Override
+	public List<KgOffersType> loadAllOffersType(){
+		List<KgOffersType> list = new ArrayList<KgOffersType>();
+		try {
+			String json = jedisClient.hget(REDIS_OFFERS_HSET,REDIS_OFFERS_TYPE_ALL_LIST);
+			//判断是否为空
+			if (StringUtils.isBlank(json)) {
+				list = iKgOffersTypeService.selectAll();
+				jedisClient.hset(REDIS_OFFERS_HSET,REDIS_OFFERS_TYPE_ALL_LIST, JsonUtils.objectToJson(list));
+			}else{
+				list = JsonUtils.jsonToList(json, KgOffersType.class);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("loadAllOffersType失败:",e);
 		}
 		return list;
 	}

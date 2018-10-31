@@ -63,6 +63,9 @@
            		<if test="publishuserid != null and publishuserid != ''">
            			AND a.publishuserid  =#{publishuserid}
            		</if>
+           		<if test="offertypeid != null and offertypeid != ''">
+           			AND a.offertypeid  =#{offertypeid}
+           		</if>
            </where>
            
            <choose>
@@ -87,6 +90,9 @@
            		</if>
            		<if test="publishuserid != null and publishuserid !=''">
            			AND a.publishuserid  =#{publishuserid}
+           		</if>
+           		<if test="offertypeid != null and offertypeid != ''">
+           			AND a.offertypeid  =#{offertypeid}
            		</if>
            </where>
     </select>
