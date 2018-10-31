@@ -254,6 +254,7 @@
 							<div class="main_right_cbl_pxyjd_line"></div>
 						  
 							<#list offerType.offerTypeList as offerTypeLists>
+								
 									<#if offerTypeLists_index%2==0>
 										<#if offerTypeLists_index==(offerType.offerTypeList?size-2)||offerTypeLists_index==(offerType.offerTypeList?size-1)>
 												<div class="bottomdldiv">
@@ -264,12 +265,11 @@
 										<dl>
 											<dd><a href="${base.contextPath}/index/offers?offertypeid=${offerTypeLists.id}"  target="_blank">${offerTypeLists.offertypename}</a></dd>
 										</dl>
-									<#if offerTypeLists_index%2==1>
+									<#if offerTypeLists_index%2==1||offerTypeLists_index==offerType.offerTypeList?size-1>
 										</div>
 									</#if>
 							</#list>
 						</div>
-							
 				</div>
 				
 				<!-- 培训与鉴定start -->
@@ -312,8 +312,13 @@
 <!-- 												</#list> -->
 											</#if>
 										</dl>
-									<#if typePxyjdShowLists_index%2==1>
-										<div class="dldiv_line">&nbsp;</div>
+									<#if typePxyjdShowLists_index%2==1||typePxyjdShowLists_index==(typePxyjdShowList?size-1)>
+										<#if typePxyjdShowLists_index==(typePxyjdShowList?size-1)>
+											
+										<#else>
+											<div class="dldiv_line">&nbsp;</div>
+										</#if>
+										
 										</div>
 									</#if>
 							</#list>
