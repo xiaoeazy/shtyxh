@@ -144,6 +144,18 @@ public class AdminController extends BaseController {
 		User loginUser = (User) request.getAttribute("user");
 		view.addObject("theLoginUserId",loginUser.getUserId());
 		view.addObject("userRealName",loginUser.getUserName());
+		
+		UserRole ur = new UserRole();
+		ur.setUserId(loginUser.getUserId());
+		List<Role> roles = roleService.adminQueryHave(RequestHelper.createServiceRequest(request), ur);
+		String isAdmin = "0";
+		for(Role role :roles) {
+			if(("admin").equals(role.getRoleCode())) {
+				isAdmin ="1";
+				break;
+			}
+		}
+		view.addObject("isAdmin",isAdmin);
 		return view;
 	}
 

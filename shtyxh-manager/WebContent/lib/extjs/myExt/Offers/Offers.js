@@ -10,6 +10,7 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 	initUIComponents : function() {
 	var me = this;
 	var mainId = me.mainId;
+	var havaFun = isAdmin==1?false:true;
    //===================================================================
 	var formpanel = new Ext.FormPanel({
 		  region:'north',
@@ -99,6 +100,7 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 				},'-',{
 					icon : _basePath+'/resources/images/icon/edit.png',
 					text : '修改招聘',
+					hidden:havaFun,
 					handler : function() {
 						var records=getUpdateRecords(grid);
 						if(records==-1)
@@ -109,6 +111,7 @@ Ext.extend(Offers.OffersPanel, Ext.Panel, {
 				},'-',{
 					icon : _basePath+'/resources/images/icon/cancel.png',
 					text : '删除招聘',
+					hidden:havaFun,
 					handler : function() {
 						var records=getDeleteRecords(grid);
 						if(records==-1)
