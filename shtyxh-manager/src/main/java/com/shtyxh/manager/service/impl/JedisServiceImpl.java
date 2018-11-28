@@ -26,6 +26,7 @@ import com.shtyxh.manager.dto.KgNewsSource;
 import com.shtyxh.manager.dto.KgOffers;
 import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
+import com.shtyxh.manager.dto.KgVisitcount;
 import com.shtyxh.manager.service.IJedisService;
 import com.shtyxh.manager.service.IKgAllonetextService;
 import com.shtyxh.manager.service.IKgAssessmentActivityService;
@@ -41,6 +42,7 @@ import com.shtyxh.manager.service.IKgNewsSourceService;
 import com.shtyxh.manager.service.IKgOffersService;
 import com.shtyxh.manager.service.IKgOffersTypeService;
 import com.shtyxh.manager.service.IKgTypeService;
+import com.shtyxh.manager.service.IKgVisitcountService;
 import com.shtyxh.redis.service.JedisClient;
 
 @Service
@@ -77,6 +79,8 @@ public class JedisServiceImpl  implements IJedisService{
 	private IKgHistoryService iKgHistoryService;
 	@Autowired
 	private IKgOffersTypeService iKgOffersTypeService;
+	@Autowired
+	private IKgVisitcountService iKgVisitcountService;
 	
 	@Value("${REDIS_NEWSSOURCE_HSET}")
 	private String REDIS_NEWSSOURCE_HSET;
@@ -175,6 +179,8 @@ public class JedisServiceImpl  implements IJedisService{
 	@Value("${REDIS_ASSESSMENTACTIVITYPAGE_ATTRIBUTEID_NEWS_LIST}")
 	private String REDIS_ASSESSMENTACTIVITYPAGE_ATTRIBUTEID_NEWS_LIST;
 	
+	@Value("${REDIS_VISITCOUNT_INT}")
+	private String REDIS_VISITCOUNT_INT;
 	
 	@Override
 	public void delAttribute(){
@@ -415,6 +421,46 @@ public class JedisServiceImpl  implements IJedisService{
 		}
 		return list;
 	}
+	
+	@Override
+	public   long loadVisitCount(){
+		long num=0;
+		try {
+			String visitcount = jedisClient.get(REDIS_VISITCOUNT_INT);
+			//判断是否为空
+			if (StringUtils.isBlank(visitcount)) {
+				KgVisitcount vc = new KgVisitcount();
+				vc.setId(1l);
+				vc.setCode("allcount");
+				KgVisitcount aa = iKgVisitcountService.selectByPrimaryKey(null, vc);
+				jedisClient.set(REDIS_VISITCOUNT_INT, aa.getValue());
+				num=Long.parseLong(aa.getValue());
+			}else{
+				num = Long.parseLong(visitcount);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("loadViewCount失败:",e);
+			num=0;
+		}
+		return num;
+	}
+	
+	public   long inrVisitCount(){
+		long num=0;
+		try {
+			return jedisClient.incr(REDIS_VISITCOUNT_INT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("inrVisitCount失败:",e);
+			num=0;
+		}
+		return num;
+	}
+	
+	
 	
 	@Override
 	public   List<KgCarousel> loadCarousel(){

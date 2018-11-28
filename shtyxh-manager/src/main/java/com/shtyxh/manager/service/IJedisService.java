@@ -20,6 +20,10 @@ import com.shtyxh.manager.dto.KgType;
 public interface IJedisService {
 
 	List<KgConfig> loadConfig();
+	
+	long loadVisitCount();
+	
+	long inrVisitCount();
 
 	List<KgLink> loadLink();
 

@@ -53,7 +53,7 @@ public class IndexDownloadController extends IndexBaseController{
          
          loadNavigation(mv,  IndexController.CH_INDEX);
          loadAttriteNews(mv, 3);
-         loadSysConfig(mv);
+         loadSysConfig(request,mv);
          return mv;
     }
     

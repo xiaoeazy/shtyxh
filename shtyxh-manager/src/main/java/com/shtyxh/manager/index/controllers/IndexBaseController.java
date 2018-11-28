@@ -4,6 +4,9 @@ package com.shtyxh.manager.index.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.huan.HTed.core.IRequest;
 import com.huan.HTed.system.controllers.BaseController;
 import com.shtyxh.common.bean.CommonPath;
-import com.shtyxh.manager.bean.SysConfig;
 import com.shtyxh.manager.dto.KgAssessmentActivity;
 import com.shtyxh.manager.dto.KgAssessmentType;
 import com.shtyxh.manager.dto.KgConfig;
@@ -132,7 +134,7 @@ public class IndexBaseController extends BaseController{
 	  }
 	
 //	
-	public void loadSysConfig(ModelAndView mv) {
+	public void loadSysConfig(HttpServletRequest request,ModelAndView mv) {
 //		mv.addObject("webname",SysConfig.webname);
 //		mv.addObject("copyright",SysConfig.copyright);
 //		mv.addObject("keyword",SysConfig.keyword);
@@ -147,7 +149,13 @@ public class IndexBaseController extends BaseController{
 //		mv.addObject("tel",SysConfig.tel);
 		
 		List<KgConfig> kgConfigList= iJedisService.loadConfig();
-		
+		long visitCount  = iJedisService.loadVisitCount();
+		HttpSession session  = (HttpSession)request.getSession();
+		if(session.getAttribute("counter")==null){
+			 visitCount  =  iJedisService.inrVisitCount();
+			 session.setAttribute("counter", 1);
+		}
+		mv.addObject("visitCount",visitCount);
 		for(KgConfig kg :kgConfigList) {
 			String value = kg.getSysvalue();
 			switch(kg.getSyskey()) {

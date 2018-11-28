@@ -66,7 +66,7 @@ public class IndexAssociationSurveyController extends IndexBaseController{
     	 loadNavigation(mv,  CH_XHGK);
     	 mv.addObject("leftList",leftNavList);
     	 mv.addObject("nowType",nowType);
-    	 loadSysConfig(mv);
+    	 loadSysConfig(request,mv);
          return mv;
     }
 	

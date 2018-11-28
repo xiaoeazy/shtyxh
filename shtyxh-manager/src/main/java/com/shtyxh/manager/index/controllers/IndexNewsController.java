@@ -76,7 +76,7 @@ public class IndexNewsController extends IndexBaseController{
         mv.addObject("sourceList",sourceList);
         mv.addObject("offerType",offerType);
         loadNavigation(mv, IndexController.CH_ZXZX);
-        loadSysConfig(mv);
+        loadSysConfig(request,mv);
         return mv;
     }
 	
@@ -98,7 +98,7 @@ public class IndexNewsController extends IndexBaseController{
         mv.addObject("newssource",newssource==null?"":newssource);
         
         loadNavigation(mv, IndexController.CH_NULL);
-        loadSysConfig(mv);
+        loadSysConfig(request,mv);
        
         return mv;
     }
@@ -160,7 +160,7 @@ public class IndexNewsController extends IndexBaseController{
 	        mv.addObject("typeid", typeid);
 	        loadNavigation(mv, IndexController.CH_ZXZX);
 	        loadAttriteNews(mv, kgNewstype.getParentid(),3);
-	        loadSysConfig(mv);
+	        loadSysConfig(request,mv);
 	        return mv;
 	    }
 	 
@@ -204,7 +204,7 @@ public class IndexNewsController extends IndexBaseController{
 	        
 	        loadNavigation(mv, IndexController.CH_ZXZX);
 	        loadAttriteNews(mv, ZXZX_ID,3);
-	        loadSysConfig(mv);
+	        loadSysConfig(request,mv);
 	        return mv;
 	    }
 
@@ -243,7 +243,7 @@ public class IndexNewsController extends IndexBaseController{
         
         loadNavigation(mv, IndexController.CH_ZXZX);
         loadAttriteNews(mv, kgNewstype.getParentid(),3);
-        loadSysConfig(mv);
+        loadSysConfig(request,mv);
         return mv;
     }
     

@@ -53,7 +53,7 @@ public class IndexUserController extends IndexBaseController{
     	 loadNavigation(mv, CH_NULL);
     	
     	 mv.addObject("typeid",1);
-    	 loadSysConfig(mv);
+    	 loadSysConfig(request,mv);
          return mv;
     }
 	

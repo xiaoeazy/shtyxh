@@ -73,7 +73,7 @@ public class IndexAssociationDynamicsController extends IndexBaseController{
         
         mv.addObject("topNewsList",topNewsList);
         loadNavigation(mv, IndexController.CH_XHDT);
-        loadSysConfig(mv);
+        loadSysConfig(request,mv);
         return mv;
     }
 	
@@ -106,7 +106,7 @@ public class IndexAssociationDynamicsController extends IndexBaseController{
 	        
 	        loadNavigation(mv, IndexController.CH_XHDT);
 	        loadAttriteNews(mv, kgtype.getParentid(),3);
-	        loadSysConfig(mv);
+	        loadSysConfig(request,mv);
 	        return mv;
 	    }
 	 
@@ -141,7 +141,7 @@ public class IndexAssociationDynamicsController extends IndexBaseController{
 	        
 	        loadNavigation(mv, IndexController.CH_XHDT);
 	        loadAttriteNews(mv, kgNewstype.getParentid(),3);
-	        loadSysConfig(mv);
+	        loadSysConfig(request,mv);
 	        return mv;
 	    }
 	    

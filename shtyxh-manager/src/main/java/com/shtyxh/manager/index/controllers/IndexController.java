@@ -133,7 +133,7 @@ public class IndexController extends IndexBaseController {
 		
 		//
 		loadNavigation(mv, CH_INDEX);
-		loadSysConfig(mv);
+		loadSysConfig(request,mv);
 		return mv;
 	}
 

@@ -62,7 +62,7 @@ public class IndexAssociationPartyBuildingController extends IndexBaseController
         
         mv.addObject("typeList", typeList);
         loadNavigation(mv, IndexController.CH_DJHD);
-        loadSysConfig(mv);
+        loadSysConfig(request,mv);
         return mv;
     }
 	
@@ -94,7 +94,7 @@ public class IndexAssociationPartyBuildingController extends IndexBaseController
 	        
 	        loadNavigation(mv, IndexController.CH_DJHD);
 	        loadAttriteNews(mv, kgtype.getParentid(),3);
-	        loadSysConfig(mv);
+	        loadSysConfig(request,mv);
 	        return mv;
 	    }
 	 
@@ -128,7 +128,7 @@ public class IndexAssociationPartyBuildingController extends IndexBaseController
 	        
 	        loadNavigation(mv, IndexController.CH_DJHD);
 	        loadAttriteNews(mv, kgNewstype.getParentid(),3);
-	        loadSysConfig(mv);
+	        loadSysConfig(request,mv);
 	        return mv;
 	    }
 	    

@@ -84,7 +84,7 @@ public class IndexAssessmentController extends IndexBaseController{
         
         
         loadNavigation(mv,CH_PXYJD);
-        loadSysConfig(mv);
+        loadSysConfig(request,mv);
         return mv;
     }
 
@@ -117,7 +117,7 @@ public class IndexAssessmentController extends IndexBaseController{
         mv.addObject("userid", user==null?"":user.getUserId());
         loadNavigation(mv, CH_PXYJD);
         loadAttriteAssessmentActivity(mv, requestContext,3);
-        loadSysConfig(mv);
+        loadSysConfig(request,mv);
         return mv;
     }
     
@@ -246,7 +246,7 @@ public class IndexAssessmentController extends IndexBaseController{
     	 mv.addObject("typeList", typeList);
     	 mv.addObject("typeAssessmentList", typeAssessmentList);
         loadNavigation(mv, IndexController.CH_PXYJD);
-        loadSysConfig(mv);
+        loadSysConfig(request,mv);
         return mv;
     }
     
@@ -274,7 +274,7 @@ public class IndexAssessmentController extends IndexBaseController{
         
         mv.addObject("nowType",currentType);
         loadNavigation(mv, CH_PXYJD);
-        loadSysConfig(mv);
+        loadSysConfig(request,mv);
         return mv;
     }
     
@@ -335,7 +335,7 @@ public class IndexAssessmentController extends IndexBaseController{
 	        
 	        loadNavigation(mv,IndexController.CH_PXYJD);
 	        loadAttriteNews(mv, kgNewstype.getParentid(),3);
-	        loadSysConfig(mv);
+	        loadSysConfig(request,mv);
 	        return mv;
 	    }
 	 
@@ -374,7 +374,7 @@ public class IndexAssessmentController extends IndexBaseController{
 	        
 	        loadNavigation(mv, IndexController.CH_PXYJD);
 	        loadAttriteNews(mv, kgNewstype.getParentid(),3);
-	        loadSysConfig(mv);
+	        loadSysConfig(request,mv);
 	        return mv;
 	    }
    

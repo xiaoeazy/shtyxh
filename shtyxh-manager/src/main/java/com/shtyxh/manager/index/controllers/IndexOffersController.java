@@ -57,7 +57,7 @@ public class IndexOffersController extends IndexBaseController{
 		mv.addObject("offertypeid", offertypeid);
 		loadNavigation(mv, IndexController.CH_ZXZX);
 //		loadAttriteNews(mv, kt.getParentid(), 3);
-		loadSysConfig(mv);
+		loadSysConfig(request,mv);
 		return mv;
 	}
 
@@ -100,7 +100,7 @@ public class IndexOffersController extends IndexBaseController{
 		ModelAndView mv = new ModelAndView("/index/offers/offersDetail");
 		mv.addObject("offersInfo", offersInfo);
 		loadNavigation(mv, IndexController.CH_ZXZX);
-		loadSysConfig(mv);
+		loadSysConfig(request,mv);
 		return mv;
 	}
 
