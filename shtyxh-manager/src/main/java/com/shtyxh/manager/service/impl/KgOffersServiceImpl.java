@@ -28,8 +28,8 @@ public class KgOffersServiceImpl extends BaseServiceImpl<KgOffers> implements IK
 	@Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<KgOffers> selectWithOtherInfo(IRequest request,  KgOffers condition ,Integer pageNum, Integer pageSize) {
-//		if(pageNum!=null&&pageSize!=null)
-//			PageHelper.startPage(pageNum, pageSize);
+		if(pageNum!=null&&pageSize!=null)
+			PageHelper.startPage(pageNum, pageSize);
 //		Example e = new Example(KgOffers.class);
 //		e.setDistinct(false);
 //		Criteria c = e.createCriteria();
