@@ -36,7 +36,15 @@ Ext.extend(addorUpdateMemberUnits.addorUpdateMemberUnitsWindowWindow, Ext.Window
 			        }
 			    },
 			    autoLoad : true,
-			    fields: ['id', 'cantonname']
+			    fields: ['id', 'cantonname'],
+			    listeners:{
+				    load:function(){
+	            		if(record!=null){
+	            			var cantonid=record.get("cantonid");
+				    		cantonCombo.setValue(cantonid);
+	            		}
+	            	}
+			    }
 			});
 	    	
 	       var cantonCombo = new Ext.form.ComboBox({
@@ -185,7 +193,7 @@ Ext.extend(addorUpdateMemberUnits.addorUpdateMemberUnitsWindowWindow, Ext.Window
 							var admissiontime = record.get("admissiontime");
 							var date  =convertDateFromString(admissiontime);
 				    		Ext.getCmp(mainId+"memberno").setValue(memberno);
-				    		cantonCombo.setValue(cantonid);
+//				    		cantonCombo.setValue(cantonid);
 				    		Ext.getCmp(mainId+"kindergartenname").setValue(kindergartenname);
 				    		Ext.getCmp(mainId+"kindergartensite").setValue(kindergartensite);
 				    		Ext.getCmp(mainId+"zipcode").setValue(zipcode);

@@ -36,7 +36,15 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 			        }
 			    },
 			    autoLoad : true,
-			    fields: ['id', 'cantonname']
+			    fields: ['id', 'cantonname'],
+			    listeners:{
+			    	load:function(){
+			    		if(record!=null){
+				    		var cantonid= record.get("cantonid");
+				    		Ext.getCmp(mainId+"cantonid").setValue(cantonid);
+			    		}
+			    	}
+			    }
 			});
 	    	
 	       var cantonCombo = new Ext.form.ComboBox({
@@ -77,7 +85,15 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 			        }
 			    },
 			    autoLoad : true,
-			    fields: ['id', 'unittypename']
+			    fields: ['id', 'unittypename'],
+			    listeners:{
+			    	load:function(){
+			    		if(record!=null){
+				    		var unittypeid= record.get("unittypeid");
+				    		Ext.getCmp(mainId+"unittypeid").setValue(unittypeid);
+			    		}
+			    	}
+			    }
 			});
 	    	
 	       var unitTypeCombo = new Ext.form.ComboBox({
@@ -120,7 +136,15 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 			        }
 			    },
 			    autoLoad : true,
-			    fields: ['offertypeid', 'unittypename']
+			    fields: ['offertypeid', 'unittypename'],
+			    listeners:{
+			    	load:function(){
+			    		if(record!=null){
+				    		var offertypeid= record.get("offertypeid");
+				    		Ext.getCmp(mainId+"offertypeid").setValue(offertypeid);
+			    		}
+			    	}
+			    }
 			});
 	    	
 	       var offerTypeCombo = new Ext.form.ComboBox({
@@ -316,10 +340,10 @@ Ext.extend(addorUpdateOffers.addorUpdateOffersWindow, Ext.Panel, {
 				    		var zipcode= record.get("zipcode");
 				    		var contacttel= record.get("contacttel");
 				    		
-				    		Ext.getCmp(mainId+"cantonid").setValue(cantonid);
-				    		Ext.getCmp(mainId+"unittypeid").setValue(unittypeid);
+//				    		Ext.getCmp(mainId+"cantonid").setValue(cantonid);
+//				    		Ext.getCmp(mainId+"unittypeid").setValue(unittypeid);
 				    		Ext.getCmp(mainId+"unitname").setValue(unitname);
-				    		Ext.getCmp(mainId+"offertypeid").setValue(offertypeid);
+//				    		Ext.getCmp(mainId+"offertypeid").setValue(offertypeid);
 				    		Ext.getCmp(mainId+"offercount").setValue(offercount);
 				    		Ext.getCmp(mainId+"content").setValue(content);
 				    		Ext.getCmp(mainId+"contactperson").setValue(contactperson);

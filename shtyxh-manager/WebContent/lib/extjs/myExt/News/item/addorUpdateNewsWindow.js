@@ -42,7 +42,15 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 			        }
 			    },
 			    autoLoad : true,
-			    fields: ['id', 'typename']
+			    fields: ['id', 'typename'],
+			    listeners:{
+	            	load:function(){
+	            		if(record!=null){
+				    		var typeid = record.get("typeid");
+				    		typeCombo.setValue(typeid);
+	            		}
+	            	}
+			    }
 			});
 	    	
 	       var typeCombo = new Ext.form.ComboBox({
@@ -88,7 +96,15 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 			        }
 			    },
 			    autoLoad : true,
-			    fields: ['id', 'sourcename']
+			    fields: ['id', 'sourcename'],
+			    listeners:{
+	            	load:function(){
+	            		if(record!=null){
+	            			var sourceid = record.get("sourceid");
+				    		sourceCombo.setValue(sourceid);
+	            		}
+	            	}
+			    }
 			});
 	    	
 	       var sourceCombo = new Ext.form.ComboBox({
@@ -190,7 +206,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 								name: 'newstitle',
 								blankText:'必须填写',
 								id:mainId+"newstitle",
-					            maxLength:45  
+					            maxLength:200  
 				  			},
 				  			typeCombo,
 				  			sourceCombo,
@@ -357,9 +373,8 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 				    		var content= record.get("content");
 				    		var indexshow = record.get("indexshow");
 				    		Ext.getCmp(mainId+"newstitle").setValue(newstitle);
-				    		typeCombo.setValue(typeid);
-				    		
-				    		sourceCombo.setValue(sourceid);
+//				    		typeCombo.setValue(typeid);
+//				    		sourceCombo.setValue(sourceid);
 				    		
 				    		Ext.getCmp(mainId+"imageUrl").setValue(thumbnail);
 				    		if(thumbnail!=null&&thumbnail!=""){

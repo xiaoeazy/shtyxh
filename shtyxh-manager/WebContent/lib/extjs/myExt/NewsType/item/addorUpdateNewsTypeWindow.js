@@ -38,7 +38,15 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 			        }
 			    },
 			    autoLoad : true,
-			    fields: ['id', 'typename']
+			    fields: ['id', 'typename'],
+			    listeners:{
+			    	load:function(){
+			    		if(record!=null){
+						    var parentid =  record.get("parentid");
+				    		parentTypeCombo.setValue(parentid);
+			    		}
+				    }
+			    }
 			});
 	    	
 	       var parentTypeCombo = new Ext.form.ComboBox({
@@ -178,7 +186,7 @@ Ext.extend(addorUpdateNewsType.addorUpdateNewsTypeWindow, Ext.Window, {
 				    		var showentrance =  record.get("showentrance");
 				    		var parentid =  record.get("parentid");
 				    		showHiddenCombo.setValue(hidden);
-				    		parentTypeCombo.setValue(parentid);
+//				    		parentTypeCombo.setValue(parentid);
 				    	}else{
 				    		showHiddenCombo.setValue(false);
 				    	}

@@ -40,6 +40,10 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 			    listeners:{
 			    	'load': function(store, records, options) {
 			    		 store.insert(0,{id:'-1',assessmentActivityName:'所有'});
+			    		 if(record!=null){
+			    			 var activityId= record.get("activityId");
+					    	 assessmentCombo.setValue(activityId);
+			    		 }
 			    	}
 			    }
 			});
@@ -86,6 +90,11 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 			    listeners:{
 			    	'load': function(store, records, options) {
 			    		 store.insert(0,{id:'-1',newstitle:'所有'});
+			    		 if(record!=null){
+			    			 var newsId= record.get("newsId");
+			    			 newsCombo.setValue(newsId);
+			    		 }
+			    		 
 			    	}
 			    }
 			});
@@ -287,8 +296,8 @@ Ext.extend(addorUpdateCarousel.addorUpdateCarouselWindow, Ext.Window, {
 				             
 				             me.inputValueToSet(me,mainId,urltype,newsCombo,assessmentCombo);
 				             Ext.getCmp(mainId+"webUrl").setValue(webUrl);
-					    	 newsCombo.setValue(newsId);
-					    	 assessmentCombo.setValue(activityId);
+//					    	 newsCombo.setValue(newsId);
+//					    	 assessmentCombo.setValue(activityId);
 					    	 Ext.getCmp(mainId+"sequence").setValue(sequence);
 				    	}else{
 				    		Ext.getCmp(mainId+'activeds').items.get(0).setValue(true);

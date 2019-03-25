@@ -42,6 +42,10 @@ Ext.extend(addorUpdateAssessmentActivity.addorUpdateAssessmentActivityWindow, Ex
 			    listeners:{
 			    	'load': function(store, records, options) {
 			    		 store.insert(0,{id:'-1',assessmentTypeName:'请选择'});
+			    		 if(record!=null){
+			    			var assessmentTypeId = record.get("assessmentTypeId");
+				    		typeCombo.setValue(assessmentTypeId);
+			    		 }
 			    	}
 			    }
 			});

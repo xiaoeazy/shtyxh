@@ -42,7 +42,7 @@ public class KgNews extends BaseDTO {
      private String attributeid;
      
      @NotEmpty
-     @Length(max = 45)
+     @Length(max = 200)
      private String newstitle;
 
      @NotEmpty
