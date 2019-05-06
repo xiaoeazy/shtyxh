@@ -12,6 +12,8 @@
         <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
         <result column="author" property="author" jdbcType="VARCHAR" />
         <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="isLink" property="islink" jdbcType="VARCHAR" />
+        <result column="linkPath" property="linkpath" jdbcType="VARCHAR" />
         <result column="indexshow" property="indexshow" jdbcType="VARCHAR" />
         <result column="sequence" property="sequence" jdbcType="DECIMAL" />
         <result column="createDate" property="createdate" jdbcType="DATE" />
@@ -28,6 +30,8 @@
         <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
         <result column="author" property="author" jdbcType="VARCHAR" />
         <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="isLink" property="islink" jdbcType="VARCHAR" />
+        <result column="linkPath" property="linkpath" jdbcType="VARCHAR" />
         <result column="indexshow" property="indexshow" jdbcType="VARCHAR" />
         <result column="sequence" property="sequence" jdbcType="DECIMAL" />
         <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />

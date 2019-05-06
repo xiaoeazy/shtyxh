@@ -10,10 +10,16 @@
 	  <div class="br_box_list">
      			 <ul class="c_list_tat">
 		<#list rightList as rightList>   
-              <li><a href="javascript:void(0)"  onclick="detail_click('${nowType.id}','${rightList.id}')"  title="${rightList.newstitle}">${rightList.newsSimpleTitle!}</a>
+			<li>
+				<#if rightList.islink=="Y">
+					<a href="javascript:void(0)"  onclick="openNewWindow('${rightList.linkpath}')"  title="${rightList.newstitle}">${rightList.newsSimpleTitle!}</a>
+				<#else>
+					<a href="javascript:void(0)"  onclick="detail_click('${nowType.id}','${rightList.id}')"  title="${rightList.newstitle}">${rightList.newsSimpleTitle!}</a>
+				</#if>
+              	
     				 <span></span>
-		    </li> 
-  			 </#list>   
+		      </li> 
+  		</#list>   
   			</ul>
   		</div>
  		    <div class="pagigation" style="text-align:right">

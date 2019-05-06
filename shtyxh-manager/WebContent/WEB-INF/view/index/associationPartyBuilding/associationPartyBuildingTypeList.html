@@ -28,7 +28,13 @@
 		
 		
 			<#list newsList as news>   
-		               <li><a href="${base.contextPath}/index/djhd/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newsSimpleTitle!}</a>
+		               <li>
+		               		<#if news.islink=="Y">
+			               			<a href="${news.linkpath}"  title="${news.newstitle}">${news.newsSimpleTitle!}</a>
+			               	<#else>
+			               			<a href="${base.contextPath}/index/djhd/newsDetail?id=${news.id}"  title="${news.newstitle}">${news.newsSimpleTitle!}</a>
+			               	</#if>
+		               		
 		     				 <span> ${news.createdate?string('yyyy-MM-dd HH:mm:ss')} </span>
 					    </li> 
 		    </#list>   

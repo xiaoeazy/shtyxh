@@ -36,9 +36,13 @@
 									<ul class="c_list mt10 mb10 tab-con split"
 										style="display: block">
 										<#list typeList.newsList as newsList>
-										<li><a
-											href="${base.contextPath}/index/dcyyj/newsDetail?id=${newsList.id}"
-											target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a>
+										<li>
+											<#if newsList.islink=="Y">
+							               			<a href="${newsList.linkpath}"  title="${newsList.newstitle}">${newsList.newstitle}</a>
+							               	<#else>
+							               			<a href="${base.contextPath}/index/dcyyj/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a>
+							               	</#if>
+											
 											 <span> ${newsList.createdate?string('yyyy-MM-dd HH:mm:ss')} </span>
 											</li>
 										</#list>

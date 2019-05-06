@@ -290,8 +290,14 @@ Ext.extend(News.NewsPanel, Ext.Panel, {
 	typeNameRender:function(value){
 		return value.typename;
 	},
-	buttonRender:function(id){
-		   return "<button  width=\"50px\" onclick=\"yulanNews('"+id+"')\">预览</button>";
+	buttonRender:function(value, cellmeta, record, rowIndex, columnIndex, store){
+		   var link =record.get("islink");
+		   if(link=="Y"){
+			   var linkpath =record.get("linkpath");
+			   return "<button  width=\"50px\" onclick=\"openNewWindow('"+linkpath+"')\">跳转预览</button>";
+		   }else{
+			   return "<button  width=\"50px\" onclick=\"yulanNews('"+value+"')\">预览</button>";
+		   }
 		   
 	},
 	addNews:function(store,mainId){
@@ -373,4 +379,9 @@ function yulanNews(id){
 	var url =appName+"/index/news/newsDetail?id="+id;
 	window.open(url);
 }
+
+function openNewWindow(path){
+	window.open(path);
+}
+	
 

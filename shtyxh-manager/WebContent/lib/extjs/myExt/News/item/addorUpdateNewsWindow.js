@@ -155,6 +155,51 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 			    	}
 			    }
 			});
+	       
+	     //=====================是否外链=========================================
+	       var islinkCombo = new Ext.form.ComboBox({
+   	   			fieldLabel:'是否外链<font color="red">*</font>',
+	    	    id:mainId+"islink",
+	    	    model:'local',
+	            store:new Ext.data.SimpleStore({  //填充的数据
+                    fields : ['text', 'value'],
+                    data : [['否', 'N'], ['是', 'Y']]
+            	}),
+	            valueField : "value",  
+	            displayField : "text",
+	            forceSelection : true,  
+	            blankText : '请选择',  
+	            emptyText : '请选择',  
+	            editable : false,  
+	            triggerAction : 'all',  
+	            allowBlank : false,  
+	            hiddenName : "text",  
+	            autoShow : true,  
+	            selectOnFocus : true,  
+	            name : "islink",
+	            listeners:{
+	            	afterrender:function(comb){
+	            	},
+	            	select:function(combo, record, index){
+	            	},
+	            	change:function(me,newValue,oldValue){
+	            		if(newValue=="Y"){
+	            			Ext.getCmp(mainId+"linkpath").setDisabled(false);
+	            			Ext.getCmp(mainId+"linkpath").setValue("");
+	            			Ext.getCmp(mainId+"attribute").setDisabled(true);	  
+	            			Ext.getCmp(mainId+"indexshow").setDisabled(true);	
+	            			Ext.getCmp(mainId+"sourceid").setDisabled(true);	
+	            		}else{
+	            			Ext.getCmp(mainId+"linkpath").setDisabled(true);
+	            			Ext.getCmp(mainId+"linkpath").setValue("");
+	            			Ext.getCmp(mainId+"attribute").setDisabled(false);	  
+	            			Ext.getCmp(mainId+"indexshow").setDisabled(false);
+	            			Ext.getCmp(mainId+"sourceid").setDisabled(false);	
+	            		}
+	            	}
+	            }
+	        });
+	       
 	       //=====================是否前台显示=========================================
 	       var indexShowCombo = new Ext.form.ComboBox({
    	   			fieldLabel:'是否前台展示图片<font color="red">*</font>',
@@ -209,6 +254,16 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 					            maxLength:200  
 				  			},
 				  			typeCombo,
+				  			islinkCombo,
+				  			{
+				          		fieldLabel:'外链地址<font color="red">*</font>',
+								allowBlank:false,
+								disabled:true,
+								name: 'linkpath',
+								blankText:'必须填写',
+								id:mainId+"linkpath",
+					            maxLength:500  
+				  			},
 				  			sourceCombo,
 				  			{
 		                        xtype: 'checkboxgroup',
@@ -372,6 +427,8 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 				    		var sequence = record.get("sequence");
 				    		var content= record.get("content");
 				    		var indexshow = record.get("indexshow");
+				    		var islink = record.get("islink");
+				    		var linkpath = record.get("linkpath");
 				    		Ext.getCmp(mainId+"newstitle").setValue(newstitle);
 //				    		typeCombo.setValue(typeid);
 //				    		sourceCombo.setValue(sourceid);
@@ -383,11 +440,15 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 				    		Ext.getCmp(mainId+"summary").setValue(summary);
 				    		 Ext.getCmp(mainId+"sequence").setValue(sequence);
 				    		 Ext.getCmp(mainId+"indexshow").setValue(indexshow);
+				    		 
+				    		 Ext.getCmp(mainId+"islink").setValue(islink);
+				    		 Ext.getCmp(mainId+"linkpath").setValue(linkpath);
 //				    		Ext.getCmp(mainId+"content").setValue(content);
 //				    		Ext.getCmp(mainId+"content").getEditor().setContent(content);
 				    	}else{
 				    		sourceCombo.setValue(1);
 				    		indexShowCombo.setValue('N');
+				    		islinkCombo.setValue('N');
 				    	}
 					}
 				}
@@ -451,6 +512,9 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 		if(attributeid!="")
 			attributeid=attributeid.substring(0,attributeid.length-1);
 		
+		var islink = Ext.getCmp(mainId+"islink").getValue();
+		var linkpath = Ext.getCmp(mainId+"linkpath").getValue();
+		
 		var newstitle =Ext.getCmp(mainId+"newstitle").getValue().trim();
 		var typeid =Ext.getCmp(mainId+"typeid").getValue();
 		var sourceid = Ext.getCmp(mainId+"sourceid").getValue();
@@ -467,22 +531,27 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 			Ext.getCmp(mainId+"typeid").markInvalid("类型不能为空！");
 			return;
 		}
-		if(sourceid==null){
-			Ext.getCmp(mainId+"sourceid").markInvalid("来源不能为空！");
-			return;
+		if(islink=="N"){
+			if(sourceid==null){
+				Ext.getCmp(mainId+"sourceid").markInvalid("来源不能为空！");
+				return;
+			}
+			
+//			if(summary==""){
+//				Ext.getCmp(mainId+"summary").markInvalid("咨讯简介不能为空！");
+//				return;
+//			}
+			if(content==""){
+				Ext.getCmp(mainId+"content").markInvalid("主体内容不能为空！");
+				return;
+			}
+		}else{
+			if(linkpath==null){
+				Ext.getCmp(mainId+"linkpath").markInvalid("外链不能为空！");
+				return;
+			}
+			
 		}
-		
-//		if(summary==""){
-//			Ext.getCmp(mainId+"summary").markInvalid("咨讯简介不能为空！");
-//			return;
-//		}
-		if(content==""){
-			Ext.getCmp(mainId+"content").markInvalid("主体内容不能为空！");
-			return;
-		}
-		
-	
-		
 	
 		if( formpanel.getForm().isValid()){
 			Ext.getBody().mask("数据提交中，请耐心等候...","x-mask-loading");
@@ -494,6 +563,8 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
                 	  __status : type,
                 	  typeid:typeid,
                 	  indexshow:indexshow,
+                	  islink:islink,
+                	  linkpath:linkpath,
                 	  attributeid:attributeid,
                 	  sourceid:sourceid,
                 	  newstitle : newstitle,

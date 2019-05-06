@@ -54,8 +54,9 @@ public class IndexNewsController extends IndexBaseController{
         	KgNews news = new KgNews();
         	news.setTypeid(kn.getId());
         	List<KgNews> newsList = iJedisService.loadTypeNews(news);
-        	newsList=CommonFuncUtil.listToList(newsList, 6);
         	kn.setCount(newsList.size());
+        	newsList=CommonFuncUtil.listToList(newsList, 6);
+        	
         	kn.setNewsList(newsList);
         }
         
@@ -193,7 +194,7 @@ public class IndexNewsController extends IndexBaseController{
 	        int allPageNum = count%limit==0?count/limit:count/limit+1;
 	        if(count==0) allPageNum=1;
 	        List<KgNews> list = iKgNewsService.selectByMap(requestContext,news, typeidList, page, limit);
-	        list=CommonFuncUtil.listToPage(list, page, limit);
+//	        list=CommonFuncUtil.listToPage(list, page, limit);
 	        CommonFuncUtil.judgeNewsTitleLength(list,33);
 	       
 	        mv.addObject("newsList", list);

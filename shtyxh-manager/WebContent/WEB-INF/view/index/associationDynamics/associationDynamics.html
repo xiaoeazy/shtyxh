@@ -130,9 +130,12 @@
 								<ul class="c_list mt10 mb10 tab-con split"
 									style="display: block">
 									<#list typeList.newsList as newsList>
-									<li><a
-										href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}"
-										target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a></li>
+										<#if newsList.islink=="Y">
+						               		<li><a href="${newsList.linkpath}" target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a></li>
+						               	<#else>
+						               		<li><a href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newstitle}</a></li>
+						               	</#if>
+										
 									</#list>
 								</ul>
 							</div>

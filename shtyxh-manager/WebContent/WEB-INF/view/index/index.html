@@ -123,8 +123,13 @@
 											</div>
 											<ul class="c_list mt10 mb10 split" id="area3_con1">
 												<#list typeList.newsList as newsList>
-												<li style="width:760px"><a href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}" target="_blank"
-													title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+												<li style="width:760px">
+													<#if newsList.islink=="Y">
+							               				<a href="${newsList.linkpath}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+									               	<#else>
+									               		<a href="${base.contextPath}/index/xhdt/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+									               	</#if>
+													
 													<font style="float:right">${newsList.createdate?string('yyyy-MM-dd')}</font>
 												</li>
 												</#list>
@@ -183,7 +188,12 @@
 													<a href="${base.contextPath}/index/news/typeList?typeid=${zxzxShow.id}" target="_blank">${zxzxShow.typename}</a></dt>
 													<#list zxzxShow.newsList as newsList>
 														<dd>
-															<a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+															<#if newsList.islink=="Y">
+											               			<a href="${newsList.linkpath}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+											               	<#else>
+											               			<a href="${base.contextPath}/index/news/newsDetail?id=${newsList.id}" target="_blank" title="${newsList.newstitle}">${newsList.newsSimpleTitle}</a>
+											               	</#if>
+															
 														</dd>
 													</#list>
 												</#if>

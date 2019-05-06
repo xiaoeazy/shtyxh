@@ -45,7 +45,12 @@
     <div class="vF_detail_relcontent_lst">
         <ul class="c_list_tat">
 					<#list linkNewsList as linkNewsList>
-						<li><a href="${base.contextPath}/index/djhd/newsDetail?id=${linkNewsList.id}" target="_blank" title="${linkNewsList.newstitle}">${linkNewsList.newsSimpleTitle}</a></li>
+						<#if linkNewsList.islink=="Y">
+			               			<li><a href="${linkNewsList.linkpath}" target="_blank" title="${linkNewsList.newstitle}">${linkNewsList.newsSimpleTitle}</a></li>
+			               	<#else>
+			               			<li><a href="${base.contextPath}/index/djhd/newsDetail?id=${linkNewsList.id}" target="_blank" title="${linkNewsList.newstitle}">${linkNewsList.newsSimpleTitle}</a></li>
+			               	</#if>
+						
 					</#list>
         </ul>
     </div>

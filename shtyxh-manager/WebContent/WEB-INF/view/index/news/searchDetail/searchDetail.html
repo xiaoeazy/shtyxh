@@ -27,9 +27,11 @@
 						
 						<#list newsList as news>   
 								    <li>
-										<a href="${base.contextPath}/index/news/newsDetail?id=${news.id}" target="_blank">
-											${news.newstitle}
-										</a>
+								     <#if news.islink=="Y">
+					               		<a href="${news.linkpath}"  title="${news.newstitle}">${news.newstitle}</a>
+					               	<#else>
+					               		<a href="${base.contextPath}/index/news/newsDetail?id=${news.id}" target="_blank">${news.newstitle}</a>
+					               	</#if>
 										<span style="text-align:center">${news.kgNewstype.typename}</span>
 										<em>
 											${news.createdate?string('yyyy-MM-dd')}

@@ -59,6 +59,10 @@ public class KgNews extends BaseDTO {
      private String content;
      
      private Long sequence;
+     
+     private String islink;
+     
+     private String linkpath;
 
      private String indexshow;
      
@@ -78,7 +82,35 @@ public class KgNews extends BaseDTO {
 
      
 
-     public KgNews() {
+    
+
+
+
+	public String getIslink() {
+		return islink;
+	}
+
+
+
+	public void setIslink(String islink) {
+		this.islink = islink;
+	}
+
+
+
+	public String getLinkpath() {
+		return linkpath;
+	}
+
+
+
+	public void setLinkpath(String linkpath) {
+		this.linkpath = linkpath;
+	}
+
+
+
+	public KgNews() {
 		super();
 	}
      
