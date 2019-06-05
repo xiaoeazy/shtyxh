@@ -78,7 +78,7 @@ import com.shtyxh.manager.service.IKgNewsService;
     @ResponseBody
     public ExtStore adminQueryAll(KgNews dto,HttpServletRequest request) {
     	 IRequest requestContext = createRequestContext(request);
-    	 List<KgNews> list = service.selectAll(requestContext);
+    	 List<KgNews> list = service.queryAll(requestContext);
     	 int count = list.size();
     	 return new ExtStore(null, null, count, list);
     }

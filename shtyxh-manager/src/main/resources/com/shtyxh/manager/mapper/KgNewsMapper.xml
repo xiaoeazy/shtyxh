@@ -41,6 +41,11 @@
             <result column="typename" property="typename"/>
         </association>
     </resultMap>
+    
+    <select id="queryAll" resultMap="BaseResultMap" >
+        select id,newsTitle from kg_news a
+           
+    </select>
 
    <select id="selectWithOtherInfo" resultMap="OtherResultMap" parameterType="com.shtyxh.manager.dto.KgNews">
         select a.*,b.typename from kg_news a left join kg_type b

@@ -11,7 +11,7 @@ import com.shtyxh.manager.dto.KgNews;
 public interface IKgNewsService extends IBaseService<KgNews>, ProxySelf<IKgNewsService>{
 	 public List<KgNews> selectWithOtherInfo(IRequest request,  KgNews condition, Integer pageNum, Integer pageSize);
 	 
-	
+	 public List<KgNews> queryAll(IRequest request);
 	 
 	 public void adminDelete(IRequest request, String webPath , List<KgNews> dto) ;
 

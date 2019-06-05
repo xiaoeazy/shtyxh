@@ -7,6 +7,8 @@ import com.huan.HTed.mybatis.common.Mapper;
 import com.shtyxh.manager.dto.KgNews;
 
 public interface KgNewsMapper extends Mapper<KgNews>{
+		public List<KgNews> queryAll();
+	
 		public List<KgNews> selectWithOtherInfo( KgNews condition);
 		
 		public List<KgNews> selectByMap(   Map<String ,Object>  typeids);
