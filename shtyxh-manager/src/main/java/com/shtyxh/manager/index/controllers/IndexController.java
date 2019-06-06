@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.huan.HTed.core.IRequest;
+import com.shtyxh.manager.dto.KgBaywindow;
 import com.shtyxh.manager.dto.KgCarousel;
 import com.shtyxh.manager.dto.KgDownload;
 import com.shtyxh.manager.dto.KgNews;
 import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
 import com.shtyxh.manager.service.IJedisService;
+import com.shtyxh.manager.service.IKgBaywindowService;
 import com.shtyxh.manager.service.IKgTypeService;
 import com.shtyxh.manager.utils.CommonFuncUtil;
 
@@ -28,6 +30,8 @@ public class IndexController extends IndexBaseController {
 
 	@Autowired
 	private IKgTypeService iKgTypeService;
+	@Autowired
+	private IKgBaywindowService iKgBaywindowService;
 	@Autowired
 	private IJedisService iJedisService;
 	
@@ -131,7 +135,14 @@ public class IndexController extends IndexBaseController {
 		mv.addObject("typePxyjdShowList", knt4list);
 		
 		
-		//
+		
+		//显示飘窗
+		KgBaywindow kw = new KgBaywindow();
+		kw.setIndexshow("Y");
+		List<KgBaywindow> list = iKgBaywindowService.select(requestContext, kw);
+		if(list.size()!=0){
+			mv.addObject("baywindow", list.get(0));
+		}
 		loadNavigation(mv, CH_INDEX);
 		loadSysConfig(request,mv);
 		return mv;

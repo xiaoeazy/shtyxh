@@ -231,6 +231,8 @@ function getOthers(funcs){
 		str +=addFunc('download1.png','download2.png','download');
 	if(isHaveFunc(funcs,15))
 		str +=addFunc('carousel1.png','carousel2.png','carousel');
+	if(isHaveFunc(funcs,24))
+		str +=addFunc('baywindow1.png','baywindow2.png','baywindow');
 	if(str!="")
 		newsOtherNum=1;
 	return addFuncStr(str);
@@ -333,6 +335,11 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'轮播图');
+	}else if (us == "baywindow") {
+		var panel=  new BayWindow.BayWindowPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'飘窗');
 	}else if (us == "download") {
 		var panel=  new Download.DownloadPanel({
 			mainId: us
