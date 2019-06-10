@@ -4,7 +4,7 @@
 			imgSrc : "http://wenwen.soso.com/p/20100204/20100204193850-483274619.jpg", //漂浮图片路径
 			url : "http://map.yanue.net", //图片点击跳转页
 			openStyle : 1, //跳转页打开方式 1为新页面打开  0为当前页打开
-			speed : 10 //漂浮速度 单位毫秒
+			speed : 30 //漂浮速度 单位毫秒
 		};
 		var options = $.extend(defaults,options);
 		var _target = options.openStyle == 1 ?  "target='_blank'" : '' ;
