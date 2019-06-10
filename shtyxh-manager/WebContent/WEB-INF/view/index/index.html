@@ -19,20 +19,21 @@
 		var filePath = encodeURI(encodeURI(path));
 		window.location="${fileserver}/fileDownload?filePath="+filePath; 
 	}
+	<#if baywindow??>
 		$(function(){
 			//调用漂浮插件
 			$("body").floatAd({
 				imgSrc : '${fileserver}${baywindow.filePath}',
 				<#if baywindow.urltype==0> 
-					url:${baywindow.webUrl}
+					url:'${baywindow.webUrl}'
 				<#elseif baywindow.urltype==1> 
-					url:${base.contextPath}/index/news/newsDetail?id=${baywindow.newsId}
+					url:'${base.contextPath}/index/news/newsDetail?id=${baywindow.newsId}'
 				<#else> 
-					url:${base.contextPath}/index/assessmentDetail?id=${baywindow.activityId}
+					url:'${base.contextPath}/index/assessmentDetail?id=${baywindow.activityId}'
 				</#if> 
-				url:'${baywindow.webUrl}'
 			});
 		})
+	</#if>
 </script>
 </head>
 <body id="index">

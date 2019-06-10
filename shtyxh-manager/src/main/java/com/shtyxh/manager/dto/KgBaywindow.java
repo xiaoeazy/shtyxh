@@ -23,7 +23,7 @@ public class KgBaywindow extends BaseDTO {
 
      @Id
      @GeneratedValue
-     private String id;
+     private Long id;
 
      @NotEmpty
      @Length(max = 200)
@@ -34,7 +34,7 @@ public class KgBaywindow extends BaseDTO {
      private String indexshow; ////
 
      @Length(max = 20)
-     private String urltype; //0:weburl , 1:activity ,2 :news
+     private Long urltype; //0:weburl , 1:activity ,2 :news
 
      @Length(max = 200)
      private String webUrl;
@@ -44,11 +44,11 @@ public class KgBaywindow extends BaseDTO {
      private Long newsId;
 
 
-     public void setId(String id){
+     public void setId(Long id){
          this.id = id;
      }
 
-     public String getId(){
+     public Long getId(){
          return id;
      }
 
@@ -68,11 +68,11 @@ public class KgBaywindow extends BaseDTO {
          return indexshow;
      }
 
-     public void setUrltype(String urltype){
+     public void setUrltype(Long urltype){
          this.urltype = urltype;
      }
 
-     public String getUrltype(){
+     public Long getUrltype(){
          return urltype;
      }
 

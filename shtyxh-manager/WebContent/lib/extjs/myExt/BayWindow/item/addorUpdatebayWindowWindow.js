@@ -190,7 +190,7 @@ Ext.extend(addorUpdateBayWindow.addorUpdateBayWindowWindow, Ext.Window, {
 //									text : '上传(1920*765)',
 									text : '上传(700*475)',
 									handler:function(){
-										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'carousel'});
+										var win = new uploadImageBase.uploadImageBaseWin({the_hidden_image_url:mainId+"imageUrl",the_image_show:mainId+"showPict",type:'baywindow'});
 										win.show();
 									}
 							 	},{
