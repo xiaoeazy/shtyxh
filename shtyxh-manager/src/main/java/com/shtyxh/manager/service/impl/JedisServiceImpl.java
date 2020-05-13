@@ -747,11 +747,11 @@ public class JedisServiceImpl  implements IJedisService{
 	public  KgAssessmentActivity loadAssessmentActivity(KgAssessmentActivity activitys){
 		KgAssessmentActivity assessmentActivity = null;
 		try {
-			String json=jedisClient.hget(REDIS_ASSESSMENTACTIVITY_HSET, REDIS_ASSESSMENTACTIVITY+":"+activitys.getAssessmentTypeId());
+			String json=jedisClient.hget(REDIS_ASSESSMENTACTIVITY_HSET, REDIS_ASSESSMENTACTIVITY+":"+activitys.getId());
 			//判断是否为空
 			if (StringUtils.isBlank(json)) {
 				assessmentActivity = iKgAssessmentActivityService.selectByPrimaryKey(null,activitys);
-					jedisClient.hset(REDIS_ASSESSMENTACTIVITY_HSET,REDIS_ASSESSMENTACTIVITY+":"+activitys.getAssessmentTypeId(), JsonUtils.objectToJson(assessmentActivity));
+					jedisClient.hset(REDIS_ASSESSMENTACTIVITY_HSET,REDIS_ASSESSMENTACTIVITY+":"+activitys.getId(), JsonUtils.objectToJson(assessmentActivity));
 			}else{
 				assessmentActivity = JsonUtils.jsonToPojo(json, KgAssessmentActivity.class);
 			}
