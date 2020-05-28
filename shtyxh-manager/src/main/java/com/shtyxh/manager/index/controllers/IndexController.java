@@ -149,7 +149,13 @@ public class IndexController extends IndexBaseController {
 	}
 
 
-	
+	@RequestMapping(value = "/ttview")
+	public ModelAndView ttview(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/index/ttview");
+		loadSysConfig(request,mv);
+		return mv;
+		
+	}
 
 
 }
