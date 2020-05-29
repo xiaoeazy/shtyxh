@@ -17,6 +17,7 @@ import com.shtyxh.manager.dto.KgBaywindow;
 import com.shtyxh.manager.dto.KgCarousel;
 import com.shtyxh.manager.dto.KgDownload;
 import com.shtyxh.manager.dto.KgNews;
+import com.shtyxh.manager.dto.KgNotice;
 import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
 import com.shtyxh.manager.service.IJedisService;
@@ -152,6 +153,12 @@ public class IndexController extends IndexBaseController {
 	@RequestMapping(value = "/ttview")
 	public ModelAndView ttview(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/index/ttview");
+		List<KgNotice> carouselList = iJedisService.loadNotice();
+		if(carouselList.size()==0) {
+			throw new RuntimeException("发生异常！");
+		}
+		KgNotice kn = carouselList.get(0);
+		mv.addObject("kn",kn);
 		loadSysConfig(request,mv);
 		return mv;
 		

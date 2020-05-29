@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shtyxh.manager.mapper.KgNoticeMapper">
+    <resultMap id="BaseResultMap" type="com.shtyxh.manager.dto.KgNotice">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="sequence" property="sequence" jdbcType="DECIMAL" />
+        <result column="urltype" property="urltype" jdbcType="DECIMAL" />
+        <result column="web_url" property="webUrl" jdbcType="VARCHAR" />
+        <result column="activity_id" property="activityId" jdbcType="DECIMAL" />
+        <result column="news_id" property="newsId" jdbcType="DECIMAL" />
+    </resultMap>
+
+
+</mapper>

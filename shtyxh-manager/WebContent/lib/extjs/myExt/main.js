@@ -233,6 +233,8 @@ function getOthers(funcs){
 		str +=addFunc('carousel1.png','carousel2.png','carousel');
 	if(isHaveFunc(funcs,24))
 		str +=addFunc('baywindow1.png','baywindow2.png','baywindow');
+	if(isHaveFunc(funcs,25))
+		str +=addFunc('xiaoxitongzhi1.png','xiaoxitongzhi2.png','notice');
 	if(str!="")
 		newsOtherNum=1;
 	return addFuncStr(str);
@@ -390,6 +392,11 @@ function addtabs(us) {
 			mainId: us
 		});
 		addTabFuns(us,panel,'历届理事');
+	}else if(us == "notice"){
+		var panel=  new Notice.CarouselPanel({
+			mainId: us
+		});
+		addTabFuns(us,panel,'消息通知');
 	}
 }
 

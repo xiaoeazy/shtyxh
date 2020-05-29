@@ -13,6 +13,7 @@ import com.shtyxh.manager.dto.KgHistory;
 import com.shtyxh.manager.dto.KgLink;
 import com.shtyxh.manager.dto.KgNews;
 import com.shtyxh.manager.dto.KgNewsSource;
+import com.shtyxh.manager.dto.KgNotice;
 import com.shtyxh.manager.dto.KgOffers;
 import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
@@ -110,6 +111,10 @@ public interface IJedisService {
 	void delHsetOfAssessmentType();
 
 	List<KgAssessmentActivity> load_AssessmentPage_Attribute_News(Long attributeId);
+
+	void delStringOfNotice();
+
+	List<KgNotice> loadNotice();
 
 
 	

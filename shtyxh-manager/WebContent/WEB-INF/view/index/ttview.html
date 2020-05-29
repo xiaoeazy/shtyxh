@@ -1,14 +1,37 @@
 <#include "../include/meta.html">
 <title>${webname}</title>
-
+<link rel="stylesheet" href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<style type="text/css">
+.middle {
+float: none;
+display: inline-block;
+vertical-align: middle;
+}
+</style>
 <script type="text/javascript">
 	function jump(){
-		window.location.href="https://meeting.tencent.com/detail.html?mtoken=fN97UGfYBWzDPxBtkoLuwbVspskAQ1hCrXr3BccDsrbYeRQHd8-DJA__&meetingcode=194739308&sdkappid=1400115281&show8k=0";
+		
+		<#if kn.urltype==0> 
+				window.location.href="${kn.webUrl}";
+		<#elseif kn.urltype==1> 
+				window.location.href="${base.contextPath}/index/news/newsDetail?id=${kn.newsId}";
+		<#else> 
+				window.location.href="${base.contextPath}/index/assessmentDetail?id=${kn.activityId}";
+		</#if> 
+		
+		//window.location.href="https://meeting.tencent.com/detail.html?mtoken=fN97UGfYBWzDPxBtkoLuwbVspskAQ1hCrXr3BccDsrbYeRQHd8-DJA__&meetingcode=194739308&sdkappid=1400115281&show8k=0";
 	}
+	
+	 window.onload=function(){ 
+	        // 初始化内容 
+		 jump();
+    }
 </script>
 </head>
 <body id="index">
-	<input type="button"  value="跳转" onclick="jump()" />
+	<!-- <div class="middle"><input type="button" class="btn btn-lg btn-primary" value="跳转" onclick="jump()" /></div> -->
 </body>
 
 </html>

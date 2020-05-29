@@ -23,6 +23,7 @@ import com.shtyxh.manager.dto.KgHistory;
 import com.shtyxh.manager.dto.KgLink;
 import com.shtyxh.manager.dto.KgNews;
 import com.shtyxh.manager.dto.KgNewsSource;
+import com.shtyxh.manager.dto.KgNotice;
 import com.shtyxh.manager.dto.KgOffers;
 import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
@@ -39,6 +40,7 @@ import com.shtyxh.manager.service.IKgHistoryService;
 import com.shtyxh.manager.service.IKgLinkService;
 import com.shtyxh.manager.service.IKgNewsService;
 import com.shtyxh.manager.service.IKgNewsSourceService;
+import com.shtyxh.manager.service.IKgNoticeService;
 import com.shtyxh.manager.service.IKgOffersService;
 import com.shtyxh.manager.service.IKgOffersTypeService;
 import com.shtyxh.manager.service.IKgTypeService;
@@ -67,6 +69,8 @@ public class JedisServiceImpl  implements IJedisService{
 	private IKgAssessmentTypeService iKgAssessmentTypeService;
 	@Autowired
 	private IKgCarouselService iKgCarouselService;
+	@Autowired
+	private IKgNoticeService iKgNoticeService;
 	@Autowired
 	private IKgDownloadService iKgDownloadService;
 	@Autowired
@@ -124,6 +128,9 @@ public class JedisServiceImpl  implements IJedisService{
 	
 	@Value("${REDIS_CAROUSEL_LIST_STRING}")
 	private String REDIS_CAROUSEL_LIST_STRING;
+	
+	@Value("${REDIS_NOTICE_LIST_STRING}")
+	private String REDIS_NOTICE_LIST_STRING;
 	
 	@Value("${REDIS_DOWNLOAD_LIST_STRING}")
 	private String REDIS_DOWNLOAD_LIST_STRING;
@@ -213,6 +220,11 @@ public class JedisServiceImpl  implements IJedisService{
 	@Override
 	public void delStringOfCarousel(){
 		jedisClient.del(REDIS_CAROUSEL_LIST_STRING);
+	}
+	
+	@Override
+	public void delStringOfNotice(){
+		jedisClient.del(REDIS_NOTICE_LIST_STRING);
 	}
 	
 	@Override
@@ -482,6 +494,30 @@ public class JedisServiceImpl  implements IJedisService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.error("loadCarousel失败:",e);
+		}
+		return list;
+	}
+	
+	@Override
+	public   List<KgNotice> loadNotice(){
+		List<KgNotice> list = new ArrayList<KgNotice>();
+		try {
+			
+			String json = jedisClient.get(REDIS_NOTICE_LIST_STRING);
+			//判断是否为空
+			if (StringUtils.isBlank(json)) {
+				KgNotice kc = new KgNotice();
+		    	 kc.setSortorder("desc");
+		    	 kc.setSortname("sequence");
+				 list = iKgNoticeService.select(null,kc);
+				 jedisClient.set(REDIS_NOTICE_LIST_STRING, JsonUtils.objectToJson(list));
+			}else{
+				list = JsonUtils.jsonToList(json, KgNotice.class);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("loadNotice失败:",e);
 		}
 		return list;
 	}
