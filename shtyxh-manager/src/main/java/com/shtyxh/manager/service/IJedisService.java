@@ -17,6 +17,7 @@ import com.shtyxh.manager.dto.KgNotice;
 import com.shtyxh.manager.dto.KgOffers;
 import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
+import com.shtyxh.manager.dto.KgVideoType;
 
 public interface IJedisService {
 
@@ -64,6 +65,8 @@ public interface IJedisService {
 	List<KgOffers> loadOffers();
 	
 	List<KgOffersType> loadAllOffersType();
+	
+	List<KgVideoType> loadAllVideoType();
 
 	KgNews loadJDYPXPage_AttributeId4_News(KgNews kn, List<Long> typeidList, Integer page, Integer pageSize);
 

@@ -27,6 +27,7 @@ import com.shtyxh.manager.dto.KgNotice;
 import com.shtyxh.manager.dto.KgOffers;
 import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
+import com.shtyxh.manager.dto.KgVideoType;
 import com.shtyxh.manager.dto.KgVisitcount;
 import com.shtyxh.manager.service.IJedisService;
 import com.shtyxh.manager.service.IKgAllonetextService;
@@ -44,6 +45,7 @@ import com.shtyxh.manager.service.IKgNoticeService;
 import com.shtyxh.manager.service.IKgOffersService;
 import com.shtyxh.manager.service.IKgOffersTypeService;
 import com.shtyxh.manager.service.IKgTypeService;
+import com.shtyxh.manager.service.IKgVideoTypeService;
 import com.shtyxh.manager.service.IKgVisitcountService;
 import com.shtyxh.redis.service.JedisClient;
 
@@ -83,6 +85,8 @@ public class JedisServiceImpl  implements IJedisService{
 	private IKgHistoryService iKgHistoryService;
 	@Autowired
 	private IKgOffersTypeService iKgOffersTypeService;
+	@Autowired
+	private IKgVideoTypeService iKgVideoTypeService;
 	@Autowired
 	private IKgVisitcountService iKgVisitcountService;
 	
@@ -174,6 +178,11 @@ public class JedisServiceImpl  implements IJedisService{
 	private String REDIS_OFFERS_ALL_LIST;
 	@Value("${REDIS_OFFERS_TYPE_ALL_LIST}")
 	private String REDIS_OFFERS_TYPE_ALL_LIST;
+	
+	@Value("${REDIS_VIDEO_HSET}")
+	private String REDIS_VIDEO_HSET;
+	@Value("${REDIS_VIDEO_TYPE_ALL_LIST}")
+	private String REDIS_VIDEO_TYPE_ALL_LIST;
 	
 	
 	
@@ -388,6 +397,25 @@ public class JedisServiceImpl  implements IJedisService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.error("loadAllOffersType失败:",e);
+		}
+		return list;
+	}
+	@Override
+	public List<KgVideoType> loadAllVideoType(){
+		List<KgVideoType> list = new ArrayList<KgVideoType>();
+		try {
+			String json = jedisClient.hget(REDIS_VIDEO_HSET,REDIS_VIDEO_TYPE_ALL_LIST);
+			//判断是否为空
+			if (StringUtils.isBlank(json)) {
+				list = iKgVideoTypeService.selectAll();
+				jedisClient.hset(REDIS_VIDEO_HSET,REDIS_VIDEO_TYPE_ALL_LIST, JsonUtils.objectToJson(list));
+			}else{
+				list = JsonUtils.jsonToList(json, KgVideoType.class);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("loadAllVideoType失败:",e);
 		}
 		return list;
 	}

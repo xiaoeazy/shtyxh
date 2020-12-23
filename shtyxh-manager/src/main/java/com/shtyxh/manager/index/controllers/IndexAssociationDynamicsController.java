@@ -17,6 +17,7 @@ import com.shtyxh.common.exception.E404Excetion;
 import com.shtyxh.manager.dto.KgNews;
 import com.shtyxh.manager.dto.KgNewsSource;
 import com.shtyxh.manager.dto.KgType;
+import com.shtyxh.manager.dto.KgVideoType;
 import com.shtyxh.manager.service.IJedisService;
 import com.shtyxh.manager.service.IKgNewsService;
 import com.shtyxh.manager.service.IKgTypeService;
@@ -145,5 +146,72 @@ public class IndexAssociationDynamicsController extends IndexBaseController{
 	        return mv;
 	    }
 	    
+	    @RequestMapping(value = "/index/xhdt/video")
+	    public ModelAndView gwpx(Long typeid, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
+	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit,HttpServletRequest request) throws E404Excetion {
+	    	ModelAndView mv = new ModelAndView(getViewPath() + "/index/associationDynamics/video");
+	    	List<KgVideoType> typeList = iJedisService.loadAllVideoType();
+	    	
+	    	KgVideoType currentType = null;
+	        if(typeid!=null) {
+	        	for(KgVideoType kt :typeList) {
+	        		if(kt.getId()==typeid) {
+	        			currentType=kt;
+	        			break;
+	        		}
+	        	}
+	        	if(currentType==null)
+	        		throw new E404Excetion("请查看的网页不存在!"); 
+	        }
+	        	
+	        KgType kt = new KgType();
+	        kt.setParentid(GWPX_ID);
+	        
+	        mv.addObject("typeList", typeList);
+	        
+	        if(typeid==null) {
+	        	if(typeList.size()!=0)
+	        		currentType=typeList.get(0);
+	        }
+	        
+	        mv.addObject("nowType",currentType);
+	        loadNavigation(mv, CH_XHDT);
+	        loadSysConfig(request,mv);
+	        return mv;
+	    }
+	    
+	    @RequestMapping(value = {"/index/xhdt/video/typeList"})
+	    @ResponseBody
+	    public ModelAndView typeList(Long typeid,@RequestParam(defaultValue = DEFAULT_PAGE) int page,
+	            @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int limit, HttpServletRequest request) throws E404Excetion {
+			 ModelAndView mv = new ModelAndView( "/index/associationDynamics/rightDetail");
+			 
+			 List<KgVideoType> typeList = iJedisService.loadAllVideoType();
+			 KgVideoType currentType = null;
+			 for(KgVideoType kt :typeList) {
+	        		if(kt.getId()==typeid) {
+	        			currentType=kt;
+	        			break;
+	        		}
+	        	}
+			 if(currentType==null)
+	        		throw new E404Excetion("请查看的网页不存在!"); 
+			 
+			 
+    		 KgNews a = new KgNews();
+    		 a.setTypeid(40l);
+    		 a.setVideotypeid(typeid);
+    		 List<KgNews> newList = iKgNewsService.select(null, a);
+    		 int count = newList.size();
+    		 newList=CommonFuncUtil.listToPage(newList, page, limit);
+    	     int allPageNum = count%limit==0?count/limit:count/limit+1;
+    	     CommonFuncUtil.judgeNewsTitleLength(newList,45);
+    	     if(count==0) allPageNum=1;
+    	     mv.addObject("page", page);
+    	     mv.addObject("allPageNum",allPageNum);
+    	     mv.addObject("rightList",newList);
+	    	 mv.addObject("nowType",currentType);
+			 return mv;
+		}
    
 }

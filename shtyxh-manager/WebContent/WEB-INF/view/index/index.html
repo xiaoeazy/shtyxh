@@ -299,6 +299,36 @@
 						</div>
 				</div>
 				
+				<!-- 短视频集锦 -->
+				<div class="main_right_block_pxyjd mt13">
+						<div class="main_right_cbl_pxyjd ">
+							<div class="main_right_cbl_pxyjd_title">
+								<h2>
+									<a href="${base.contextPath}/index/xhdt/video"
+										target="_blank">${dspjjType.typename}</a>
+								</h2>
+							</div>
+							<div class="main_right_cbl_pxyjd_line"></div>
+						  
+							<#list dspjjType.videoTypeList as videoTypeLists>
+								
+									<#if videoTypeLists_index%2==0>
+										<#if videoTypeLists_index==(dspjjType.videoTypeList?size-2)||videoTypeLists_index==(dspjjType.videoTypeList?size-1)>
+												<div class="bottomdldiv">
+										<#else>
+												<div class="dldivzp">
+										</#if>
+									</#if>
+										<dl>
+											<dd><a href="${base.contextPath}/index/xhdt/video?typeid=${videoTypeLists.id}"  target="_blank">${videoTypeLists.videoTypeName}</a></dd>
+										</dl>
+									<#if videoTypeLists_index%2==1||videoTypeLists_index==dspjjType.videoTypeList?size-1>
+										</div>
+									</#if>
+							</#list>
+						</div>
+				</div>
+				
 				<!-- 培训与鉴定start -->
 				<div class="main_right_block_pxyjd mt13">
 						<div class="main_right_cbl_pxyjd ">

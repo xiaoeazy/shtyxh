@@ -76,12 +76,83 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 //		            	     typeCombo.setRawValue("所有");
 		            	},
 		            	select:function(combo, record, index){
-//		            		var combovalue = combo.getValue();
+		            		var combovalue = combo.getValue();
+		            		if(combovalue==40){
+		            			Ext.getCmp(mainId+"videotypeid").setDisabled(false);
+		            			Ext.getCmp(mainId+"videotypeid").setValue("");
+		            		}else{
+		            			Ext.getCmp(mainId+"videotypeid").setDisabled(true);
+		            			Ext.getCmp(mainId+"videotypeid").setValue("");
+		            		}
 //		            		Ext.apply(other_Combo_Store.baseParams, { repid:combovalue  });
 //		            		other_Combo_Store.load();
 		            	}
 		            }
 		        }); 
+	       //=======================短视频类型=============================================
+	       
+	       var vedioid_Combo_Store = new Ext.data.Store({
+	    		pageSize:0,
+	    		proxy: {
+			        type: 'ajax',
+			        url : appName+ '/admin/video/type/queryAllByParam',
+			        reader: {
+			        	root : "results",
+						totalProperty: "totalProperty",
+						successProperty:'success'
+			        },
+			        extraParams: {
+			        	relatetype :  2 
+			        }
+			    },
+			    autoLoad : true,
+			    fields: ['id', 'videoTypeName'],
+			    listeners:{
+	            	load:function(){
+	            		if(record!=null){
+	            			var typeid = record.get("typeid");
+	            			if(typeid==40){
+	            				var videotypeid = record.get("videotypeid");
+					    		videotypeCombo.setValue(videotypeid);
+					    		Ext.getCmp(mainId+"videotypeid").setDisabled(false);
+	            			}
+	            		}
+	            	}
+			    }
+			});
+	    	
+	       var videotypeCombo = new Ext.form.ComboBox({
+	    	   		fieldLabel:'短视频类别<font color="red">*</font>',
+		    	    id:mainId+"videotypeid",
+		    	    disabled:true,
+		            store : vedioid_Combo_Store,  
+		            valueField : "id",  
+		            mode : 'remote',  
+		            displayField : "videoTypeName",  
+		            forceSelection : true,  
+		            blankText : '请选择',  
+		            emptyText : '请选择',  
+		            editable : false,  
+		            triggerAction : 'all',  
+		            allowBlank : false,  
+		            hiddenName : "videoTypeName",  
+		            autoShow : true,  
+		            selectOnFocus : true,  
+		            name : "videotypeid",
+		            listeners:{
+		            	afterrender:function(comb){
+//		            		 typeCombo.setValue(-1);
+//		            	     typeCombo.setRawValue("所有");
+		            	},
+		            	select:function(combo, record, index){
+		            		var combovalue = combo.getValue();
+//		            		alert(combovalue);
+//		            		Ext.apply(other_Combo_Store.baseParams, { repid:combovalue  });
+//		            		other_Combo_Store.load();
+		            	}
+		            }
+		        }); 
+	       
 	       
 	       //=====================source=========================================
 	    	var sourceid_Combo_Store = new Ext.data.Store({
@@ -254,6 +325,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 					            maxLength:200  
 				  			},
 				  			typeCombo,
+				  			videotypeCombo,
 				  			islinkCombo,
 				  			{
 				          		fieldLabel:'外链地址<font color="red">*</font>',
@@ -518,6 +590,11 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
 		var newstitle =Ext.getCmp(mainId+"newstitle").getValue().trim();
 		var typeid =Ext.getCmp(mainId+"typeid").getValue();
 		var sourceid = Ext.getCmp(mainId+"sourceid").getValue();
+		var videotypeid = Ext.getCmp(mainId+"videotypeid").getValue();
+		if(typeid==40&&videotypeid==null){
+			Ext.getCmp(mainId+"videotypeid").markInvalid("短视频类型不能为空！");
+			return;
+		}
 		var summary =Ext.getCmp(mainId+"summary").getValue().trim();
 		var thumbnail =Ext.getCmp(mainId+"imageUrl").getValue().trim();
 		var content = Ext.getCmp(mainId+"content").getEditor().getContent();
@@ -564,6 +641,7 @@ Ext.extend(addorUpdateNews.addorUpdateNewsWindow, Ext.Panel, {
                 	  typeid:typeid,
                 	  indexshow:indexshow,
                 	  islink:islink,
+                	  videotypeid:videotypeid,
                 	  linkpath:linkpath,
                 	  attributeid:attributeid,
                 	  sourceid:sourceid,

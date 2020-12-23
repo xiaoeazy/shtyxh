@@ -58,6 +58,8 @@ public class IndexBaseController extends BaseController{
 	public static final Long DJHD_ID = 7L;
 	public static final Long OFFER_ID = 20L;  //招聘
 	
+	public static final Long DSPJJ_ID = 40L;  //短视频集锦
+	
 	public static final  Long LJLS_ID =11L; //历届理事
 	public static final  Long LSYG_ID =12L; //历史沿革
 	public static final  Long HYDW_ID =15L;	//会员单位

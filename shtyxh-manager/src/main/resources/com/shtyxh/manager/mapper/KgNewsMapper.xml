@@ -6,6 +6,7 @@
         <result column="id" property="id" jdbcType="DECIMAL" />
         <result column="typeId" property="typeid" jdbcType="DECIMAL" />
         <result column="sourceId" property="sourceid" jdbcType="DECIMAL" />
+        <result column="videoTypeId" property="videotypeid" jdbcType="DECIMAL" />
         <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
         <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />
         <result column="summary" property="summary" jdbcType="VARCHAR" />
@@ -23,6 +24,7 @@
 	 <resultMap  id="OtherResultMap" type="com.shtyxh.manager.dto.KgNews">
         <result column="id" property="id" jdbcType="DECIMAL" />
         <result column="typeId" property="typeid" jdbcType="DECIMAL" />
+        <result column="videoTypeId" property="videotypeid" jdbcType="DECIMAL" />
         <result column="sourceId" property="sourceid" jdbcType="DECIMAL" />
         <result column="attributeId" property="attributeid" jdbcType="VARCHAR" />
         <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />

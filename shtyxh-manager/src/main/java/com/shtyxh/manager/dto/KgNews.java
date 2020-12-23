@@ -39,6 +39,8 @@ public class KgNews extends BaseDTO {
 
      private Long sourceid;
      
+     private Long videotypeid;
+     
      private String attributeid;
      
      @NotEmpty
@@ -83,6 +85,22 @@ public class KgNews extends BaseDTO {
      
 
     
+
+
+
+
+
+
+
+	public Long getVideotypeid() {
+		return videotypeid;
+	}
+
+
+
+	public void setVideotypeid(Long videotypeid) {
+		this.videotypeid = videotypeid;
+	}
 
 
 

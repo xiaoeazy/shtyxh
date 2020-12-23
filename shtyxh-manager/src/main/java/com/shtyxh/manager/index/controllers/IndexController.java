@@ -20,6 +20,7 @@ import com.shtyxh.manager.dto.KgNews;
 import com.shtyxh.manager.dto.KgNotice;
 import com.shtyxh.manager.dto.KgOffersType;
 import com.shtyxh.manager.dto.KgType;
+import com.shtyxh.manager.dto.KgVideoType;
 import com.shtyxh.manager.service.IJedisService;
 import com.shtyxh.manager.service.IKgBaywindowService;
 import com.shtyxh.manager.service.IKgTypeService;
@@ -122,6 +123,11 @@ public class IndexController extends IndexBaseController {
 //		kn6.setChildType(childOfferTypeList);
 		mv.addObject("offerType", kn6);
 		
+		//短视频集锦
+		KgType kn7 = iJedisService.loadType(new KgType(DSPJJ_ID));
+		List<KgVideoType> videoTypeList = iJedisService.loadAllVideoType();
+		kn7.setVideoTypeList(videoTypeList);
+		mv.addObject("dspjjType", kn7);
 		// 培训与鉴定
 		KgType kn4 = new KgType();
 		kn4.setParentid(PXYJD_ID);

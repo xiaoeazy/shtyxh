@@ -63,9 +63,20 @@ public class KgType extends BaseDTO {
      @Transient 
      private List<KgOffersType> offerTypeList;
 
+     @Transient 
+     private List<KgVideoType> videoTypeList;
      
      
-     public List<KgOffersType> getOfferTypeList() {
+     
+     public List<KgVideoType> getVideoTypeList() {
+		return videoTypeList;
+	}
+
+	public void setVideoTypeList(List<KgVideoType> videoTypeList) {
+		this.videoTypeList = videoTypeList;
+	}
+
+	public List<KgOffersType> getOfferTypeList() {
 		return offerTypeList;
 	}
 

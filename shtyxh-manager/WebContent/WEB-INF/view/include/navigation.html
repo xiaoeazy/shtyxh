@@ -130,8 +130,12 @@
                  </li>
                  <li id="ch_xhdt" <#if chanel =='CH_XHDT'> class="actv" </#if>><a href="${base.contextPath}/index/xhdt" >协会动态</a>
                   		<ul>
-		                	<#list xhdtTypeList as typeList>   
+		                	<#list xhdtTypeList as typeList> 
+		                	 <#if typeList.id == 40>
+									<li><a href="${base.contextPath}/index/xhdt/video">${typeList.typename}</a></li>
+								<#else>  
 									<li><a href="${base.contextPath}/index/xhdt/typeList?typeid=${typeList.id}">${typeList.typename}</a></li>
+								</#if>
 							</#list>
 	                	</ul>
                   </li>
